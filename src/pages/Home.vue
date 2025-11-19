@@ -221,7 +221,7 @@
                 <section class="shop-bg-section fix">
                     <div class="row g-4">
                         <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
-                            <div class="bg-image bg-cover" style="background-image: url(assets/img/product/IMG_7642.JPG);">
+                            <div class="bg-image bg-cover" style="background-image: url(assets/img/product/earring1.JPG);">
                                 <div class="content bg-white badge">
                                     <h3>
                                         <a href="shop-grid.html">Accessories</a>
