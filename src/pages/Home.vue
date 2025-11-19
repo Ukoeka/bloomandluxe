@@ -2007,7 +2007,7 @@
                 </section>
 
                 <!-- News-section Start -->
-                <section class="news-section fix section-padding">
+                <!-- <section class="news-section fix section-padding">
                     <div class="container">
                         <div class="section-title-area">
                             <div class="section-title style-3">
@@ -2086,7 +2086,7 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
 
                 <!-- Instagram Banner Section Start -->
                 <div class="instagram-banner fix">
