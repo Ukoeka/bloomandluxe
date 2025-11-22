@@ -1,0 +1,183 @@
+<template>
+  <AdminLayout>
+    <div class="add-product-page">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Add New Product</h2>
+        <router-link to="/admin/products" class="btn btn-secondary">Back to Products</router-link>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <form @submit.prevent="saveProduct">
+            <div class="card">
+              <div class="card-body">
+                <div class="mb-3">
+                  <label for="productName" class="form-label">Product Name</label>
+                  <input v-model="productForm.name" type="text" class="form-control" id="productName" required>
+                </div>
+                <div class="mb-3">
+                  <label for="productPrice" class="form-label">Price</label>
+                  <input v-model="productForm.price" type="number" step="0.01" class="form-control" id="productPrice" required>
+                </div>
+                <div class="mb-3">
+                  <label for="productCategory" class="form-label">Category</label>
+                  <select v-model="productForm.category" class="form-select" id="productCategory" required @change="updateSubCategories">
+                    <option value="">Select Category</option>
+                    <option v-for="category in categories" :key="category.id" :value="category.name">{{ category.name }}</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="productSubCategory" class="form-label">Sub-Category</label>
+                  <select v-model="productForm.subCategory" class="form-select" id="productSubCategory">
+                    <option value="">Select Sub-Category</option>
+                    <option v-for="subCategory in subCategories" :key="subCategory" :value="subCategory">{{ subCategory }}</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="productStock" class="form-label">Stock Quantity</label>
+                  <input v-model="productForm.stock" type="number" class="form-control" id="productStock" required>
+                </div>
+                <div class="mb-3">
+                  <label for="productDescription" class="form-label">Description</label>
+                  <textarea v-model="productForm.description" class="form-control" id="productDescription" rows="4"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="productImage" class="form-label">Product Image</label>
+                  <input type="file" class="form-control" id="productImage" accept="image/*" @change="handleImageUpload">
+                </div>
+                <button type="submit" class="btn btn-primary" :disabled="loading">
+                  {{ loading ? 'Saving...' : 'Save Product' }}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Product Preview</h5>
+              <div v-if="imagePreview" class="text-center mb-3">
+                <img :src="imagePreview" alt="Product preview" class="img-fluid" style="max-height: 200px;">
+              </div>
+              <h6>{{ productForm.name || 'Product Name' }}</h6>
+              <p class="text-muted">${{ productForm.price || '0.00' }}</p>
+              <p>{{ productForm.description || 'Product description will appear here.' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </AdminLayout>
+</template>
+
+<script>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import AdminLayout from '../components/AdminLayout.vue'
+import { useApiStore } from '../stores/api'
+
+export default {
+  name: 'AdminAddProduct',
+  components: {
+    AdminLayout
+  },
+  setup() {
+    const router = useRouter()
+    const apiStore = useApiStore()
+    const loading = ref(false)
+    const productForm = ref({
+      name: '',
+      price: 0,
+      category: '',
+      subCategory: '',
+      stock: 0,
+      description: '',
+      image: null
+    })
+    const imagePreview = ref('')
+    const categories = ref([
+      { id: 1, name: 'Electronics' },
+      { id: 2, name: 'Clothing' },
+      { id: 3, name: 'Home & Garden' },
+      { id: 4, name: 'Sports & Outdoors' },
+      { id: 5, name: 'Books' }
+    ])
+    const subCategories = ref([])
+    const categorySubCategories = {
+      'Electronics': ['Smartphones', 'Laptops', 'Headphones', 'Cameras'],
+      'Clothing': ['Men\'s Wear', 'Women\'s Wear', 'Kids\' Wear', 'Accessories'],
+      'Home & Garden': ['Furniture', 'Decor', 'Kitchen', 'Garden Tools'],
+      'Sports & Outdoors': ['Fitness', 'Outdoor Gear', 'Sports Equipment', 'Cycling'],
+      'Books': ['Fiction', 'Non-Fiction', 'Textbooks', 'Comics']
+    }
+
+    const updateSubCategories = () => {
+      subCategories.value = categorySubCategories[productForm.value.category] || []
+      productForm.value.subCategory = ''
+    }
+
+    const handleImageUpload = (event) => {
+      const file = event.target.files[0]
+      if (file) {
+        productForm.value.image = file
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          imagePreview.value = e.target.result
+        }
+        reader.readAsDataURL(file)
+      }
+    }
+
+    const saveProduct = async () => {
+      loading.value = true
+      try {
+        // For now, just use the preview URL. In a real app, you'd upload the file first.
+        const formData = { ...productForm.value, image: imagePreview.value }
+        await apiStore.post('/api/admin/products', formData)
+        router.push('/admin/products')
+      } catch (error) {
+        console.error('Failed to save product:', error)
+        alert('Failed to save product. Please try again.')
+      } finally {
+        loading.value = false
+      }
+    }
+
+    return {
+      productForm,
+      imagePreview,
+      categories,
+      subCategories,
+      loading,
+      updateSubCategories,
+      handleImageUpload,
+      saveProduct
+    }
+  }
+}
+</script>
+
+<style scoped>
+.add-product-page {
+  padding: 20px 0;
+}
+
+.add-product-page .btn-primary {
+  background-color: var(--theme, #6B8F71);
+  border-color: var(--theme, #6B8F71);
+}
+
+.add-product-page .btn-primary:hover {
+  background-color: var(--header, #010F1C);
+  border-color: var(--header, #010F1C);
+}
+
+.add-product-page .btn-secondary {
+  background-color: var(--text, #55585B);
+  border-color: var(--text, #55585B);
+}
+
+.add-product-page .btn-secondary:hover {
+  background-color: var(--header, #010F1C);
+  border-color: var(--header, #010F1C);
+}
+</style>

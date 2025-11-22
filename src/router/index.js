@@ -16,6 +16,14 @@ import News from '../pages/News.vue'
 import Categories from '../pages/Categories.vue'
 import SubCategories from '../pages/Sub-categories.vue'
 import Category from '../pages/Category.vue'
+import AdminLogin from '../pages/AdminLogin.vue'
+import AdminDashboard from '../pages/AdminDashboard.vue'
+import AdminProducts from '../pages/AdminProducts.vue'
+import AdminOrders from '../pages/AdminOrders.vue'
+import AdminAddProduct from '../pages/AdminAddProduct.vue'
+import AdminUsers from '../pages/AdminUsers.vue'
+import AdminReports from '../pages/AdminReports.vue'
+import AdminCategories from '../pages/AdminCategories.vue'
 
 const routes = [
   {
@@ -97,7 +105,47 @@ const routes = [
     path: '/category',
     name: 'Category',
     component: Category
-  }
+  },
+  {
+    path: '/admin/login',
+    name: 'AdminLogin',
+    component: AdminLogin
+  },
+  {
+    path: '/admin/dashboard',
+    name: 'AdminDashboard',
+    component: AdminDashboard
+  },
+  {
+    path: '/admin/products',
+    name: 'AdminProducts',
+    component: AdminProducts
+  },
+  {
+    path: '/admin/orders',
+    name: 'AdminOrders',
+    component: AdminOrders
+  },
+  {
+    path: '/admin/products/add',
+    name: 'AdminAddProduct',
+    component: AdminAddProduct
+  },
+  {
+    path: '/admin/categories',
+    name: 'AdminCategories',
+    component: AdminCategories
+  },
+  {
+    path: '/admin/users',
+    name: 'AdminUsers',
+    component: AdminUsers
+  },
+  {
+    path: '/admin/reports',
+    name: 'AdminReports',
+    component: AdminReports
+  },
 ]
 
 const router = createRouter({
