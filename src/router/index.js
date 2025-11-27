@@ -24,6 +24,7 @@ import AdminAddProduct from '../pages/AdminAddProduct.vue'
 import AdminUsers from '../pages/AdminUsers.vue'
 import AdminReports from '../pages/AdminReports.vue'
 import AdminCategories from '../pages/AdminCategories.vue'
+import { useAdminAuthStore } from '../stores/adminAuth'
 
 const routes = [
   {
@@ -114,43 +115,62 @@ const routes = [
   {
     path: '/admin/dashboard',
     name: 'AdminDashboard',
-    component: AdminDashboard
+    component: AdminDashboard,
+    meta: { requiresAuth: true }
   },
   {
     path: '/admin/products',
     name: 'AdminProducts',
-    component: AdminProducts
+    component: AdminProducts,
+    meta: { requiresAuth: true }
   },
   {
     path: '/admin/orders',
     name: 'AdminOrders',
-    component: AdminOrders
+    component: AdminOrders,
+    meta: { requiresAuth: true }
   },
   {
     path: '/admin/products/add',
     name: 'AdminAddProduct',
-    component: AdminAddProduct
+    component: AdminAddProduct,
+    meta: { requiresAuth: true }
   },
   {
     path: '/admin/categories',
     name: 'AdminCategories',
-    component: AdminCategories
+    component: AdminCategories,
+    meta: { requiresAuth: true }
   },
   {
     path: '/admin/users',
     name: 'AdminUsers',
-    component: AdminUsers
+    component: AdminUsers,
+    meta: { requiresAuth: true }
   },
   {
     path: '/admin/reports',
     name: 'AdminReports',
-    component: AdminReports
+    component: AdminReports,
+    meta: { requiresAuth: true }
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+// Route guard for admin authentication
+router.beforeEach((to, from, next) => {
+  const adminAuthStore = useAdminAuthStore()
+
+  if (to.meta.requiresAuth && !adminAuthStore.isAuthenticated) {
+    // Redirect to admin login if not authenticated
+    next('/admin/login')
+  } else {
+    next()
+  }
 })
 
 export default router

@@ -22,7 +22,7 @@
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
                 <td>${{ product.price }}</td>
-                <td>{{ product.category }}</td>
+                <td>{{ product.category?.name || 'N/A' }}</td>
                 <td>{{ product.stock }}</td>
                 <td>
                   <button class="btn btn-sm btn-outline-danger" @click="deleteProduct(product.id)">Delete</button>
@@ -51,8 +51,9 @@ export default {
 
     const fetchProducts = async () => {
       try {
-        const data = await apiStore.get('/api/admin/products')
-        products.value = data
+        const response = await apiStore.get('/admin/products')
+        console.log(response,'response');
+        products.value = response?.data?.data || []
       } catch (error) {
         console.error('Failed to fetch products:', error)
       }
@@ -61,7 +62,7 @@ export default {
     const deleteProduct = async (id) => {
       if (confirm('Are you sure you want to delete this product?')) {
         try {
-          await apiStore.delete(`/api/admin/products/${id}`)
+          await apiStore.delete(`/admin/products/${id}`)
           await fetchProducts()
         } catch (error) {
           console.error('Failed to delete product:', error)
@@ -71,6 +72,7 @@ export default {
 
     onMounted(() => {
       fetchProducts()
+      console.log('getting products',products.value)
     })
 
     return {

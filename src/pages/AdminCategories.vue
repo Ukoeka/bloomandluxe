@@ -23,30 +23,16 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="card">
-            <div class="card-header">
-              <h5>Sub-Categories</h5>
-              <button class="btn btn-sm btn-success" @click="showAddSubCategoryModal = true" :disabled="!selectedCategory">Add Sub-Category</button>
-            </div>
-            <div class="card-body">
-              <div class="mb-3">
-                <select v-model="selectedCategory" class="form-select" @change="loadSubCategories">
-                  <option value="">Select Category</option>
-                  <option v-for="category in categories" :key="category.id" :value="category">{{ category.name }}</option>
-                </select>
-              </div>
-              <ul class="list-group" v-if="selectedCategory">
-                <li v-for="subCategory in subCategories" :key="subCategory.id" class="list-group-item d-flex justify-content-between align-items-center">
-                  {{ subCategory.name }}
-                  <div>
-                    <button class="btn btn-sm btn-outline-primary me-2" @click="editSubCategory(subCategory)">Edit</button>
-                    <button class="btn btn-sm btn-outline-danger" @click="deleteSubCategory(subCategory.id)">Delete</button>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+           <div class="card">
+             <div class="card-header">
+               <h5>Category Statistics</h5>
+             </div>
+             <div class="card-body">
+               <p>Total Categories: {{ categories.length }}</p>
+               <p>Active Categories: {{ categories.filter(c => c.is_active).length }}</p>
+             </div>
+           </div>
+         </div>
       </div>
 
       <!-- Add/Edit Category Modal -->
@@ -70,26 +56,6 @@
         </div>
       </div>
 
-      <!-- Add/Edit Sub-Category Modal -->
-      <div v-if="showAddSubCategoryModal || editingSubCategory" class="modal fade show d-block" style="background-color: rgba(0,0,0,0.5);">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">{{ editingSubCategory ? 'Edit Sub-Category' : 'Add New Sub-Category' }}</h5>
-              <button type="button" class="btn-close" @click="closeModal"></button>
-            </div>
-            <div class="modal-body">
-              <form @submit.prevent="saveSubCategory">
-                <div class="mb-3">
-                  <label for="subCategoryName" class="form-label">Sub-Category Name</label>
-                  <input v-model="subCategoryForm.name" type="text" class="form-control" id="subCategoryName" required>
-                </div>
-                <button type="submit" class="btn btn-primary" :disabled="loading">{{ loading ? 'Saving...' : 'Save' }}</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </AdminLayout>
 </template>
@@ -106,21 +72,16 @@ export default {
   },
   setup() {
     const categories = ref([])
-    const subCategories = ref([])
-    const selectedCategory = ref(null)
     const showAddCategoryModal = ref(false)
-    const showAddSubCategoryModal = ref(false)
     const editingCategory = ref(null)
-    const editingSubCategory = ref(null)
     const loading = ref(false)
     const apiStore = useApiStore()
     const categoryForm = ref({ name: '' })
-    const subCategoryForm = ref({ name: '' })
 
     const fetchCategories = async () => {
       try {
-        const data = await apiStore.get('/api/admin/categories')
-        categories.value = data
+        const response = await apiStore.get('/admin/categories')
+        categories.value = response.data || []
       } catch (error) {
         console.error('Failed to fetch categories:', error)
       }
@@ -130,9 +91,9 @@ export default {
       loading.value = true
       try {
         if (editingCategory.value) {
-          await apiStore.put(`/api/admin/categories/${editingCategory.value.id}`, categoryForm.value)
+          await apiStore.put(`/admin/categories/${editingCategory.value.id}`, categoryForm.value)
         } else {
-          await apiStore.post('/api/admin/categories', categoryForm.value)
+          await apiStore.post('/admin/categories', categoryForm.value)
         }
         await fetchCategories()
         closeModal()
@@ -152,7 +113,7 @@ export default {
     const deleteCategory = async (id) => {
       if (confirm('Are you sure you want to delete this category?')) {
         try {
-          await apiStore.delete(`/api/admin/categories/${id}`)
+          await apiStore.delete(`/admin/categories/${id}`)
           await fetchCategories()
         } catch (error) {
           console.error('Failed to delete category:', error)
@@ -160,60 +121,11 @@ export default {
       }
     }
 
-    const loadSubCategories = async () => {
-      if (selectedCategory.value) {
-        try {
-          const data = await apiStore.get(`/api/admin/categories/${selectedCategory.value.id}/subcategories`)
-          subCategories.value = data
-        } catch (error) {
-          console.error('Failed to fetch sub-categories:', error)
-        }
-      } else {
-        subCategories.value = []
-      }
-    }
-
-    const saveSubCategory = async () => {
-      loading.value = true
-      try {
-        if (editingSubCategory.value) {
-          await apiStore.put(`/api/admin/subcategories/${editingSubCategory.value.id}`, subCategoryForm.value)
-        } else {
-          await apiStore.post(`/api/admin/categories/${selectedCategory.value.id}/subcategories`, subCategoryForm.value)
-        }
-        await loadSubCategories()
-        closeModal()
-      } catch (error) {
-        console.error('Failed to save sub-category:', error)
-      } finally {
-        loading.value = false
-      }
-    }
-
-    const editSubCategory = (subCategory) => {
-      editingSubCategory.value = subCategory
-      subCategoryForm.value = { ...subCategory }
-      showAddSubCategoryModal.value = false
-    }
-
-    const deleteSubCategory = async (id) => {
-      if (confirm('Are you sure you want to delete this sub-category?')) {
-        try {
-          await apiStore.delete(`/api/admin/subcategories/${id}`)
-          await loadSubCategories()
-        } catch (error) {
-          console.error('Failed to delete sub-category:', error)
-        }
-      }
-    }
 
     const closeModal = () => {
       showAddCategoryModal.value = false
-      showAddSubCategoryModal.value = false
       editingCategory.value = null
-      editingSubCategory.value = null
       categoryForm.value = { name: '' }
-      subCategoryForm.value = { name: '' }
     }
 
     onMounted(() => {
@@ -222,22 +134,13 @@ export default {
 
     return {
       categories,
-      subCategories,
-      selectedCategory,
       showAddCategoryModal,
-      showAddSubCategoryModal,
       editingCategory,
-      editingSubCategory,
       loading,
       categoryForm,
-      subCategoryForm,
       saveCategory,
       editCategory,
       deleteCategory,
-      loadSubCategories,
-      saveSubCategory,
-      editSubCategory,
-      deleteSubCategory,
       closeModal
     }
   }
