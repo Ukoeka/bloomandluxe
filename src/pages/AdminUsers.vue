@@ -49,7 +49,7 @@ export default {
 
     const fetchUsers = async () => {
       try {
-        const data = await apiStore.get('/api/admin/users')
+        const data = await apiStore.get('/admin/users')
         users.value = data
       } catch (error) {
         console.error('Failed to fetch users:', error)
@@ -64,7 +64,7 @@ export default {
     const deleteUser = async (id) => {
       if (confirm('Are you sure you want to delete this user?')) {
         try {
-          await apiStore.delete(`/api/admin/users/${id}`)
+          await apiStore.delete(`/admin/users/${id}`)
           await fetchUsers()
         } catch (error) {
           console.error('Failed to delete user:', error)

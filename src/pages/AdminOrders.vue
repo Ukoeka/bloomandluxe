@@ -105,7 +105,7 @@ export default {
 
     const fetchOrders = async () => {
       try {
-        const data = await apiStore.get('/api/admin/orders')
+        const data = await apiStore.get('/admin/orders')
         orders.value = data
       } catch (error) {
         console.error('Failed to fetch orders:', error)
@@ -114,7 +114,7 @@ export default {
 
     const updateStatus = async (orderId, status) => {
       try {
-        await apiStore.put(`/api/admin/orders/${orderId}/status`, { status })
+        await apiStore.put(`/admin/orders/${orderId}/status`, { status })
         await fetchOrders()
       } catch (error) {
         console.error('Failed to update order status:', error)
@@ -123,7 +123,7 @@ export default {
 
     const viewOrderDetails = async (order) => {
       try {
-        const details = await apiStore.get(`/api/admin/orders/${order.id}`)
+        const details = await apiStore.get(`/admin/orders/${order.id}`)
         selectedOrder.value = details
       } catch (error) {
         console.error('Failed to fetch order details:', error)

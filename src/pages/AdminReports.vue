@@ -55,7 +55,7 @@ export default {
 
     const generateSalesReport = async () => {
       try {
-        const data = await apiStore.get('/api/admin/reports/sales')
+        const data = await apiStore.get('/admin/reports/sales')
         reportData.value = data
       } catch (error) {
         console.error('Failed to generate sales report:', error)
@@ -64,7 +64,7 @@ export default {
 
     const generateUserReport = async () => {
       try {
-        const data = await apiStore.get('/api/admin/reports/users')
+        const data = await apiStore.get('/admin/reports/users')
         reportData.value = data
       } catch (error) {
         console.error('Failed to generate user report:', error)
@@ -73,7 +73,7 @@ export default {
 
     const generateInventoryReport = async () => {
       try {
-        const data = await apiStore.get('/api/admin/reports/inventory')
+        const data = await apiStore.get('/admin/reports/inventory')
         reportData.value = data
       } catch (error) {
         console.error('Failed to generate inventory report:', error)

@@ -1,5 +1,28 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import { useAdminAuthStore } from './adminAuth'
+
+// Create a custom axios instance
+const apiClient = axios.create({
+  baseURL: process.env.VUE_APP_API_BASE_URL || '/api',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+
+// Add request interceptor to include auth token
+apiClient.interceptors.request.use(
+  (config) => {
+    const adminAuthStore = useAdminAuthStore()
+    if (adminAuthStore.token) {
+      config.headers.Authorization = `Bearer ${adminAuthStore.token}`
+    }
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
 
 export const useApiStore = defineStore('api', {
   state: () => ({
@@ -11,7 +34,7 @@ export const useApiStore = defineStore('api', {
       this.loading = true
       this.error = null
       try {
-        const response = await axios.get(url, config)
+        const response = await apiClient.get(url, config)
         return response.data
       } catch (error) {
         this.error = error.response?.data || error.message
@@ -24,7 +47,7 @@ export const useApiStore = defineStore('api', {
       this.loading = true
       this.error = null
       try {
-        const response = await axios.post(url, data, config)
+        const response = await apiClient.post(url, data, config)
         return response.data
       } catch (error) {
         this.error = error.response?.data || error.message
@@ -37,7 +60,7 @@ export const useApiStore = defineStore('api', {
       this.loading = true
       this.error = null
       try {
-        const response = await axios.put(url, data, config)
+        const response = await apiClient.put(url, data, config)
         return response.data
       } catch (error) {
         this.error = error.response?.data || error.message
@@ -50,7 +73,7 @@ export const useApiStore = defineStore('api', {
       this.loading = true
       this.error = null
       try {
-        const response = await axios.delete(url, config)
+        const response = await apiClient.delete(url, config)
         return response.data
       } catch (error) {
         this.error = error.response?.data || error.message

@@ -92,11 +92,11 @@ export default {
     const fetchDashboardData = async () => {
       try {
         const [products, orders, users, revenueData, ordersList] = await Promise.all([
-          apiStore.get('/api/admin/products/count'),
-          apiStore.get('/api/admin/orders/count'),
-          apiStore.get('/api/admin/users/count'),
-          apiStore.get('/api/admin/revenue'),
-          apiStore.get('/api/admin/orders/recent')
+          apiStore.get('/admin/products/count'),
+          apiStore.get('/admin/orders/count'),
+          apiStore.get('/admin/users/count'),
+          apiStore.get('/admin/revenue'),
+          apiStore.get('/admin/orders/recent')
         ])
         productsCount.value = products.count
         ordersCount.value = orders.count

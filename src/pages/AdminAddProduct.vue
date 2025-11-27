@@ -20,16 +20,9 @@
                 </div>
                 <div class="mb-3">
                   <label for="productCategory" class="form-label">Category</label>
-                  <select v-model="productForm.category" class="form-select" id="productCategory" required @change="updateSubCategories">
+                  <select v-model="productForm.category_id" class="form-select" id="productCategory" required>
                     <option value="">Select Category</option>
-                    <option v-for="category in categories" :key="category.id" :value="category.name">{{ category.name }}</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="productSubCategory" class="form-label">Sub-Category</label>
-                  <select v-model="productForm.subCategory" class="form-select" id="productSubCategory">
-                    <option value="">Select Sub-Category</option>
-                    <option v-for="subCategory in subCategories" :key="subCategory" :value="subCategory">{{ subCategory }}</option>
+                    <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
                   </select>
                 </div>
                 <div class="mb-3">
@@ -87,32 +80,20 @@ export default {
     const productForm = ref({
       name: '',
       price: 0,
-      category: '',
-      subCategory: '',
+      category_id: '',
       stock: 0,
       description: '',
       image: null
     })
     const imagePreview = ref('')
-    const categories = ref([
-      { id: 1, name: 'Electronics' },
-      { id: 2, name: 'Clothing' },
-      { id: 3, name: 'Home & Garden' },
-      { id: 4, name: 'Sports & Outdoors' },
-      { id: 5, name: 'Books' }
-    ])
-    const subCategories = ref([])
-    const categorySubCategories = {
-      'Electronics': ['Smartphones', 'Laptops', 'Headphones', 'Cameras'],
-      'Clothing': ['Men\'s Wear', 'Women\'s Wear', 'Kids\' Wear', 'Accessories'],
-      'Home & Garden': ['Furniture', 'Decor', 'Kitchen', 'Garden Tools'],
-      'Sports & Outdoors': ['Fitness', 'Outdoor Gear', 'Sports Equipment', 'Cycling'],
-      'Books': ['Fiction', 'Non-Fiction', 'Textbooks', 'Comics']
-    }
-
-    const updateSubCategories = () => {
-      subCategories.value = categorySubCategories[productForm.value.category] || []
-      productForm.value.subCategory = ''
+    const categories = ref([])
+    const fetchCategories = async () => {
+      try {
+        const response = await apiStore.get('/admin/categories')
+        categories.value = response.data || []
+      } catch (error) {
+        console.error('Failed to fetch categories:', error)
+      }
     }
 
     const handleImageUpload = (event) => {
@@ -132,7 +113,7 @@ export default {
       try {
         // For now, just use the preview URL. In a real app, you'd upload the file first.
         const formData = { ...productForm.value, image: imagePreview.value }
-        await apiStore.post('/api/admin/products', formData)
+        await apiStore.post('/admin/products', formData)
         router.push('/admin/products')
       } catch (error) {
         console.error('Failed to save product:', error)
@@ -142,13 +123,14 @@ export default {
       }
     }
 
+    // Fetch categories on component mount
+    fetchCategories()
+
     return {
       productForm,
       imagePreview,
       categories,
-      subCategories,
       loading,
-      updateSubCategories,
       handleImageUpload,
       saveProduct
     }

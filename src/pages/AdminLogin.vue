@@ -72,7 +72,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import SharedLayout from '../components/SharedLayout.vue'
-import { useApiStore } from '../stores/api'
+import { useAdminAuthStore } from '../stores/adminAuth'
 
 export default {
   name: 'AdminLoginPage',
@@ -85,16 +85,13 @@ export default {
     const loading = ref(false)
     const error = ref('')
     const router = useRouter()
-    const apiStore = useApiStore()
+    const adminAuthStore = useAdminAuthStore()
 
     const handleLogin = async () => {
       loading.value = true
       error.value = ''
       try {
-        // Assuming there's an API endpoint for admin login
-        const response = await apiStore.post('/api/admin/login', { email: email.value, password: password.value })
-        // Handle successful login, e.g., store token, redirect
-        localStorage.setItem('adminToken', response.token)
+        await adminAuthStore.login({ email: email.value, password: password.value })
         router.push('/admin/dashboard')
       } catch (err) {
         error.value = 'Login failed. Please check your credentials.'
