@@ -535,7 +535,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-6">
                                         <div class="product-store-item">
                                             <div class="product-image">
-                                                <img src="assets/img/product/36.jpg" alt="img">
+                                                <img src="assets/img/shop/kid-2.jpeg" alt="img">
                                                 <ul class="product-size">
                                                     <li>s</li>
                                                     <li>m</li>
@@ -596,7 +596,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-6">
                                         <div class="product-store-item">
                                             <div class="product-image">
-                                                <img src="assets/img/product/37.jpg" alt="img">
+                                                <img src="assets/img/shop/ear-1.jpeg" alt="img">
                                                 <div class="sale-box">
                                                     <div class="box">20% off</div>
                                                 </div>
@@ -657,7 +657,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-6">
                                         <div class="product-store-item">
                                             <div class="product-image">
-                                                <img src="assets/img/product/38.jpg" alt="img">
+                                                <img src="assets/img/shop/kid-3.jpeg" alt="img">
                                                 <ul class="product-size">
                                                     <li>s</li>
                                                     <li>m</li>
@@ -718,7 +718,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-6">
                                         <div class="product-store-item">
                                             <div class="product-image">
-                                                <img src="assets/img/product/39.jpg" alt="img">
+                                                <img src="assets/img/shop/ear-2.jpeg" alt="img">
                                                 <div class="sale-box">
                                                     <div class="box">20% off</div>
                                                 </div>
@@ -847,7 +847,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-6">
                                         <div class="product-store-item">
                                             <div class="product-image">
-                                                <img src="assets/img/product/33.jpg" alt="img">
+                                                <img src="assets/img/shop/ear-3.jpeg" alt="img">
                                                 <ul class="product-size">
                                                     <li>s</li>
                                                     <li>m</li>
