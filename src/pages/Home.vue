@@ -100,7 +100,7 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <div class="hero-3">
-                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/bg-4.jpg);">
+                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/bg-1.png);">
                                     </div>
                                         <div class="container">
                                             <div class="row g-4">
@@ -121,7 +121,7 @@
                             </div>
                             <div class="swiper-slide">
                                 <div class="hero-3">
-                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/bg-3.jpg);">
+                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/bg-11.png);">
                                     </div>
                                         <div class="container">
                                             <div class="row g-4">
@@ -142,7 +142,7 @@
                             </div>
                             <div class="swiper-slide">
                                 <div class="hero-3">
-                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/bg-2.jpg);">
+                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/bg-5.png);">
                                     </div>
                                         <div class="container">
                                             <div class="row g-4">
@@ -221,17 +221,17 @@
                 <section class="shop-bg-section fix">
                     <div class="row g-4">
                         <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
-                            <div class="bg-image bg-cover" style="background-image: url(assets/img/product/earring1.JPG);">
+                            <div class="bg-image bg-cover" style="background-image: url(assets/img/shop/kid.jpeg);">
                                 <div class="content bg-white badge">
                                     <h3>
-                                        <a href="shop-grid.html">Accessories</a>
+                                        <a href="shop-grid.html">Kids</a>
                                     </h3>
                                     <p>2025 Collection</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="bg-image style-2 bg-cover" style="background-image: url(assets/img/shop/15.jpg);">
+                            <div class="bg-image style-2 bg-cover" style="background-image: url(assets/img/shop/man-1.png);">
                                 <div class="content">
                                     <h3>
                                         <a href="shop-grid.html">Men</a>
@@ -239,7 +239,7 @@
                                     <p>2025 Collection</p>
                                 </div>
                             </div>
-                            <div class="bg-image mt-20 style-2 bg-cover" style="background-image: url(assets/img/shop/16.jpg);">
+                            <div class="bg-image mt-20 style-2 bg-cover" style="background-image: url(assets/img/shop/woman-1.png);">
                                 <div class="content">
                                     <h3>
                                         <a href="shop-grid.html">Women</a>
@@ -291,7 +291,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-6">
                                         <div class="product-store-item">
                                             <div class="product-image">
-                                                <img src="assets/img/product/32.jpg" alt="img">
+                                                <img src="assets/img/shop/woman-2.png" alt="img">
                                                 <div class="sale-box">
                                                     <div class="box">20% off</div>
                                                 </div>
@@ -355,7 +355,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-6">
                                         <div class="product-store-item">
                                             <div class="product-image">
-                                                <img src="assets/img/product/33.jpg" alt="img">
+                                                <img src="assets/img/shop/woman-5.png" alt="img">
                                                 <ul class="product-size">
                                                     <li>s</li>
                                                     <li>m</li>
@@ -413,7 +413,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-6">
                                         <div class="product-store-item">
                                             <div class="product-image">
-                                                <img src="assets/img/product/34.jpg" alt="img">
+                                                <img src="assets/img/shop/woman-4.png"  alt="img">
                                                 <div class="sale-box">
                                                     <div class="box">20% off</div>
                                                 </div>
@@ -477,7 +477,7 @@
                                     <div class="col-xl-3 col-lg-4 col-md-6">
                                         <div class="product-store-item">
                                             <div class="product-image">
-                                                <img src="assets/img/product/35.jpg" alt="img">
+                                                <img src="assets/img/shop/man-5.png"  alt="img">
                                                 <ul class="product-size">
                                                     <li>s</li>
                                                     <li>m</li>
@@ -2182,8 +2182,8 @@ export default {
         const heroSlider = new Swiper('.hero-slider', {
           loop: true,
           slidesPerView: 1,
-          effect: 'fade',
-          speed: 3000,
+          effect: 'slide',
+          speed: 1000,
           autoplay: {
             delay: 3000,
             disableOnInteraction: false,
@@ -2484,4 +2484,15 @@ export default {
 
 <style scoped>
 /* component styles */
+.hero-content p, .hero-content h1 {
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Make text visible on background images in shop sections */
+.bg-image .content h3,
+.bg-image .content p {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
 </style>
