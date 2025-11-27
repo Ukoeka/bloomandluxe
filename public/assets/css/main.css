@@ -6791,7 +6791,7 @@ input.main-search-input::placeholder {
 }
 .product-wrapper .tab-content .product-store-item .product-image img {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 .product-wrapper .tab-content .product-store-item .product-image .sale-box {
   position: absolute;

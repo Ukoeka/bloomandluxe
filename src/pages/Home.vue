@@ -266,22 +266,22 @@
                         <ul class="nav">
                             <li class="nav-item wow fadeInUp" data-wow-delay=".3s">
                                 <a href="#Course" data-bs-toggle="tab" class="nav-link active">
-                                    New Products
+                                    All Products
                                 </a>
                             </li>
                             <li class="nav-item wow fadeInUp" data-wow-delay=".5s">
                                 <a href="#Curriculum" data-bs-toggle="tab" class="nav-link">
-                                    Featured Products
+                                    Ladies Products
                                 </a>
                             </li>
                             <li class="nav-item wow fadeInUp" data-wow-delay=".5s">
                                 <a href="#Instructors" data-bs-toggle="tab" class="nav-link">
-                                    On Sale Products
+                                    Men Products
                                 </a>
                             </li>
                             <li class="nav-item wow fadeInUp" data-wow-delay=".5s">
                                 <a href="#Reviews" data-bs-toggle="tab" class="nav-link bb-none">
-                                    Trending Products
+                                    Others
                                 </a>
                             </li>
                         </ul>
@@ -2494,5 +2494,11 @@ export default {
 .bg-image .content p {
   color: white;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Make product images have similar height */
+.product-store-item .product-image img {
+  height: 370px;
+  object-fit: cover;
 }
 </style>
