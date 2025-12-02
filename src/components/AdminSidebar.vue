@@ -27,6 +27,11 @@
           </router-link>
         </li>
         <li class="nav-item">
+          <router-link to="/admin/disputes" class="nav-link" :class="{ active: $route.name === 'AdminDisputes' }">
+            <i class="fas fa-exclamation-triangle"></i> Disputes
+          </router-link>
+        </li>
+        <li class="nav-item">
           <router-link to="/admin/users" class="nav-link" :class="{ active: $route.name === 'AdminUsers' }">
             <i class="fas fa-users"></i> Users
           </router-link>

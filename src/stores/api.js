@@ -5,9 +5,18 @@ import { useAdminAuthStore } from './adminAuth'
 // Create a custom axios instance
 const apiClient = axios.create({
   baseURL: process.env.VUE_APP_API_BASE_URL || '/api',
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  transformRequest: [function (data, headers) {
+    // Don't transform FormData
+    if (data instanceof FormData) {
+      return data
+    }
+    // For other data, use default JSON transformation
+    if (typeof data === 'object' && data !== null) {
+      headers['Content-Type'] = 'application/json'
+      return JSON.stringify(data)
+    }
+    return data
+  }],
 })
 
 // Add request interceptor to include auth token

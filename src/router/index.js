@@ -24,6 +24,7 @@ import AdminAddProduct from '../pages/AdminAddProduct.vue'
 import AdminUsers from '../pages/AdminUsers.vue'
 import AdminReports from '../pages/AdminReports.vue'
 import AdminCategories from '../pages/AdminCategories.vue'
+import AdminDisputes from '../pages/AdminDisputes.vue'
 import { useAdminAuthStore } from '../stores/adminAuth'
 
 const routes = [
@@ -152,6 +153,12 @@ const routes = [
     path: '/admin/reports',
     name: 'AdminReports',
     component: AdminReports,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/admin/disputes',
+    name: 'AdminDisputes',
+    component: AdminDisputes,
     meta: { requiresAuth: true }
   },
 ]
