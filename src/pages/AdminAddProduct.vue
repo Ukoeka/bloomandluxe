@@ -48,8 +48,12 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Product Preview</h5>
-              <div v-if="imagePreview" class="text-center mb-3">
-                <img :src="imagePreview" alt="Product preview" class="img-fluid" style="max-height: 200px;">
+              <div class="text-center mb-3">
+                <img v-if="imagePreview" :src="imagePreview" alt="Product preview" class="img-fluid" style="max-height: 200px;">
+                <div v-else class="text-muted">
+                  <i class="fas fa-image fa-3x mb-2"></i>
+                  <p>No image selected</p>
+                </div>
               </div>
               <h6>{{ productForm.name || 'Product Name' }}</h6>
               <p class="text-muted">${{ productForm.price || '0.00' }}</p>
@@ -103,16 +107,37 @@ export default {
         const reader = new FileReader()
         reader.onload = (e) => {
           imagePreview.value = e.target.result
+          console.log('Image preview set:', imagePreview.value)
         }
         reader.readAsDataURL(file)
+      } else {
+        // Clear preview if no file selected
+        imagePreview.value = ''
+        productForm.value.image = null
       }
     }
 
     const saveProduct = async () => {
       loading.value = true
       try {
-        // For now, just use the preview URL. In a real app, you'd upload the file first.
-        const formData = { ...productForm.value, image: imagePreview.value }
+        const formData = new FormData()
+        formData.append('name', productForm.value.name)
+        formData.append('price', productForm.value.price)
+        formData.append('category_id', productForm.value.category_id)
+        formData.append('stock', productForm.value.stock)
+        formData.append('description', productForm.value.description)
+        formData.append('is_active', '1')
+
+        if (productForm.value.image) {
+          formData.append('image', productForm.value.image)
+          console.log('Image file:', productForm.value.image)
+        }
+
+        console.log('FormData contents:')
+        for (let [key, value] of formData.entries()) {
+          console.log(key, value)
+        }
+
         await apiStore.post('/admin/products', formData)
         router.push('/admin/products')
       } catch (error) {
