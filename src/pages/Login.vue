@@ -47,18 +47,18 @@
                 </div> -->
                 <!-- <p>or Sign in with Email</p> -->
                 <div class="contact-form-item">
-                  <form action="#" id="contact-form2" method="POST">
+                  <form @submit.prevent="handleLogin" id="contact-form2" method="POST">
                     <div class="row g-4">
                       <div class="col-lg-12">
                         <div class="form-clt">
-                          <input type="text" name="email" id="email20" placeholder="Your Email">
+                          <input type="email" name="email" id="email20" v-model="form.email" placeholder="Your Email" required>
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-clt">
-                          <input type="text" name="subject" id="email21" placeholder="Password">
-                          <div class="icon">
-                            <i class="fa-regular fa-eye"></i>
+                          <input :type="showPassword ? 'text' : 'password'" name="password" id="email21" v-model="form.password" placeholder="Password" required>
+                          <div class="icon" @click="togglePasswordVisibility">
+                            <i :class="showPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
                           </div>
                         </div>
                       </div>
@@ -93,7 +93,9 @@
 </template>
 
 <script>
-import { onMounted } from 'vue'
+import { onMounted, ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth.js'
 import SharedLayout from '../components/SharedLayout.vue'
 
 export default {
@@ -102,6 +104,31 @@ export default {
     SharedLayout
   },
   setup() {
+    const router = useRouter()
+    const auth = useAuthStore()
+
+    const form = reactive({
+      email: '',
+      password: ''
+    })
+
+    const showPassword = ref(false)
+
+    const togglePasswordVisibility = () => {
+      showPassword.value = !showPassword.value
+    }
+
+    const handleLogin = async () => {
+      try {
+        console.log('🔵 Sending login payload:', form)
+        const res = await auth.login(form)
+        console.log('✅ Login success:', res)
+        router.push('/categories')
+      } catch (error) {
+        console.log('🔴 Login failed:', error.response?.data || error.message)
+        alert('Login failed: ' + (error.response?.data?.message || error.message))
+      }
+    }
     onMounted(() => {
       // Initialize jQuery plugins and custom JS
       if (window.$) {
@@ -195,7 +222,13 @@ export default {
       }
     });
 
-    return {};
+    return {
+      form,
+      showPassword,
+      togglePasswordVisibility,
+      handleLogin,
+      router
+    };
   }
 }
 </script>

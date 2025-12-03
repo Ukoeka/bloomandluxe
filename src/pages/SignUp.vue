@@ -28,31 +28,33 @@
                
                 <!-- <p>or Sign in with Email</p> -->
                 <div class="contact-form-item">
-                  <form action="#" id="contact-form2" method="POST">
+                  <form @submit.prevent="handleRegister" id="contact-form2" method="POST">
                     <div class="row g-4">
+
                       <div class="col-lg-12">
                         <div class="form-clt">
-                          <input type="text" name="email" id="email20" placeholder="First name">
+                          <input name="name" v-model="form.username" type="text" required placeholder="Username">
+                        </div>
+                      </div>
+
+                      <div class="col-lg-12">
+                        <div class="form-clt">
+                          <input name="email" v-model="form.email" type="email" required placeholder="Email Address">
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-clt">
-                          <input type="text" name="email" id="email21" placeholder="Last name">
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-clt">
-                          <input type="text" name="subject" id="Password" placeholder="Password">
-                          <div class="icon">
-                            <i class="fa-regular fa-eye"></i>
+                          <input :type="showPassword ? 'text' : 'password'" v-model="form.password" placeholder="Password">
+                          <div class="icon" @click="togglePasswordVisibility">
+                            <i :class="showPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
                           </div>
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-clt">
-                          <input type="text" name="subject" id="password2" placeholder="Confirm Password">
-                          <div class="icon">
-                            <i class="fa-regular fa-eye"></i>
+                          <input :type="showConfirmPassword ? 'text' : 'password'" v-model="form.password_confirmation" name="subject" id="password2" placeholder="Confirm Password">
+                          <div class="icon" @click="toggleConfirmPasswordVisibility">
+                            <i :class="showConfirmPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
                           </div>
                         </div>
                       </div>
@@ -86,7 +88,9 @@
 </template>
 
 <script>
-import { onMounted } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth.js'
 import SharedLayout from '../components/SharedLayout.vue'
 
 export default {
@@ -95,6 +99,51 @@ export default {
     SharedLayout
   },
   setup() {
+    const router = useRouter()
+    const auth = useAuthStore()
+
+    const form = reactive({
+      email: '',
+      username: '',
+      password: '',
+      password_confirmation: ''
+    })
+
+    const showPassword = ref(false)
+    const showConfirmPassword = ref(false)
+
+    const togglePasswordVisibility = () => {
+      showPassword.value = !showPassword.value
+    }
+
+    const toggleConfirmPasswordVisibility = () => {
+      showConfirmPassword.value = !showConfirmPassword.value
+    }
+
+    const handleRegister = async () => {
+      if (form.password !== form.password_confirmation) {
+        alert('Passwords do not match')
+        return
+      }
+
+      const payload = {
+        name: form.username,
+        email: form.email,
+        password: form.password,
+      }
+
+      console.log('🔵 Sending payload:', payload)
+
+      try {
+        const res = await auth.register(payload)
+        console.log('✅ Register success:', res)
+        router.push('/login')
+      } catch (error) {
+        console.log('🔴 Register failed:', error.response?.data || error.message)
+        alert('Registration failed: ' + (error.response?.data?.message || error.message))
+      }
+    }
+
     onMounted(() => {
       // Initialize jQuery plugins and custom JS
       if (window.$) {
@@ -188,7 +237,15 @@ export default {
       }
     });
 
-    return {};
+    return {
+      form,
+      showPassword,
+      showConfirmPassword,
+      togglePasswordVisibility,
+      toggleConfirmPasswordVisibility,
+      handleRegister,
+      router
+    };
   }
 }
 </script>

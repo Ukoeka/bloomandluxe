@@ -169,8 +169,8 @@
                     
                   </li>
                   <li>
-                    <router-link to="/categories">
-                      Categories
+                    <router-link to="/shop">
+                      Shop
                     </router-link>
                     
                   </li>

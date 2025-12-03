@@ -42,11 +42,11 @@ const routes = [
     name: 'Contact',
     component: Contact
   },
-  {
-    path: '/shop',
-    name: 'Shop',
-    component: ShopGrid
-  },
+  // {
+  //   path: '/shop',
+  //   name: 'Shop',
+  //   component: ShopGrid
+  // },
   {
     path: '/product-details',
     name: 'ProductDetails',
@@ -98,7 +98,7 @@ const routes = [
     component: News
   },
   {
-    path: '/categories',
+    path: '/shop',
     name: 'Categories',
     component: Categories
   },
