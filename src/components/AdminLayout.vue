@@ -23,13 +23,23 @@ export default {
 <style scoped>
 .admin-layout {
   display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .admin-content {
-  margin-left: 250px;
-  padding: 20px;
-  width: calc(100% - 250px);
+  margin-left: 280px;
+  padding: 30px;
+  width: calc(100% - 280px);
   min-height: 100vh;
-  background-color: var(--bg, #F7F7F7);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .admin-content {
+    margin-left: 0;
+    width: 100%;
+  }
 }
 </style>
