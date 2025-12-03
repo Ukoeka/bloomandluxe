@@ -10,9 +10,20 @@
               <button class="btn btn-sm btn-success" @click="showAddCategoryModal = true">Add Category</button>
             </div>
             <div class="card-body">
-              <ul class="list-group">
-                <li v-for="category in categories" :key="category.id" class="list-group-item d-flex justify-content-between align-items-center">
-                  {{ category.name }}
+              <div v-if="loadingCategories" class="text-center py-4">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2 text-muted">Loading categories...</p>
+              </div>
+              <ul v-else class="list-group">
+                <li v-for="category in sortedCategories" :key="category.id" class="list-group-item d-flex justify-content-between align-items-center"
+                    :style="{ 'padding-left': getCategoryIndent(category) + 'px' }">
+                  <span>
+                    <span v-if="category.parent_id" class="text-muted">└─ </span>
+                    {{ category.name }}
+                    <small v-if="category.parent" class="text-muted">({{ category.parent.name }})</small>
+                  </span>
                   <div>
                     <button class="btn btn-sm btn-outline-primary me-2" @click="editCategory(category)">Edit</button>
                     <button class="btn btn-sm btn-outline-danger" @click="deleteCategory(category.id)">Delete</button>
@@ -29,6 +40,8 @@
              </div>
              <div class="card-body">
                <p>Total Categories: {{ categories.length }}</p>
+               <p>Main Categories: {{ categories.filter(c => !c.parent_id).length }}</p>
+               <p>Subcategories: {{ categories.filter(c => c.parent_id).length }}</p>
                <p>Active Categories: {{ categories.filter(c => c.is_active).length }}</p>
              </div>
            </div>
@@ -49,6 +62,17 @@
                   <label for="categoryName" class="form-label">Category Name</label>
                   <input v-model="categoryForm.name" type="text" class="form-control" id="categoryName" required>
                 </div>
+                <div class="mb-3">
+                  <label for="parentCategory" class="form-label">Parent Category (Optional)</label>
+                  <select v-model="categoryForm.parent_id" class="form-control" id="parentCategory" :disabled="loadingCategories">
+                    <option :value="null">
+                      {{ loadingCategories ? 'Loading categories...' : 'None (Main Category)' }}
+                    </option>
+                    <option v-for="cat in mainCategories" :key="cat.id" :value="cat.id">
+                      {{ cat.name }}
+                    </option>
+                  </select>
+                </div>
                 <button type="submit" class="btn btn-primary" :disabled="loading">{{ loading ? 'Saving...' : 'Save' }}</button>
               </form>
             </div>
@@ -61,7 +85,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import AdminLayout from '../components/AdminLayout.vue'
 import { useApiStore } from '../stores/api'
 
@@ -75,15 +99,64 @@ export default {
     const showAddCategoryModal = ref(false)
     const editingCategory = ref(null)
     const loading = ref(false)
+    const loadingCategories = ref(false)
     const apiStore = useApiStore()
-    const categoryForm = ref({ name: '' })
+    const categoryForm = ref({ name: '', parent_id: null })
+
+    const mainCategories = computed(() => {
+      return categories.value.filter(cat => !cat.parent_id)
+    })
+
+    const sortedCategories = computed(() => {
+      if (!categories.value || !Array.isArray(categories.value)) {
+        return []
+      }
+
+      const result = []
+      const categoryMap = new Map()
+
+      // Create a map for quick lookup
+      categories.value.forEach(cat => {
+        categoryMap.set(cat.id, { ...cat, children: [] })
+      })
+
+      // Build the hierarchy
+      categories.value.forEach(cat => {
+        if (cat.parent_id) {
+          const parent = categoryMap.get(cat.parent_id)
+          if (parent) {
+            parent.children.push(categoryMap.get(cat.id))
+          }
+        }
+      })
+
+      // Flatten the hierarchy with proper ordering
+      const addCategory = (cat, level = 0) => {
+        result.push({ ...cat, level })
+        if (cat.children && Array.isArray(cat.children)) {
+          cat.children.forEach(child => addCategory(child, level + 1))
+        }
+      }
+
+      const mainCategories = categories.value.filter(cat => !cat.parent_id)
+      mainCategories.forEach(cat => addCategory(categoryMap.get(cat.id)))
+
+      return result
+    })
+
+    const getCategoryIndent = (category) => {
+      return category.level * 20 // 20px indent per level
+    }
 
     const fetchCategories = async () => {
+      loadingCategories.value = true
       try {
         const response = await apiStore.get('/admin/categories')
         categories.value = response.data || []
       } catch (error) {
         console.error('Failed to fetch categories:', error)
+      } finally {
+        loadingCategories.value = false
       }
     }
 
@@ -125,7 +198,7 @@ export default {
     const closeModal = () => {
       showAddCategoryModal.value = false
       editingCategory.value = null
-      categoryForm.value = { name: '' }
+      categoryForm.value = { name: '', parent_id: null }
     }
 
     onMounted(() => {
@@ -137,7 +210,11 @@ export default {
       showAddCategoryModal,
       editingCategory,
       loading,
+      loadingCategories,
       categoryForm,
+      mainCategories,
+      sortedCategories,
+      getCategoryIndent,
       saveCategory,
       editCategory,
       deleteCategory,

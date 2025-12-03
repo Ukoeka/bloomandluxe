@@ -20,9 +20,14 @@
                 </div>
                 <div class="mb-3">
                   <label for="productCategory" class="form-label">Category</label>
-                  <select v-model="productForm.category_id" class="form-select" id="productCategory" required>
-                    <option value="">Select Category</option>
-                    <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+                  <select v-model="productForm.category_id" class="form-select" id="productCategory" required :disabled="loadingCategories">
+                    <option value="">
+                      {{ loadingCategories ? 'Loading categories...' : 'Select Category' }}
+                    </option>
+                    <option v-for="category in sortedCategories" :key="category.id" :value="category.id"
+                            :style="{ 'padding-left': getCategoryIndent(category) + 'px' }">
+                      {{ category.name }}
+                    </option>
                   </select>
                 </div>
                 <div class="mb-3">
@@ -67,7 +72,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import AdminLayout from '../components/AdminLayout.vue'
 import { useApiStore } from '../stores/api'
@@ -91,12 +96,58 @@ export default {
     })
     const imagePreview = ref('')
     const categories = ref([])
+    const loadingCategories = ref(false)
+
+    const sortedCategories = computed(() => {
+      if (!categories.value || !Array.isArray(categories.value)) {
+        return []
+      }
+
+      const result = []
+      const categoryMap = new Map()
+
+      // Create a map for quick lookup
+      categories.value.forEach(cat => {
+        categoryMap.set(cat.id, { ...cat, children: [] })
+      })
+
+      // Build the hierarchy
+      categories.value.forEach(cat => {
+        if (cat.parent_id) {
+          const parent = categoryMap.get(cat.parent_id)
+          if (parent) {
+            parent.children.push(categoryMap.get(cat.id))
+          }
+        }
+      })
+
+      // Flatten the hierarchy with proper ordering
+      const addCategory = (cat, level = 0) => {
+        result.push({ ...cat, level })
+        if (cat.children && Array.isArray(cat.children)) {
+          cat.children.forEach(child => addCategory(child, level + 1))
+        }
+      }
+
+      const mainCategories = categories.value.filter(cat => !cat.parent_id)
+      mainCategories.forEach(cat => addCategory(categoryMap.get(cat.id)))
+
+      return result
+    })
+
+    const getCategoryIndent = (category) => {
+      return category.level * 15 // 15px indent per level for dropdown
+    }
+
     const fetchCategories = async () => {
+      loadingCategories.value = true
       try {
         const response = await apiStore.get('/admin/categories')
         categories.value = response.data || []
       } catch (error) {
         console.error('Failed to fetch categories:', error)
+      } finally {
+        loadingCategories.value = false
       }
     }
 
@@ -155,7 +206,10 @@ export default {
       productForm,
       imagePreview,
       categories,
+      sortedCategories,
+      getCategoryIndent,
       loading,
+      loadingCategories,
       handleImageUpload,
       saveProduct
     }

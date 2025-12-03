@@ -27,8 +27,14 @@
           <h5 class="card-title">Orders List</h5>
         </div>
         <div class="card-body">
-          <div class="table-responsive">
-            <table class="modern-table">
+           <div v-if="loadingOrders" class="text-center py-4">
+             <div class="spinner-border text-primary" role="status">
+               <span class="visually-hidden">Loading...</span>
+             </div>
+             <p class="mt-2 text-muted">Loading orders...</p>
+           </div>
+           <div v-else class="table-responsive">
+             <table class="modern-table">
               <thead>
                 <tr>
                   <th>Order Number</th>
@@ -164,14 +170,19 @@ export default {
   setup() {
     const orders = ref([])
     const selectedOrder = ref(null)
+    const loadingOrders = ref(false)
+    const loadingOrderDetails = ref(false)
     const apiStore = useApiStore()
 
     const fetchOrders = async () => {
+      loadingOrders.value = true
       try {
-        const data = await apiStore.get('/admin/orders')
-        orders.value = data
+        const response = await apiStore.get('/admin/orders')
+        orders.value = response.data || []
       } catch (error) {
         console.error('Failed to fetch orders:', error)
+      } finally {
+        loadingOrders.value = false
       }
     }
 
@@ -185,11 +196,14 @@ export default {
     }
 
     const viewOrderDetails = async (order) => {
+      loadingOrderDetails.value = true
       try {
-        const details = await apiStore.get(`/admin/orders/${order.id}`)
-        selectedOrder.value = details
+        const response = await apiStore.get(`/admin/orders/${order.id}`)
+        selectedOrder.value = response.data
       } catch (error) {
         console.error('Failed to fetch order details:', error)
+      } finally {
+        loadingOrderDetails.value = false
       }
     }
 
@@ -204,6 +218,8 @@ export default {
     return {
       orders,
       selectedOrder,
+      loadingOrders,
+      loadingOrderDetails,
       updateStatus,
       viewOrderDetails,
       closeModal
