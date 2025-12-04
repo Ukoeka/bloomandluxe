@@ -25,7 +25,11 @@
                 <td>{{ product.category?.name || 'N/A' }}</td>
                 <td>{{ product.stock }}</td>
                 <td>
-                  <button class="btn btn-sm btn-outline-danger" @click="deleteProduct(product.id)">Delete</button>
+                  <AdminTableActions
+                    :item="product"
+                    @edit="editProduct"
+                    @delete="deleteProduct($event.id)"
+                  />
                 </td>
               </tr>
             </tbody>
@@ -37,15 +41,19 @@
 
 <script>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import AdminLayout from '../components/AdminLayout.vue'
+import AdminTableActions from '../components/AdminTableActions.vue'
 import { useApiStore } from '../stores/api'
 
 export default {
   name: 'AdminProducts',
   components: {
-    AdminLayout
+    AdminLayout,
+    AdminTableActions
   },
   setup() {
+    const router = useRouter()
     const products = ref([])
     const apiStore = useApiStore()
 
@@ -57,6 +65,10 @@ export default {
       } catch (error) {
         console.error('Failed to fetch products:', error)
       }
+    }
+
+    const editProduct = (product) => {
+      router.push(`/admin/products/add/${product.id}`)
     }
 
     const deleteProduct = async (id) => {
@@ -77,6 +89,7 @@ export default {
 
     return {
       products,
+      editProduct,
       deleteProduct
     }
   }

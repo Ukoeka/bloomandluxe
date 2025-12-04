@@ -24,6 +24,7 @@ import AdminAddProduct from '../pages/AdminAddProduct.vue'
 import AdminUsers from '../pages/AdminUsers.vue'
 import AdminReports from '../pages/AdminReports.vue'
 import AdminCategories from '../pages/AdminCategories.vue'
+import AdminSubCategories from '../pages/AdminSubCategories.vue'
 import AdminDisputes from '../pages/AdminDisputes.vue'
 import { useAdminAuthStore } from '../stores/adminAuth'
 
@@ -132,7 +133,7 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/admin/products/add',
+    path: '/admin/products/add/:id?',
     name: 'AdminAddProduct',
     component: AdminAddProduct,
     meta: { requiresAuth: true }
@@ -141,6 +142,12 @@ const routes = [
     path: '/admin/categories',
     name: 'AdminCategories',
     component: AdminCategories,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/admin/categories/:id/subcategories',
+    name: 'AdminSubCategories',
+    component: AdminSubCategories,
     meta: { requiresAuth: true }
   },
   {
