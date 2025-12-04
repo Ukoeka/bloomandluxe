@@ -73,6 +73,13 @@
                     </option>
                   </select>
                 </div>
+                <div class="mb-3">
+                  <label for="categoryImage" class="form-label">Category Image</label>
+                  <input type="file" class="form-control" id="categoryImage" accept="image/*" @change="handleImageUpload">
+                  <div v-if="imagePreview" class="mt-2">
+                    <img :src="imagePreview" alt="Category preview" class="img-fluid" style="max-height: 200px;">
+                  </div>
+                </div>
                 <button type="submit" class="btn btn-primary" :disabled="loading">{{ loading ? 'Saving...' : 'Save' }}</button>
               </form>
             </div>
@@ -101,7 +108,8 @@ export default {
     const loading = ref(false)
     const loadingCategories = ref(false)
     const apiStore = useApiStore()
-    const categoryForm = ref({ name: '', parent_id: null })
+    const categoryForm = ref({ name: '', parent_id: null, image: null })
+    const imagePreview = ref('')
 
     const mainCategories = computed(() => {
       return categories.value.filter(cat => !cat.parent_id)
@@ -160,13 +168,37 @@ export default {
       }
     }
 
+    const handleImageUpload = (event) => {
+      const file = event.target.files[0]
+      if (file) {
+        categoryForm.value.image = file
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          imagePreview.value = e.target.result
+        }
+        reader.readAsDataURL(file)
+      } else {
+        imagePreview.value = ''
+        categoryForm.value.image = null
+      }
+    }
+
     const saveCategory = async () => {
       loading.value = true
       try {
+        const formData = new FormData()
+        formData.append('name', categoryForm.value.name)
+        formData.append('parent_id', categoryForm.value.parent_id || '')
+        formData.append('is_active', '1')
+
+        if (categoryForm.value.image) {
+          formData.append('image', categoryForm.value.image)
+        }
+
         if (editingCategory.value) {
-          await apiStore.put(`/admin/categories/${editingCategory.value.id}`, categoryForm.value)
+          await apiStore.put(`/admin/categories/${editingCategory.value.id}`, formData)
         } else {
-          await apiStore.post('/admin/categories', categoryForm.value)
+          await apiStore.post('/admin/categories', formData)
         }
         await fetchCategories()
         closeModal()
@@ -198,7 +230,8 @@ export default {
     const closeModal = () => {
       showAddCategoryModal.value = false
       editingCategory.value = null
-      categoryForm.value = { name: '', parent_id: null }
+      categoryForm.value = { name: '', parent_id: null, image: null }
+      imagePreview.value = ''
     }
 
     onMounted(() => {
@@ -212,13 +245,15 @@ export default {
       loading,
       loadingCategories,
       categoryForm,
+      imagePreview,
       mainCategories,
       sortedCategories,
       getCategoryIndent,
       saveCategory,
       editCategory,
       deleteCategory,
-      closeModal
+      closeModal,
+      handleImageUpload
     }
   }
 }
