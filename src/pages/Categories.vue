@@ -34,10 +34,10 @@
     <section class="shop-product-section section-padding pt-0 fix">
       <div class="container">
         <div class="row g-4">
-          <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+          <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" v-for="category in categories" :key="category.id">
             <div class="shop-product-item">
               <div class="product-image">
-                <img src="/assets/img/shop/shop-8.jpg" alt="img">
+                <img :src="getImageUrl(category.image)" alt="img">
                 <!-- <ul class="shop-icon d-flex justify-content-center align-items-center">
                   <li>
                     <router-link to="/product-details"><i class="far fa-heart"></i></router-link>
@@ -54,95 +54,13 @@
               </div>
               <div class="content">
                 <h3>
-                  <router-link to="/category">Male Wears</router-link>
+                  <router-link to="/category">{{ category.name }}</router-link>
                 </h3>
                 <p>23 Products</p>
                 <router-link to="/category" class="link-btns">Shop Now <i class="fa-solid fa-chevron-right"></i></router-link>
               </div>
             </div>
           </div>
-          <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
-            <div class="shop-product-item">
-              <div class="product-image">
-                <img src="/assets/img/shop/20.jpg" alt="img">
-                <!-- <ul class="shop-icon d-flex justify-content-center align-items-center">
-                  <li>
-                    <router-link to="/product-details"><i class="far fa-heart"></i></router-link>
-                  </li>
-                  <li>
-                    <router-link to="/product-details"><i class="fa-regular fa-cart-shopping"></i></router-link>
-                  </li>
-                  <li>
-                    <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                      <i class="fa-regular fa-eye"></i>
-                    </button>
-                  </li>
-                </ul> -->
-              </div>
-              <div class="content">
-                <h3>
-                  <router-link to="/category">Female Wears</router-link>
-                </h3>
-                <p>74 products</p>
-                <router-link to="/category" class="link-btns">Shop Now <i class="fa-solid fa-chevron-right"></i></router-link>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".7s">
-            <div class="shop-product-item">
-              <div class="product-image">
-                <img src="/assets/img/product/kid1.jpeg" alt="img">
-                <!-- <ul class="shop-icon d-flex justify-content-center align-items-center">
-                  <li>
-                    <router-link to="/category"><i class="far fa-heart"></i></router-link>
-                  </li>
-                  <li>
-                    <router-link to="/product-details"><i class="fa-regular fa-cart-shopping"></i></router-link>
-                  </li>
-                  <li>
-                    <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                      <i class="fa-regular fa-eye"></i>
-                    </button>
-                  </li>
-                </ul> -->
-              </div>
-              <div class="content">
-                <h3>
-                  <router-link to="/category">Kids</router-link>
-                </h3>
-                <p>51 Products</p>
-                <router-link to="/category" class="link-btns">Shop Now <i class="fa-solid fa-chevron-right"></i></router-link>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-            <div class="shop-product-item">
-              <div class="product-image">
-                <img src="/assets/img/shop/shop-12.jpg" alt="img">
-                <!-- <ul class="shop-icon d-flex justify-content-center align-items-center">
-                  <li>
-                    <router-link to="/product-details"><i class="far fa-heart"></i></router-link>
-                  </li>
-                  <li>
-                    <router-link to="/product-details"><i class="fa-regular fa-cart-shopping"></i></router-link>
-                  </li>
-                  <li>
-                    <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                      <i class="fa-regular fa-eye"></i>
-                    </button>
-                  </li>
-                </ul> -->
-              </div>
-              <div class="content">
-                <h3>
-                  <router-link to="/category">Accesories</router-link>
-                </h3>
-                <p>23 Products</p>
-                <router-link to="/category" class="link-btns">Shop Now <i class="fa-solid fa-chevron-right"></i></router-link>
-              </div>
-            </div>
-          </div>
-          
         </div>
         <!-- <div class="shop-bottom">
           <p class="wow fadeInUp" data-wow-delay=".3s">Showing 12 of 46 products</p>
@@ -181,8 +99,9 @@
   </SharedLayout>
 </template>
 <script>
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import SharedLayout from '../components/SharedLayout.vue'
+import { useApiStore } from '../stores/api'
 
 export default {
   name: 'Categories',
@@ -190,15 +109,56 @@ export default {
     SharedLayout
   },
   setup() {
+
+
+
+     const categories = ref([])
+    // const submitting = ref(false)
+    const apiStore = useApiStore()
+
+    const fetchCategories = async () => {
+      try {
+        const response = await apiStore.get('/categories')
+        categories.value = response.data || []
+        console.log('Categories:', categories.value);
+        console.log('First category:', categories.value[0]);
+      } catch (error) {
+        console.error('Failed to fetch categories:', error)
+      }
+    }
+
+    const getImageUrl = (imagePath) => {
+      if (!imagePath) return '/assets/img/placeholder.jpg'
+
+      // If it's already an absolute URL, return as is
+      if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+        return imagePath
+      }
+
+      // If it's a relative path, prefix with API base URL
+      const baseUrl = 'https://api.digi-essentials.com/'
+      return baseUrl + imagePath.replace(/^\//, '') // Remove leading slash if present
+    }
+
+    
+
     onMounted(() => {
       // Preloader
       setTimeout(() => {
         $(".preloader").addClass('loaded');
         $(".preloader").delay(600).fadeOut();
       }, 100); // small delay to ensure DOM is ready
+      fetchCategories();
+
+
+
+   
     });
 
-    return {};
+    return {
+      categories,
+      getImageUrl,
+    };
   }
 }
 </script>
