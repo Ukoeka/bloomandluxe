@@ -281,7 +281,7 @@
                             </li>
                             <li class="nav-item wow fadeInUp" data-wow-delay=".5s">
                                 <a href="#Reviews" data-bs-toggle="tab" class="nav-link bb-none">
-                                    Others
+                                    Others 
                                 </a>
                             </li>
                         </ul>
@@ -2096,7 +2096,7 @@
                             <div class="swiper-slide">
                                 <div class="instagram-banner-items mt-0">
                                     <div class="banner-image">
-                                        <img src="assets/img/instagram/13.jpg" alt="insta-img">
+                                        <img src="assets/img/shop/ig-pic3.png" alt="insta-img">
                                         <a href="https://instagram.com/" class="icon">
                                             <i class="fa-brands fa-instagram"></i>
                                         </a>
@@ -2106,7 +2106,7 @@
                             <div class="swiper-slide">
                                 <div class="instagram-banner-items mt-0">
                                     <div class="banner-image">
-                                        <img src="assets/img/instagram/14.jpg" alt="insta-img">
+                                        <img src="assets/img/shop/ig-pic4.png" alt="insta-img">
                                         <a href="https://instagram.com/" class="icon">
                                             <i class="fa-brands fa-instagram"></i>
                                         </a>
@@ -2116,7 +2116,7 @@
                             <div class="swiper-slide">
                                 <div class="instagram-banner-items mt-0">
                                     <div class="banner-image">
-                                        <img src="assets/img/instagram/15.jpg" alt="insta-img">
+                                        <img src="assets/img/shop/ig-pic1.png" alt="insta-img">
                                         <a href="https://instagram.com/" class="icon">
                                             <i class="fa-brands fa-instagram"></i>
                                         </a>
@@ -2126,7 +2126,7 @@
                             <div class="swiper-slide">
                                 <div class="instagram-banner-items mt-0">
                                     <div class="banner-image">
-                                        <img src="assets/img/instagram/16.jpg" alt="insta-img">
+                                        <img src="assets/img/shop/ig-pic2.png" alt="insta-img">
                                         <a href="https://instagram.com/" class="icon">
                                             <i class="fa-brands fa-instagram"></i>
                                         </a>
@@ -2136,7 +2136,7 @@
                             <div class="swiper-slide">
                                 <div class="instagram-banner-items mt-0">
                                     <div class="banner-image">
-                                        <img src="assets/img/instagram/17.jpg" alt="insta-img">
+                                        <img src="assets/img/shop/man-1.png" alt="insta-img">
                                         <a href="https://instagram.com/" class="icon">
                                             <i class="fa-brands fa-instagram"></i>
                                         </a>
