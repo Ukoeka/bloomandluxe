@@ -2,7 +2,7 @@
   <AdminLayout>
     <div class="add-product-page">
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Add New Product</h2>
+        <h2>{{ isEditing ? 'Edit Product' : 'Add New Product' }}</h2>
         <router-link to="/admin/products" class="btn btn-secondary">Back to Products</router-link>
       </div>
       <div class="row">
@@ -43,7 +43,7 @@
                   <input type="file" class="form-control" id="productImage" accept="image/*" @change="handleImageUpload">
                 </div>
                 <button type="submit" class="btn btn-primary" :disabled="loading">
-                  {{ loading ? 'Saving...' : 'Save Product' }}
+                  {{ loading ? 'Saving...' : (isEditing ? 'Update Product' : 'Save Product') }}
                 </button>
               </div>
             </div>
@@ -72,8 +72,8 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import AdminLayout from '../components/AdminLayout.vue'
 import { useApiStore } from '../stores/api'
 
@@ -84,6 +84,7 @@ export default {
   },
   setup() {
     const router = useRouter()
+    const route = useRoute()
     const apiStore = useApiStore()
     const loading = ref(false)
     const productForm = ref({
@@ -97,6 +98,8 @@ export default {
     const imagePreview = ref('')
     const categories = ref([])
     const loadingCategories = ref(false)
+    const isEditing = ref(false)
+    const productId = ref(null)
 
     const sortedCategories = computed(() => {
       if (!categories.value || !Array.isArray(categories.value)) {
@@ -151,6 +154,31 @@ export default {
       }
     }
 
+    const fetchProduct = async (id) => {
+      loading.value = true
+      try {
+        const response = await apiStore.get(`/admin/products/${id}`)
+        const product = response.data
+        productForm.value = {
+          name: product.name || '',
+          price: product.price || 0,
+          category_id: product.category_id || '',
+          stock: product.stock || 0,
+          description: product.description || '',
+          image: null // Don't pre-fill image file
+        }
+        if (product.image) {
+          imagePreview.value = product.image // Assuming the API returns the image URL
+        }
+      } catch (error) {
+        console.error('Failed to fetch product:', error)
+        alert('Failed to load product data.')
+        router.push('/admin/products')
+      } finally {
+        loading.value = false
+      }
+    }
+
     const handleImageUpload = (event) => {
       const file = event.target.files[0]
       if (file) {
@@ -189,7 +217,10 @@ export default {
           console.log(key, value)
         }
 
-        await apiStore.post('/admin/products', formData)
+        if (isEditing.value) {
+          formData.append('_method', 'PUT')
+        }
+        await apiStore.post(isEditing.value ? `/admin/products/${productId.value}` : '/admin/products', formData)
         router.push('/admin/products')
       } catch (error) {
         console.error('Failed to save product:', error)
@@ -199,8 +230,19 @@ export default {
       }
     }
 
-    // Fetch categories on component mount
-    fetchCategories()
+    // Check if we're editing
+    const id = route.params.id
+    if (id) {
+      isEditing.value = true
+      productId.value = id
+    }
+
+    onMounted(async () => {
+      await fetchCategories()
+      if (isEditing.value) {
+        await fetchProduct(productId.value)
+      }
+    })
 
     return {
       productForm,
@@ -210,6 +252,7 @@ export default {
       getCategoryIndent,
       loading,
       loadingCategories,
+      isEditing,
       handleImageUpload,
       saveProduct
     }

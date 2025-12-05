@@ -19,15 +19,17 @@
               <ul v-else class="list-group">
                 <li v-for="category in sortedCategories" :key="category.id" class="list-group-item d-flex justify-content-between align-items-center"
                     :style="{ 'padding-left': getCategoryIndent(category) + 'px' }">
-                  <span>
+                  <span :class="{ 'clickable-category': !category.parent_id }" @click="navigateToSubcategories(category)">
                     <span v-if="category.parent_id" class="text-muted">└─ </span>
                     {{ category.name }}
                     <small v-if="category.parent" class="text-muted">({{ category.parent.name }})</small>
+                    <small v-if="!category.parent_id" class="text-muted ms-2">({{ getSubcategoryCount(category) }} subcategories)</small>
                   </span>
-                  <div>
-                    <button class="btn btn-sm btn-outline-primary me-2" @click="editCategory(category)">Edit</button>
-                    <button class="btn btn-sm btn-outline-danger" @click="deleteCategory(category.id)">Delete</button>
-                  </div>
+                  <AdminTableActions
+                    :item="category"
+                    @edit="editCategory"
+                    @delete="deleteCategory($event.id)"
+                  />
                 </li>
               </ul>
             </div>
@@ -93,15 +95,19 @@
 
 <script>
 import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import AdminLayout from '../components/AdminLayout.vue'
+import AdminTableActions from '../components/AdminTableActions.vue'
 import { useApiStore } from '../stores/api'
 
 export default {
   name: 'AdminCategories',
   components: {
-    AdminLayout
+    AdminLayout,
+    AdminTableActions
   },
   setup() {
+    const router = useRouter()
     const categories = ref([])
     const showAddCategoryModal = ref(false)
     const editingCategory = ref(null)
@@ -133,7 +139,7 @@ export default {
         if (cat.parent_id) {
           const parent = categoryMap.get(cat.parent_id)
           if (parent) {
-            parent.children.push(categoryMap.get(cat.id))
+            // parent.children.push(categoryMap.get(cat.id))
           }
         }
       })
@@ -154,6 +160,11 @@ export default {
 
     const getCategoryIndent = (category) => {
       return category.level * 20 // 20px indent per level
+    }
+
+    const getSubcategoryCount = (category) => {
+      if (category.parent_id) return 0 // Subcategories don't have subcategories
+      return categories.value.filter(c => c.parent_id === category.id).length
     }
 
     const fetchCategories = async () => {
@@ -227,6 +238,12 @@ export default {
     }
 
 
+    const navigateToSubcategories = (category) => {
+      if (!category.parent_id) { // Only navigate for main categories
+        router.push(`/admin/categories/${category.id}/subcategories`)
+      }
+    }
+
     const closeModal = () => {
       showAddCategoryModal.value = false
       editingCategory.value = null
@@ -249,17 +266,27 @@ export default {
       mainCategories,
       sortedCategories,
       getCategoryIndent,
+      getSubcategoryCount,
       saveCategory,
       editCategory,
       deleteCategory,
       closeModal,
-      handleImageUpload
+      handleImageUpload,
+      navigateToSubcategories
     }
   }
 }
 </script>
 
 <style scoped>
+.list-group {
+  border: none;
+}
+
+.list-group-item {
+  border: none;
+}
+
 .admin-categories {
   padding: 20px 0;
 }
@@ -305,5 +332,14 @@ export default {
 .admin-categories .btn-outline-danger:hover {
   background-color: var(--theme-2, #EF6CC2);
   border-color: var(--theme-2, #EF6CC2);
+}
+
+.clickable-category {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.clickable-category:hover {
+  color: var(--theme, #6B8F71);
 }
 </style>
