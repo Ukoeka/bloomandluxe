@@ -64,17 +64,7 @@
                   <label for="categoryName" class="form-label">Category Name</label>
                   <input v-model="categoryForm.name" type="text" class="form-control" id="categoryName" required>
                 </div>
-                <div class="mb-3">
-                  <label for="parentCategory" class="form-label">Parent Category (Optional)</label>
-                  <select v-model="categoryForm.parent_id" class="form-control" id="parentCategory" :disabled="loadingCategories">
-                    <option :value="null">
-                      {{ loadingCategories ? 'Loading categories...' : 'None (Main Category)' }}
-                    </option>
-                    <option v-for="cat in mainCategories" :key="cat.id" :value="cat.id">
-                      {{ cat.name }}
-                    </option>
-                  </select>
-                </div>
+               
                 <div class="mb-3">
                   <label for="categoryImage" class="form-label">Category Image</label>
                   <input type="file" class="form-control" id="categoryImage" accept="image/*" @change="handleImageUpload">

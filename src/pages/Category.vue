@@ -1,430 +1,168 @@
 <template>
   <SharedLayout>
-    <!-- product-details-Section Start -->
     <section class="product-collection-section-2 section-padding fix">
-            <div class="container">
-                <div class="section-title-area">
-                    <div class="section-title style-3">
-                        <h6 class="sub-title wow fadeInUp">
-                            Male Collection
-                        </h6>
-                        <h2 class="wow fadeInUp" data-wow-delay=".3s">
-                            Shop from the best quality outfits
-                        </h2>
+      <div class="container">
+        <div class="section-title-area">
+          <div class="section-title style-3">
+            <h6 class="sub-title wow fadeInUp">
+              {{ subcategories[0]?.parent_name }}
+            </h6>
+
+            <h2 class="wow fadeInUp" data-wow-delay=".3s">
+              Shop from the best quality outfits
+            </h2>
+          </div>
+
+          <ul class="nav">
+            <li class="nav-item wow fadeInUp" data-wow-delay=".3s">
+              <a href="#All" data-bs-toggle="tab" class="nav-link active"> All </a>
+            </li>
+
+            <!-- SAFE SUBCATEGORY LOOP -->
+            <li
+              v-for="subcategory in (subcategories || [])"
+              :key="subcategory?.id"
+              class="nav-item wow fadeInUp"
+              data-wow-delay=".3s"
+            >
+              <a :href="`#${subcategory?.name}`" data-bs-toggle="tab" class="nav-link">
+                {{ subcategory?.name }}
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="tab-content">
+          <div id="All" class="tab-pane fade show active">
+            <div class="row">
+
+              <!-- SAFE PRODUCTS LOOP -->
+              <div
+                v-for="product in (products || [])"
+                :key="product?.id"
+                class="col-xl-3 col-lg-4 col-md-6"
+              >
+                <div class="product-collection-item">
+                  <div class="product-image">
+                    <img :src="product?.image" alt="img" />
+                    <div class="product-btn">
+                      <router-link to="/shop-cart" class="theme-btn-2">Add To Cart</router-link>
                     </div>
-                    <ul class="nav">
-                        <li class="nav-item wow fadeInUp" data-wow-delay=".3s">
-                            <a href="#All" data-bs-toggle="tab" class="nav-link active">
-                                All
-                            </a>
-                        </li>
-                        <li class="nav-item wow fadeInUp" data-wow-delay=".5s">
-                            <a href="#Trending" data-bs-toggle="tab" class="nav-link">
-                                Shirts
-                            </a>
-                        </li>
-                        <li class="nav-item wow fadeInUp" data-wow-delay=".5s">
-                            <a href="#Beauty" data-bs-toggle="tab" class="nav-link">
-                                Pants
-                            </a>
-                        </li>
-                        <li class="nav-item wow fadeInUp" data-wow-delay=".5s">
-                            <a href="#Cosmetics" data-bs-toggle="tab" class="nav-link bb-none">
-                                Underwears
-                            </a>
-                        </li>
-                    </ul>
+                  </div>
+                  <div class="product-content">
+                    <p>{{ product?.category }}</p>
+                    <h4>
+                      <router-link :to="`/product-details/${product?.id}`">{{ product?.name }}</router-link>
+                    </h4>
+                    <span>{{ product?.price }}</span>
+                  </div>
                 </div>
-                <div class="tab-content">
-                    <div id="All" class="tab-pane fade show active">
-                        <div class="row">
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/bag1.jpg" alt="img">
-                                        <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>Bags</p>
-                                        <h4>
-                                            <a href="/product-details">Hand Crafted Bag</a>
-                                        </h4>
-                                        <ul class="doller">
-                                            <li>
-                                                $102.00 <del>$226.00</del>
-                                            </li>
-                                         </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/bag2.jpg" alt="img">
-                                        <div class="badge">26%</div>
-                                        <div class="product-btn">
-                                            <a href="shop-cart" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>bag </p>
-                                        <h4>
-                                            <a href="/product-details">Hand Crafted Bag</a>
-                                        </h4>
-                                        <span>$16.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/bag1.jpg" alt="img">
-                                        <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>Bags</p>
-                                        <h4>
-                                            <a href="/product-details">Hand Crafted Bag</a>
-                                        </h4>
-                                        <ul class="doller">
-                                            <li>
-                                                $102.00 <del>$226.00</del>
-                                            </li>
-                                         </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/bag2.jpg" alt="img">
-                                        <div class="badge">26%</div>
-                                        <div class="product-btn">
-                                            <a href="shop-cart" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>bag </p>
-                                        <h4>
-                                            <a href="/product-details">Hand Crafted Bag</a>
-                                        </h4>
-                                        <span>$16.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/bag1.jpg" alt="img">
-                                        <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>Bags</p>
-                                        <h4>
-                                            <a href="/product-details">Hand Crafted Bag</a>
-                                        </h4>
-                                        <ul class="doller">
-                                            <li>
-                                                $102.00 <del>$226.00</del>
-                                            </li>
-                                         </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/bag2.jpg" alt="img">
-                                        <div class="badge">26%</div>
-                                        <div class="product-btn">
-                                            <a href="shop-cart" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>bag </p>
-                                        <h4>
-                                            <a href="/product-details">Hand Crafted Bag</a>
-                                        </h4>
-                                        <span>$16.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="Trending" class="tab-pane fade">
-                        <div class="row">
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/24.jpg" alt="img">
-                                        <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>Physicians</p>
-                                        <h4>
-                                            <a href="product-details.html">Powder Creamy Natural</a>
-                                        </h4>
-                                        <ul class="doller">
-                                            <li>
-                                                $102.00 <del>$226.00</del>
-                                            </li>
-                                         </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/25.jpg" alt="img">
-                                        <div class="badge">26%</div>
-                                        <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>Mineral </p>
-                                        <h4>
-                                            <a href="product-details.html">Mineral Matte Finishing</a>
-                                        </h4>
-                                        <span>$16.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/26.jpg" alt="img">
-                                        <div class="product-btn active">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>StriVectin</p>
-                                        <h4>
-                                            <a href="product-details.html">Resurfacing Exfoliating</a>
-                                        </h4>
-                                        <ul class="doller">
-                                            <li>
-                                                $76.00 <del>$106.00</del>
-                                            </li>
-                                         </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/27.jpg" alt="img">
-                                        <div class="badge">35%</div>
-                                        <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>Marcelle</p>
-                                        <h4>
-                                            <a href="product-details.html">Correction Tinted Cream</a>
-                                        </h4>
-                                        <span>$44.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="Beauty" class="tab-pane fade">
-                        <div class="row">
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/24.jpg" alt="img">
-                                        <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>Physicians</p>
-                                        <h4>
-                                            <a href="product-details.html">Powder Creamy Natural</a>
-                                        </h4>
-                                        <ul class="doller">
-                                            <li>
-                                                $102.00 <del>$226.00</del>
-                                            </li>
-                                         </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/25.jpg" alt="img">
-                                        <div class="badge">26%</div>
-                                        <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>Mineral </p>
-                                        <h4>
-                                            <a href="product-details.html">Mineral Matte Finishing</a>
-                                        </h4>
-                                        <span>$16.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/26.jpg" alt="img">
-                                        <div class="product-btn active">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>StriVectin</p>
-                                        <h4>
-                                            <a href="product-details.html">Resurfacing Exfoliating</a>
-                                        </h4>
-                                        <ul class="doller">
-                                            <li>
-                                                $76.00 <del>$106.00</del>
-                                            </li>
-                                         </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/27.jpg" alt="img">
-                                        <div class="badge">35%</div>
-                                        <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>Marcelle</p>
-                                        <h4>
-                                            <a href="product-details.html">Correction Tinted Cream</a>
-                                        </h4>
-                                        <span>$44.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="Cosmetics" class="tab-pane fade">
-                        <div class="row">
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/24.jpg" alt="img">
-                                        <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>Physicians</p>
-                                        <h4>
-                                            <a href="product-details.html">Powder Creamy Natural</a>
-                                        </h4>
-                                        <ul class="doller">
-                                            <li>
-                                                $102.00 <del>$226.00</del>
-                                            </li>
-                                         </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/25.jpg" alt="img">
-                                        <div class="badge">26%</div>
-                                        <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>Mineral </p>
-                                        <h4>
-                                            <a href="product-details.html">Mineral Matte Finishing</a>
-                                        </h4>
-                                        <span>$16.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/26.jpg" alt="img">
-                                        <div class="product-btn active">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>StriVectin</p>
-                                        <h4>
-                                            <a href="product-details.html">Resurfacing Exfoliating</a>
-                                        </h4>
-                                        <ul class="doller">
-                                            <li>
-                                                $76.00 <del>$106.00</del>
-                                            </li>
-                                         </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-collection-item">
-                                    <div class="product-image">
-                                        <img src="assets/img/product/27.jpg" alt="img">
-                                        <div class="badge">35%</div>
-                                        <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <p>Marcelle</p>
-                                        <h4>
-                                            <a href="product-details.html">Correction Tinted Cream</a>
-                                        </h4>
-                                        <span>$44.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-        </section>
+          </div>
+
+          <!-- SUB CATEGORY TABS -->
+          <div
+            v-for="subcategory in (subcategories || [])"
+            :key="subcategory?.id"
+            :id="subcategory?.name"
+            class="tab-pane fade"
+          >
+            <div class="row">
+              <div
+                v-for="product in (products || []).filter(p => p?.category === subcategory?.name)"
+                :key="product?.id"
+                class="col-xl-3 col-lg-4 col-md-6"
+              >
+                <div class="product-collection-item">
+                  <div class="product-image">
+                    <img :src="product?.image" alt="img" />
+                    <div class="product-btn">
+                      <router-link to="/shop-cart" class="theme-btn-2">Add To Cart</router-link>
+                    </div>
+                  </div>
+                  <div class="product-content">
+                    <p>{{ product?.category }}</p>
+                    <h4>
+                      <router-link :to="`/product-details/${product?.id}`">{{ product?.name }}</router-link>
+                    </h4>
+                    <span>{{ product?.price }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
   </SharedLayout>
 </template>
 
+
 <script>
 import SharedLayout from '../components/SharedLayout.vue'
+import { useApiStore } from '../stores/api'
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 
 export default {
   name: 'Category',
-  components: {
-    SharedLayout
-  },
+  components: { SharedLayout },
+
   setup() {
-    // Preloader
-    $(window).on('load', function() {
-      $(".preloader").addClass('loaded');
-      $(".preloader").delay(600).fadeOut();
+
+    const route = useRoute();
+    const apiStore = useApiStore();
+
+    const subcategories = ref([])
+    const products = ref([])
+    const category = ref(null)
+    const loading = ref(true)
+    const error = ref(null)
+
+    const fetchCategory = async () => {
+      try {
+        const response = await apiStore.get(`/categories/${route.params.id}`);
+        category.value = response?.data || response;
+      } catch (err) {
+        error.value = "Failed to load category";
+      }
+    };
+
+    const fetchSubcategories = async () => {
+      try {
+        const response = await apiStore.get(`/categories/${route.params.id}/subcategories`);
+        subcategories.value = (response?.data || response)
+      } catch (err) {
+        error.value = "Failed to load subcategories";
+      }
+    };
+
+    const fetchProducts = async () => {
+      try {
+        const response = await apiStore.get(`products?category_id=${route.params.id}&min_price=0&max_price=10000`);
+        const data = response?.data || response;
+        products.value = Array.isArray(data) ? data : [];
+      } catch (err) {
+        error.value = "Failed to load products";
+      }
+    };
+
+    onMounted(async () => {
+      await fetchCategory();
+      await fetchSubcategories();
+      await fetchProducts();
+      loading.value = false;
     });
 
-    return {};
+    return {
+      subcategories,
+      category,
+      products,
+      loading,
+      error
+    };
   }
 }
 </script>

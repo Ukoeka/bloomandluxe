@@ -105,7 +105,7 @@ const routes = [
     component: Categories
   },
   {
-    path: '/category',
+    path: '/category/:id',
     name: 'Category',
     component: Category
   },

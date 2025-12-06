@@ -54,10 +54,10 @@
               </div>
               <div class="content">
                 <h3>
-                  <router-link to="/category">{{ category.name }}</router-link>
+                  <router-link :to="`/category/${category.id}`">{{ category.name }}</router-link>
                 </h3>
                 <p>23 Products</p>
-                <router-link to="/category" class="link-btns">Shop Now <i class="fa-solid fa-chevron-right"></i></router-link>
+                <router-link :to="`/category/${category.id}`" class="link-btns">Shop Now <i class="fa-solid fa-chevron-right"></i></router-link>
               </div>
             </div>
           </div>
