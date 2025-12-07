@@ -5,7 +5,7 @@
         <div class="section-title-area">
           <div class="section-title style-3">
             <h6 class="sub-title wow fadeInUp">
-              {{ subcategories[0]?.parent_name }}
+              {{ activeSubcategory?.parent_name || subcategories[0]?.parent_name }}
             </h6>
 
             <h2 class="wow fadeInUp" data-wow-delay=".3s">
@@ -14,86 +14,61 @@
           </div>
 
           <ul class="nav">
-            <li class="nav-item wow fadeInUp" data-wow-delay=".3s">
-              <a href="#All" data-bs-toggle="tab" class="nav-link active"> All </a>
-            </li>
-
-            <!-- SAFE SUBCATEGORY LOOP -->
+            <!-- SUBCATEGORY LOOP -->
             <li
               v-for="subcategory in (subcategories || [])"
               :key="subcategory?.id"
-              class="nav-item wow fadeInUp"
-              data-wow-delay=".3s"
+              class="nav-item"
             >
-              <a :href="`#${subcategory?.name}`" data-bs-toggle="tab" class="nav-link">
+              <a
+                href="javascript:void(0)"
+                @click="activeSubcategory = subcategory"
+                :class="['nav-link', activeSubcategory?.id === subcategory?.id && 'active']"
+              >
                 {{ subcategory?.name }}
               </a>
             </li>
           </ul>
         </div>
 
-        <div class="tab-content">
-          <div id="All" class="tab-pane fade show active">
-            <div class="row">
-
-              <!-- SAFE PRODUCTS LOOP -->
-              <div
-                v-for="product in (products || [])"
-                :key="product?.id"
-                class="col-xl-3 col-lg-4 col-md-6"
-              >
-                <div class="product-collection-item">
-                  <div class="product-image">
-                    <img :src="product?.image" alt="img" />
-                    <div class="product-btn">
-                      <router-link to="/shop-cart" class="theme-btn-2">Add To Cart</router-link>
-                    </div>
-                  </div>
-                  <div class="product-content">
-                    <p>{{ product?.category }}</p>
-                    <h4>
-                      <router-link :to="`/product-details/${product?.id}`">{{ product?.name }}</router-link>
-                    </h4>
-                    <span>{{ product?.price }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <!-- Loading State -->
+        <div v-if="loading" class="row mt-4">
+          <div class="col-12 text-center">
+            <p>Loading products...</p>
           </div>
-
-          <!-- SUB CATEGORY TABS -->
-          <div
-            v-for="subcategory in (subcategories || [])"
-            :key="subcategory?.id"
-            :id="subcategory?.name"
-            class="tab-pane fade"
-          >
-            <div class="row">
-              <div
-                v-for="product in (products || []).filter(p => p?.category === subcategory?.name)"
-                :key="product?.id"
-                class="col-xl-3 col-lg-4 col-md-6"
-              >
-                <div class="product-collection-item">
-                  <div class="product-image">
-                    <img :src="product?.image" alt="img" />
-                    <div class="product-btn">
-                      <router-link to="/shop-cart" class="theme-btn-2">Add To Cart</router-link>
-                    </div>
-                  </div>
-                  <div class="product-content">
-                    <p>{{ product?.category }}</p>
-                    <h4>
-                      <router-link :to="`/product-details/${product?.id}`">{{ product?.name }}</router-link>
-                    </h4>
-                    <span>{{ product?.price }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
         </div>
+
+        <!-- PRODUCT LIST BY ACTIVE SUBCATEGORY -->
+        <div v-else class="row mt-4">
+          <div
+            v-for="product in products"
+            :key="product?.id"
+            class="col-xl-3 col-lg-4 col-md-6"
+          >
+            <div class="product-collection-item">
+              <div class="product-image">
+                <img :src="product?.image" alt="img" style="width: 100%; height: 350px; object-fit: cover;" />
+                <div class="product-btn">
+                  <router-link to="/shop-cart" class="theme-btn-2">Add To Cart</router-link>
+                </div>
+              </div>
+
+              <div class="product-content">
+                <p>{{ product?.category?.name || product?.category }}</p>
+                <h4>
+                  <router-link :to="`/product-details/${product?.id}`">{{ product?.name }}</router-link>
+                </h4>
+                <span>${{ product?.price }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div v-if="!loading && products.length === 0" class="col-12 text-center">
+            <p>No products found in this subcategory.</p>
+          </div>
+        </div>
+
       </div>
     </section>
   </SharedLayout>
@@ -103,7 +78,7 @@
 <script>
 import SharedLayout from '../components/SharedLayout.vue'
 import { useApiStore } from '../stores/api'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 export default {
@@ -117,51 +92,79 @@ export default {
 
     const subcategories = ref([])
     const products = ref([])
-    const category = ref(null)
-    const loading = ref(true)
-    const error = ref(null)
-
-    const fetchCategory = async () => {
-      try {
-        const response = await apiStore.get(`/categories/${route.params.id}`);
-        category.value = response?.data || response;
-      } catch (err) {
-        error.value = "Failed to load category";
-      }
-    };
+    const activeSubcategory = ref(null)
+    const loading = ref(false)
 
     const fetchSubcategories = async () => {
       try {
-        const response = await apiStore.get(`/categories/${route.params.id}/subcategories`);
-        subcategories.value = (response?.data || response)
-      } catch (err) {
-        error.value = "Failed to load subcategories";
+        const res = await apiStore.get(`/categories/${route.params.id}/subcategories`);
+        subcategories.value = Array.isArray(res?.data) ? res.data : [];
+        
+        console.log('Subcategories fetched:', subcategories.value);
+        
+        if (subcategories.value.length > 0) {
+          activeSubcategory.value = subcategories.value[0];
+          console.log('Active subcategory set to:', activeSubcategory.value);
+        }
+      } catch (error) {
+        console.error('Error fetching subcategories:', error);
       }
     };
 
-    const fetchProducts = async () => {
+    const fetchProductsBySubcategory = async (subcategoryId) => {
+      if (!subcategoryId) return;
+      
+      loading.value = true;
       try {
-        const response = await apiStore.get(`products?category_id=${route.params.id}&min_price=0&max_price=10000`);
-        const data = response?.data || response;
+        // IMPORTANT: Try fetching with the subcategory ID directly
+        const res = await apiStore.get(`products?category_id=${subcategoryId}`);
+        const data = res?.data?.data || res?.data || res;
         products.value = Array.isArray(data) ? data : [];
-      } catch (err) {
-        error.value = "Failed to load products";
+        
+        console.log(`=== Products for subcategory ID ${subcategoryId} (${activeSubcategory.value?.name}) ===`);
+        console.log('API Response:', res);
+        console.log('Products data:', data);
+        console.log('Products array:', products.value);
+        
+        if (products.value.length > 0) {
+          console.log('First product details:', products.value[0]);
+          console.log('All products category IDs:', products.value.map(p => ({
+            id: p.id,
+            name: p.name,
+            category_id: p.category_id,
+            category: p.category
+          })));
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        products.value = [];
+      } finally {
+        loading.value = false;
       }
     };
+
+    // Watch for active subcategory changes
+    watch(activeSubcategory, (newSubcategory) => {
+      if (newSubcategory) {
+        console.log('Active subcategory changed to:', newSubcategory);
+        fetchProductsBySubcategory(newSubcategory.id);
+      }
+    });
 
     onMounted(async () => {
-      await fetchCategory();
       await fetchSubcategories();
-      await fetchProducts();
-      loading.value = false;
+      
+      // Initial fetch for the first subcategory
+      if (activeSubcategory.value) {
+        await fetchProductsBySubcategory(activeSubcategory.value.id);
+      }
     });
 
     return {
       subcategories,
-      category,
+      activeSubcategory,
       products,
-      loading,
-      error
+      loading
     };
   }
 }

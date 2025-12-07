@@ -6564,6 +6564,10 @@ input.main-search-input::placeholder {
   left: 25px;
   top: 25px;
 }
+.tab-content .product-collection-item .product-image {
+  position: relative;
+  overflow: hidden;
+}
 .tab-content .product-collection-item .product-image .product-btn {
   position: absolute;
   left: 0;
