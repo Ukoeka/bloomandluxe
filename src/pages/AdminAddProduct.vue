@@ -29,9 +29,9 @@
                     </option>
                   </select>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" v-if="availableSubcategories.length > 0">
                   <label for="productSubcategory" class="form-label">Subcategory</label>
-                  <select v-model="productForm.category_id" class="form-select" id="productSubcategory" required :disabled="!selectedCategory || loadingCategories">
+                  <select v-model="productForm.category_id" class="form-select" id="productSubcategory" required>
                     <option value="">Select Subcategory</option>
                     <option v-for="sub in availableSubcategories" :key="sub.id" :value="sub.id">
                       {{ sub.name }}
@@ -50,7 +50,7 @@
                   <label for="productImage" class="form-label">Product Image</label>
                   <input type="file" class="form-control" id="productImage" accept="image/*" @change="handleImageUpload">
                 </div>
-                <button type="submit" class="btn btn-primary" :disabled="loading">
+                <button type="submit" class="btn btn-primary" :disabled="loading || !isCategorySelected">
                   {{ loading ? 'Saving...' : (isEditing ? 'Update Product' : 'Save Product') }}
                 </button>
               </div>
@@ -118,20 +118,42 @@ export default {
     })
 
     const availableSubcategories = computed(() => {
-      if (!categories.value || !Array.isArray(categories.value)) {
+      if (!categories.value || !Array.isArray(categories.value) || !selectedCategory.value) {
         return []
       }
-      const subs = categories.value.filter(c => c.parent_id == selectedCategory.value)
-      if (subs.length === 0 && selectedCategory.value) {
-        const main = categories.value.find(c => c.id == selectedCategory.value)
-        if (main) subs.push(main)
-      }
-      return subs
+      return categories.value.filter(c => c.parent_id == selectedCategory.value)
     })
 
+    // Check if a valid category is selected (either subcategory or main category without children)
+    const isCategorySelected = computed(() => {
+      if (!selectedCategory.value) return false
+      
+      // If there are subcategories available, one must be selected
+      if (availableSubcategories.value.length > 0) {
+        return !!productForm.value.category_id
+      }
+      
+      // If no subcategories, the main category itself is valid
+      return true
+    })
+
+    // Watch for category changes
     watch(selectedCategory, (newVal) => {
-      if (newVal && !availableSubcategories.value.find(s => s.id == productForm.value.category_id)) {
+      if (!newVal) {
         productForm.value.category_id = ''
+        return
+      }
+
+      const subcategories = categories.value.filter(c => c.parent_id == newVal)
+      
+      // If there are no subcategories, use the main category as the product category
+      if (subcategories.length === 0) {
+        productForm.value.category_id = newVal
+      } else {
+        // If there are subcategories, clear the selection so user must choose one
+        if (!subcategories.find(s => s.id == productForm.value.category_id)) {
+          productForm.value.category_id = ''
+        }
       }
     })
 
@@ -160,14 +182,19 @@ export default {
           description: product.description || '',
           image: null // Don't pre-fill image file
         }
+        
+        // Find the category and set the parent category
         const category = categories.value.find(c => c.id == product.category_id)
         if (category) {
           if (category.parent_id) {
+            // This is a subcategory
             selectedCategory.value = category.parent_id
           } else {
+            // This is a main category
             selectedCategory.value = category.id
           }
         }
+        
         if (product.image) {
           imagePreview.value = product.image // Assuming the API returns the image URL
         }
@@ -187,7 +214,6 @@ export default {
         const reader = new FileReader()
         reader.onload = (e) => {
           imagePreview.value = e.target.result
-          console.log('Image preview set:', imagePreview.value)
         }
         reader.readAsDataURL(file)
       } else {
@@ -198,6 +224,12 @@ export default {
     }
 
     const saveProduct = async () => {
+      // Validate that we have a valid category
+      if (!isCategorySelected.value) {
+        alert('Please select a category')
+        return
+      }
+
       loading.value = true
       try {
         const formData = new FormData()
@@ -210,17 +242,12 @@ export default {
 
         if (productForm.value.image) {
           formData.append('image', productForm.value.image)
-          console.log('Image file:', productForm.value.image)
-        }
-
-        console.log('FormData contents:')
-        for (let [key, value] of formData.entries()) {
-          console.log(key, value)
         }
 
         if (isEditing.value) {
           formData.append('_method', 'PUT')
         }
+
         await apiStore.post(isEditing.value ? `/admin/products/${productId.value}` : '/admin/products', formData)
         router.push('/admin/products')
       } catch (error) {
@@ -255,6 +282,7 @@ export default {
       loading,
       loadingCategories,
       isEditing,
+      isCategorySelected,
       handleImageUpload,
       saveProduct
     }
@@ -285,5 +313,10 @@ export default {
 .add-product-page .btn-secondary:hover {
   background-color: var(--header, #010F1C);
   border-color: var(--header, #010F1C);
+}
+
+.add-product-page .btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 </style>
