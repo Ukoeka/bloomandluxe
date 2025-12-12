@@ -214,7 +214,7 @@
                   <span>$386.00</span>
                 </div>
                 <div class="cart-button mb-4">
-                  <a href="shop-cart.html" class="theme-btn">
+                  <a href="/shop-cart" class="theme-btn">
                     View Cart
                   </a>
                 </div>

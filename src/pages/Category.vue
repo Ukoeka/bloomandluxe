@@ -49,7 +49,7 @@
               <div class="product-image">
                 <img :src="product?.image" alt="img" style="width: 100%; height: 350px; object-fit: cover;" />
                 <div class="product-btn">
-                  <router-link to="/shop-cart" class="theme-btn-2">Add To Cart</router-link>
+                  <button @click="addToCart(product)" class="theme-btn theme-btn-2">Add To Cart</button>
                 </div>
               </div>
 
@@ -78,6 +78,7 @@
 <script>
 import SharedLayout from '../components/SharedLayout.vue'
 import { useApiStore } from '../stores/api'
+import { useCartStore } from '../stores/cart'
 import { ref, onMounted, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -89,6 +90,7 @@ export default {
 
     const route = useRoute();
     const apiStore = useApiStore();
+    const cartStore = useCartStore();
 
     const subcategories = ref([])
     const products = ref([])
@@ -151,9 +153,15 @@ export default {
       }
     });
 
+    const addToCart = (product) => {
+      cartStore.addToCart(product);
+      // Optional: Show a success message or notification
+      alert(`${product.name} added to cart!`);
+    };
+
     onMounted(async () => {
       await fetchSubcategories();
-      
+
       // Initial fetch for the first subcategory
       if (activeSubcategory.value) {
         await fetchProductsBySubcategory(activeSubcategory.value.id);
@@ -164,7 +172,8 @@ export default {
       subcategories,
       activeSubcategory,
       products,
-      loading
+      loading,
+      addToCart
     };
   }
 }
