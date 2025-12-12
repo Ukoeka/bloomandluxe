@@ -121,8 +121,10 @@ export default {
       if (!categories.value || !Array.isArray(categories.value) || !selectedCategory.value) {
         return []
       }
-      return categories.value.filter(c => c.parent_id == selectedCategory.value)
+      return categories.value.map(c => c.children).flat().filter(c => c.parent_id == selectedCategory.value) || []
     })
+
+    console.log(availableSubcategories.value, selectedCategory.value)
 
     // Check if a valid category is selected (either subcategory or main category without children)
     const isCategorySelected = computed(() => {
@@ -144,8 +146,8 @@ export default {
         return
       }
 
-      const subcategories = categories.value.filter(c => c.parent_id == newVal)
-      
+      const subcategories = categories.value.find(c => c.id == newVal).children || [];
+      availableSubcategories.value = subcategories;
       // If there are no subcategories, use the main category as the product category
       if (subcategories.length === 0) {
         productForm.value.category_id = newVal
