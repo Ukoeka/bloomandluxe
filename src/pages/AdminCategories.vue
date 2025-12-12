@@ -17,13 +17,11 @@
                 <p class="mt-2 text-muted">Loading categories...</p>
               </div>
               <ul v-else class="list-group">
-                <li v-for="category in sortedCategories" :key="category.id" class="list-group-item d-flex justify-content-between align-items-center"
+                <li v-for="category in categories" :key="category.id" class="list-group-item d-flex justify-content-between align-items-center"
                     :style="{ 'padding-left': getCategoryIndent(category) + 'px' }">
                   <span :class="{ 'clickable-category': !category.parent_id }" @click="navigateToSubcategories(category)">
-                    <span v-if="category.parent_id" class="text-muted">└─ </span>
                     {{ category.name }}
-                    <small v-if="category.parent" class="text-muted">({{ category.parent.name }})</small>
-                    <small v-if="!category.parent_id" class="text-muted ms-2">({{ getSubcategoryCount(category) }} subcategories)</small>
+                    <small class="text-muted ms-2">({{ getSubcategoryCount(category) }} subcategories)</small>
                   </span>
                   <AdminTableActions
                     :item="category"
@@ -43,7 +41,7 @@
              <div class="card-body">
                <p>Total Categories: {{ categories.length }}</p>
                <p>Main Categories: {{ categories.filter(c => !c.parent_id).length }}</p>
-               <p>Subcategories: {{ categories.filter(c => c.parent_id).length }}</p>
+               <p>Subcategories: {{ categories.map(c => c.children).flat().length  }}</p>
                <p>Active Categories: {{ categories.filter(c => c.is_active).length }}</p>
              </div>
            </div>
@@ -111,50 +109,14 @@ export default {
       return categories.value.filter(cat => !cat.parent_id)
     })
 
-    const sortedCategories = computed(() => {
-      if (!categories.value || !Array.isArray(categories.value)) {
-        return []
-      }
-
-      const result = []
-      const categoryMap = new Map()
-
-      // Create a map for quick lookup
-      categories.value.forEach(cat => {
-        categoryMap.set(cat.id, { ...cat, children: [] })
-      })
-
-      // Build the hierarchy
-      categories.value.forEach(cat => {
-        if (cat.parent_id) {
-          const parent = categoryMap.get(cat.parent_id)
-          if (parent) {
-            // parent.children.push(categoryMap.get(cat.id))
-          }
-        }
-      })
-
-      // Flatten the hierarchy with proper ordering
-      const addCategory = (cat, level = 0) => {
-        result.push({ ...cat, level })
-        if (cat.children && Array.isArray(cat.children)) {
-          cat.children.forEach(child => addCategory(child, level + 1))
-        }
-      }
-
-      const mainCategories = categories.value.filter(cat => !cat.parent_id)
-      mainCategories.forEach(cat => addCategory(categoryMap.get(cat.id)))
-
-      return result
-    })
 
     const getCategoryIndent = (category) => {
       return category.level * 20 // 20px indent per level
     }
 
     const getSubcategoryCount = (category) => {
-      if (category.parent_id) return 0 // Subcategories don't have subcategories
-      return categories.value.filter(c => c.parent_id === category.id).length
+      console.log(category.children)
+      return category.children.length || 0;
     }
 
     const fetchCategories = async () => {
@@ -254,7 +216,6 @@ export default {
       categoryForm,
       imagePreview,
       mainCategories,
-      sortedCategories,
       getCategoryIndent,
       getSubcategoryCount,
       saveCategory,
