@@ -128,10 +128,14 @@
           <div class="flag-wrap">
           </div>
           <div class="content">
-            <button id="openButton" class="account-text">
+            <button v-if="!isLoggedIn" id="openButton" class="account-text">
               <i class="fa-regular fa-user"></i>
               Log in
             </button>
+            <div v-else class="user-info">
+              <i class="fa-regular fa-user"></i>
+              <span>Welcome, {{ authStore.user?.name || 'User' }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -191,37 +195,32 @@
             <a href="#0" class="search-trigger search-icon style-2"><i class="fa-regular fa-magnifying-glass"></i></a>
             <div class="menu-cart">
               <div class="cart-box">
-                <ul>
-                  <li>
-                    <img src="/assets/img/cart/01.jpg" alt="image">
+                <ul v-if="cartStore.cartItems.length > 0">
+                  <li v-for="item in cartStore.cartItems.slice(0, 2)" :key="item.id">
+                    <img :src="getImageUrl(item.image)" :alt="item.name">
                     <div class="cart-product">
-                      <a href="#">Android phone</a>
-                      <span>118$</span>
+                      <a href="#">{{ item.name || 'Product' }}</a>
+                      <span>${{ Number(item.price).toFixed(2) }}</span>
                     </div>
                   </li>
                 </ul>
-                <ul>
-                  <li class="border-none">
-                    <img src="/assets/img/cart/02.jpg" alt="image">
-                    <div class="cart-product">
-                      <a href="#">Macbook Book</a>
-                      <span>268$</span>
-                    </div>
-                  </li>
-                </ul>
-                <div class="shopping-items">
+                <div v-else class="text-center py-3">
+                  <p>Your cart is empty</p>
+                </div>
+                <div v-if="cartStore.cartItems.length > 0" class="shopping-items">
                   <span>Total :</span>
-                  <span>$386.00</span>
+                  <span>${{ totalPrice.toFixed(2) }}</span>
                 </div>
                 <div class="cart-button mb-4">
-                  <a href="/shop-cart" class="theme-btn">
+                  <router-link to="/shop-cart" class="theme-btn">
                     View Cart
-                  </a>
+                  </router-link>
                 </div>
               </div>
-              <a href="shop-cart.html" class="cart-icon">
+              <router-link to="/shop-cart" class="cart-icon">
                 <i class="fa-sharp fa-regular fa-bag-shopping"></i>
-              </a>
+                <span v-if="totalItems > 0" class="cart-count">{{ totalItems }}</span>
+              </router-link>
             </div>
             <div class="header__hamburger d-xl-none my-auto">
               <div class="sidebar__toggle">
@@ -238,11 +237,12 @@
 
 
    <div id="targetElement" class="side_bar slideInRight side_bar_hidden">
-      <div class="side_bar_overlay"></div>
-      <div class="cart-title mb-50">
-        <h4>Log in</h4>
-      </div>
-      <div class="login-sidebar">
+       <div class="side_bar_overlay"></div>
+       <div class="cart-title mb-50">
+         <h4 v-if="!isLoggedIn">Log in</h4>
+         <h4 v-else>Account</h4>
+       </div>
+       <div v-if="!isLoggedIn" class="login-sidebar">
         <form action="#" id="contact-form" method="POST">
           <div class="row g-4">
             <div class="col-lg-12">
@@ -285,6 +285,33 @@
           <a href="account.html">Create an Account</a>
         </div>
       </div>
+      <div v-else class="account-sidebar">
+        <div class="user-info-section">
+          <div class="user-avatar">
+            <img src="/assets/img/user.png" alt="user">
+          </div>
+          <h5>{{ authStore.user?.name || 'User' }}</h5>
+          <p>{{ authStore.user?.email || '' }}</p>
+        </div>
+        <div class="account-links">
+          <a href="#" class="account-link">
+            <i class="fas fa-user"></i>
+            My Profile
+          </a>
+          <a href="#" class="account-link">
+            <i class="fas fa-shopping-bag"></i>
+            My Orders
+          </a>
+          <a href="#" class="account-link">
+            <i class="fas fa-heart"></i>
+            Wishlist
+          </a>
+          <a href="#" @click.prevent="logout" class="account-link">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+          </a>
+        </div>
+      </div>
       <button id="closeButton" class="x-mark-icon"><i class="fas fa-times"></i></button>
     </div>
 
@@ -304,8 +331,49 @@
 </template>
 
 <script>
+import { useCartStore } from '../stores/cart'
+import { useAuthStore } from '../stores/auth'
+import { computed } from 'vue'
+
 export default {
   name: 'Header',
+  setup() {
+    const cartStore = useCartStore()
+    const authStore = useAuthStore()
+
+    const totalItems = computed(() => cartStore.getTotalItems())
+    const totalPrice = computed(() => cartStore.getTotalPrice())
+    const isLoggedIn = computed(() => !!authStore.user)
+
+    const getImageUrl = (imagePath) => {
+      if (!imagePath) return '/assets/img/cart/01.jpg' // Use a default cart image
+
+      // If it's already an absolute URL, return as is
+      if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+        return imagePath
+      }
+
+      // If it's a relative path, prefix with API base URL
+      const baseUrl = 'https://api.digi-essentials.com/'
+      return baseUrl + imagePath.replace(/^\//, '') // Remove leading slash if present
+    }
+
+    const logout = () => {
+      authStore.logout()
+      // Optional: redirect to home page or show message
+      alert('Logged out successfully!')
+    }
+
+    return {
+      cartStore,
+      authStore,
+      totalItems,
+      totalPrice,
+      isLoggedIn,
+      getImageUrl,
+      logout
+    }
+  },
   data() {
     return {
       showPreloader: true
@@ -412,3 +480,95 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 20px;
+}
+
+.cart-icon {
+  position: relative;
+}
+
+.account-sidebar {
+  text-align: center;
+}
+
+.user-info-section {
+  margin-bottom: 30px;
+}
+
+.user-avatar {
+  margin-bottom: 15px;
+}
+
+.user-avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info-section h5 {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.user-info-section p {
+  color: #666;
+  font-size: 14px;
+}
+
+.account-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.account-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.3s ease;
+}
+
+.account-link:hover {
+  background: #e9ecef;
+  color: #000;
+}
+
+.account-link i {
+  width: 20px;
+  color: #666;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+  font-weight: 500;
+}
+
+.user-info i {
+  color: #666;
+}
+</style>

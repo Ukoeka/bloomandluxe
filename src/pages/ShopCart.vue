@@ -111,7 +111,7 @@
                 placeholder="Enter coupon code">
               <button type="submit" class="theme-btn alt-color radius-xs">Apply</button>
             </form> -->
-            <router-link to="/checkout" type="button" class="theme-btn alt-color radius-xs">Checkout</router-link>
+            <router-link to="/checkout" class="theme-btn alt-color radius-xs">Checkout</router-link>
           </div>
         </div>
       </div>

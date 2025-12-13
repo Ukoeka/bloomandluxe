@@ -4,7 +4,7 @@ import { useApiStore } from './api'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null,
+    user: JSON.parse(localStorage.getItem('user')) || null,
     registerError: null,
     registerLoading: false,
     loginError: null,
@@ -23,6 +23,9 @@ export const useAuthStore = defineStore('auth', {
         const data = await api.post('/api/register', payload)
         // assuming the backend returns user data
         this.user = data.user || null
+        if (this.user) {
+          localStorage.setItem('user', JSON.stringify(this.user))
+        }
         return data
       } catch (err) {
         this.registerError =
@@ -46,6 +49,9 @@ export const useAuthStore = defineStore('auth', {
         const data = await api.post('/api/login', payload)
         // assuming the backend returns user data
         this.user = data.user || null
+        if (this.user) {
+          localStorage.setItem('user', JSON.stringify(this.user))
+        }
         return data
       } catch (err) {
         this.loginError =
@@ -56,6 +62,11 @@ export const useAuthStore = defineStore('auth', {
       } finally {
         this.loginLoading = false
       }
+    },
+
+    logout() {
+      this.user = null
+      localStorage.removeItem('user')
     },
   },
 })
