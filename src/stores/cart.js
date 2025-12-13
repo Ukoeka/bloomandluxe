@@ -51,18 +51,13 @@ export const useCartStore = defineStore('cart', () => {
   const removeFromCart = async (product_id) => {
     loading.value = true
     error.value = null
-    const api = useApiStore()
+    // For now, just remove locally since API doesn't support removal
     try {
-      const response = await api.post('/cart', { action: 'remove', product_id })
-      // If API returns updated cart, use it
-      if (response.items) {
-        cartItems.value = response.items
-        saveCartToLocalStorage()
-      } else {
-        // Otherwise remove locally
-        cartItems.value = cartItems.value.filter(item => item.id !== product_id)
-        saveCartToLocalStorage()
-      }
+      cartItems.value = cartItems.value.filter(item => item.id !== product_id)
+      saveCartToLocalStorage()
+      // Optional: Try to sync with API if needed in the future
+      // const api = useApiStore()
+      // await api.post('/cart', { action: 'remove', product_id: product_id })
     } catch (err) {
       error.value = err.message || 'Failed to remove item from cart'
       // Fallback to local update
