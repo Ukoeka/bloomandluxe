@@ -219,87 +219,7 @@ Meticulous Hand-Stitching: Using traditional saddle-stitch techniques and waxed 
               </div>
             </div>
             <div id="review" class="tab-pane fade">
-              <div class="review-items">
-                <div class="admin-items d-flex flex-wrap flex-md-nowrap align-items-center pb-4">
-                  <div class="admin-img pb-4 pb-md-0 me-4">
-                    <img src="/assets/img/shop/01.jpg" alt="image">
-                  </div>
-                  <div class="content p-4">
-                    <div class="head-content pb-1 d-flex flex-wrap justify-content-between">
-                      <h5>miklos salsa<span>27June 2025 at 5.44pm</span></h5>
-                      <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                      </div>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipiscing elit. Curabitur vulputate vestibulum Phasellus rhoncus dolor eget viverra pretium.Curabitur vulputate vestibulum Phasellus rhoncus dolor eget viverra pretium.
-                    </p>
-                  </div>
-                </div>
-                <div class="admin-items d-flex flex-wrap flex-md-nowrap align-items-center pb-4">
-                  <div class="admin-img pb-4 pb-md-0 me-4">
-                    <img src="/assets/img/shop/02.jpg" alt="image">
-                  </div>
-                  <div class="content p-4">
-                    <div class="head-content pb-1 d-flex flex-wrap justify-content-between">
-                      <h5>Ethan Turner <span>27June 2025 at 5.44pm</span></h5>
-                      <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                      </div>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipiscing elit. Curabitur vulputate vestibulum Phasellus rhoncus dolor eget viverra pretium.Curabitur vulputate vestibulum Phasellus rhoncus dolor eget viverra pretium.
-                    </p>
-                  </div>
-                </div>
-                <div class="review-title mt-5 py-15 mb-30">
-                  <h4>add a review</h4>
-                  <div class="rate-now d-flex align-items-center">
-                    <p>Rate this product? *</p>
-                    <div class="star">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </div>
-                  </div>
-                </div>
-                <div class="review-form">
-                  <form action="#" id="contact-form2" method="POST">
-                    <div class="row g-4">
-                      <div class="col-lg-6">
-                        <div class="form-clt">
-                          <input type="text" name="name" id="name" placeholder="Full Name">
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-clt">
-                          <input type="text" name="email" id="email" placeholder="email addres">
-                        </div>
-                      </div>
-                      <div class="col-lg-12 wow fadeInUp" data-wow-delay=".8">
-                        <div class="form-clt-big form-clt">
-                          <textarea name="message" id="message" placeholder="message"></textarea>
-                        </div>
-                      </div>
-                      <div class="col-lg-6 wow fadeInUp" data-wow-delay=".9">
-                        <button type="submit" class="theme-btn hover-color">
-                          Post Submit
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
+              <ProductReviews :product-id="productId" />
             </div>
           </div>
         </div>
@@ -406,15 +326,20 @@ Meticulous Hand-Stitching: Using traditional saddle-stitch techniques and waxed 
 </template>
 
 <script>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import SharedLayout from '../components/SharedLayout.vue'
+import ProductReviews from '../components/ProductReviews.vue'
 
 export default {
   name: 'ProductDetailsPage',
   components: {
-    SharedLayout
+    SharedLayout,
+    ProductReviews
   },
   setup() {
+    // In a real app, this would come from route params
+    const productId = ref(1) // Hardcoded for demo
+
     onMounted(() => {
       // Initialize jQuery plugins and custom JS
       if (window.$) {
@@ -508,7 +433,9 @@ export default {
       }
     });
 
-    return {};
+    return {
+      productId
+    };
   }
 }
 </script>
