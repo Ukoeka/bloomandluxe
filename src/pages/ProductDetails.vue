@@ -1,8 +1,26 @@
 <template>
   <SharedLayout>
 
+    <!-- Loading State -->
+    <section v-if="loading" class="shop-details-section section-padding fix shop-bg">
+      <div class="container">
+        <div class="text-center">
+          <p>Loading product details...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Error State -->
+    <section v-else-if="error" class="shop-details-section section-padding fix shop-bg">
+      <div class="container">
+        <div class="text-center">
+          <p>{{ error }}</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Shop Details Section Start -->
-    <section class="shop-details-section section-padding fix shop-bg">
+    <section v-else-if="product" class="shop-details-section section-padding fix shop-bg">
       <div class="container">
         <div class="shop-details-wrapper">
           <div class="row g-4">
@@ -11,7 +29,7 @@
                 <div class="tab-content">
                   <div id="thumb1" class="tab-pane fade show active">
                     <div class="shop-thumb">
-                      <img src="/assets/img/product/bag1.jpg" alt="img">
+                      <img :src="product?.image" :alt="product?.name">
                     </div>
                   </div>
                   <div id="thumb2" class="tab-pane fade">
@@ -66,7 +84,7 @@
             </div>
             <div class="col-lg-6">
               <div class="product-details-content">
-                <h3 class="pb-3">Hand Crafted Bag</h3>
+                <h3 class="pb-3">{{ product?.name }}</h3>
                 <div class="star pb-3">
                   <a href="#"> <i class="fas fa-star"></i></a>
                   <a href="#"><i class="fas fa-star"></i></a>
@@ -76,10 +94,10 @@
                   <span>(25 Customer Review)</span>
                 </div>
                 <p class="mb-3">
-                  This handcrafted bag blends timeless design with expert artistry. Featuring premium, naturally tanned leather and meticulous stitching, each piece is a unique companion built to last a lifetime.
+                  {{ product?.description || 'This handcrafted bag blends timeless design with expert artistry. Featuring premium, naturally tanned leather and meticulous stitching, each piece is a unique companion built to last a lifetime.' }}
                 </p>
                 <div class="price-list">
-                  <h3>$1,260.00</h3>
+                  <h3>${{ product?.price }}</h3>
                 </div>
                 <div class="cart-wrp">
                   <div class="cart-quantity">
@@ -110,9 +128,9 @@
                     <span> Buy now</span>
                   </a>
                 </div>
-                <h6 class="details-info"><span>SKU:</span> <a href="product-details.html">124224</a></h6>
-                <h6 class="details-info"><span>Categories:</span> <a href="product-details.html">Accesories</a></h6>
-                <h6 class="details-info style-2"><span>Tags:</span> <a href="product-details.html"> <b>accessories</b> <b>business</b></a></h6>
+                <h6 class="details-info"><span>SKU:</span> <a href="product-details.html">{{ product?.id }}</a></h6>
+                <h6 class="details-info"><span>Categories:</span> <a href="product-details.html">{{ product?.category?.name || 'Accesories' }}</a></h6>
+                <h6 class="details-info style-2"><span>Tags:</span> <a href="product-details.html"> <b>{{ product?.category?.name || 'accessories' }}</b> <b>business</b></a></h6>
               </div>
             </div>
           </div>
@@ -149,13 +167,7 @@
                     <div class="description-content">
                       <h3>Product descriptions</h3>
                       <p class="mb-4">
-                        Embrace the exceptional with the handcrafted, a bag where modern utility meets heritage craftsmanship. Each piece is brought to life over several days by skilled artisans, ensuring that no two are exactly alike. This isn't just a bag; it's a wearable piece of art.
-
-Crafted for Character and Longevity:
-
-Premium Full-Grain Leather: Sourced from a renowned eco-tannery, our leather is chosen for its durability and natural beauty. It will develop a rich, unique patina over time, making the bag distinctly yours.
-
-Meticulous Hand-Stitching: Using traditional saddle-stitch techniques and waxed thread, every seam is incredibly strong and flexible, promising a lifetime of faithful service.
+                        {{ product?.description || 'Embrace the exceptional with the handcrafted, a bag where modern utility meets heritage craftsmanship. Each piece is brought to life over several days by skilled artisans, ensuring that no two are exactly alike. This isn\'t just a bag; it\'s a wearable piece of art. Crafted for Character and Longevity: Premium Full-Grain Leather: Sourced from a renowned eco-tannery, our leather is chosen for its durability and natural beauty. It will develop a rich, unique patina over time, making the bag distinctly yours. Meticulous Hand-Stitching: Using traditional saddle-stitch techniques and waxed thread, every seam is incredibly strong and flexible, promising a lifetime of faithful service.' }}
                       </p>
                       
                       <div class="description-list-items d-flex justify-content-between">
@@ -192,7 +204,7 @@ Meticulous Hand-Stitching: Using traditional saddle-stitch techniques and waxed 
                   </div>
                   <div class="col-xl-6 col-lg-6 mt-5 mt-lg-0">
                     <div class="description-image">
-                      <img src="/assets/img/product/bag1.jpg" alt="img">
+                      <img :src="product?.image" :alt="product?.name">
                     </div>
                   </div>
                 </div>
@@ -406,8 +418,10 @@ Meticulous Hand-Stitching: Using traditional saddle-stitch techniques and waxed 
 </template>
 
 <script>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import SharedLayout from '../components/SharedLayout.vue'
+import { useApiStore } from '../stores/api'
 
 export default {
   name: 'ProductDetailsPage',
@@ -415,7 +429,27 @@ export default {
     SharedLayout
   },
   setup() {
-    onMounted(() => {
+    const route = useRoute()
+    const apiStore = useApiStore()
+    const product = ref(null)
+    const loading = ref(true)
+    const error = ref(null)
+
+    const fetchProduct = async () => {
+      try {
+        const productId = route.params.id
+        const res = await apiStore.get(`/products/${productId}`)
+        product.value = res.data || res
+      } catch (e) {
+        error.value = e.message || 'Failed to load product'
+      } finally {
+        loading.value = false
+      }
+    }
+
+    onMounted(async () => {
+      await fetchProduct()
+
       // Initialize jQuery plugins and custom JS
       if (window.$) {
         // Mobile Menu
@@ -508,7 +542,11 @@ export default {
       }
     });
 
-    return {};
+    return {
+      product,
+      loading,
+      error
+    };
   }
 }
 </script>
