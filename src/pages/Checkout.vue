@@ -241,20 +241,19 @@ export default {
           shipping_address: `${formData.value.address}, ${formData.value.city}`.trim()
         }
 
-        // Submit order
+        // Create order and get Stripe checkout URL
         const response = await apiStore.post('/cart/checkout', checkoutData)
 
-        // Clear cart on successful order
-        cartStore.clearCart()
-
-        // Redirect to success page or show success message
-        alert('Order placed successfully!')
-        router.push('/')
+        if (response.checkout_url) {
+          // Redirect to Stripe checkout
+          window.location.href = response.checkout_url
+        } else {
+          throw new Error('No checkout URL received')
+        }
 
       } catch (error) {
-        submitError.value = error.response?.data?.message || 'Failed to place order. Please try again.'
+        submitError.value = error.response?.data?.message || error.message || 'Failed to create checkout session. Please try again.'
         console.error('Checkout error:', error)
-      } finally {
         isSubmitting.value = false
       }
     }

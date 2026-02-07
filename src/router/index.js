@@ -6,6 +6,8 @@ import ShopGrid from '../pages/ShopGrid.vue'
 import ProductDetails from '../pages/ProductDetails.vue'
 import ShopCart from '../pages/ShopCart.vue'
 import Checkout from '../pages/Checkout.vue'
+import CheckoutSuccess from '../pages/CheckoutSuccess.vue'
+import CheckoutCancel from '../pages/CheckoutCancel.vue'
 import NotFound from '../pages/NotFound.vue'
 import SignUp from '../pages/SignUp.vue'
 import Login from '../pages/Login.vue'
@@ -63,6 +65,16 @@ const routes = [
     path: '/checkout',
     name: 'Checkout',
     component: Checkout
+  },
+  {
+    path: '/checkout/success',
+    name: 'CheckoutSuccess',
+    component: CheckoutSuccess
+  },
+  {
+    path: '/checkout/cancel',
+    name: 'CheckoutCancel',
+    component: CheckoutCancel
   },
   {
     path: '/404',
