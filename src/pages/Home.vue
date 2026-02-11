@@ -53,7 +53,7 @@
                                 <input type='button' value='+' class='qtyplus plus'>
                                 </form>
                             </div>
-                            <a href="product-details.html" class="icon">
+                            <a href="/product-details/1" class="icon">
                                 <i class="far fa-heart"></i>
                             </a>
                             <div class="social-profile">
@@ -67,16 +67,16 @@
                             </div>
                             </div>
                             <div class="shop-btn">
-                            <a href="shop-cart.html" class="theme-btn">
+                            <a href="/shop-cart" class="theme-btn">
                                 <span> Add to cart</span>
                             </a>
-                            <a href="product-details.html" class="theme-btn">
+                            <a href="/product-details/1" class="theme-btn">
                                 <span> Buy now</span>
                             </a>
                             </div>
-                            <h6 class="details-info"><span>SKU:</span> <a href="product-details.html">124224</a></h6>
-                            <h6 class="details-info"><span>Categories:</span> <a href="product-details.html">Crux Indoor Fast and Easy</a></h6>
-                            <h6 class="details-info style-2"><span>Tags:</span> <a href="product-details.html"> <b>accessories</b> <b>business</b></a></h6>
+                            <h6 class="details-info"><span>SKU:</span> <a href="/product-details/1">124224</a></h6>
+                            <h6 class="details-info"><span>Categories:</span> <a href="/product-details/1">Crux Indoor Fast and Easy</a></h6>
+                            <h6 class="details-info style-2"><span>Tags:</span> <a href="/product-details/1"> <b>accessories</b> <b>business</b></a></h6>
                         </div>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                                                             New Collection With <br> Modern Style
                                                         </h1>
                                                         <div class="hero-button" data-animation="fadeInUp" data-delay="1.7s">
-                                                            <a href="product-details.html" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
+                                                            <a href="/product-details/1" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -132,7 +132,7 @@
                                                             New Collection With <br> Modern Style
                                                         </h1>
                                                         <div class="hero-button" data-animation="fadeInUp" data-delay="1.7s">
-                                                            <a href="product-details.html" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
+                                                            <a href="/product-details/1" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,7 +153,7 @@
                                                             New Collection With <br> Modern Style
                                                         </h1>
                                                         <div class="hero-button" data-animation="fadeInUp" data-delay="1.7s">
-                                                            <a href="product-details.html" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
+                                                            <a href="/product-details/1" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -224,7 +224,7 @@
                             <div class="bg-image bg-cover" style="background-image: url(assets/img/shop/kid.jpeg);">
                                 <div class="content bg-white badge">
                                     <h3>
-                                        <a href="shop-grid.html">Kids</a>
+                                        <a href="/shop">Kids</a>
                                     </h3>
                                     <p>2025 Collection</p>
                                 </div>
@@ -234,7 +234,7 @@
                             <div class="bg-image style-2 bg-cover" style="background-image: url(assets/img/shop/man-1.png);">
                                 <div class="content">
                                     <h3>
-                                        <a href="shop-grid.html">Men</a>
+                                        <a href="/shop">Men</a>
                                     </h3>
                                     <p>2025 Collection</p>
                                 </div>
@@ -242,7 +242,7 @@
                             <div class="bg-image mt-20 style-2 bg-cover" style="background-image: url(assets/img/shop/woman-1.png);">
                                 <div class="content">
                                     <h3>
-                                        <a href="shop-grid.html">Women</a>
+                                        <a href="/shop">Women</a>
                                     </h3>
                                     <p>2025 Collection</p>
                                 </div>
@@ -302,11 +302,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -315,7 +315,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -332,7 +332,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Black Geometric Print Mini Dress</a>
+                                                    <a href="/product-details/1">Black Geometric Print Mini Dress</a>
                                                 </h5>
                                                 <h6>$80.00 <del>$99.00</del></h6>
                                                 <ul class="list-color-product">
@@ -363,11 +363,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -376,7 +376,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -393,7 +393,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Men Formal Stylist Cotton Shirt</a>
+                                                    <a href="/product-details/1">Men Formal Stylist Cotton Shirt</a>
                                                 </h5>
                                                 <h6>$80.00 <del>$99.00</del></h6>
                                                 <ul class="list-color-product">
@@ -424,11 +424,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -437,7 +437,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -454,7 +454,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Fancy Printed Handwork Kurta</a>
+                                                    <a href="/product-details/1">Fancy Printed Handwork Kurta</a>
                                                 </h5>
                                                 <h6>$89.00 <del>$95.00</del></h6>
                                                 <ul class="list-color-product">
@@ -485,11 +485,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -498,7 +498,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -515,7 +515,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Mom Flare Wide Leg High Jeans</a>
+                                                    <a href="/product-details/1">Mom Flare Wide Leg High Jeans</a>
                                                 </h5>
                                                 <h6>$75.00 <del>$85.00</del></h6>
                                                 <ul class="list-color-product">
@@ -543,11 +543,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -556,7 +556,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -573,7 +573,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Fancy Printed Handwork Kurta</a>
+                                                    <a href="/product-details/1">Fancy Printed Handwork Kurta</a>
                                                 </h5>
                                                 <h6>$100.00 <del>$110.00</del></h6>
                                                 <ul class="list-color-product">
@@ -607,11 +607,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -620,7 +620,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -637,7 +637,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Printed Asymmetric Maxi Dress</a>
+                                                    <a href="/product-details/1">Printed Asymmetric Maxi Dress</a>
                                                 </h5>
                                                 <h6>$79.00 <del>$89.00</del></h6>
                                                 <ul class="list-color-product">
@@ -665,11 +665,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -678,7 +678,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -695,7 +695,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">La Bohème Rose Gold</a>
+                                                    <a href="/product-details/1">La Bohème Rose Gold</a>
                                                 </h5>
                                                 <h6>$74.00 <del>$98.00</del></h6>
                                                 <ul class="list-color-product">
@@ -729,11 +729,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -742,7 +742,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -759,7 +759,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Classy Flare For Moment Dress</a>
+                                                    <a href="/product-details/1">Classy Flare For Moment Dress</a>
                                                 </h5>
                                                 <h6>$75.00 <del>$79.00</del></h6>
                                                 <ul class="list-color-product">
@@ -794,11 +794,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -807,7 +807,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -824,7 +824,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Black Geometric Print Mini Dress</a>
+                                                    <a href="/product-details/1">Black Geometric Print Mini Dress</a>
                                                 </h5>
                                                 <h6>$80.00 <del>$99.00</del></h6>
                                                 <ul class="list-color-product">
@@ -855,11 +855,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -868,7 +868,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -885,7 +885,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Men Formal Stylist Cotton Shirt</a>
+                                                    <a href="/product-details/1">Men Formal Stylist Cotton Shirt</a>
                                                 </h5>
                                                 <h6>$80.00 <del>$99.00</del></h6>
                                                 <ul class="list-color-product">
@@ -916,11 +916,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -929,7 +929,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -946,7 +946,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Fancy Printed Handwork Kurta</a>
+                                                    <a href="/product-details/1">Fancy Printed Handwork Kurta</a>
                                                 </h5>
                                                 <h6>$89.00 <del>$95.00</del></h6>
                                                 <ul class="list-color-product">
@@ -977,11 +977,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -990,7 +990,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1007,7 +1007,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Mom Flare Wide Leg High Jeans</a>
+                                                    <a href="/product-details/1">Mom Flare Wide Leg High Jeans</a>
                                                 </h5>
                                                 <h6>$75.00 <del>$85.00</del></h6>
                                                 <ul class="list-color-product">
@@ -1039,11 +1039,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -1052,7 +1052,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1069,7 +1069,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Fancy Printed Handwork Kurta</a>
+                                                    <a href="/product-details/1">Fancy Printed Handwork Kurta</a>
                                                 </h5>
                                                 <h6>$100.00 <del>$110.00</del></h6>
                                                 <ul class="list-color-product">
@@ -1103,11 +1103,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -1116,7 +1116,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1133,7 +1133,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Printed Asymmetric Maxi Dress</a>
+                                                    <a href="/product-details/1">Printed Asymmetric Maxi Dress</a>
                                                 </h5>
                                                 <h6>$79.00 <del>$89.00</del></h6>
                                                 <ul class="list-color-product">
@@ -1161,11 +1161,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -1174,7 +1174,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1191,7 +1191,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">La Bohème Rose Gold</a>
+                                                    <a href="/product-details/1">La Bohème Rose Gold</a>
                                                 </h5>
                                                 <h6>$74.00 <del>$98.00</del></h6>
                                                 <ul class="list-color-product">
@@ -1225,11 +1225,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -1238,7 +1238,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1255,7 +1255,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Classy Flare For Moment Dress</a>
+                                                    <a href="/product-details/1">Classy Flare For Moment Dress</a>
                                                 </h5>
                                                 <h6>$75.00 <del>$79.00</del></h6>
                                                 <ul class="list-color-product">
@@ -1290,11 +1290,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -1303,7 +1303,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1320,7 +1320,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Black Geometric Print Mini Dress</a>
+                                                    <a href="/product-details/1">Black Geometric Print Mini Dress</a>
                                                 </h5>
                                                 <h6>$80.00 <del>$99.00</del></h6>
                                                 <ul class="list-color-product">
@@ -1351,11 +1351,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -1364,7 +1364,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1381,7 +1381,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Men Formal Stylist Cotton Shirt</a>
+                                                    <a href="/product-details/1">Men Formal Stylist Cotton Shirt</a>
                                                 </h5>
                                                 <h6>$80.00 <del>$99.00</del></h6>
                                                 <ul class="list-color-product">
@@ -1412,11 +1412,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -1425,7 +1425,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1442,7 +1442,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Fancy Printed Handwork Kurta</a>
+                                                    <a href="/product-details/1">Fancy Printed Handwork Kurta</a>
                                                 </h5>
                                                 <h6>$89.00 <del>$95.00</del></h6>
                                                 <ul class="list-color-product">
@@ -1473,11 +1473,11 @@
                                                     <li>xl</li>
                                                 </ul>
                                                 <div class="cart-btn">
-                                                    <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                                    <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                                 </div>
                                                 <ul class="social-icon">
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -1486,7 +1486,7 @@
                                                     </button>
                                                     </li>
                                                     <li>
-                                                        <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                        <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1503,7 +1503,7 @@
                                                     </div>
                                                 </div>
                                                 <h5>
-                                                    <a href="product-details.html">Mom Flare Wide Leg High Jeans</a>
+                                                    <a href="/product-details/1">Mom Flare Wide Leg High Jeans</a>
                                                 </h5>
                                                 <h6>$75.00 <del>$85.00</del></h6>
                                                 <ul class="list-color-product">
@@ -1561,13 +1561,13 @@
                                                 <i class="fa-solid fa-star"></i>
                                             </div>
                                             <h3>
-                                                <a href="product-details.html">
+                                                <a href="/product-details/1">
                                                     Clothing
                                                     Collection 2025
                                                 </a>
                                             </h3>
                                             <h4>$102.00 <del>$226.00</del></h4>
-                                            <a href="product-details.html" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
+                                            <a href="/product-details/1" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
                                         </div>
                                         <div class="shop-image">
                                             <img src="assets/img/shop/17.png" alt="img">
@@ -1584,13 +1584,13 @@
                                                 <i class="fa-solid fa-star"></i>
                                             </div>
                                             <h3>
-                                                <a href="product-details.html">
+                                                <a href="/product-details/1">
                                                     Non Slip Athletic
                                                     Tennis Walking
                                                 </a>
                                             </h3>
                                             <h4>$102.00 <del>$226.00</del></h4>
-                                            <a href="product-details.html" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
+                                            <a href="/product-details/1" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
                                         </div>
                                         <div class="shop-image max-width">
                                             <img src="assets/img/shop/18.png" alt="img">
@@ -1607,13 +1607,13 @@
                                                 <i class="fa-solid fa-star"></i>
                                             </div>
                                             <h3>
-                                                <a href="product-details.html">
+                                                <a href="/product-details/1">
                                                     Vera Bradley
                                                     Straw Tote Bag
                                                 </a>
                                             </h3>
                                             <h4>$46.00 <del>$96.00</del></h4>
-                                            <a href="product-details.html" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
+                                            <a href="/product-details/1" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
                                         </div>
                                         <div class="shop-image max-width-2">
                                             <img src="assets/img/shop/19.png" alt="img">
@@ -1638,7 +1638,7 @@
                                     Trending Arrivals
                                 </h2>
                             </div>
-                            <a href="news.html" class="theme-btn theme-btn-2 wow fadeInUp" data-wow-delay=".5s">View More Items</a>
+                            <a href="/news" class="theme-btn theme-btn-2 wow fadeInUp" data-wow-delay=".5s">View More Items</a>
                         </div>
                         <div class="shop-discover-wrapper">
                             <div class="row g-5">
@@ -1660,7 +1660,7 @@
                                                         </div>
                                                         <p>Whitetails Store</p>
                                                         <h4>
-                                                            <a href="product-details.html">Whitetails Women's Open Sky</a>
+                                                            <a href="/product-details/1">Whitetails Women's Open Sky</a>
                                                         </h4>
                                                         <h6>$76.00 <del>$84.00</del></h6>
                                                     </div>
@@ -1681,7 +1681,7 @@
                                                         </div>
                                                         <p>Whitetails Store</p>
                                                         <h4>
-                                                            <a href="product-details.html">Whitetails Women's Open Sky</a>
+                                                            <a href="/product-details/1">Whitetails Women's Open Sky</a>
                                                         </h4>
                                                         <h6>$76.00 <del>$84.00</del></h6>
                                                     </div>
@@ -1702,7 +1702,7 @@
                                                         </div>
                                                         <p>Whitetails Store</p>
                                                         <h4>
-                                                            <a href="product-details.html">Whitetails Women's Open Sky</a>
+                                                            <a href="/product-details/1">Whitetails Women's Open Sky</a>
                                                         </h4>
                                                         <h6>$76.00 <del>$84.00</del></h6>
                                                     </div>
@@ -1718,12 +1718,12 @@
                                     <div class="bg-image-2 bg-cover" style="background-image: url(assets/img/shop/22.jpg);">
                                         <div class="content">
                                             <h3>
-                                                <a href="product-details.html">
+                                                <a href="/product-details/1">
                                                     Short Sleeve Tunic <br>
                                                     Tops Casual Swing
                                                 </a>
                                             </h3>
-                                            <a href="product-details.html" class="theme-btn">Explore More <i class="fa-regular fa-arrow-right"></i></a>
+                                            <a href="/product-details/1" class="theme-btn">Explore More <i class="fa-regular fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -1749,11 +1749,11 @@
                                     <div class="product-image">
                                         <img src="assets/img/product/28.jpg" alt="img">
                                         <div class="cart-btn">
-                                            <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                         </div>
                                         <ul class="social-icon">
                                             <li>
-                                                <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                 </a>
                                             </li>
                                             <li>
@@ -1762,7 +1762,7 @@
                                             </button>
                                             </li>
                                             <li>
-                                                <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1777,7 +1777,7 @@
                                             <span>Zippered Striped Sweatshirt</span>
                                         </div>
                                         <h5>
-                                            <a href="product-details.html">Black Geometric Print Mini Dress</a>
+                                            <a href="/product-details/1">Black Geometric Print Mini Dress</a>
                                         </h5>
                                         <h6>$80.00 <del>$99.00</del></h6>
                                     </div>
@@ -1788,11 +1788,11 @@
                                     <div class="product-image">
                                         <img src="assets/img/product/29.jpg" alt="img">
                                         <div class="cart-btn">
-                                            <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                         </div>
                                         <ul class="social-icon">
                                             <li>
-                                                <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                 </a>
                                             </li>
                                             <li>
@@ -1801,7 +1801,7 @@
                                             </button>
                                             </li>
                                             <li>
-                                                <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                             </li>
                                         </ul>
                                         <div class="sale-box">
@@ -1819,7 +1819,7 @@
                                             <span>Zippered Striped Sweatshirt</span>
                                         </div>
                                         <h5>
-                                            <a href="product-details.html">Black Geometric Print Mini Dress</a>
+                                            <a href="/product-details/1">Black Geometric Print Mini Dress</a>
                                         </h5>
                                         <h6>$80.00 <del>$99.00</del></h6>
                                     </div>
@@ -1830,11 +1830,11 @@
                                     <div class="product-image">
                                         <img src="assets/img/product/30.jpg" alt="img">
                                         <div class="cart-btn">
-                                            <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                         </div>
                                         <ul class="social-icon">
                                             <li>
-                                                <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                 </a>
                                             </li>
                                             <li>
@@ -1843,7 +1843,7 @@
                                             </button>
                                             </li>
                                             <li>
-                                                <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1858,7 +1858,7 @@
                                             <span>DeFactoFit Oversize Fit Hooded</span>
                                         </div>
                                         <h5>
-                                            <a href="product-details.html">Fancy Printed Handwork Kurta</a>
+                                            <a href="/product-details/1">Fancy Printed Handwork Kurta</a>
                                         </h5>
                                         <h6>$89.00 <del>$95.00</del></h6>
                                     </div>
@@ -1869,11 +1869,11 @@
                                     <div class="product-image">
                                         <img src="assets/img/product/31.jpg" alt="img">
                                         <div class="cart-btn">
-                                            <a href="shop-cart.html" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn"><i class="fa-regular fa-cart-shopping"></i> Add To Cart</a>
                                         </div>
                                         <ul class="social-icon">
                                             <li>
-                                                <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i>
+                                                <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i>
                                                 </a>
                                             </li>
                                             <li>
@@ -1882,7 +1882,7 @@
                                             </button>
                                             </li>
                                             <li>
-                                                <a href="product-details.html"><i class="fa-regular fa-heart"></i></a>
+                                                <a href="/product-details/1"><i class="fa-regular fa-heart"></i></a>
                                             </li>
                                         </ul>
                                         <div class="sale-box">
@@ -1900,7 +1900,7 @@
                                             <span>Standard Fit Printed Sweatshir</span>
                                         </div>
                                         <h5>
-                                            <a href="product-details.html">Mom Flare Wide Leg High Jeans</a>
+                                            <a href="/product-details/1">Mom Flare Wide Leg High Jeans</a>
                                         </h5>
                                         <h6>$75.00 <del>$85.00</del></h6>
                                     </div>
@@ -2041,9 +2041,9 @@
                                                 </li>
                                             </ul>
                                             <h3>
-                                                <a href="news-details.html">In Difficult Times, Fashion is Always Outrageous.</a>
+                                                <a href="/news">In Difficult Times, Fashion is Always Outrageous.</a>
                                             </h3>
-                                            <a href="news-details.html" class="link-btn">Read More <i class="fa-regular fa-arrow-right"></i></a>
+                                            <a href="/news" class="link-btn">Read More <i class="fa-regular fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -2059,9 +2059,9 @@
                                                 </li>
                                             </ul>
                                             <h3>
-                                                <a href="news-details.html">In Difficult Times, Fashion is Always Outrageous.</a>
+                                                <a href="/news">In Difficult Times, Fashion is Always Outrageous.</a>
                                             </h3>
-                                            <a href="news-details.html" class="link-btn">Read More <i class="fa-regular fa-arrow-right"></i></a>
+                                            <a href="/news" class="link-btn">Read More <i class="fa-regular fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -2077,9 +2077,9 @@
                                                 </li>
                                             </ul>
                                             <h3>
-                                                <a href="news-details.html">In Difficult Times, Fashion is Always Outrageous.</a>
+                                                <a href="/news">In Difficult Times, Fashion is Always Outrageous.</a>
                                             </h3>
-                                            <a href="news-details.html" class="link-btn">Read More <i class="fa-regular fa-arrow-right"></i></a>
+                                            <a href="/news" class="link-btn">Read More <i class="fa-regular fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>

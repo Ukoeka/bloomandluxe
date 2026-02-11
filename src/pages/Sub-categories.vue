@@ -114,13 +114,13 @@
                                     <div class="product-image">
                                         <img src="assets/img/product/24.jpg" alt="img">
                                         <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>Physicians</p>
                                         <h4>
-                                            <a href="product-details.html">Powder Creamy Natural</a>
+                                            <a href="/product-details/1">Powder Creamy Natural</a>
                                         </h4>
                                         <ul class="doller">
                                             <li>
@@ -136,13 +136,13 @@
                                         <img src="assets/img/product/25.jpg" alt="img">
                                         <div class="badge">26%</div>
                                         <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>Mineral </p>
                                         <h4>
-                                            <a href="product-details.html">Mineral Matte Finishing</a>
+                                            <a href="/product-details/1">Mineral Matte Finishing</a>
                                         </h4>
                                         <span>$16.00</span>
                                     </div>
@@ -153,13 +153,13 @@
                                     <div class="product-image">
                                         <img src="assets/img/product/26.jpg" alt="img">
                                         <div class="product-btn active">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>StriVectin</p>
                                         <h4>
-                                            <a href="product-details.html">Resurfacing Exfoliating</a>
+                                            <a href="/product-details/1">Resurfacing Exfoliating</a>
                                         </h4>
                                         <ul class="doller">
                                             <li>
@@ -175,13 +175,13 @@
                                         <img src="assets/img/product/27.jpg" alt="img">
                                         <div class="badge">35%</div>
                                         <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>Marcelle</p>
                                         <h4>
-                                            <a href="product-details.html">Correction Tinted Cream</a>
+                                            <a href="/product-details/1">Correction Tinted Cream</a>
                                         </h4>
                                         <span>$44.00</span>
                                     </div>
@@ -196,13 +196,13 @@
                                     <div class="product-image">
                                         <img src="assets/img/product/24.jpg" alt="img">
                                         <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>Physicians</p>
                                         <h4>
-                                            <a href="product-details.html">Powder Creamy Natural</a>
+                                            <a href="/product-details/1">Powder Creamy Natural</a>
                                         </h4>
                                         <ul class="doller">
                                             <li>
@@ -218,13 +218,13 @@
                                         <img src="assets/img/product/25.jpg" alt="img">
                                         <div class="badge">26%</div>
                                         <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>Mineral </p>
                                         <h4>
-                                            <a href="product-details.html">Mineral Matte Finishing</a>
+                                            <a href="/product-details/1">Mineral Matte Finishing</a>
                                         </h4>
                                         <span>$16.00</span>
                                     </div>
@@ -235,13 +235,13 @@
                                     <div class="product-image">
                                         <img src="assets/img/product/26.jpg" alt="img">
                                         <div class="product-btn active">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>StriVectin</p>
                                         <h4>
-                                            <a href="product-details.html">Resurfacing Exfoliating</a>
+                                            <a href="/product-details/1">Resurfacing Exfoliating</a>
                                         </h4>
                                         <ul class="doller">
                                             <li>
@@ -257,13 +257,13 @@
                                         <img src="assets/img/product/27.jpg" alt="img">
                                         <div class="badge">35%</div>
                                         <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>Marcelle</p>
                                         <h4>
-                                            <a href="product-details.html">Correction Tinted Cream</a>
+                                            <a href="/product-details/1">Correction Tinted Cream</a>
                                         </h4>
                                         <span>$44.00</span>
                                     </div>
@@ -278,13 +278,13 @@
                                     <div class="product-image">
                                         <img src="assets/img/product/24.jpg" alt="img">
                                         <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>Physicians</p>
                                         <h4>
-                                            <a href="product-details.html">Powder Creamy Natural</a>
+                                            <a href="/product-details/1">Powder Creamy Natural</a>
                                         </h4>
                                         <ul class="doller">
                                             <li>
@@ -300,13 +300,13 @@
                                         <img src="assets/img/product/25.jpg" alt="img">
                                         <div class="badge">26%</div>
                                         <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>Mineral </p>
                                         <h4>
-                                            <a href="product-details.html">Mineral Matte Finishing</a>
+                                            <a href="/product-details/1">Mineral Matte Finishing</a>
                                         </h4>
                                         <span>$16.00</span>
                                     </div>
@@ -317,13 +317,13 @@
                                     <div class="product-image">
                                         <img src="assets/img/product/26.jpg" alt="img">
                                         <div class="product-btn active">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>StriVectin</p>
                                         <h4>
-                                            <a href="product-details.html">Resurfacing Exfoliating</a>
+                                            <a href="/product-details/1">Resurfacing Exfoliating</a>
                                         </h4>
                                         <ul class="doller">
                                             <li>
@@ -339,13 +339,13 @@
                                         <img src="assets/img/product/27.jpg" alt="img">
                                         <div class="badge">35%</div>
                                         <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>Marcelle</p>
                                         <h4>
-                                            <a href="product-details.html">Correction Tinted Cream</a>
+                                            <a href="/product-details/1">Correction Tinted Cream</a>
                                         </h4>
                                         <span>$44.00</span>
                                     </div>
@@ -360,13 +360,13 @@
                                     <div class="product-image">
                                         <img src="assets/img/product/24.jpg" alt="img">
                                         <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>Physicians</p>
                                         <h4>
-                                            <a href="product-details.html">Powder Creamy Natural</a>
+                                            <a href="/product-details/1">Powder Creamy Natural</a>
                                         </h4>
                                         <ul class="doller">
                                             <li>
@@ -382,13 +382,13 @@
                                         <img src="assets/img/product/25.jpg" alt="img">
                                         <div class="badge">26%</div>
                                         <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>Mineral </p>
                                         <h4>
-                                            <a href="product-details.html">Mineral Matte Finishing</a>
+                                            <a href="/product-details/1">Mineral Matte Finishing</a>
                                         </h4>
                                         <span>$16.00</span>
                                     </div>
@@ -399,13 +399,13 @@
                                     <div class="product-image">
                                         <img src="assets/img/product/26.jpg" alt="img">
                                         <div class="product-btn active">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>StriVectin</p>
                                         <h4>
-                                            <a href="product-details.html">Resurfacing Exfoliating</a>
+                                            <a href="/product-details/1">Resurfacing Exfoliating</a>
                                         </h4>
                                         <ul class="doller">
                                             <li>
@@ -421,13 +421,13 @@
                                         <img src="assets/img/product/27.jpg" alt="img">
                                         <div class="badge">35%</div>
                                         <div class="product-btn">
-                                            <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                                            <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                                         </div>
                                     </div>
                                     <div class="product-content">
                                         <p>Marcelle</p>
                                         <h4>
-                                            <a href="product-details.html">Correction Tinted Cream</a>
+                                            <a href="/product-details/1">Correction Tinted Cream</a>
                                         </h4>
                                         <span>$44.00</span>
                                     </div>

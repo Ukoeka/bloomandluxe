@@ -233,18 +233,27 @@ export default {
       submitError.value = ''
 
       try {
-        // Prepare checkout data
+        // Prepare checkout data with cart items
         const checkoutData = {
           customer_name: `${formData.value.firstName} ${formData.value.lastName}`.trim(),
           customer_email: formData.value.email,
           customer_phone: formData.value.phone,
-          shipping_address: `${formData.value.address}, ${formData.value.city}`.trim()
+          shipping_address: `${formData.value.address}, ${formData.value.city}`.trim(),
+          // Send cart items directly in request
+          items: cartStore.cartItems.map(item => ({
+            product_id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity
+          }))
         }
 
         // Create order and get Stripe checkout URL
         const response = await apiStore.post('/cart/checkout', checkoutData)
 
         if (response.checkout_url) {
+          // Clear cart after successful checkout
+          cartStore.clearCart()
           // Redirect to Stripe checkout
           window.location.href = response.checkout_url
         } else {

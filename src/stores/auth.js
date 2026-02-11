@@ -5,6 +5,7 @@ import { useApiStore } from './api'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: JSON.parse(localStorage.getItem('user')) || null,
+    token: localStorage.getItem('userToken') || null,
     registerError: null,
     registerLoading: false,
     loginError: null,
@@ -20,13 +21,17 @@ export const useAuthStore = defineStore('auth', {
 
       try {
         // Adjust the URL to match your backend register endpoint
-        const data = await api.post('/api/register', payload)
-        // assuming the backend returns user data
-        this.user = data.user || null
+        const response = await api.post('/register', payload)
+        // Backend returns { success, message, data: { user, token } }
+        this.user = response.data?.user || null
+        this.token = response.data?.token || null
         if (this.user) {
           localStorage.setItem('user', JSON.stringify(this.user))
         }
-        return data
+        if (this.token) {
+          localStorage.setItem('userToken', this.token)
+        }
+        return response
       } catch (err) {
         this.registerError =
           err.response?.data?.message ||
@@ -38,6 +43,7 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
+
     async login(payload) {
       this.loginLoading = true
       this.loginError = null
@@ -46,13 +52,18 @@ export const useAuthStore = defineStore('auth', {
 
       try {
         // Adjust the URL to match your backend login endpoint
-        const data = await api.post('/api/login', payload)
-        // assuming the backend returns user data
-        this.user = data.user || null
+        const response = await api.post('/login', payload)
+        // Backend returns { success, message, data: { user, token } }
+        this.user = response.data?.user || null
+        this.token = response.data?.token || null
         if (this.user) {
           localStorage.setItem('user', JSON.stringify(this.user))
         }
-        return data
+        if (this.token) {
+          localStorage.setItem('userToken', this.token)
+        }
+
+        return response
       } catch (err) {
         this.loginError =
           err.response?.data?.message ||
@@ -66,7 +77,9 @@ export const useAuthStore = defineStore('auth', {
 
     logout() {
       this.user = null
+      this.token = null
       localStorage.removeItem('user')
+      localStorage.removeItem('userToken')
     },
   },
 })

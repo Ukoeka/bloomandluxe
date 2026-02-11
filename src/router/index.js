@@ -52,7 +52,7 @@ const routes = [
   //   component: ShopGrid
   // },
   {
-    path: '/product-details',
+    path: '/product-details/:id',
     name: 'ProductDetails',
     component: ProductDetails
   },

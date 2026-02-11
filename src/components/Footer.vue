@@ -37,7 +37,7 @@
               </div>
               <ul class="list-items">
                 <li>
-                  <a href="order.html">
+                  <a href="/order">
                     Track Orders
                   </a>
                 </li>
@@ -47,17 +47,17 @@
                   </router-link>
                 </li>
                 <li>
-                  <a href="shop-cart.html">
+                  <a href="/shop-cart">
                     Wishlist
                   </a>
                 </li>
                 <li>
-                  <a href="my-account.html">
+                  <a href="/login">
                     My Account
                   </a>
                 </li>
                 <li>
-                  <a href="order.html">
+                  <a href="/order">
                     Order History
                   </a>
                 </li>
@@ -96,7 +96,7 @@
                   </router-link>
                 </li>
                 <li>
-                  <a href="news-details.html">
+                  <a href="/news">
                     Latest News
                   </a>
                 </li>

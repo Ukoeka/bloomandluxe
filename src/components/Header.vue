@@ -97,7 +97,7 @@
               </ul>
               <div class="header-button mt-4">
               </div>
-              <a href="contact.html" class="theme-btn"><span>Let’s Talk <i class="fa-solid fa-arrow-right"></i></span></a>
+              <a href="/contact" class="theme-btn"><span>Let’s Talk <i class="fa-solid fa-arrow-right"></i></span></a>
               <div class="social-icon d-flex align-items-center">
                 <a href="https://www.facebook.com/share/17ZJGw6Lnc/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.tiktok.com/@bloomlux.store?"><i class="fab fa-tiktok"></i></a>
@@ -282,7 +282,7 @@
         <div class="user-icon-box">
           <img src="/assets/img/user.png" alt="img">
           <p>No account yet?</p>
-          <a href="account.html">Create an Account</a>
+          <a href="/login">Create an Account</a>
         </div>
       </div>
       <div v-else class="account-sidebar">

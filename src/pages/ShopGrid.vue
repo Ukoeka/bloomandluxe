@@ -47,7 +47,7 @@
           <div class="offcanvas__content">
             <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
               <div class="offcanvas__logo">
-                <a href="index-2.html">
+                <a href="/">
                   <img src="/assets/img/logo/red-logo.svg" alt="logo-img">
                 </a>
               </div>
@@ -160,7 +160,7 @@
         <div class="user-icon-box">
           <img src="/assets/img/user.png" alt="img">
           <p>No account yet?</p>
-          <a href="account.html">Create an Account</a>
+          <a href="/login">Create an Account</a>
         </div>
       </div>
       <button id="closeButton" class="x-mark-icon"><i class="fas fa-times"></i></button>
@@ -326,14 +326,14 @@
           </div>
           <div class="widget-categories">
             <ul>
-              <li><a href="product-details.html">Leather</a><span>10</span></li>
-              <li><a href="product-details.html">Classic Watch</a><span>28</span></li>
-              <li><a href="product-details.html">Leather Man Wacth</a><span>12</span></li>
-              <li><a href="product-details.html">Trending Watch</a><span>17</span></li>
-              <li><a href="product-details.html">Google</a><span>22</span></li>
-              <li><a href="product-details.html">Woman Wacth</a><span>14</span></li>
-              <li><a href="product-details.html">Tables</a><span>19</span></li>
-              <li><a href="product-details.html">ShopEngine</a><span>29</span></li>
+              <li><a href="/product-details/1">Leather</a><span>10</span></li>
+              <li><a href="/product-details/1">Classic Watch</a><span>28</span></li>
+              <li><a href="/product-details/1">Leather Man Wacth</a><span>12</span></li>
+              <li><a href="/product-details/1">Trending Watch</a><span>17</span></li>
+              <li><a href="/product-details/1">Google</a><span>22</span></li>
+              <li><a href="/product-details/1">Woman Wacth</a><span>14</span></li>
+              <li><a href="/product-details/1">Tables</a><span>19</span></li>
+              <li><a href="/product-details/1">ShopEngine</a><span>29</span></li>
             </ul>
           </div>
         </div>
@@ -610,45 +610,45 @@
                       </ul>
                     </li>
                     <li class="has-dropdown">
-                      <a href="news-details.html">
+                      <a href="/news">
                         Pages
                         <i class="fa-solid fa-chevron-down"></i>
                       </a>
                       <ul class="submenu">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="order.html">Track Your Order</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="sign-up.html">Sign-Up</a></li>
-                        <li><a href="categories.html">Categories</a></li>
-                        <li><a href="coming-soon.html">Coming Soon</a></li>
-                        <li><a href="forgate-password.html">Forget Password</a></li>
-                        <li><a href="my-account.html">My Account</a></li>
-                        <li><a href="faq.html">Faq</a></li>
-                        <li><a href="404.html">404</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/order">Track Your Order</a></li>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/sign-up">Sign-Up</a></li>
+                        <li><a href="/shop">Categories</a></li>
+                        <li><a href="javascript:void(0)">Coming Soon</a></li>
+                        <li><a href="javascript:void(0)">Forget Password</a></li>
+                        <li><a href="/login">My Account</a></li>
+                        <li><a href="javascript:void(0)">Faq</a></li>
+                        <li><a href="/404">404</a></li>
                       </ul>
                     </li>
                     <li>
-                      <a href="product-details.html">
+                      <a href="/product-details/1">
                         Shop
                         <i class="fa-solid fa-chevron-down"></i>
                       </a>
                       <ul class="submenu">
-                        <li><a href="shop-grid.html">Shop Grid</a></li>
-                        <li><a href="shop-left-sideber.html">Shop Left Sideber</a></li>
-                        <li><a href="shop-right-sideber.html">Shop Right Sideber</a></li>
-                        <li><a href="shop-cart.html">Shop Cart</a></li>
-                        <li><a href="checkout.html">Cheekout</a></li>
+                        <li><a href="/shop">Shop Grid</a></li>
+                        <li><a href="javascript:void(0)">Shop Left Sideber</a></li>
+                        <li><a href="javascript:void(0)">Shop Right Sideber</a></li>
+                        <li><a href="/shop-cart">Shop Cart</a></li>
+                        <li><a href="/checkout">Cheekout</a></li>
                       </ul>
                     </li>
                     <li>
-                      <a href="news-details.html">
+                      <a href="/news">
                         Blog
                         <i class="fa-solid fa-chevron-down"></i>
                       </a>
                       <ul class="submenu">
-                        <li><a href="news-grid.html">Blog Grid</a></li>
-                        <li><a href="news-list.html">Blog List</a></li>
-                        <li><a href="news-details.html">Blog Details</a></li>
+                        <li><a href="javascript:void(0)">Blog Grid</a></li>
+                        <li><a href="javascript:void(0)">Blog List</a></li>
+                        <li><a href="/news">Blog Details</a></li>
                       </ul>
                     </li>
                     <li>
@@ -696,12 +696,12 @@
                     <span>$386.00</span>
                   </div>
                   <div class="cart-button mb-4">
-                    <a href="shop-cart.html" class="theme-btn">
+                    <a href="/shop-cart" class="theme-btn">
                       View Cart
                     </a>
                   </div>
                 </div>
-                <a href="shop-cart.html" class="cart-icon">
+                <a href="/shop-cart" class="cart-icon">
                   <i class="fa-sharp fa-regular fa-bag-shopping"></i>
                 </a>
               </div>
@@ -776,7 +776,7 @@
                           <input type='button' value='+' class='qtyplus plus'>
                         </form>
                       </div>
-                      <a href="product-details.html" class="icon">
+                      <a href="/product-details/1" class="icon">
                         <i class="far fa-heart"></i>
                       </a>
                       <div class="social-profile">
@@ -790,16 +790,16 @@
                       </div>
                     </div>
                     <div class="shop-btn">
-                      <a href="shop-cart.html" class="theme-btn">
+                      <a href="/shop-cart" class="theme-btn">
                         <span> Add to cart</span>
                       </a>
-                      <a href="product-details.html" class="theme-btn">
+                      <a href="/product-details/1" class="theme-btn">
                         <span> Buy now</span>
                       </a>
                     </div>
-                    <h6 class="details-info"><span>SKU:</span> <a href="product-details.html">124224</a></h6>
-                    <h6 class="details-info"><span>Categories:</span> <a href="product-details.html">Crux Indoor Fast and Easy</a></h6>
-                    <h6 class="details-info style-2"><span>Tags:</span> <a href="product-details.html"> <b>accessories</b> <b>business</b></a></h6>
+                    <h6 class="details-info"><span>SKU:</span> <a href="/product-details/1">124224</a></h6>
+                    <h6 class="details-info"><span>Categories:</span> <a href="/product-details/1">Crux Indoor Fast and Easy</a></h6>
+                    <h6 class="details-info style-2"><span>Tags:</span> <a href="/product-details/1"> <b>accessories</b> <b>business</b></a></h6>
                   </div>
                 </div>
               </div>
@@ -876,7 +876,7 @@
                       <img src="/assets/img/shop/shop-1.jpg" alt="img">
                       <ul class="shop-icon d-grid justify-content-center align-items-center">
                         <li>
-                          <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i></a>
+                          <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i></a>
                         </li>
                         <li>
                           <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
@@ -884,14 +884,14 @@
                           </button>
                         </li>
                         <li>
-                          <a href="shop-cart.html"><i class="far fa-heart"></i></a>
+                          <a href="/shop-cart"><i class="far fa-heart"></i></a>
                         </li>
                       </ul>
                     </div>
                     <div class="content">
                       <p>Whitetails Store</p>
                       <h4>
-                        <a href="product-details.html">Whitetails Women's Open Sky</a>
+                        <a href="/product-details/1">Whitetails Women's Open Sky</a>
                       </h4>
                       <div class="star">
                         <i class="fa-solid fa-star"></i>
@@ -910,7 +910,7 @@
                       <img src="/assets/img/shop/shop-2.jpg" alt="img">
                       <ul class="shop-icon d-grid justify-content-center align-items-center">
                         <li>
-                          <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i></a>
+                          <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i></a>
                         </li>
                         <li>
                           <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
@@ -918,14 +918,14 @@
                           </button>
                         </li>
                         <li>
-                          <a href="shop-cart.html"><i class="far fa-heart"></i></a>
+                          <a href="/shop-cart"><i class="far fa-heart"></i></a>
                         </li>
                       </ul>
                     </div>
                     <div class="content">
                       <p>Backpack, Wonder</p>
                       <h4>
-                        <a href="product-details.html">Simple Modern School Boys</a>
+                        <a href="/product-details/1">Simple Modern School Boys</a>
                       </h4>
                       <div class="star">
                         <i class="fa-solid fa-star"></i>
@@ -944,7 +944,7 @@
                       <img src="/assets/img/shop/shop-3.jpg" alt="img">
                       <ul class="shop-icon d-grid justify-content-center align-items-center">
                         <li>
-                          <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i></a>
+                          <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i></a>
                         </li>
                         <li>
                           <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
@@ -952,14 +952,14 @@
                           </button>
                         </li>
                         <li>
-                          <a href="shop-cart.html"><i class="far fa-heart"></i></a>
+                          <a href="/shop-cart"><i class="far fa-heart"></i></a>
                         </li>
                       </ul>
                     </div>
                     <div class="content">
                       <p>Shoe, Men's</p>
                       <h4>
-                        <a href="product-details.html">Women's Essentials Convertible</a>
+                        <a href="/product-details/1">Women's Essentials Convertible</a>
                       </h4>
                       <div class="star">
                         <i class="fa-solid fa-star"></i>
@@ -978,7 +978,7 @@
                       <img src="/assets/img/shop/shop-4.jpg" alt="img">
                       <ul class="shop-icon d-grid justify-content-center align-items-center">
                         <li>
-                          <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i></a>
+                          <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i></a>
                         </li>
                         <li>
                           <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
@@ -986,14 +986,14 @@
                           </button>
                         </li>
                         <li>
-                          <a href="shop-cart.html"><i class="far fa-heart"></i></a>
+                          <a href="/shop-cart"><i class="far fa-heart"></i></a>
                         </li>
                       </ul>
                     </div>
                     <div class="content">
                       <p>Bag, Wonder</p>
                       <h4>
-                        <a href="product-details.html">Calvin Klein Gabrianna Novelty</a>
+                        <a href="/product-details/1">Calvin Klein Gabrianna Novelty</a>
                       </h4>
                       <div class="star">
                         <i class="fa-solid fa-star"></i>
@@ -1012,7 +1012,7 @@
                       <img src="/assets/img/shop/shop-5.jpg" alt="img">
                       <ul class="shop-icon d-grid justify-content-center align-items-center">
                         <li>
-                          <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i></a>
+                          <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i></a>
                         </li>
                         <li>
                           <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
@@ -1020,14 +1020,14 @@
                           </button>
                         </li>
                         <li>
-                          <a href="shop-cart.html"><i class="far fa-heart"></i></a>
+                          <a href="/shop-cart"><i class="far fa-heart"></i></a>
                         </li>
                       </ul>
                     </div>
                     <div class="content">
                       <p>Shoes, Work Dress</p>
                       <h4>
-                        <a href="product-details.html">Govicta Men's Shoes Leather</a>
+                        <a href="/product-details/1">Govicta Men's Shoes Leather</a>
                       </h4>
                       <div class="star">
                         <i class="fa-solid fa-star"></i>
@@ -1046,7 +1046,7 @@
                       <img src="/assets/img/shop/shop-6.jpg" alt="img">
                       <ul class="shop-icon d-grid justify-content-center align-items-center">
                         <li>
-                          <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i></a>
+                          <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i></a>
                         </li>
                         <li>
                           <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
@@ -1054,14 +1054,14 @@
                           </button>
                         </li>
                         <li>
-                          <a href="shop-cart.html"><i class="far fa-heart"></i></a>
+                          <a href="/shop-cart"><i class="far fa-heart"></i></a>
                         </li>
                       </ul>
                     </div>
                     <div class="content">
                       <p>Bag, Wonder</p>
                       <h4>
-                        <a href="product-details.html">Tommy Hilfiger Women’s Jaden</a>
+                        <a href="/product-details/1">Tommy Hilfiger Women’s Jaden</a>
                       </h4>
                       <div class="star">
                         <i class="fa-solid fa-star"></i>
@@ -1080,7 +1080,7 @@
                       <img src="/assets/img/shop/shop-7.jpg" alt="img">
                       <ul class="shop-icon d-grid justify-content-center align-items-center">
                         <li>
-                          <a href="product-details.html"><i class="fa-regular fa-cart-shopping"></i></a>
+                          <a href="/product-details/1"><i class="fa-regular fa-cart-shopping"></i></a>
                         </li>
                         <li>
                           <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
@@ -1088,14 +1088,14 @@
                           </button>
                         </li>
                         <li>
-                          <a href="shop-cart.html"><i class="far fa-heart"></i></a>
+                          <a href="/shop-cart"><i class="far fa-heart"></i></a>
                         </li>
                       </ul>
                     </div>
                     <div class="content">
                       <p>Bag, Wonder</p>
                       <h4>
-                        <a href="product-details.html">Tommy Hilfiger Women’s Jaden</a>
+                        <a href="/product-details/1">Tommy Hilfiger Women’s Jaden</a>
                       </h4>
                       <div class="star">
                         <i class="fa-solid fa-star"></i>
