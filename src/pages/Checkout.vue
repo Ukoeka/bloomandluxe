@@ -138,34 +138,7 @@
                       <p><strong>Total</strong></p>
                       <p><strong>${{ totalPrice.toFixed(2) }}</strong></p>
                     </div>
-                    <div class="checkout-item-2">
-                      <div class="form-check-2 d-flex align-items-center from-customradio-2">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                          id="flexRadioDefault1222">
-                        <label class="form-check-label" for="flexRadioDefault1222">
-                          Direct bank transfer
-                        </label>
-                      </div>
-                      <p>
-                        Make your payment directly into our bank account please use your Order ID as the
-                        payment reference. Your order will not be shipped until the funds have cleared in
-                        our account.
-                      </p>
-                      <div class="form-check-3 d-flex align-items-center from-customradio-2 mt-3">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                          id="flexRadioDefault12224">
-                        <label class="form-check-label" for="flexRadioDefault12224">
-                          Cash on delivery
-                        </label>
-                      </div>
-                      <div class="form-check-3 d-flex align-items-center from-customradio-2 mt-3">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                          id="flexRadioDefault12225">
-                        <label class="form-check-label" for="flexRadioDefault12225">
-                          Paypal
-                        </label>
-                      </div>
-                    </div>
+                   
                     <button type="submit" form="checkout-form" class="theme-btn mt-4" :disabled="isSubmitting || cartStore.cartItems.length === 0">
                       <span v-if="isSubmitting">
                         <i class="fas fa-spinner fa-spin me-2"></i>Processing...
@@ -241,20 +214,19 @@ export default {
           shipping_address: `${formData.value.address}, ${formData.value.city}`.trim()
         }
 
-        // Submit order
+        // Create order and get Stripe checkout URL
         const response = await apiStore.post('/cart/checkout', checkoutData)
 
-        // Clear cart on successful order
-        cartStore.clearCart()
-
-        // Redirect to success page or show success message
-        alert('Order placed successfully!')
-        router.push('/')
+        if (response.checkout_url) {
+          // Redirect to Stripe checkout
+          window.location.href = response.checkout_url
+        } else {
+          throw new Error('No checkout URL received')
+        }
 
       } catch (error) {
-        submitError.value = error.response?.data?.message || 'Failed to place order. Please try again.'
+        submitError.value = error.response?.data?.message || error.message || 'Failed to create checkout session. Please try again.'
         console.error('Checkout error:', error)
-      } finally {
         isSubmitting.value = false
       }
     }
