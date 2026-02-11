@@ -231,87 +231,7 @@
               </div>
             </div>
             <div id="review" class="tab-pane fade">
-              <div class="review-items">
-                <div class="admin-items d-flex flex-wrap flex-md-nowrap align-items-center pb-4">
-                  <div class="admin-img pb-4 pb-md-0 me-4">
-                    <img src="/assets/img/shop/01.jpg" alt="image">
-                  </div>
-                  <div class="content p-4">
-                    <div class="head-content pb-1 d-flex flex-wrap justify-content-between">
-                      <h5>miklos salsa<span>27June 2025 at 5.44pm</span></h5>
-                      <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                      </div>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipiscing elit. Curabitur vulputate vestibulum Phasellus rhoncus dolor eget viverra pretium.Curabitur vulputate vestibulum Phasellus rhoncus dolor eget viverra pretium.
-                    </p>
-                  </div>
-                </div>
-                <div class="admin-items d-flex flex-wrap flex-md-nowrap align-items-center pb-4">
-                  <div class="admin-img pb-4 pb-md-0 me-4">
-                    <img src="/assets/img/shop/02.jpg" alt="image">
-                  </div>
-                  <div class="content p-4">
-                    <div class="head-content pb-1 d-flex flex-wrap justify-content-between">
-                      <h5>Ethan Turner <span>27June 2025 at 5.44pm</span></h5>
-                      <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                      </div>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipiscing elit. Curabitur vulputate vestibulum Phasellus rhoncus dolor eget viverra pretium.Curabitur vulputate vestibulum Phasellus rhoncus dolor eget viverra pretium.
-                    </p>
-                  </div>
-                </div>
-                <div class="review-title mt-5 py-15 mb-30">
-                  <h4>add a review</h4>
-                  <div class="rate-now d-flex align-items-center">
-                    <p>Rate this product? *</p>
-                    <div class="star">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </div>
-                  </div>
-                </div>
-                <div class="review-form">
-                  <form action="#" id="contact-form2" method="POST">
-                    <div class="row g-4">
-                      <div class="col-lg-6">
-                        <div class="form-clt">
-                          <input type="text" name="name" id="name" placeholder="Full Name">
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-clt">
-                          <input type="text" name="email" id="email" placeholder="email addres">
-                        </div>
-                      </div>
-                      <div class="col-lg-12 wow fadeInUp" data-wow-delay=".8">
-                        <div class="form-clt-big form-clt">
-                          <textarea name="message" id="message" placeholder="message"></textarea>
-                        </div>
-                      </div>
-                      <div class="col-lg-6 wow fadeInUp" data-wow-delay=".9">
-                        <button type="submit" class="theme-btn hover-color">
-                          Post Submit
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
+              <ProductReviews :product-id="productId" />
             </div>
           </div>
         </div>
@@ -420,28 +340,32 @@
 <script>
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import SharedLayout from '../components/SharedLayout.vue'
 import { useApiStore } from '../stores/api'
+import SharedLayout from '../components/SharedLayout.vue'
+import ProductReviews from '../components/ProductReviews.vue'
 
 export default {
   name: 'ProductDetailsPage',
   components: {
-    SharedLayout
+    SharedLayout,
+    ProductReviews
   },
   setup() {
     const route = useRoute()
     const apiStore = useApiStore()
+
     const product = ref(null)
     const loading = ref(true)
     const error = ref(null)
 
+    const productId = route.params.id
+
     const fetchProduct = async () => {
       try {
-        const productId = route.params.id
         const res = await apiStore.get(`/products/${productId}`)
-        product.value = res.data || res
+        product.value = res.data ?? res
       } catch (e) {
-        error.value = e.message || 'Failed to load product'
+        error.value = e?.message || 'Failed to load product'
       } finally {
         loading.value = false
       }
@@ -450,103 +374,51 @@ export default {
     onMounted(async () => {
       await fetchProduct()
 
-      // Initialize jQuery plugins and custom JS
-      if (window.$) {
-        // Mobile Menu
-        $('#mobile-menu').meanmenu({
-          meanMenuContainer: '.mobile-menu',
-          meanScreenWidth: "1199",
-          meanExpand: ['<i class="far fa-plus"></i>'],
-        });
+      // Initialize jQuery plugins
+      if (!window.$) return
 
-        // Sidebar Toggle
-        $(".offcanvas__close,.offcanvas__overlay").on("click", function() {
-          $(".offcanvas__info").removeClass("info-open");
-          $(".offcanvas__overlay").removeClass("overlay-open");
-        });
-        $(".sidebar__toggle").on("click", function() {
-          $(".offcanvas__info").addClass("info-open");
-          $(".offcanvas__overlay").addClass("overlay-open");
-        });
+      $('#mobile-menu').meanmenu({
+        meanMenuContainer: '.mobile-menu',
+        meanScreenWidth: '1199',
+        meanExpand: ['<i class="far fa-plus"></i>'],
+      })
 
-        // Sidebar Area
-        $("#openButton").on("click", function(e) {
-          e.preventDefault();
-          $("#targetElement").removeClass("side_bar_hidden");
-        });
-        $("#closeButton").on("click", function(e) {
-          e.preventDefault();
-          $("#targetElement").addClass("side_bar_hidden");
-        });
+      $('.img-popup').magnificPopup({
+        type: 'image',
+        gallery: { enabled: true }
+      })
 
-        // Video Popup
-        $('.img-popup').magnificPopup({
-          type: "image",
-          gallery: { enabled: true },
-        });
-        $('.video-popup').magnificPopup({
-          type: 'iframe'
-        });
+      $('.video-popup').magnificPopup({ type: 'iframe' })
 
-        // Counterup
-        $(".count").counterUp({
-          delay: 15,
-          time: 4000,
-        });
+      $('.count').counterUp({
+        delay: 15,
+        time: 4000
+      })
 
-        // Wow Animation
-        new WOW().init();
+      new WOW().init()
+      $('select').niceSelect()
 
-        // Nice Select
-        $('select').niceSelect();
+      $(window).on('scroll', function () {
+        $('#header-sticky').toggleClass('sticky', $(this).scrollTop() > 250)
+        $('#back-top').toggleClass('show', $(this).scrollTop() > 20)
+      })
 
-        // Sticky Header
-        $(window).on("scroll", function() {
-          if ($(this).scrollTop() > 250) {
-            $("#header-sticky").addClass("sticky");
-          } else {
-            $("#header-sticky").removeClass("sticky");
-          }
-        });
+      $(document).on('click', '#back-top', function () {
+        $('html, body').animate({ scrollTop: 0 }, 800)
+        return false
+      })
 
-        // Search Popup
-        $(".search-trigger").on("click", function (e) {
-          e.preventDefault();
-          $(".search-wrap").animate({ opacity: "toggle" }, 500);
-          $(".nav-search, #search-close").addClass("open");
-        });
-        $(".search-close").on("click", function (e) {
-          e.preventDefault();
-          $(".search-wrap").animate({ opacity: "toggle" }, 500);
-          $(".nav-search, #search-close").removeClass("open");
-        });
-
-        // Back to Top
-        $(window).on('scroll', function() {
-          if ($(this).scrollTop() > 20) {
-            $("#back-top").addClass("show");
-          } else {
-            $("#back-top").removeClass("show");
-          }
-        });
-        $(document).on('click', '#back-top', function() {
-          $('html, body').animate({ scrollTop: 0 }, 800);
-          return false;
-        });
-
-        // Preloader
-        $(window).on('load', function() {
-          $(".preloader").addClass('loaded');
-          $(".preloader").delay(600).fadeOut();
-        });
-      }
-    });
+      $(window).on('load', function () {
+        $('.preloader').addClass('loaded').delay(600).fadeOut()
+      })
+    })
 
     return {
       product,
       loading,
       error
-    };
+    }
   }
 }
+
 </script>
