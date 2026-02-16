@@ -144,7 +144,7 @@ export default {
       }
 
       // If it's a relative path, prefix with API base URL (remove /api from the end)
-      const baseUrl = 'https://api.digi-essentials.com/'
+      const baseUrl = 'https://api.bloomandluxe.store/api'
       return baseUrl + imagePath.replace(/^\//, '') // Remove leading slash if present
     }
 

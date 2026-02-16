@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useAdminAuthStore } from './adminAuth'
+import { useAuthStore } from './auth'
 
 // Create a custom axios instance
 const apiClient = axios.create({
@@ -23,7 +24,12 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     const adminAuthStore = useAdminAuthStore()
-    if (adminAuthStore.token) {
+    const authStore = useAuthStore()
+
+    // Prioritize user token over admin token for regular API calls
+    if (authStore.token) {
+      config.headers.Authorization = `Bearer ${authStore.token}`
+    } else if (adminAuthStore.token) {
       config.headers.Authorization = `Bearer ${adminAuthStore.token}`
     }
     return config

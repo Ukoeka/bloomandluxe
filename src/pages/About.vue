@@ -108,7 +108,7 @@ Each piece we curate blends modern design with everyday practicality, helping yo
                   <p class="wow fadeInUp" data-wow-delay=".5s">
                     Our Limited Edition Collaborations bring you one-of-a-kind pieces created with top designers and fashion creatives. Each collection is crafted in small batches — once they’re gone, they’re gone for good. Shop now and own a look that’s uniquely yours.
                   </p>
-                  <a href="about.html" class="theme-btn wow fadeInUp" data-wow-delay=".7s">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
+                  <a href="/about" class="theme-btn wow fadeInUp" data-wow-delay=".7s">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
                 </div>
               </div>
             </div>

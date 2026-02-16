@@ -71,7 +71,7 @@
                         </div>
                       </div>
                       <div class="hero-button" data-animation="fadeInUp" data-delay="1.3s">
-                        <a href="contact.html" class="theme-btn">Discover Now <i class="fa-regular fa-arrow-right"></i></a>
+                        <a href="/contact" class="theme-btn">Discover Now <i class="fa-regular fa-arrow-right"></i></a>
                       </div>
                     </div>
                   </div>
@@ -127,7 +127,7 @@
                         </div>
                       </div>
                       <div class="hero-button" data-animation="fadeInUp" data-delay="1.3s">
-                        <a href="contact.html" class="theme-btn">Discover Now <i class="fa-regular fa-arrow-right"></i></a>
+                        <a href="/contact" class="theme-btn">Discover Now <i class="fa-regular fa-arrow-right"></i></a>
                       </div>
                     </div>
                   </div>
@@ -183,7 +183,7 @@
                         </div>
                       </div>
                       <div class="hero-button" data-animation="fadeInUp" data-delay="1.3s">
-                        <a href="contact.html" class="theme-btn">Discover Now <i class="fa-regular fa-arrow-right"></i></a>
+                        <a href="/contact" class="theme-btn">Discover Now <i class="fa-regular fa-arrow-right"></i></a>
                       </div>
                     </div>
                   </div>
@@ -214,10 +214,10 @@
                   <img src="/assets/img/shop/08.jpg" alt="img">
                   <div class="content">
                     <h3>
-                      <a href="shop-grid.html">Cleansers</a>
+                      <a href="/shop">Cleansers</a>
                     </h3>
                     <p>8 Products</p>
-                    <a href="shop-grid.html" class="link-btns style-2">View Now <i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="/shop" class="link-btns style-2">View Now <i class="fa-solid fa-chevron-right"></i></a>
                   </div>
                 </div>
               </div>
@@ -228,10 +228,10 @@
                   <img src="/assets/img/shop/09.jpg" alt="img">
                   <div class="content">
                     <h3>
-                      <a href="shop-grid.html">Face Sunscreen</a>
+                      <a href="/shop">Face Sunscreen</a>
                     </h3>
                     <p>8 Products</p>
-                    <a href="shop-grid.html" class="link-btns style-2">View Now <i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="/shop" class="link-btns style-2">View Now <i class="fa-solid fa-chevron-right"></i></a>
                   </div>
                 </div>
               </div>
@@ -242,10 +242,10 @@
                   <img src="/assets/img/shop/10.jpg" alt="img">
                   <div class="content">
                     <h3>
-                      <a href="shop-grid.html">Face Sunscreen</a>
+                      <a href="/shop">Face Sunscreen</a>
                     </h3>
                     <p>Conditioners</p>
-                    <a href="shop-grid.html" class="link-btns style-2">View Now <i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="/shop" class="link-btns style-2">View Now <i class="fa-solid fa-chevron-right"></i></a>
                   </div>
                 </div>
               </div>
@@ -256,10 +256,10 @@
                   <img src="/assets/img/shop/11.jpg" alt="img">
                   <div class="content">
                     <h3>
-                      <a href="shop-grid.html">Masks</a>
+                      <a href="/shop">Masks</a>
                     </h3>
                     <p>Conditioners</p>
-                    <a href="shop-grid.html" class="link-btns style-2">View Now <i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="/shop" class="link-btns style-2">View Now <i class="fa-solid fa-chevron-right"></i></a>
                   </div>
                 </div>
               </div>
@@ -288,7 +288,7 @@
               </div>
               <div class="product-content">
                 <h3>
-                  <a href="product-details.html">Super Boost <br>
+                  <a href="/product-details/1">Super Boost <br>
                     Moisturizing Lip Gloss</a>
                 </h3>
                 <p>
@@ -305,7 +305,7 @@
               </div>
               <div class="product-content">
                 <h3>
-                  <a href="product-details.html">Mini Glycolic <br>
+                  <a href="/product-details/1">Mini Glycolic <br>
                     Acid 7% Exfoliating Toner</a>
                 </h3>
                 <p>
@@ -322,7 +322,7 @@
               </div>
               <div class="product-content">
                 <h3>
-                  <a href="product-details.html">Mini Radiant Creamy <br>
+                  <a href="/product-details/1">Mini Radiant Creamy <br>
                     Concealer with Medium
                   </a>
                 </h3>
@@ -349,7 +349,7 @@
               Discover our products
             </h2>
           </div>
-          <a href="product-details.html" class="theme-btn theme-btn-3">Shop All Products <i class="fa-regular fa-arrow-right"></i></a>
+          <a href="/product-details/1" class="theme-btn theme-btn-3">Shop All Products <i class="fa-regular fa-arrow-right"></i></a>
         </div>
         <div class="tab-content">
           <div class="row">
@@ -358,13 +358,13 @@
                 <div class="product-image">
                   <img src="/assets/img/product/16.jpg" alt="img">
                   <div class="product-btn">
-                    <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                    <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                   </div>
                 </div>
                 <div class="product-content">
                   <p>Retinol 24</p>
                   <h4>
-                    <a href="product-details.html">Face Wash by Olay Regenerist</a>
+                    <a href="/product-details/1">Face Wash by Olay Regenerist</a>
                   </h4>
                   <span>$19.00</span>
                 </div>
@@ -376,13 +376,13 @@
                   <img src="/assets/img/product/17.jpg" alt="img">
                   <div class="badge">26%</div>
                   <div class="product-btn">
-                    <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                    <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                   </div>
                 </div>
                 <div class="product-content">
                   <p>Retinol 24</p>
                   <h4>
-                    <a href="product-details.html">Kabuki Makeup Brush</a>
+                    <a href="/product-details/1">Kabuki Makeup Brush</a>
                   </h4>
                   <ul class="doller">
                     <li>
@@ -397,13 +397,13 @@
                 <div class="product-image">
                   <img src="/assets/img/product/18.jpg" alt="img">
                   <div class="product-btn">
-                    <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                    <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                   </div>
                 </div>
                 <div class="product-content">
                   <p>Coola</p>
                   <h4>
-                    <a href="product-details.html">Organic Face Sunscreen</a>
+                    <a href="/product-details/1">Organic Face Sunscreen</a>
                   </h4>
                   <span>$44.00</span>
                 </div>
@@ -415,13 +415,13 @@
                   <img src="/assets/img/product/19.jpg" alt="img">
                   <div class="badge">35%</div>
                   <div class="product-btn">
-                    <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                    <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                   </div>
                 </div>
                 <div class="product-content">
                   <p>Fanning</p>
                   <h4>
-                    <a href="shop-cart.html">Pure Cosmetics Lip Gloss</a>
+                    <a href="/shop-cart">Pure Cosmetics Lip Gloss</a>
                   </h4>
                   <ul class="doller">
                     <li>
@@ -437,13 +437,13 @@
                   <img src="/assets/img/product/20.jpg" alt="img">
                   <div class="badge">14%</div>
                   <div class="product-btn">
-                    <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                    <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                   </div>
                 </div>
                 <div class="product-content">
                   <p>Mineral </p>
                   <h4>
-                    <a href="product-details.html">Mineral Matte Finishing</a>
+                    <a href="/product-details/1">Mineral Matte Finishing</a>
                   </h4>
                   <ul class="doller">
                     <li>
@@ -458,13 +458,13 @@
                 <div class="product-image">
                   <img src="/assets/img/product/21.jpg" alt="img">
                   <div class="product-btn">
-                    <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                    <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                   </div>
                 </div>
                 <div class="product-content">
                   <p>Night Face</p>
                   <h4>
-                    <a href="product-details.html">Retinol Value Set Duo</a>
+                    <a href="/product-details/1">Retinol Value Set Duo</a>
                   </h4>
                   <span>
                     $76.00
@@ -478,13 +478,13 @@
                   <img src="/assets/img/product/22.jpg" alt="img">
                   <div class="badge">40%</div>
                   <div class="product-btn">
-                    <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                    <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                   </div>
                 </div>
                 <div class="product-content">
                   <p>Coty Airspun</p>
                   <h4>
-                    <a href="product-details.html">Airspun Loose Face Powder</a>
+                    <a href="/product-details/1">Airspun Loose Face Powder</a>
                   </h4>
                   <ul class="doller">
                     <li>
@@ -499,13 +499,13 @@
                 <div class="product-image">
                   <img src="/assets/img/product/23.jpg" alt="img">
                   <div class="product-btn">
-                    <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                    <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                   </div>
                 </div>
                 <div class="product-content">
                   <p>Fanning</p>
                   <h4>
-                    <a href="product-details.html">Grande Cosmetics Grande</a>
+                    <a href="/product-details/1">Grande Cosmetics Grande</a>
                   </h4>
                   <span>
                     $102.00
@@ -531,7 +531,7 @@
                     Foundation and <br>
                     powder brush
                   </h3>
-                  <a href="product-details.html" class="theme-btn">Discover Now <i class="fa-regular fa-arrow-right"></i></a>
+                  <a href="/product-details/1" class="theme-btn">Discover Now <i class="fa-regular fa-arrow-right"></i></a>
                 </div>
               </div>
             </div>
@@ -541,7 +541,7 @@
                   <h3>
                     best cosmetics For Hair and skin
                   </h3>
-                  <a href="product-details.html" class="link-btn">Shop Collection</a>
+                  <a href="/product-details/1" class="link-btn">Shop Collection</a>
                 </div>
               </div>
             </div>
@@ -622,13 +622,13 @@
                   <div class="product-image">
                     <img src="/assets/img/product/24.jpg" alt="img">
                     <div class="product-btn">
-                      <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                      <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                     </div>
                   </div>
                   <div class="product-content">
                     <p>Physicians</p>
                     <h4>
-                      <a href="product-details.html">Powder Creamy Natural</a>
+                      <a href="/product-details/1">Powder Creamy Natural</a>
                     </h4>
                     <ul class="doller">
                       <li>
@@ -644,13 +644,13 @@
                     <img src="/assets/img/product/25.jpg" alt="img">
                     <div class="badge">26%</div>
                     <div class="product-btn">
-                      <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                      <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                     </div>
                   </div>
                   <div class="product-content">
                     <p>Mineral </p>
                     <h4>
-                      <a href="product-details.html">Mineral Matte Finishing</a>
+                      <a href="/product-details/1">Mineral Matte Finishing</a>
                     </h4>
                     <span>$16.00</span>
                   </div>
@@ -661,13 +661,13 @@
                   <div class="product-image">
                     <img src="/assets/img/product/26.jpg" alt="img">
                     <div class="product-btn active">
-                      <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                      <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                     </div>
                   </div>
                   <div class="product-content">
                     <p>StriVectin</p>
                     <h4>
-                      <a href="product-details.html">Resurfacing Exfoliating</a>
+                      <a href="/product-details/1">Resurfacing Exfoliating</a>
                     </h4>
                     <ul class="doller">
                       <li>
@@ -683,13 +683,13 @@
                     <img src="/assets/img/product/27.jpg" alt="img">
                     <div class="badge">35%</div>
                     <div class="product-btn">
-                      <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                      <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                     </div>
                   </div>
                   <div class="product-content">
                     <p>Marcelle</p>
                     <h4>
-                      <a href="product-details.html">Correction Tinted Cream</a>
+                      <a href="/product-details/1">Correction Tinted Cream</a>
                     </h4>
                     <span>$44.00</span>
                   </div>
@@ -704,13 +704,13 @@
                   <div class="product-image">
                     <img src="/assets/img/product/24.jpg" alt="img">
                     <div class="product-btn">
-                      <a href="shop-cart.html" class="theme-btn-2">Add To Cart</a>
+                      <a href="/shop-cart" class="theme-btn-2">Add To Cart</a>
                     </div>
                   </div>
                   <div class="product-content">
                     <p>Physicians</p>
                     <h4>
-                      <a href="product-details.html">Powder Creamy Natural</a>
+                      <a href="/product-details/1">Powder Creamy Natural</a>
                     </h4>
                     <ul class="doller">
                       <li>
@@ -736,7 +736,7 @@
               <img src="/assets/img/shop/12.jpg" alt="img">
               <div class="banner-product">
                 <div class="product-details">
-                  <h4 class="title"><a href="product-details.html">Night Face</a></h4>
+                  <h4 class="title"><a href="/product-details/1">Night Face</a></h4>
                   <div class="price">$15.22 - $15.22</div>
                   <div class="rating-image">
                     <img src="/assets/img/cart/cream.jpg" alt="img">
@@ -748,7 +748,7 @@
               </div>
               <div class="banner-product style-2">
                 <div class="product-details">
-                  <h4 class="title"><a href="product-details.html">Night Face</a></h4>
+                  <h4 class="title"><a href="/product-details/1">Night Face</a></h4>
                   <div class="price">$15.22 - $15.22</div>
                   <div class="rating-image">
                     <img src="/assets/img/cart/cream.jpg" alt="img">
@@ -982,7 +982,7 @@
             Latest News & Articles
           </h2>
         </div>
-        <a href="news.html" class="theme-btn theme-btn-3 border-color wow fadeInUp" data-wow-delay=".5s">Discover More</a>
+        <a href="/news" class="theme-btn theme-btn-3 border-color wow fadeInUp" data-wow-delay=".5s">Discover More</a>
       </div>
       <div class="row">
         <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
@@ -998,7 +998,7 @@
                 </li>
               </ul>
               <h3>
-                <a href="news-details.html">Best New Beauty Products to Shop in August.</a>
+                <a href="/news">Best New Beauty Products to Shop in August.</a>
               </h3>
             </div>
           </div>
@@ -1016,7 +1016,7 @@
                 </li>
               </ul>
               <h3>
-                <a href="news-details.html">A Perfect way to make your fingernail shiny and adorable.</a>
+                <a href="/news">A Perfect way to make your fingernail shiny and adorable.</a>
               </h3>
             </div>
           </div>
@@ -1034,7 +1034,7 @@
                 </li>
               </ul>
               <h3>
-                <a href="news-details.html">All Essential Carings your Skin wants you to Do at Night</a>
+                <a href="/news">All Essential Carings your Skin wants you to Do at Night</a>
               </h3>
             </div>
           </div>
