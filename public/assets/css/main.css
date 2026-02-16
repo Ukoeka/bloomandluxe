@@ -10334,3 +10334,221 @@ input.main-search-input::placeholder {
 .testimonial-wrapper .testimonial-content .array-buttons .array-next:hover {
   background-color: var(--theme);
 }/*# sourceMappingURL=main.css.map */
+
+/* ===========================================
+   State Dropdown Custom Styles
+   =========================================== */
+
+/* State select wrapper */
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select-wrapper {
+  position: relative;
+}
+
+/* Custom state select styling */
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select {
+  width: 100%;
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #D5D8DB;
+  border-radius: 0;
+  padding: 18px 40px 18px 24px;
+  color: var(--header);
+  text-transform: capitalize;
+  font-weight: 400;
+  font-size: 14px;
+  background-color: var(--white);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23010F1C' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  transition: all 0.3s ease;
+}
+
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select:hover {
+  border-color: var(--theme);
+}
+
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select:focus {
+  border-color: var(--theme);
+  box-shadow: 0 0 0 3px rgba(107, 143, 113, 0.15);
+}
+
+/* Custom dropdown arrow */
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--header);
+  border-bottom: 2px solid var(--header);
+  pointer-events: none;
+  transform: translateY(-50%) rotate(45deg);
+  transition: all 0.3s ease;
+}
+
+/* State select options - native styling fallback */
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select option {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--header);
+  background-color: var(--white);
+  border: none;
+  cursor: pointer;
+}
+
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select option:hover,
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select option:focus,
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select option:checked {
+  background-color: var(--theme);
+  color: var(--white);
+}
+
+/* Nice-select custom styling for state dropdown */
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select {
+  background-color: var(--white);
+  border: 1px solid #D5D8DB;
+  border-radius: 0;
+  padding: 18px 40px 18px 24px;
+  width: 100%;
+  height: auto;
+  line-height: 1.5;
+}
+
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select:hover {
+  border-color: var(--theme);
+}
+
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select:focus,
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select.open {
+  border-color: var(--theme);
+  box-shadow: 0 0 0 3px rgba(107, 143, 113, 0.15);
+}
+
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select span {
+  font-size: 14px;
+  color: var(--header);
+  font-weight: 400;
+}
+
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select span.current {
+  color: var(--header);
+}
+
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select::after {
+  border-right: 2px solid var(--header);
+  border-bottom: 2px solid var(--header);
+  height: 8px;
+  width: 8px;
+  right: 16px;
+}
+
+/* Nice-select dropdown list */
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select .list {
+  background-color: var(--white);
+  border: 1px solid #D5D8DB;
+  border-radius: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 8px;
+  width: 100%;
+  left: 0 !important;
+  right: 0 !important;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select .list .option {
+  padding: 12px 20px;
+  font-size: 14px;
+  color: var(--header);
+  background-color: var(--white);
+  border-bottom: 1px solid #F0F0F0;
+  line-height: 1.5;
+  min-height: auto;
+  transition: all 0.2s ease;
+}
+
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select .list .option:last-child {
+  border-bottom: none;
+}
+
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select .list .option:hover,
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select .list .option.focus,
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select .list .option.selected.focus {
+  background-color: var(--theme);
+  color: var(--white);
+}
+
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select .list .option.selected {
+  font-weight: 600;
+  background-color: var(--theme);
+  color: var(--white);
+}
+
+/* Placeholder state */
+.checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select .placeholder {
+  color: #818487;
+  font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select,
+  .checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select {
+    padding: 16px 40px 16px 20px;
+    font-size: 14px;
+  }
+  
+  .checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select .list {
+    max-height: 250px;
+  }
+}
+
+@media (max-width: 575px) {
+  .checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select,
+  .checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select {
+    padding: 14px 40px 14px 16px;
+    font-size: 14px;
+  }
+  
+  .checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single .state-select.nice-select .list .option {
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+}
+
+/* Shipping display in order summary */
+.checkout-order-area .product-checout-area .shipping-display {
+  text-align: right;
+}
+
+.checkout-order-area .product-checout-area .shipping-display p {
+  margin: 0;
+  font-weight: 500;
+  color: var(--header);
+}
+
+/* Stock info styling */
+.product-details-content .stock-info {
+  font-size: 14px;
+}
+
+.product-details-content .stock-info .text-success {
+  color: #28a745 !important;
+}
+
+.product-details-content .stock-info .text-danger {
+  color: #dc3545 !important;
+}
+
+/* Total price styling */
+.product-details-content .price-list .total-price {
+  font-size: 18px;
+  color: var(--theme);
+  font-weight: 600;
+}

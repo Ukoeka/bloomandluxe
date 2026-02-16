@@ -75,7 +75,7 @@
                     <i class="fal fa-envelope"></i>
                   </div>
                   <div class="offcanvas__contact-text">
-                    <a href="mailto:info@example.com"><span class="mailto:info@example.com">contact@bloom&luxe.com</span></a>
+                    <a href="mailto:contact@bloom&luxe.com"><span class="mailto:info@example.com">contact@bloom&luxe.com</span></a>
                   </div>
                 </li>
                 <li class="d-flex align-items-center">
@@ -91,13 +91,13 @@
                     <i class="far fa-phone"></i>
                   </div>
                   <div class="offcanvas__contact-text">
-                    <a href="tel:+11002345909"> +61401596099</a>
+                    <a href="tel:+61401596099"> +61401596099</a>
                   </div>
                 </li>
               </ul>
               <div class="header-button mt-4">
               </div>
-              <a href="contact.html" class="theme-btn"><span>Let’s Talk <i class="fa-solid fa-arrow-right"></i></span></a>
+              <a href="/contact" class="theme-btn"><span>Let’s Talk <i class="fa-solid fa-arrow-right"></i></span></a>
               <div class="social-icon d-flex align-items-center">
                 <a href="https://www.facebook.com/share/17ZJGw6Lnc/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.tiktok.com/@bloomlux.store?"><i class="fab fa-tiktok"></i></a>
@@ -187,10 +187,10 @@
           </div>
           <div class="header-right d-flex justify-content-end align-items-center">
             <div class="search-widget">
-              <form action="#">
+              <!-- <form action="#">
                 <input type="text" placeholder="Search for Products...">
                 <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-              </form>
+              </form> -->
             </div>
             <a href="#0" class="search-trigger search-icon style-2"><i class="fa-regular fa-magnifying-glass"></i></a>
             <div class="menu-cart">
@@ -282,7 +282,7 @@
         <div class="user-icon-box">
           <img src="/assets/img/user.png" alt="img">
           <p>No account yet?</p>
-          <a href="account.html">Create an Account</a>
+          <a href="/login">Create an Account</a>
         </div>
       </div>
       <div v-else class="account-sidebar">
@@ -341,7 +341,11 @@ export default {
     const cartStore = useCartStore()
     const authStore = useAuthStore()
 
-    const totalItems = computed(() => cartStore.getTotalItems())
+  const totalItems = computed(() => {
+  // Only calculate after cart is initialized
+  if (!cartStore.initialized) return 0
+  return cartStore.getTotalItems()
+})
     const totalPrice = computed(() => cartStore.getTotalPrice())
     const isLoggedIn = computed(() => !!authStore.user)
 
@@ -354,7 +358,7 @@ export default {
       }
 
       // If it's a relative path, prefix with API base URL
-      const baseUrl = 'https://api.digi-essentials.com/'
+      const baseUrl = 'https://api.bloomandluxe.store/api'
       return baseUrl + imagePath.replace(/^\//, '') // Remove leading slash if present
     }
 

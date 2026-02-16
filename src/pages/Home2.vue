@@ -489,7 +489,7 @@
                           <input type='button' value='+' class='qtyplus plus'>
                         </form>
                       </div>
-                      <a href="product-details.html" class="icon">
+                      <a href="/product-details/1" class="icon">
                         <i class="far fa-heart"></i>
                       </a>
                       <div class="social-profile">
@@ -503,16 +503,16 @@
                       </div>
                     </div>
                     <div class="shop-btn">
-                      <a href="shop-cart.html" class="theme-btn">
+                      <a href="/shop-cart" class="theme-btn">
                         <span> Add to cart</span>
                       </a>
-                      <a href="product-details.html" class="theme-btn">
+                      <a href="/product-details/1" class="theme-btn">
                         <span> Buy now</span>
                       </a>
                     </div>
-                    <h6 class="details-info"><span>SKU:</span> <a href="product-details.html">124224</a></h6>
-                    <h6 class="details-info"><span>Categories:</span> <a href="product-details.html">Crux Indoor Fast and Easy</a></h6>
-                    <h6 class="details-info style-2"><span>Tags:</span> <a href="product-details.html"> <b>accessories</b> <b>business</b></a></h6>
+                    <h6 class="details-info"><span>SKU:</span> <a href="/product-details/1">124224</a></h6>
+                    <h6 class="details-info"><span>Categories:</span> <a href="/product-details/1">Crux Indoor Fast and Easy</a></h6>
+                    <h6 class="details-info style-2"><span>Tags:</span> <a href="/product-details/1"> <b>accessories</b> <b>business</b></a></h6>
                   </div>
                 </div>
               </div>
