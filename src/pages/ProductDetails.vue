@@ -162,7 +162,7 @@
     </template>
 
     <!-- Product-collection Section Start -->
-    <section class="product-collection-section-2 section-padding pt-0 fix">
+    <!-- <section class="product-collection-section-2 section-padding pt-0 fix">
       <div class="container">
         <div class="section-title style-2 text-center">
           <h6 class="sub-title wow fadeInUp">
@@ -255,7 +255,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
   </SharedLayout>
 </template>

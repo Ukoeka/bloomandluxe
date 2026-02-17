@@ -187,6 +187,14 @@ export default {
       return parts.length > 1 ? parseFloat(parts[1]) || 0 : 0
     })
     
+    
+
+    const shipping_location = computed(() => {
+    if (!formData.value.state) return ''
+    return formData.value.state.split(':')[0]
+  })
+
+
     // Get selected state name for display
     const selectedStateName = computed(() => {
       if (!formData.value.state) return ''
@@ -239,7 +247,7 @@ export default {
           customer_email: formData.value.email,
           customer_phone: formData.value.phone,
           shipping_address: `${formData.value.address}, ${formData.value.city}, ${selectedStateName.value}`.trim(),
-          shipping_fee: shippingFee.value,
+          shipping_location: shipping_location.value,
           total_amount: totalWithShipping.value,
           // Send cart items directly in request
           items: cartStore.cartItems.map(item => ({
