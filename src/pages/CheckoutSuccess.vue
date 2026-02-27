@@ -23,7 +23,7 @@
                   Continue Shopping
                 </router-link>
                 <router-link :to="`/order?order_id=${orderInfo?.id}`" class="theme-btn" v-if="orderInfo">
-                  View Order
+                  View Orders
                 </router-link>
               </div>
             </div>
