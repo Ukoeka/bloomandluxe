@@ -22,7 +22,7 @@
                 <router-link to="/" class="theme-btn me-3">
                   Continue Shopping
                 </router-link>
-                <router-link :to="`/order?order_id=${orderInfo?.id}`" class="theme-btn" v-if="orderInfo">
+                <router-link :to="`/order-details/${orderInfo?.id}`" class="theme-btn" v-if="orderInfo">
                   View Order
                 </router-link>
               </div>

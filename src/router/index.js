@@ -67,7 +67,8 @@ const routes = [
   {
     path: '/checkout',
     name: 'Checkout',
-    component: Checkout
+    component: Checkout,
+    meta: { requiresUserAuth: true }
   },
   {
     path: '/checkout/success',
@@ -215,7 +216,7 @@ router.beforeEach((to, from, next) => {
     next('/admin/login')
   } else if (requiresUser && !authStore.token) {
     // If route requires user but no user token exists, redirect to login
-    next('/login')
+    next({ path: '/login', query: { redirect: to.fullPath } })
   } else {
     // Proceed to the route
     next()
