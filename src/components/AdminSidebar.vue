@@ -53,17 +53,20 @@
 
 <script>
 import { useRouter } from 'vue-router'
+import { useAdminAuthStore } from '../stores/adminAuth'
+
 
 export default {
   name: 'AdminSidebar',
   setup() {
     const router = useRouter()
+    const adminAuthStore = useAdminAuthStore()
 
     const logout = () => {
-      // Clear admin token and redirect to login
-      localStorage.removeItem('adminToken')
+      adminAuthStore.logout()
       router.push('/admin/login')
     }
+
 
     return {
       logout

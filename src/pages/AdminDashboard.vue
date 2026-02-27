@@ -171,14 +171,19 @@ export default {
           apiStore.get('/admin/revenue'),
           apiStore.get('/admin/orders/recent')
         ])
-        productsCount.value = products.count
-        ordersCount.value = orders.count
-        usersCount.value = users.count
-        revenue.value = revenueData.total
-        recentOrders.value = ordersList
+        productsCount.value = products.data?.count || 0
+        ordersCount.value = orders.data?.count || 0
+        usersCount.value = users.data?.count || 0
+        revenue.value = revenueData.data?.total || 0
+        recentOrders.value = ordersList.data || []
       } catch (error) {
         console.error('Failed to fetch dashboard data:', error)
+        if (error.response?.status === 403) {
+          console.error('Permission denied. Redirecting to login.')
+          // router.push('/admin/login')
+        }
       }
+
     }
 
     onMounted(() => {

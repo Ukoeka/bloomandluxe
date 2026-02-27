@@ -26,13 +26,19 @@ apiClient.interceptors.request.use(
     const adminAuthStore = useAdminAuthStore()
     const authStore = useAuthStore()
 
-    // Prioritize user token over admin token for regular API calls
-    if (authStore.token) {
+    // Select the correct token based on the request URL
+    const isAdminRoute = config.url.startsWith('/admin')
+
+    if (isAdminRoute && adminAuthStore.token) {
+      config.headers.Authorization = `Bearer ${adminAuthStore.token}`
+    } else if (authStore.token) {
       config.headers.Authorization = `Bearer ${authStore.token}`
     } else if (adminAuthStore.token) {
+      // Fallback for cases where an admin might be accessing non-admin routes
       config.headers.Authorization = `Bearer ${adminAuthStore.token}`
     }
     return config
+
   },
   (error) => {
     return Promise.reject(error)

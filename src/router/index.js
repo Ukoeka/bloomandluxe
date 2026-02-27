@@ -207,15 +207,20 @@ router.beforeEach((to, from, next) => {
   const adminAuthStore = useAdminAuthStore()
   const authStore = useAuthStore()
 
-  if (to.meta.requiresAuth && !adminAuthStore.isAuthenticated) {
-    // Redirect to admin login if not authenticated as admin
+  const requiresAdmin = to.meta.requiresAuth
+  const requiresUser = to.meta.requiresUserAuth
+
+  if (requiresAdmin && !adminAuthStore.token) {
+    // If route requires admin but no admin token exists, redirect to admin login
     next('/admin/login')
-  } else if (to.meta.requiresUserAuth && !authStore.token) {
-    // Redirect to login if not authenticated as user
+  } else if (requiresUser && !authStore.token) {
+    // If route requires user but no user token exists, redirect to login
     next('/login')
   } else {
+    // Proceed to the route
     next()
   }
 })
+
 
 export default router
