@@ -76,8 +76,9 @@
                       <h6>Don’t have an account? <router-link to="/sign-up">
                       Create a free account</router-link></h6>
                       <div class="col-lg-12">
-                        <button type="submit" class="theme-btn header-btn w-100">
-                          Login
+                        <button type="submit" class="theme-btn header-btn w-100" :disabled="auth.loginLoading">
+                          <span v-if="auth.loginLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                          {{ auth.loginLoading ? 'Logging In...' : 'Login' }}
                         </button>
                       </div>
                     </div>
@@ -227,7 +228,8 @@ export default {
       showPassword,
       togglePasswordVisibility,
       handleLogin,
-      router
+      router,
+      auth
     };
   }
 }

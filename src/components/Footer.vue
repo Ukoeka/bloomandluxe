@@ -57,9 +57,9 @@
                   </a>
                 </li>
                 <li>
-                  <a href="/order">
+                  <router-link to="/my-orders">
                     Order History
-                  </a>
+                  </router-link>
                 </li>
                 <li>
                   <router-link to="/contact">

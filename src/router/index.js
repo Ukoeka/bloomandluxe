@@ -28,7 +28,10 @@ import AdminReports from '../pages/AdminReports.vue'
 import AdminCategories from '../pages/AdminCategories.vue'
 import AdminSubCategories from '../pages/AdminSubCategories.vue'
 import AdminDisputes from '../pages/AdminDisputes.vue'
+import MyOrders from '../pages/MyOrders.vue'
+import OrderDetails from '../pages/OrderDetails.vue'
 import { useAdminAuthStore } from '../stores/adminAuth'
+import { useAuthStore } from '../stores/auth'
 
 const routes = [
   {
@@ -180,6 +183,18 @@ const routes = [
     component: AdminDisputes,
     meta: { requiresAuth: true }
   },
+  {
+    path: '/my-orders',
+    name: 'MyOrders',
+    component: MyOrders,
+    meta: { requiresUserAuth: true }
+  },
+  {
+    path: '/order-details/:id',
+    name: 'OrderDetails',
+    component: OrderDetails,
+    meta: { requiresUserAuth: true }
+  },
 ]
 
 const router = createRouter({
@@ -187,13 +202,17 @@ const router = createRouter({
   routes
 })
 
-// Route guard for admin authentication
+// Route guard for authentication
 router.beforeEach((to, from, next) => {
   const adminAuthStore = useAdminAuthStore()
+  const authStore = useAuthStore()
 
   if (to.meta.requiresAuth && !adminAuthStore.isAuthenticated) {
-    // Redirect to admin login if not authenticated
+    // Redirect to admin login if not authenticated as admin
     next('/admin/login')
+  } else if (to.meta.requiresUserAuth && !authStore.token) {
+    // Redirect to login if not authenticated as user
+    next('/login')
   } else {
     next()
   }

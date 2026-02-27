@@ -71,8 +71,9 @@
                       </div>
                       <h6>Already have an account? <router-link>Login</router-link></h6>
                       <div class="col-lg-12">
-                        <button type="submit" class="theme-btn w-100">
-                          Sign Up
+                        <button type="submit" class="theme-btn w-100" :disabled="auth.registerLoading">
+                          <span v-if="auth.registerLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                          {{ auth.registerLoading ? 'Signing Up...' : 'Sign Up' }}
                         </button>
                       </div>
                     </div>
@@ -244,7 +245,8 @@ export default {
       togglePasswordVisibility,
       toggleConfirmPasswordVisibility,
       handleRegister,
-      router
+      router,
+      auth
     };
   }
 }

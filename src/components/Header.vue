@@ -132,9 +132,12 @@
               <i class="fa-regular fa-user"></i>
               Log in
             </button>
-            <div v-else class="user-info">
-              <i class="fa-regular fa-user"></i>
+            <div v-else class="user-info d-flex align-items-center">
+              <i class="fa-regular fa-user me-1"></i>
               <span>Welcome, {{ authStore.user?.name || 'User' }}</span>
+              <button @click.prevent="logout" class="btn btn-link btn-sm text-danger ms-3 p-0" style="text-decoration: none; border: none; background: transparent;">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </button>
             </div>
           </div>
         </div>
@@ -177,6 +180,9 @@
                       Shop
                     </router-link>
                     
+                  </li>
+                  <li v-if="isLoggedIn">
+                    <router-link to="/my-orders">Orders</router-link>
                   </li>
                   <li>
                     <router-link to="/contact">Contact Us</router-link>
@@ -298,10 +304,10 @@
             <i class="fas fa-user"></i>
             My Profile
           </a>
-          <a href="#" class="account-link">
+          <router-link to="/my-orders" class="account-link">
             <i class="fas fa-shopping-bag"></i>
             My Orders
-          </a>
+          </router-link>
           <a href="#" class="account-link">
             <i class="fas fa-heart"></i>
             Wishlist

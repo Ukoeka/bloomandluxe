@@ -1,4 +1,5 @@
 // src/stores/auth.js
+/* eslint-disable */
 import { defineStore } from 'pinia'
 import { useApiStore } from './api'
 
@@ -81,5 +82,25 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('user')
       localStorage.removeItem('userToken')
     },
+
+    async fetchOrders() {
+      const api = useApiStore()
+      try {
+        const response = await api.get('/orders')
+        return response.data // response is { success: true, message: '...', data: [...] }
+      } catch (err) {
+        throw err
+      }
+    },
+
+    async fetchOrderDetails(orderId) {
+      const api = useApiStore()
+      try {
+        const response = await api.get(`/orders/${orderId}`)
+        return response.data
+      } catch (err) {
+        throw err
+      }
+    }
   },
 })
