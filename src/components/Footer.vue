@@ -140,20 +140,7 @@
           <p class="wow fadeInUp" data-wow-delay=".3s">
             ©All Rights reserved | by <span>bloomandluxe</span>
           </p>
-          <div class="bottom-list wow fadeInUp" data-wow-delay=".5s">
-            <div class="app-image">
-              <img src="/assets/img/footer/01.png" alt="img">
-            </div>
-            <div class="app-image">
-              <img src="/assets/img/footer/02.png" alt="img">
-            </div>
-            <div class="app-image">
-              <img src="/assets/img/footer/03.png" alt="img">
-            </div>
-            <div class="app-image">
-              <img src="/assets/img/footer/04.png" alt="img">
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>
