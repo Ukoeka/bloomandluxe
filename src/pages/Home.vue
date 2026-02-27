@@ -111,7 +111,7 @@
                                                             New Collection With <br> Modern Style
                                                         </h1>
                                                         <div class="hero-button" data-animation="fadeInUp" data-delay="1.7s">
-                                                            <a href="/product-details/1" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
+                                                            <a href="/shop" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -132,7 +132,7 @@
                                                             New Collection With <br> Modern Style
                                                         </h1>
                                                         <div class="hero-button" data-animation="fadeInUp" data-delay="1.7s">
-                                                            <a href="/product-details/1" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
+                                                            <a href="/shop" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,7 +153,7 @@
                                                             New Collection With <br> Modern Style
                                                         </h1>
                                                         <div class="hero-button" data-animation="fadeInUp" data-delay="1.7s">
-                                                            <a href="/product-details/1" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
+                                                            <a href="/shop" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -56,7 +56,7 @@
                 <h3>
                   <router-link :to="`/category/${category.id}`">{{ category.name }}</router-link>
                 </h3>
-                <p>23 Products</p>
+                <!-- <p>23 Products</p> -->
                 <router-link :to="`/category/${category.id}`" class="link-btns">Shop Now <i class="fa-solid fa-chevron-right"></i></router-link>
               </div>
             </div>
@@ -136,7 +136,7 @@ export default {
       }
 
       // If it's a relative path, prefix with API base URL
-      const baseUrl = 'https://api.digi-essentials.com/'
+      const baseUrl = 'https://api.bloomandluxe.store/api'
       return baseUrl + imagePath.replace(/^\//, '') // Remove leading slash if present
     }
 

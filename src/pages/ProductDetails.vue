@@ -43,6 +43,14 @@
                   </p>
                   <div class="price-list">
                     <h3>${{ product.price }}</h3>
+                    <span v-if="quantity > 1" class="total-price ms-2">
+                      Total: ${{ totalPrice.toFixed(2) }}
+                    </span>
+                  </div>
+                  <div class="stock-info mb-3" v-if="product.stock !== undefined">
+                    <span :class="product.stock > 0 ? 'text-success' : 'text-danger'">
+                      <strong>{{ product.stock }}</strong> items available in stock
+                    </span>
                   </div>
                   <div class="cart-wrp">
                     <div class="cart-quantity">
@@ -154,7 +162,7 @@
     </template>
 
     <!-- Product-collection Section Start -->
-    <section class="product-collection-section-2 section-padding pt-0 fix">
+    <!-- <section class="product-collection-section-2 section-padding pt-0 fix">
       <div class="container">
         <div class="section-title style-2 text-center">
           <h6 class="sub-title wow fadeInUp">
@@ -247,13 +255,13 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
   </SharedLayout>
 </template>
 
 <script>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import SharedLayout from '../components/SharedLayout.vue'
 import ProductReviews from '../components/ProductReviews.vue'
@@ -277,6 +285,12 @@ export default {
     const error = ref(null)
     const quantity = ref(1)
 
+    // Calculate total price based on quantity
+    const totalPrice = computed(() => {
+      if (!product.value) return 0
+      return Number(product.value.price) * quantity.value
+    })
+
     const fetchProduct = async (id) => {
       loading.value = true
       error.value = null
@@ -293,115 +307,73 @@ export default {
 
     const addToCart = () => {
       if (product.value) {
-        // We need to handle quantity here since the store doesn't seem to take it in addToCart
-        // Wait, looking at cart.js, addToCart adds 1.
-        // Let's implement a loop or modify the store call if needed, but for now 1 is fine if that's the pattern.
-        // Actually, let's just call it once and then we can improve it if the user wants.
+        // Check if adding more than available stock
+        const availableStock = product.value.stock || 999
+        const existingItem = cartStore.cartItems.find(item => item.id === product.value.id)
+        const currentQty = existingItem ? existingItem.quantity : 0
+        const requestedQty = quantity.value
+        
+        if (currentQty + requestedQty > availableStock) {
+          alert(`Only ${availableStock - currentQty} more items available in stock!`)
+          return
+        }
+        
         cartStore.addToCart({
           ...product.value,
-          price: product.value.price // Ensure price is passed correctly
+          price: product.value.price,
+          quantity: quantity.value
         })
-        alert(`${product.value.name} added to cart!`)
+        alert(`${quantity.value} x ${product.value.name} added to cart!`)
       }
     }
 
-    const incrementQty = () => { quantity.value++ }
+    const incrementQty = () => { 
+      const maxStock = product.value?.stock || 999
+      if (quantity.value < maxStock) quantity.value++ 
+    }
     const decrementQty = () => { if (quantity.value > 1) quantity.value-- }
 
-    onMounted(() => {
-      fetchProduct(productId.value)
+    onMounted(async () => {
+      await fetchProduct(productId.value)
 
-      // Initialize jQuery plugins and custom JS
-      if (window.$) {
-        // Mobile Menu
-        $('#mobile-menu').meanmenu({
-          meanMenuContainer: '.mobile-menu',
-          meanScreenWidth: "1199",
-          meanExpand: ['<i class="far fa-plus"></i>'],
-        });
+      // Initialize jQuery plugins
+      if (!window.$) return
 
-        // Sidebar Toggle
-        $(".offcanvas__close,.offcanvas__overlay").on("click", function() {
-          $(".offcanvas__info").removeClass("info-open");
-          $(".offcanvas__overlay").removeClass("overlay-open");
-        });
-        $(".sidebar__toggle").on("click", function() {
-          $(".offcanvas__info").addClass("info-open");
-          $(".offcanvas__overlay").addClass("overlay-open");
-        });
+      $('#mobile-menu').meanmenu({
+        meanMenuContainer: '.mobile-menu',
+        meanScreenWidth: '1199',
+        meanExpand: ['<i class="far fa-plus"></i>'],
+      })
 
-        // Sidebar Area
-        $("#openButton").on("click", function(e) {
-          e.preventDefault();
-          $("#targetElement").removeClass("side_bar_hidden");
-        });
-        $("#closeButton").on("click", function(e) {
-          e.preventDefault();
-          $("#targetElement").addClass("side_bar_hidden");
-        });
+      $('.img-popup').magnificPopup({
+        type: 'image',
+        gallery: { enabled: true }
+      })
 
-        // Video Popup
-        $('.img-popup').magnificPopup({
-          type: "image",
-          gallery: { enabled: true },
-        });
-        $('.video-popup').magnificPopup({
-          type: 'iframe'
-        });
+      $('.video-popup').magnificPopup({ type: 'iframe' })
 
-        // Counterup
-        $(".count").counterUp({
-          delay: 15,
-          time: 4000,
-        });
+      $('.count').counterUp({
+        delay: 15,
+        time: 4000
+      })
 
-        // Wow Animation
-        new WOW().init();
+      new WOW().init()
+      $('select').niceSelect()
 
-        // Nice Select
-        $('select').niceSelect();
+      $(window).on('scroll', function () {
+        $('#header-sticky').toggleClass('sticky', $(this).scrollTop() > 250)
+        $('#back-top').toggleClass('show', $(this).scrollTop() > 20)
+      })
 
-        // Sticky Header
-        $(window).on("scroll", function() {
-          if ($(this).scrollTop() > 250) {
-            $("#header-sticky").addClass("sticky");
-          } else {
-            $("#header-sticky").removeClass("sticky");
-          }
-        });
+      $(document).on('click', '#back-top', function () {
+        $('html, body').animate({ scrollTop: 0 }, 800)
+        return false
+      })
 
-        // Search Popup
-        $(".search-trigger").on("click", function (e) {
-          e.preventDefault();
-          $(".search-wrap").animate({ opacity: "toggle" }, 500);
-          $(".nav-search, #search-close").addClass("open");
-        });
-        $(".search-close").on("click", function (e) {
-          e.preventDefault();
-          $(".search-wrap").animate({ opacity: "toggle" }, 500);
-          $(".nav-search, #search-close").removeClass("open");
-        });
-
-        // Back to Top
-        $(window).on('scroll', function() {
-          if ($(this).scrollTop() > 20) {
-            $("#back-top").addClass("show");
-          } else {
-            $("#back-top").removeClass("show");
-          }
-        });
-        $(document).on('click', '#back-top', function() {
-          $('html, body').animate({ scrollTop: 0 }, 800);
-          return false;
-        });
-
-        // Preloader
-        $(window).on('load', function() {
-          $(".preloader").addClass('loaded');
-          $(".preloader").delay(600).fadeOut();
-        });
-      }
-    });
+      $(window).on('load', function () {
+        $('.preloader').addClass('loaded').delay(600).fadeOut()
+      })
+    })
 
     // Watch for route ID changes
     watch(() => route.params.id, (newId) => {
@@ -417,10 +389,13 @@ export default {
       loading,
       error,
       quantity,
+      totalPrice,
       addToCart,
       incrementQty,
       decrementQty
-    };
+    }
   }
 }
+  
+
 </script>

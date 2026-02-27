@@ -57,6 +57,23 @@
                         </div>
                         <div class="col-lg-12">
                           <div class="input-single">
+                            <span>State*</span>
+                            <select v-model="formData.state" name="state" id="state" class="state-select" @change="onStateChange" required>
+                              <option value="" disabled>Select your state</option>
+                              <option value="NSW:15">NSW: Sydney (15 AUD)</option>
+                              <option value="SA:15">SA: Adelaide (15 AUD)</option>
+                              <option value="ACT:15">ACT (15 AUD)</option>
+                              <option value="VIC:18">VIC: Melbourne (18 AUD)</option>
+                              <option value="WA:25">WA: Perth (25 AUD)</option>
+                              <option value="NT:20">NT: Darwin (20 AUD)</option>
+                              <option value="QLD:20">QLD: Brisbane (20 AUD)</option>
+                              <option value="TAS:20">TAS: Hobart (20 AUD)</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                          <div class="input-single">
                             <span>Phone*</span>
                             <input v-model="formData.phone" name="phone" id="phone" placeholder="phone" required>
                           </div>
@@ -67,7 +84,7 @@
                             <input v-model="formData.email" type="email" name="email" id="email22" placeholder="email" required>
                           </div>
                         </div>
-                        <div class="col-lg-12">
+                        <!-- <div class="col-lg-12">
                           <div class="input-check payment-save">
                             <input type="checkbox" class="form-check-input" name="save-for-next" id="saveForNext111">
                             <label for="saveForNext111">Save for my next payment</label>
@@ -77,7 +94,7 @@
                               id="saveForNext2">
                             <label for="saveForNext2">Ship to a different address?</label>
                           </div>
-                        </div>
+                        </div> -->
                         <div class="col-lg-12">
                           <div class="input-single">
                             <span>order notes (optional)</span>
@@ -111,61 +128,19 @@
                     <div class="checkout-item d-flex justify-content-between">
                       <p>Shipping</p>
                       <div class="shopping-items">
-                        <div class="form-check d-flex align-items-center from-customradio">
-                          <label class="form-check-label">
-                            Free Shipping
-                          </label>
-                          <input class="form-check-input" type="radio" name="flexRadioDefault"
-                            id="flexRadioDefault12">
+                        <div v-if="formData.state" class="shipping-display">
+                          <p class="mb-0">{{ selectedStateName }}: ${{ shippingFee.toFixed(2) }} AUD</p>
                         </div>
-                        <div class="form-check d-flex align-items-center from-customradio">
-                          <label class="form-check-label">
-                            Local: $15.00
-                          </label>
-                          <input class="form-check-input" type="radio" name="flexRadioDefault"
-                            id="flexRadioDefault123">
-                        </div>
-                        <div class="form-check d-flex align-items-center from-customradio">
-                          <label class="form-check-label">
-                            Flat rate: $10.00
-                          </label>
-                          <input class="form-check-input" type="radio" name="flexRadioDefault"
-                            id="flexRadioDefault124">
+                        <div v-else class="text-muted">
+                          <p class="mb-0">Select a state to calculate shipping</p>
                         </div>
                       </div>
                     </div>
                     <div class="checkout-item d-flex align-items-center justify-content-between">
                       <p><strong>Total</strong></p>
-                      <p><strong>${{ totalPrice.toFixed(2) }}</strong></p>
+                      <p><strong>${{ totalWithShipping.toFixed(2) }}</strong></p>
                     </div>
-                    <div class="checkout-item-2">
-                      <div class="form-check-2 d-flex align-items-center from-customradio-2">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                          id="flexRadioDefault1222">
-                        <label class="form-check-label" for="flexRadioDefault1222">
-                          Direct bank transfer
-                        </label>
-                      </div>
-                      <p>
-                        Make your payment directly into our bank account please use your Order ID as the
-                        payment reference. Your order will not be shipped until the funds have cleared in
-                        our account.
-                      </p>
-                      <div class="form-check-3 d-flex align-items-center from-customradio-2 mt-3">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                          id="flexRadioDefault12224">
-                        <label class="form-check-label" for="flexRadioDefault12224">
-                          Cash on delivery
-                        </label>
-                      </div>
-                      <div class="form-check-3 d-flex align-items-center from-customradio-2 mt-3">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                          id="flexRadioDefault12225">
-                        <label class="form-check-label" for="flexRadioDefault12225">
-                          Paypal
-                        </label>
-                      </div>
-                    </div>
+                   
                     <button type="submit" form="checkout-form" class="theme-btn mt-4" :disabled="isSubmitting || cartStore.cartItems.length === 0">
                       <span v-if="isSubmitting">
                         <i class="fas fa-spinner fa-spin me-2"></i>Processing...
@@ -204,6 +179,33 @@ export default {
 
     const totalItems = computed(() => cartStore.getTotalItems())
     const totalPrice = computed(() => cartStore.getTotalPrice())
+    
+    // Extract shipping fee from selected state (format: "STATE:FEE")
+    const shippingFee = computed(() => {
+      if (!formData.value.state) return 0
+      const parts = formData.value.state.split(':')
+      return parts.length > 1 ? parseFloat(parts[1]) || 0 : 0
+    })
+    
+    
+
+    const shipping_location = computed(() => {
+    if (!formData.value.state) return ''
+    return formData.value.state.split(':')[0]
+  })
+
+
+    // Get selected state name for display
+    const selectedStateName = computed(() => {
+      if (!formData.value.state) return ''
+      const parts = formData.value.state.split(':')
+      return parts[0] || ''
+    })
+    
+    // Calculate total with shipping
+    const totalWithShipping = computed(() => {
+      return totalPrice.value + shippingFee.value
+    })
 
     // Form data
     const formData = ref({
@@ -212,7 +214,8 @@ export default {
       email: '',
       phone: '',
       address: '',
-      city: ''
+      city: '',
+      state: ''
     })
 
     const isSubmitting = ref(false)
@@ -229,16 +232,23 @@ export default {
         return
       }
 
+      if (!formData.value.state) {
+        submitError.value = 'Please select your state for shipping'
+        return
+      }
+
       isSubmitting.value = true
       submitError.value = ''
 
       try {
-        // Prepare checkout data with cart items
+        // Prepare checkout data with cart items and shipping
         const checkoutData = {
           customer_name: `${formData.value.firstName} ${formData.value.lastName}`.trim(),
           customer_email: formData.value.email,
           customer_phone: formData.value.phone,
-          shipping_address: `${formData.value.address}, ${formData.value.city}`.trim(),
+          shipping_address: `${formData.value.address}, ${formData.value.city}, ${selectedStateName.value}`.trim(),
+          shipping_location: shipping_location.value,
+          total_amount: totalWithShipping.value,
           // Send cart items directly in request
           items: cartStore.cartItems.map(item => ({
             product_id: item.id,
@@ -274,7 +284,7 @@ export default {
         return imagePath
       }
 
-      const baseUrl = 'https://api.digi-essentials.com/'
+      const baseUrl = 'https://api.bloomandluxe.store/api'
       return baseUrl + imagePath.replace(/^\//, '')
     }
     onMounted(() => {
@@ -325,8 +335,14 @@ export default {
         // Wow Animation
         new WOW().init();
 
-        // Nice Select
-        $('select').niceSelect();
+        // Nice Select - Initialize state select with custom styling
+        $('.state-select').niceSelect();
+        // Listen for nice-select changes and update Vue model
+        $('.state-select').on('change', function() {
+          formData.value.state = $(this).val();
+        });
+        // Also initialize other selects
+        $('select.country-select').niceSelect();
 
         // Sticky Header
         $(window).on("scroll", function() {
@@ -370,15 +386,24 @@ export default {
       }
     });
 
+    // Handle state dropdown change
+    const onStateChange = (event) => {
+      formData.value.state = event.target.value
+    }
+
     return {
       cartStore,
       totalItems,
       totalPrice,
+      shippingFee,
+      selectedStateName,
+      totalWithShipping,
       getImageUrl,
       formData,
       isSubmitting,
       submitError,
-      submitOrder
+      submitOrder,
+      onStateChange
     };
   }
 }
