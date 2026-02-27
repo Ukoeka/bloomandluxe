@@ -11,6 +11,7 @@
               <th>Customer</th>
               <th>Date</th>
               <th>Total</th>
+              <th>Payment</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -22,6 +23,11 @@
               <td>{{ order.customer || 'N/A' }}</td>
               <td>{{ new Date(order.date).toLocaleDateString() }}</td>
               <td>${{ order.total }}</td>
+              <td>
+                <span :class="['badge', getPaymentStatusClass(order.payment_status)]">
+                  {{ order.payment_status || 'pending' }}
+                </span>
+              </td>
               <td>
                 <select
                   :value="order.status"
@@ -68,6 +74,11 @@
                     <p><strong>Date:</strong> {{ new Date(selectedOrder.date).toLocaleString() }}</p>
                     <p><strong>Status:</strong> {{ selectedOrder.status }}</p>
                     <p><strong>Total:</strong> ${{ selectedOrder.total }}</p>
+                    <p><strong>Payment Status:</strong> 
+                      <span :class="['badge', getPaymentStatusClass(selectedOrder.payment_status)]">
+                        {{ selectedOrder.payment_status || 'pending' }}
+                      </span>
+                    </p>
                   </div>
                 </div>
                 <h6 class="mt-3">Items</h6>
@@ -151,6 +162,23 @@ export default {
       selectedOrder.value = null
     }
 
+    const getPaymentStatusClass = (status) => {
+      switch (status) {
+        case 'succeeded':
+          return 'bg-success'
+        case 'pending':
+        case 'processing':
+          return 'bg-warning text-dark'
+        case 'failed':
+        case 'canceled':
+          return 'bg-danger'
+        case 'refunded':
+          return 'bg-info text-dark'
+        default:
+          return 'bg-secondary'
+      }
+    }
+
     onMounted(() => {
       fetchOrders()
     })
@@ -162,7 +190,8 @@ export default {
       loadingOrderDetails,
       updateStatus,
       viewOrderDetails,
-      closeModal
+      closeModal,
+      getPaymentStatusClass
     }
   }
 }
