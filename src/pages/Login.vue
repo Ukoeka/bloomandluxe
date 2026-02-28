@@ -73,7 +73,7 @@
                           <span>Forgot Password?</span>
                         </div>
                       </div>
-                      <h6>Don’t have an account? <router-link to="/sign-up">
+                      <h6>Don’t have an account? <router-link :to="{ path: '/sign-up', query: $route.query }">
                       Create a free account</router-link></h6>
                       <div class="col-lg-12">
                         <button type="submit" class="theme-btn header-btn w-100" :disabled="auth.loginLoading">
@@ -95,7 +95,7 @@
 
 <script>
 import { onMounted, ref, reactive } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.js'
 import SharedLayout from '../components/SharedLayout.vue'
 
@@ -106,6 +106,7 @@ export default {
   },
   setup() {
     const router = useRouter()
+    const route = useRoute()
     const auth = useAuthStore()
 
     const form = reactive({
@@ -124,7 +125,8 @@ export default {
         console.log('🔵 Sending login payload:', form)
         const res = await auth.login(form)
         console.log('✅ Login success:', res)
-        router.push('/categories')
+        const redirect = route.query.redirect || '/categories'
+        router.push(redirect)
       } catch (error) {
         console.log('🔴 Login failed:', error.response?.data || error.message)
         alert('Login failed: ' + (error.response?.data?.message || error.message))

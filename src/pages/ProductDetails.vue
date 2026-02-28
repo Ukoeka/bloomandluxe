@@ -267,6 +267,7 @@ import SharedLayout from '../components/SharedLayout.vue'
 import ProductReviews from '../components/ProductReviews.vue'
 import { useApiStore } from '../stores/api'
 import { useCartStore } from '../stores/cart'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'ProductDetailsPage',
@@ -314,7 +315,7 @@ export default {
         const requestedQty = quantity.value
         
         if (currentQty + requestedQty > availableStock) {
-          alert(`Only ${availableStock - currentQty} more items available in stock!`)
+          Swal.fire(`Only ${availableStock - currentQty} more items available in stock!`)
           return
         }
         
@@ -323,7 +324,7 @@ export default {
           price: product.value.price,
           quantity: quantity.value
         })
-        alert(`${quantity.value} x ${product.value.name} added to cart!`)
+        Swal.fire(`${quantity.value} x ${product.value.name} added to cart!`)
       }
     }
 

@@ -75,13 +75,13 @@
                         <div class="col-lg-12">
                           <div class="input-single">
                             <span>Phone*</span>
-                            <input v-model="formData.phone" name="phone" id="phone" placeholder="phone" required>
+                            <input v-model="formData.phone" type="tel"  placeholder="phone" inputmode="numeric" pattern="[0-9]*" required @input="formData.phone = formData.phone.replace(/\D/g, '')">
                           </div>
                         </div>
                         <div class="col-lg-12">
                           <div class="input-single">
                             <span>Email Address*</span>
-                            <input v-model="formData.email" type="email" name="email" id="email22" placeholder="email" required>
+                            <input v-model="formData.email" type="email" placeholder="email" required>
                           </div>
                         </div>
                         <!-- <div class="col-lg-12">
@@ -408,3 +408,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>

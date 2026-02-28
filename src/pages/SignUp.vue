@@ -69,7 +69,7 @@
                           <span>Forgot Password?</span>
                         </div>
                       </div>
-                      <h6>Already have an account? <router-link>Login</router-link></h6>
+                      <h6>Already have an account? <router-link :to="{ path: '/login', query: $route.query }">Login</router-link></h6>
                       <div class="col-lg-12">
                         <button type="submit" class="theme-btn w-100" :disabled="auth.registerLoading">
                           <span v-if="auth.registerLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
@@ -90,7 +90,7 @@
 
 <script>
 import { onMounted, reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.js'
 import SharedLayout from '../components/SharedLayout.vue'
 
@@ -101,6 +101,7 @@ export default {
   },
   setup() {
     const router = useRouter()
+    const route = useRoute()
     const auth = useAuthStore()
 
     const form = reactive({
@@ -138,7 +139,7 @@ export default {
       try {
         const res = await auth.register(payload)
         console.log('✅ Register success:', res)
-        router.push('/login')
+        router.push({ path: '/login', query: route.query })
       } catch (error) {
         console.log('🔴 Register failed:', error.response?.data || error.message)
         alert('Registration failed: ' + (error.response?.data?.message || error.message))
