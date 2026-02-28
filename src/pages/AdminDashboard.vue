@@ -113,7 +113,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="order in recentOrders" :key="order.id" class="order-row">
+              <tr v-for="order in paginatedOrders" :key="order.id" class="order-row">
                 <td class="order-id">#{{ order.id }}</td>
                 <td>
                   <div class="customer-info">
@@ -139,13 +139,45 @@
             </tbody>
           </table>
         </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container" v-if="totalPages > 1">
+          <div class="pagination-info">
+            Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ Math.min(currentPage * itemsPerPage, totalOrders) }} of {{ totalOrders }} entries
+          </div>
+          <div class="pagination-controls">
+            <button 
+              class="pagination-btn" 
+              :disabled="currentPage === 1" 
+              @click="currentPage--"
+            >
+              <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <button 
+              v-for="page in visiblePages" 
+              :key="page" 
+              class="pagination-btn"
+              :class="{ active: page === currentPage }"
+              @click="currentPage = page"
+            >
+              {{ page }}
+            </button>
+            <button 
+              class="pagination-btn" 
+              :disabled="currentPage === totalPages" 
+              @click="currentPage++"
+            >
+              Next <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </AdminLayout>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import AdminLayout from '../components/AdminLayout.vue'
 import { useApiStore } from '../stores/api'
 
@@ -162,20 +194,50 @@ export default {
     const recentOrders = ref([])
     const apiStore = useApiStore()
 
+    // Pagination state
+    const currentPage = ref(1)
+    const itemsPerPage = ref(5)
+    const totalOrders = ref(0)
+
+    const totalPages = computed(() => Math.ceil(totalOrders.value / itemsPerPage.value))
+
+    const paginatedOrders = computed(() => {
+      const start = (currentPage.value - 1) * itemsPerPage.value
+      const end = start + itemsPerPage.value
+      return recentOrders.value.slice(start, end)
+    })
+
+    const visiblePages = computed(() => {
+      const pages = []
+      const maxVisible = 5
+      let start = Math.max(1, currentPage.value - Math.floor(maxVisible / 2))
+      let end = Math.min(totalPages.value, start + maxVisible - 1)
+
+      if (end - start + 1 < maxVisible) {
+        start = Math.max(1, end - maxVisible + 1)
+      }
+
+      for (let i = start; i <= end; i++) {
+        pages.push(i)
+      }
+      return pages
+    })
+
     const fetchDashboardData = async () => {
       try {
-        const [products, orders, users, revenueData, ordersList] = await Promise.all([
-          apiStore.get('/admin/products/count'),
+        const [ orders, users, revenueData, ordersList] = await Promise.all([
+          // apiStore.get('/admin/products/count'),
           apiStore.get('/admin/orders/count'),
           apiStore.get('/admin/users/count'),
           apiStore.get('/admin/revenue'),
           apiStore.get('/admin/orders/recent')
         ])
-        productsCount.value = products.data?.count || 0
+        // productsCount.value = products.data?.count || 0
         ordersCount.value = orders.data?.count || 0
         usersCount.value = users.data?.count || 0
         revenue.value = revenueData.data?.total || 0
         recentOrders.value = ordersList.data || []
+        totalOrders.value = recentOrders.value.length
       } catch (error) {
         console.error('Failed to fetch dashboard data:', error)
         if (error.response?.status === 403) {
@@ -195,7 +257,13 @@ export default {
       ordersCount,
       usersCount,
       revenue,
-      recentOrders
+      recentOrders,
+      currentPage,
+      itemsPerPage,
+      totalOrders,
+      totalPages,
+      paginatedOrders,
+      visiblePages
     }
   }
 }
@@ -606,6 +674,65 @@ export default {
     flex-direction: column;
     text-align: center;
     gap: 8px;
+  }
+}
+
+/* Pagination Styles */
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-top: 1px solid #f1f3f4;
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+}
+
+.pagination-info {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.pagination-btn {
+  padding: 8px 16px;
+  border: 1px solid #dee2e6;
+  background: white;
+  color: #495057;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: var(--theme, #6B8F71);
+  color: white;
+  border-color: var(--theme, #6B8F71);
+}
+
+.pagination-btn.active {
+  background: var(--theme, #6B8F71);
+  color: white;
+  border-color: var(--theme, #6B8F71);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .pagination-container {
+    flex-direction: column;
+    gap: 15px;
   }
 }
 </style>
