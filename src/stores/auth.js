@@ -101,6 +101,20 @@ export const useAuthStore = defineStore('auth', {
       } catch (err) {
         throw err
       }
+    },
+
+    async createDispute(formData) {
+      const api = useApiStore()
+      try {
+        const response = await api.post('/disputes', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        return response.data
+      } catch (err) {
+        throw err
+      }
     }
   },
 })

@@ -105,6 +105,12 @@
             <div class="text-center">
                 <router-link to="/my-orders" class="theme-btn w-100">Back to My Orders</router-link>
             </div>
+            <div class="text-center mt-3">
+                <router-link :to="`/create-dispute/${order.id}`" class="theme-btn theme-btn-secondary w-100">
+                    <i class="fas fa-ticket-alt me-2"></i>
+                    Create Dispute Ticket
+                </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -236,5 +242,17 @@ export default {
 }
 .card-header {
     font-weight: 600;
+}
+
+.theme-btn-secondary {
+    background-color: #6c757d;
+    border: 2px solid #6c757d;
+    color: white;
+}
+
+.theme-btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
+    color: white;
 }
 </style>

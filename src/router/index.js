@@ -30,6 +30,7 @@ import AdminSubCategories from '../pages/AdminSubCategories.vue'
 import AdminDisputes from '../pages/AdminDisputes.vue'
 import MyOrders from '../pages/MyOrders.vue'
 import OrderDetails from '../pages/OrderDetails.vue'
+import CreateDispute from '../pages/CreateDispute.vue'
 import { useAdminAuthStore } from '../stores/adminAuth'
 import { useAuthStore } from '../stores/auth'
 
@@ -194,6 +195,12 @@ const routes = [
     path: '/order-details/:id',
     name: 'OrderDetails',
     component: OrderDetails,
+    meta: { requiresUserAuth: true }
+  },
+  {
+    path: '/create-dispute/:orderId?',
+    name: 'CreateDispute',
+    component: CreateDispute,
     meta: { requiresUserAuth: true }
   },
 ]
