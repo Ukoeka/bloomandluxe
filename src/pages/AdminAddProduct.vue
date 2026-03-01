@@ -1,5 +1,6 @@
 <template>
   <AdminLayout>
+    <AdminPreloader :loading="loading" message="Loading..." />
     <div class="add-product-page">
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>{{ isEditing ? 'Edit Product' : 'Add New Product' }}</h2>
@@ -83,12 +84,14 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import AdminLayout from '../components/AdminLayout.vue'
+import AdminPreloader from '../components/AdminPreloader.vue'
 import { useApiStore } from '../stores/api'
 
 export default {
   name: 'AdminAddProduct',
   components: {
-    AdminLayout
+    AdminLayout,
+    AdminPreloader
   },
   setup() {
     const router = useRouter()

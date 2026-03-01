@@ -1,5 +1,6 @@
 <template>
   <AdminLayout>
+    <AdminPreloader :loading="loading" message="Loading users..." />
     <div class="admin-users">
       <h2 class="mb-4">Manage Users</h2>
       <div class="table-responsive">
@@ -68,15 +69,18 @@
 <script>
 import { ref, onMounted } from 'vue'
 import AdminLayout from '../components/AdminLayout.vue'
+import AdminPreloader from '../components/AdminPreloader.vue'
 import { useApiStore } from '../stores/api'
 
 export default {
   name: 'AdminUsers',
   components: {
-    AdminLayout
+    AdminLayout,
+    AdminPreloader
   },
   setup() {
     const users = ref([])
+    const loading = ref(true)
     const submitting = ref(false)
     const apiStore = useApiStore()
 
@@ -86,6 +90,8 @@ export default {
         users.value = response.data || []
       } catch (error) {
         console.error('Failed to fetch users:', error)
+      } finally {
+        loading.value = false
       }
     }
 
@@ -127,6 +133,7 @@ export default {
     })
 
     return {
+      loading,
       users,
       submitting,
       toggleAdmin,

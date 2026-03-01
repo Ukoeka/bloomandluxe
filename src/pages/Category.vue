@@ -81,6 +81,7 @@ import { useApiStore } from '../stores/api'
 import { useCartStore } from '../stores/cart'
 import { ref, onMounted, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'Category',
@@ -156,7 +157,7 @@ export default {
     const addToCart = (product) => {
       cartStore.addToCart(product);
       // Optional: Show a success message or notification
-      alert(`${product.name} added to cart!`);
+      Swal.fire(`${product.name} added to cart!`)
     };
 
     onMounted(async () => {

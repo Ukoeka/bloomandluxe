@@ -9430,7 +9430,6 @@ input.main-search-input::placeholder {
   border-radius: 0;
   padding: 18px 24px;
   color: var(--header);
-  text-transform: capitalize;
   font-weight: 400;
   font-size: 14px;
   color: #818487;
@@ -9457,7 +9456,6 @@ input.main-search-input::placeholder {
 .checkout-wrapper .checkout-single-wrapper .checkout-single .checkout-single-form .input-single label {
   color: var(--header);
   font-size: 18px;
-  text-transform: capitalize;
   margin-bottom: 10px;
   font-weight: 500;
 }
