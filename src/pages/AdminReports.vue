@@ -18,19 +18,6 @@
         </li>
       </ul>
 
-      <!-- Report Generation Cards -->
-      <div class="row mb-4">
-        <div class="col-md-4" v-for="tab in tabs" :key="tab.key">
-          <div class="card report-card" :class="{ 'border-primary': activeReport === tab.key }">
-            <div class="card-body">
-              <h5 class="card-title">{{ tab.label }}</h5>
-              <p class="card-text">{{ tab.description }}</p>
-              <button class="btn btn-primary" @click="generateReport(tab.key)">Generate Report</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Error Message -->
       <div v-if="errorMessage" class="alert alert-danger mt-3">
         {{ errorMessage }}
@@ -64,14 +51,12 @@
             </thead>
             <tbody>
               <tr v-if="paginatedData.length === 0">
-                <td colspan="8" class="text-center">No sales data available</td>
+                <td colspan="3" class="text-center">No sales data available</td>
               </tr>
               <tr v-for="sale in paginatedData" :key="sale.id || sale.order_id" class="order-row">
-                
                 <td>{{ sale.year }}</td>
                 <td>{{ sale.month }}</td>
                 <td>{{ formatCurrency(sale.total || 0) }}</td>
-                
               </tr>
             </tbody>
           </table>
@@ -82,19 +67,19 @@
           <table class="table table-striped table-hover">
             <thead>
               <tr>
-                <th>Active Users</th>
-                <th>Active Users Last 30days</th>
+                <th>Total Users</th>
+                <th>Active Users Last 30 Days</th>
                 <th>Admin Users</th>
               </tr>
             </thead>
             <tbody>
               <tr v-if="paginatedData.length === 0">
-                <td colspan="8" class="text-center">No user data available</td>
+                <td colspan="3" class="text-center">No user data available</td>
               </tr>
               <tr v-for="user in paginatedData" :key="user.id || user.user_id">
                 <td>{{ user.total_users }}</td>
                 <td>{{ user.active_users_last_30_days }}</td>
-                <td>{{ user.admin_users}}</td>
+                <td>{{ user.admin_users }}</td>
               </tr>
             </tbody>
           </table>
@@ -176,15 +161,34 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import AdminLayout from '../components/AdminLayout.vue'
 import AdminPreloader from '../components/AdminPreloader.vue'
 import { useApiStore } from '../stores/api'
 
+// ── Tab definitions ────────────────────────────────────────────────────────────
 const TABS = [
-  { key: 'sales', label: 'Sales Report', description: 'View detailed sales analytics and trends.', endpoint: '/admin/reports/sales' },
-  { key: 'users', label: 'User Activity Report', description: 'Analyze user engagement and behavior.', endpoint: '/admin/reports/users' },
-  { key: 'inventory', label: 'Inventory Report', description: 'Check stock levels and product performance.', endpoint: '/admin/reports/inventory' },
+  {
+    key: 'sales',
+    label: 'Sales Report',
+    endpoint: '/admin/reports/sales',
+    icon: 'fa-dollar-sign',
+    description: 'View monthly sales totals and order trends over time.',
+  },
+  {
+    key: 'users',
+    label: 'User Activity',
+    endpoint: '/admin/reports/users',
+    icon: 'fa-users',
+    description: 'Monitor active users, new signups, and admin accounts.',
+  },
+  {
+    key: 'inventory',
+    label: 'Inventory Report',
+    endpoint: '/admin/reports/inventory',
+    icon: 'fa-boxes',
+    description: 'Track stock levels, product values, and low-stock alerts.',
+  },
 ]
 
 export default {
@@ -214,10 +218,22 @@ export default {
 
     const activeData = computed(() => {
       switch (activeReport.value) {
-        case 'sales':      return normalizeData(reportData.value, ['sales', 'orders'])
-        case 'users':      return normalizeData(reportData.value, ['users'])
-        case 'inventory':  return normalizeData(reportData.value, ['products', 'inventory'])
-        default:           return []
+        case 'sales':
+          return normalizeData(reportData.value, ['sales', 'orders'])
+        case 'users': {
+          // Response: { data: { total_users, active_users_last_30_days, admin_users } }
+          const raw = reportData.value?.data ?? reportData.value
+          if (!raw) return []
+          return Array.isArray(raw) ? raw : [raw]
+        }
+        case 'inventory': {
+          // Response: { data: { summary: {...}, products: [...] } }
+          const products = reportData.value?.data?.products
+          if (Array.isArray(products)) return products
+          return normalizeData(reportData.value, ['products', 'inventory'])
+        }
+        default:
+          return []
       }
     })
 
@@ -255,36 +271,29 @@ export default {
         ]
       }
       if (activeReport.value === 'users') {
-        const spent = data.reduce((s, u) => s + (parseFloat(u.total_spent || u.total_spend) || 0), 0)
-        const active = data.filter(u => u.status === 'active').length || data.length
+        const u = data[0] || {}
         return [
-          { label: 'Total Users',  value: data.length },
-          { label: 'Active Users', value: active },
-          { label: 'Total Spent',  value: formatCurrency(spent) },
+          { label: 'Total Users',             value: u.total_users ?? 0 },
+          { label: 'Active Users (Last 30d)', value: u.active_users_last_30_days ?? 0 },
+          { label: 'Admin Users',             value: u.admin_users ?? 0 },
         ]
       }
       if (activeReport.value === 'inventory') {
-        const stock = data.reduce((s, i) => s + (parseInt(i.stock || i.quantity || i.stock_quantity) || 0), 0)
-        const value = data.reduce((s, i) => s + getItemTotalValue(i), 0)
-        const low   = data.filter(i => isLowStock(i.stock)).length
+        const summary = reportData.value?.data?.summary || {}
+        const value   = data.reduce((s, i) => s + getItemTotalValue(i), 0)
+        const low     = data.filter(i => isLowStock(i.stock)).length
         return [
-          { label: 'Total Products',   value: data.length },
-          { label: 'Total Stock',      value: stock },
-          { label: 'Inventory Value',  value: formatCurrency(value) },
-          { label: 'Low Stock Items',  value: low },
+          { label: 'Total Products',  value: summary.total_products ?? data.length },
+          { label: 'In Stock',        value: summary.in_stock ?? 0 },
+          { label: 'Out of Stock',    value: summary.out_of_stock ?? 0 },
+          { label: 'Low Stock Items', value: low },
+          { label: 'Inventory Value', value: formatCurrency(value) },
         ]
       }
       return []
     })
 
     // ── Actions ───────────────────────────────────────────────────────────────
-    const switchTab = (key) => {
-      activeReport.value = key
-      reportData.value   = null
-      currentPage.value  = 1
-      errorMessage.value = ''
-    }
-
     const generateReport = async (key) => {
       const tab = TABS.find(t => t.key === key)
       if (!tab) return
@@ -303,6 +312,10 @@ export default {
       }
     }
 
+    const switchTab = (key) => generateReport(key)
+
+    onMounted(() => generateReport(activeReport.value))
+
     // ── Export ────────────────────────────────────────────────────────────────
     const exportReport = () => {
       const escapeCSV = (field) => {
@@ -314,37 +327,22 @@ export default {
 
       const configs = {
         sales: {
-          headers: ['Order ID', 'Order Number', 'Customer', 'Date', 'Total', 'Payment Status', 'Order Status'],
-          row: (s) => [
-            s.id || s.order_id,
-            s.order_number || `#${s.id}`,
-            s.customer_name || s.customer || 'N/A',
-            formatDate(s.created_at || s.date),
-            s.total || s.amount || 0,
-            s.payment_status || 'pending',
-            s.status || s.order_status || 'pending',
-          ],
+          headers: ['Year', 'Month', 'Total'],
+          row: (s) => [s.year, s.month, s.total || 0],
         },
         users: {
-          headers: ['User ID', 'Name', 'Email', 'Total Orders', 'Total Spent', 'Last Activity', 'Status'],
-          row: (u) => [
-            u.id,
-            u.name || u.full_name || 'N/A',
-            u.email || 'N/A',
-            u.total_orders || 0,
-            u.total_spent || 0,
-            formatDate(u.last_activity || u.last_login),
-            u.status || 'active',
-          ],
+          headers: ['Total Users', 'Active Users Last 30 Days', 'Admin Users'],
+          row: (u) => [u.total_users, u.active_users_last_30_days, u.admin_users],
         },
         inventory: {
-          headers: ['Product ID', 'Product Name', 'Category', 'Stock', 'Price', 'Status'],
+          headers: ['Product ID', 'Product Name', 'Category', 'Stock', 'Price', 'Total Value', 'Status'],
           row: (i) => [
-            i.id,
+            i.id || i.product_id,
             i.name || i.product_name || 'N/A',
             i.category_name || i.category || 'Uncategorized',
             i.stock || i.quantity || 0,
             i.price || 0,
+            getItemTotalValue(i),
             getInventoryStatus(i.stock),
           ],
         },
@@ -357,7 +355,10 @@ export default {
       const csv  = [config.headers, ...rows].map(r => r.map(escapeCSV).join(',')).join('\n')
       const blob = new Blob([csv], { type: 'text/csv' })
       const url  = URL.createObjectURL(blob)
-      const a    = Object.assign(document.createElement('a'), { href: url, download: `${activeReport.value}_report.csv` })
+      const a    = Object.assign(document.createElement('a'), {
+        href: url,
+        download: `${activeReport.value}_report.csv`,
+      })
       a.click()
       URL.revokeObjectURL(url)
     }
@@ -422,7 +423,7 @@ export default {
       isLowStock, getInventoryStatus, getInventoryStatusClass,
       getPaymentStatusClass, getOrderStatusClass, getUserStatusClass,
     }
-  }
+  },
 }
 </script>
 
@@ -441,7 +442,6 @@ export default {
   border-color: var(--header, #010F1C);
 }
 
-/* Nav Tabs */
 .nav-tabs .nav-link {
   cursor: pointer;
   color: #495057;
@@ -461,7 +461,6 @@ export default {
   border-bottom-color: var(--theme, #6B8F71);
 }
 
-/* Report Cards */
 .report-card {
   transition: all 0.3s ease;
   border: 2px solid transparent;
@@ -476,7 +475,6 @@ export default {
   border-color: var(--theme, #6B8F71) !important;
 }
 
-/* Summary Cards */
 .summary-cards {
   display: flex;
   gap: 20px;
@@ -504,7 +502,6 @@ export default {
   opacity: 0.9;
 }
 
-/* Table Styles */
 .table-responsive {
   border-radius: 8px;
   overflow: hidden;
@@ -533,14 +530,12 @@ export default {
   background-color: #f8f9fa;
 }
 
-/* Badge Styles */
 .badge {
   padding: 6px 12px;
   font-weight: 500;
   font-size: 12px;
 }
 
-/* Pagination Styles */
 .pagination-container {
   display: flex;
   justify-content: space-between;
