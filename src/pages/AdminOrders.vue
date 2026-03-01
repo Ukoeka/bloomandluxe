@@ -1,5 +1,6 @@
 <template>
   <AdminLayout>
+    <AdminPreloader :loading="loadingOrders" message="Loading orders..." />
     <div class="admin-orders">
       <h2 class="mb-4">Manage Orders</h2>
       <div class="table-responsive">
@@ -143,12 +144,14 @@
 <script>
 import { ref, onMounted, computed } from 'vue'
 import AdminLayout from '../components/AdminLayout.vue'
+import AdminPreloader from '../components/AdminPreloader.vue'
 import { useApiStore } from '../stores/api'
 
 export default {
   name: 'AdminOrders',
   components: {
-    AdminLayout
+    AdminLayout,
+    AdminPreloader
   },
   setup() {
     const orders = ref([])

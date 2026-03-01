@@ -1,5 +1,6 @@
 <template>
   <AdminLayout>
+    <AdminPreloader :loading="loading" message="Loading disputes..." />
     <div class="admin-disputes">
       <div class="page-header">
         <div class="header-content">
@@ -197,15 +198,18 @@
 <script>
 import { ref, onMounted } from 'vue'
 import AdminLayout from '../components/AdminLayout.vue'
+import AdminPreloader from '../components/AdminPreloader.vue'
 import { useApiStore } from '../stores/api'
 
 export default {
   name: 'AdminDisputes',
   components: {
-    AdminLayout
+    AdminLayout,
+    AdminPreloader
   },
   setup() {
     const disputes = ref([])
+    const loading = ref(true)
     const selectedDispute = ref(null)
     const selectedImage = ref(null)
     const statusFilter = ref('')
@@ -215,12 +219,15 @@ export default {
     const apiStore = useApiStore()
 
     const fetchDisputes = async () => {
+      loading.value = true
       try {
         const params = statusFilter.value ? { status: statusFilter.value } : {}
         const response = await apiStore.get('/admin/disputes', { params })
         disputes.value = response.data || []
       } catch (error) {
         console.error('Failed to fetch disputes:', error)
+      } finally {
+        loading.value = false
       }
     }
 
@@ -279,6 +286,7 @@ export default {
     })
 
     return {
+      loading,
       disputes,
       selectedDispute,
       selectedImage,

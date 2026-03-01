@@ -1,5 +1,6 @@
 <template>
   <AdminLayout>
+    <AdminPreloader :loading="loadingCategories" message="Loading categories..." />
     <div class="admin-categories">
       <h2 class="mb-4">Manage Categories</h2>
       <div class="row">
@@ -85,6 +86,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import AdminLayout from '../components/AdminLayout.vue'
+import AdminPreloader from '../components/AdminPreloader.vue'
 import AdminTableActions from '../components/AdminTableActions.vue'
 import { useApiStore } from '../stores/api'
 
@@ -92,6 +94,7 @@ export default {
   name: 'AdminCategories',
   components: {
     AdminLayout,
+    AdminPreloader,
     AdminTableActions
   },
   setup() {

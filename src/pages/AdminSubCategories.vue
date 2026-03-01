@@ -1,5 +1,6 @@
 <template>
   <AdminLayout>
+    <AdminPreloader :loading="loading" message="Loading subcategories..." />
     <div class="admin-subcategories">
       <h2 class="mb-4">Subcategories for "{{ categoryName }}"</h2>
       <div class="mb-3">
@@ -85,6 +86,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import AdminLayout from '../components/AdminLayout.vue'
+import AdminPreloader from '../components/AdminPreloader.vue'
 import AdminTableActions from '../components/AdminTableActions.vue'
 import { useApiStore } from '../stores/api'
 
@@ -92,6 +94,7 @@ export default {
   name: 'AdminSubCategories',
   components: {
     AdminLayout,
+    AdminPreloader,
     AdminTableActions
   },
   setup() {

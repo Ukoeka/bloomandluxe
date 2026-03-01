@@ -1,5 +1,6 @@
 <template>
   <AdminLayout>
+    <AdminPreloader :loading="loading" message="Loading reports..." />
     <div class="admin-reports">
       <h2 class="mb-4">Reports</h2>
       <div class="row">
@@ -42,45 +43,58 @@
 <script>
 import { ref } from 'vue'
 import AdminLayout from '../components/AdminLayout.vue'
+import AdminPreloader from '../components/AdminPreloader.vue'
 import { useApiStore } from '../stores/api'
 
 export default {
   name: 'AdminReports',
   components: {
-    AdminLayout
+    AdminLayout,
+    AdminPreloader
   },
   setup() {
     const reportData = ref(null)
+    const loading = ref(false)
     const apiStore = useApiStore()
 
     const generateSalesReport = async () => {
+      loading.value = true
       try {
         const data = await apiStore.get('/admin/reports/sales')
         reportData.value = data
       } catch (error) {
         console.error('Failed to generate sales report:', error)
+      } finally {
+        loading.value = false
       }
     }
 
     const generateUserReport = async () => {
+      loading.value = true
       try {
         const data = await apiStore.get('/admin/reports/users')
         reportData.value = data
       } catch (error) {
         console.error('Failed to generate user report:', error)
+      } finally {
+        loading.value = false
       }
     }
 
     const generateInventoryReport = async () => {
+      loading.value = true
       try {
         const data = await apiStore.get('/admin/reports/inventory')
         reportData.value = data
       } catch (error) {
         console.error('Failed to generate inventory report:', error)
+      } finally {
+        loading.value = false
       }
     }
 
     return {
+      loading,
       reportData,
       generateSalesReport,
       generateUserReport,

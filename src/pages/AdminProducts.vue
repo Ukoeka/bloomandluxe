@@ -1,5 +1,6 @@
 <template>
   <AdminLayout>
+    <AdminPreloader :loading="loading" message="Loading products..." />
     <div class="admin-products">
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Manage Products</h2>
@@ -43,6 +44,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import AdminLayout from '../components/AdminLayout.vue'
+import AdminPreloader from '../components/AdminPreloader.vue'
 import AdminTableActions from '../components/AdminTableActions.vue'
 import { useApiStore } from '../stores/api'
 
@@ -50,11 +52,13 @@ export default {
   name: 'AdminProducts',
   components: {
     AdminLayout,
+    AdminPreloader,
     AdminTableActions
   },
   setup() {
     const router = useRouter()
     const products = ref([])
+    const loading = ref(true)
     const apiStore = useApiStore()
 
     const fetchProducts = async () => {
@@ -64,6 +68,8 @@ export default {
         products.value = response?.data?.data || []
       } catch (error) {
         console.error('Failed to fetch products:', error)
+      } finally {
+        loading.value = false
       }
     }
 
@@ -88,6 +94,7 @@ export default {
     })
 
     return {
+      loading,
       products,
       editProduct,
       deleteProduct

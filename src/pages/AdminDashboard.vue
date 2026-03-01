@@ -1,5 +1,6 @@
 <template>
   <AdminLayout>
+    <AdminPreloader :loading="loading" message="Loading dashboard..." />
     <div class="admin-dashboard">
       <!-- Welcome Header -->
       <div class="welcome-header">
@@ -179,14 +180,17 @@
 <script>
 import { ref, onMounted, computed } from 'vue'
 import AdminLayout from '../components/AdminLayout.vue'
+import AdminPreloader from '../components/AdminPreloader.vue'
 import { useApiStore } from '../stores/api'
 
 export default {
   name: 'AdminDashboard',
   components: {
-    AdminLayout
+    AdminLayout,
+    AdminPreloader
   },
   setup() {
+    const loading = ref(true)
     const productsCount = ref(0)
     const ordersCount = ref(0)
     const usersCount = ref(0)
@@ -238,6 +242,7 @@ export default {
         revenue.value = revenueData.data?.total || 0
         recentOrders.value = ordersList.data || []
         totalOrders.value = recentOrders.value.length
+        loading.value = false
       } catch (error) {
         console.error('Failed to fetch dashboard data:', error)
         if (error.response?.status === 403) {
@@ -253,6 +258,7 @@ export default {
     })
 
     return {
+      loading,
       productsCount,
       ordersCount,
       usersCount,
