@@ -139,13 +139,6 @@ export default {
 
       // Initialize jQuery plugins and custom JS
       if (window.$) {
-        // Mobile Menu
-        $('#mobile-menu').meanmenu({
-          meanMenuContainer: '.mobile-menu',
-          meanScreenWidth: "1199",
-          meanExpand: ['<i class="far fa-plus"></i>'],
-        });
-
         // Sidebar Toggle
         $(".offcanvas__close,.offcanvas__overlay").on("click", function() {
           $(".offcanvas__info").removeClass("info-open");

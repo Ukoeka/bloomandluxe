@@ -262,12 +262,6 @@ export default {
             $("#header-sticky").removeClass("sticky");
           }
         });
-        
-        $('#mobile-menu').meanmenu({
-          meanMenuContainer: '.mobile-menu',
-          meanScreenWidth: "1199",
-          meanExpand: ['<i class="far fa-plus"></i>'],
-        });
 
         $(".offcanvas__close,.offcanvas__overlay").on("click", function() {
           $(".offcanvas__info").removeClass("info-open");
