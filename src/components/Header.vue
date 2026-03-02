@@ -128,17 +128,16 @@
           <div class="flag-wrap">
           </div>
           <div class="content">
-            <button v-if="!isLoggedIn" id="openButton" class="account-text">
-              <i class="fa-regular fa-user"></i>
-              Log in
+            <button v-if="!isLoggedIn" class="account-text">
+              <router-link to="/login" class="text-decoration-none text-dark">
+                <i class="fa-regular fa-user"></i>
+                Log in
+              </router-link>
             </button>
-            <div v-else class="user-info d-flex align-items-center">
-              <i class="fa-regular fa-user me-1"></i>
-              <span>Welcome, {{ authStore.user?.name || 'User' }}</span>
-              <button @click.prevent="logout" class="btn btn-link btn-sm text-danger ms-3 p-0" style="text-decoration: none; border: none; background: transparent;">
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </button>
-            </div>
+            <button v-else @click.prevent="logout" class="account-text text-decoration-none text-dark">
+              <i class="fas fa-sign-out-alt"></i>
+              Logout
+            </button>
           </div>
         </div>
       </div>
@@ -249,48 +248,12 @@
          <h4 v-else>Account</h4>
        </div>
        <div v-if="!isLoggedIn" class="login-sidebar">
-        <form action="#" id="contact-form" method="POST">
-          <div class="row g-4">
-            <div class="col-lg-12">
-              <div class="form-clt">
-                <span>Username or email address *</span>
-                <input type="text" name="name15" id="name15" placeholder="">
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div class="form-clt">
-                <span>Password *</span>
-                <input id="password" type="password" placeholder="">
-                <div class="icon"><i class="fa-regular fa-eye"></i></div>
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <button class="theme-btn style-2" type="submit"><span>Log In</span></button>
-            </div>
-            <div class="col-lg-12">
-              <div class="from-cheak-items">
-                <div class="form-check d-flex gap-2 from-customradio">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                  <label class="form-check-label" for="flexRadioDefault1">
-                    Remember Me
-                  </label>
-                </div>
-                <p>Forgot Password?</p>
-              </div>
-            </div>
-          </div>
-        </form>
-        <p class="text">Or login with</p>
-        <div class="social-item">
-          <a href="#" class="facebook-text style-2"><img src="/assets/img/facebook.png" alt="img">FACEBOOK</a>
-          <a href="#" class="facebook-text google-text style-2"><img src="/assets/img/google.png" alt="img">Google</a>
-        </div>
-        <div class="user-icon-box">
-          <img src="/assets/img/user.png" alt="img">
-          <p>No account yet?</p>
-          <a href="/login">Create an Account</a>
-        </div>
-      </div>
+         <div class="user-icon-box">
+           <img src="/assets/img/user.png" alt="img">
+           <p>No account yet?</p>
+           <router-link to="/login">Login to Your Account</router-link>
+         </div>
+       </div>
       <div v-else class="account-sidebar">
         <div class="user-info-section">
           <div class="user-avatar">
