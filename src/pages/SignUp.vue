@@ -139,7 +139,7 @@ export default {
       try {
         const res = await auth.register(payload)
         console.log('✅ Register success:', res)
-        router.push({ path: '/login', query: route.query })
+        router.push(route.query.redirect || '/shop')
       } catch (error) {
         console.log('🔴 Register failed:', error.response?.data || error.message)
         alert('Registration failed: ' + (error.response?.data?.message || error.message))
