@@ -125,7 +125,7 @@ export default {
         console.log('🔵 Sending login payload:', form)
         const res = await auth.login(form)
         console.log('✅ Login success:', res)
-        const redirect = route.query.redirect || '/categories'
+        const redirect = route.query.redirect || '/shop'
         router.push(redirect)
       } catch (error) {
         console.log('🔴 Login failed:', error.response?.data || error.message)

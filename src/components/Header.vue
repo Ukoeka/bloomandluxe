@@ -340,10 +340,12 @@
 import { useCartStore } from '../stores/cart'
 import { useAuthStore } from '../stores/auth'
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'Header',
   setup() {
+    const router = useRouter()
     const cartStore = useCartStore()
     const authStore = useAuthStore()
 
@@ -370,8 +372,7 @@ export default {
 
     const logout = () => {
       authStore.logout()
-      // Optional: redirect to home page or show message
-      alert('Logged out successfully!')
+      router.push('/')
     }
 
     return {
