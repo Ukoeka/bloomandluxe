@@ -119,7 +119,7 @@
                 <td>
                   <div class="customer-info">
                     <div class="customer-avatar">
-                      {{ order?.customer?.charAt(0)?.toUpperCase() }}
+                      {{order && order.customer ? order?.customer?.charAt(0)?.toUpperCase() : 'U' }}
                     </div>
                     <span class="customer-name">{{ order.customer }}</span>
                   </div>

@@ -51,7 +51,17 @@
                         <td>
                           <div class="d-flex align-items-center gap-3">
                             <img :src="getImageUrl(item.product?.image)" :alt="item.product?.name" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
-                            <span>{{ item.product?.name || 'Unknown Product' }}</span>
+                            <div>
+                              <span class="d-block">{{ item.product?.name || 'Unknown Product' }}</span>
+                              <router-link 
+                                v-if="order.status === 'delivered' && item.product?.id" 
+                                :to="`/leave-review/${item.product.id}?orderId=${order.id}`" 
+                                class="text-primary mt-1 d-inline-block" 
+                                style="font-size: 0.85rem; text-decoration: underline;"
+                              >
+                                Leave a Review
+                              </router-link>
+                            </div>
                           </div>
                         </td>
                         <td class="text-center">${{ Number(item.price).toFixed(2) }}</td>

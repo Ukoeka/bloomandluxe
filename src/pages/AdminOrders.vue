@@ -44,9 +44,9 @@
                 </select>
               </td>
               <td>
-                <button class="btn btn-sm btn-primary" @click="viewOrderDetails(order)">
+                <router-link :to="'/admin/orders/' + order.id" class="btn btn-sm btn-primary">
                   View Details
-                </button>
+                </router-link>
               </td>
             </tr>
           </tbody>
@@ -85,58 +85,6 @@
         </div>
       </div>
 
-        <!-- Order Details Modal -->
-        <div v-if="selectedOrder" class="modal fade show d-block" style="background-color: rgba(0,0,0,0.5);">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Order Details - #{{ selectedOrder.id }}</h5>
-                <button type="button" class="btn-close" @click="closeModal"></button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <h6>Customer Information</h6>
-                    <p><strong>Name:</strong> {{ selectedOrder.customer || 'N/A' }}</p>
-                    <p><strong>Email:</strong> {{ selectedOrder.email || 'N/A' }}</p>
-                    <p><strong>Phone:</strong> {{ selectedOrder.phone || 'N/A' }}</p>
-                    <p><strong>Address:</strong> {{ selectedOrder.address || 'N/A' }}</p>
-                  </div>
-                  <div class="col-md-6">
-                    <h6>Order Information</h6>
-                    <p><strong>Date:</strong> {{ new Date(selectedOrder.date).toLocaleString() }}</p>
-                    <p><strong>Status:</strong> {{ selectedOrder.status }}</p>
-                    <p><strong>Total:</strong> ${{ selectedOrder.total }}</p>
-                    <p><strong>Payment Status:</strong> 
-                      <span :class="['badge', getPaymentStatusClass(selectedOrder.payment_status)]">
-                        {{ selectedOrder.payment_status || 'pending' }}
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                <h6 class="mt-3">Items</h6>
-                <table class="table table-sm">
-                  <thead>
-                    <tr>
-                      <th>Product</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                      <th>Subtotal</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="item in (selectedOrder.items || [])" :key="item.id || Math.random()">
-                      <td>{{ item.name || 'N/A' }}</td>
-                      <td>{{ item.quantity || 0 }}</td>
-                      <td>${{ item.price || 0 }}</td>
-                      <td>${{ (item.quantity || 0) * (item.price || 0) }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
     </div>
   </AdminLayout>
 </template>
@@ -155,9 +103,7 @@ export default {
   },
   setup() {
     const orders = ref([])
-    const selectedOrder = ref(null)
     const loadingOrders = ref(false)
-    const loadingOrderDetails = ref(false)
     const apiStore = useApiStore()
 
     // Pagination state
@@ -211,22 +157,6 @@ export default {
       }
     }
 
-    const viewOrderDetails = async (order) => {
-      loadingOrderDetails.value = true
-      try {
-        const response = await apiStore.get(`/admin/orders/${order.id}`)
-        selectedOrder.value = response.data
-      } catch (error) {
-        console.error('Failed to fetch order details:', error)
-      } finally {
-        loadingOrderDetails.value = false
-      }
-    }
-
-    const closeModal = () => {
-      selectedOrder.value = null
-    }
-
     const getPaymentStatusClass = (status) => {
       switch (status) {
         case 'succeeded':
@@ -250,12 +180,8 @@ export default {
 
     return {
       orders,
-      selectedOrder,
       loadingOrders,
-      loadingOrderDetails,
       updateStatus,
-      viewOrderDetails,
-      closeModal,
       getPaymentStatusClass,
       currentPage,
       itemsPerPage,

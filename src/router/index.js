@@ -28,8 +28,10 @@ import AdminReports from '../pages/AdminReports.vue'
 import AdminCategories from '../pages/AdminCategories.vue'
 import AdminSubCategories from '../pages/AdminSubCategories.vue'
 import AdminDisputes from '../pages/AdminDisputes.vue'
+import AdminOrderDetails from '../pages/AdminOrderDetails.vue'
 import MyOrders from '../pages/MyOrders.vue'
 import OrderDetails from '../pages/OrderDetails.vue'
+import LeaveReview from '../pages/LeaveReview.vue'
 import CreateDispute from '../pages/CreateDispute.vue'
 import { useAdminAuthStore } from '../stores/adminAuth'
 import { useAuthStore } from '../stores/auth'
@@ -150,6 +152,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/admin/orders/:id',
+    name: 'AdminOrderDetails',
+    component: AdminOrderDetails,
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/admin/products/add/:id?',
     name: 'AdminAddProduct',
     component: AdminAddProduct,
@@ -195,7 +203,13 @@ const routes = [
     path: '/order-details/:id',
     name: 'OrderDetails',
     component: OrderDetails,
-    meta: { requiresUserAuth: true }
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/leave-review/:productId',
+    name: 'LeaveReview',
+    component: LeaveReview,
+    meta: { requiresAuth: true }
   },
   {
     path: '/create-dispute/:orderId?',
