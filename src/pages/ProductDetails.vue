@@ -340,12 +340,6 @@ export default {
       // Initialize jQuery plugins
       if (!window.$) return
 
-      $('#mobile-menu').meanmenu({
-        meanMenuContainer: '.mobile-menu',
-        meanScreenWidth: '1199',
-        meanExpand: ['<i class="far fa-plus"></i>'],
-      })
-
       $('.img-popup').magnificPopup({
         type: 'image',
         gallery: { enabled: true }
