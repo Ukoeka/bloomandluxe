@@ -37,33 +37,29 @@
               </div>
               <ul class="list-items">
                 <li>
-                  <a href="/order">
+                  <a href="/my-orders">
                     Track Orders
                   </a>
                 </li>
-                <li>
-                  <router-link to="/product-details">
-                    Shipping
-                  </router-link>
-                </li>
+                
                 <li>
                   <a href="/shop-cart">
-                    Wishlist
+                    cart
                   </a>
                 </li>
-                <li>
+                <!-- <li>
                   <a href="/login">
                     My Account
                   </a>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                   <router-link to="/my-orders">
                     Order History
                   </router-link>
-                </li>
+                </li> -->
                 <li>
                   <router-link to="/contact">
-                    Returns
+                    Contact Us
                   </router-link>
                 </li>
               </ul>
@@ -77,12 +73,12 @@
               <ul class="list-items">
                 <li>
                   <router-link to="/about">
-                    Our Story
+                    About Us
                   </router-link>
                 </li>
                 <li>
                   <router-link to="/contact">
-                    Careers
+                    Contact US
                   </router-link>
                 </li>
                 <li>

@@ -77,11 +77,11 @@
                     <button @click="addToCart" class="theme-btn">
                       <span> Add to cart</span>
                     </button>
-                    <button class="theme-btn">
+                    <!-- <button class="theme-btn">
                       <span> Buy now</span>
-                    </button>
+                    </button> -->
                   </div>
-                  <h6 class="details-info"><span>SKU:</span> <a href="javascript:void(0)">{{ product.sku || 'N/A' }}</a></h6>
+                  <!-- <h6 class="details-info"><span>SKU:</span> <a href="javascript:void(0)">{{ product.sku || 'N/A' }}</a></h6> -->
                   <h6 class="details-info"><span>Categories:</span> <a href="javascript:void(0)">{{ product.category?.name || 'Uncategorized' }}</a></h6>
                   <h6 class="details-info style-2"><span>Tags:</span> <a href="javascript:void(0)"> <b>{{ product.tags || 'fashion' }}</b></a></h6>
                 </div>
