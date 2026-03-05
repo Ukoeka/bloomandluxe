@@ -24,7 +24,7 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <div class="hero-3">
-                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/bg-1.png);">
+                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/bg1.png);">
                                     </div>
                                         <div class="container">
                                             <div class="row g-4">

@@ -29,14 +29,14 @@
                         <div class="col-lg-6">
                           <div class="input-single">
                             <span>First Name*</span>
-                            <input type="text" v-model="formData.firstName" name="user-first-name" id="userFirstName" required=""
+                            <input type="text" v-model="formData.firstName" name="user-first-name" id="userFirstName" required
                               placeholder="First Name">
                           </div>
                         </div>
                         <div class="col-lg-6">
                           <div class="input-single">
                             <span>Last Name*</span>
-                            <input type="text" v-model="formData.lastName" name="user-last-name" id="userLastName" required=""
+                            <input type="text" v-model="formData.lastName" name="user-last-name" id="userLastName" required
                               placeholder="Last Name">
                           </div>
                         </div>
@@ -52,22 +52,34 @@
                         <div class="col-lg-12">
                           <div class="input-single">
                             <span>Town/ City*</span>
-                            <input v-model="formData.city" name="towncity" id="towncity" placeholder="towncity" required>
+                            <input v-model="formData.city" name="towncity" id="towncity" placeholder="Town/City" required>
                           </div>
                         </div>
+                        
                         <div class="col-lg-12">
                           <div class="input-single">
                             <span>State*</span>
-                            <select v-model="formData.state" name="state" id="state" class="state-select" @change="onStateChange" required>
+                            <select v-model="formData.state" name="state" id="state" class="state-select" required>
                               <option value="" disabled>Select your state</option>
-                              <option value="NSW:15">NSW: Sydney (15 AUD)</option>
-                              <option value="SA:15">SA: Adelaide (15 AUD)</option>
-                              <option value="ACT:15">ACT (15 AUD)</option>
-                              <option value="VIC:18">VIC: Melbourne (18 AUD)</option>
-                              <option value="WA:25">WA: Perth (25 AUD)</option>
-                              <option value="NT:20">NT: Darwin (20 AUD)</option>
-                              <option value="QLD:20">QLD: Brisbane (20 AUD)</option>
-                              <option value="TAS:20">TAS: Hobart (20 AUD)</option>
+                              <option value="New South Wales">New South Wales</option>
+                              <option value="South Australia">South Australia</option>
+                              <option value="Tasmania">Tasmania</option>
+                              <option value="Western Australia">Western Australia</option>
+                              <option value="Victoria">Victoria</option>
+                              <option value="Queensland">Queensland</option>
+                              <option value="Northern Territory">Northern Territory</option>
+                              <option value="ACT">ACT</option>
+                            </select>
+                          </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                          <div class="input-single">
+                            <span>Delivery Method*</span>
+                            <select v-model="formData.deliveryMethod" name="deliveryMethod" id="deliveryMethod" class="state-select" required >
+                              <option value="" disabled>Select Preferred Method</option>
+                              <option value="regular">Regular (5-7 days) - $12.00</option>
+                              <option value="express">Express (3-5 days) - $15.00</option>
                             </select>
                           </div>
                         </div>
@@ -75,30 +87,21 @@
                         <div class="col-lg-12">
                           <div class="input-single">
                             <span>Phone*</span>
-                            <input v-model="formData.phone" type="tel"  placeholder="phone" inputmode="numeric" pattern="[0-9]*" required @input="formData.phone = formData.phone.replace(/\D/g, '')">
+                            <input v-model="formData.phone" type="tel" placeholder="Phone" inputmode="numeric" pattern="[0-9]*" required @input="formData.phone = formData.phone.replace(/\D/g, '')">
                           </div>
                         </div>
+                        
                         <div class="col-lg-12">
                           <div class="input-single">
                             <span>Email Address*</span>
-                            <input v-model="formData.email" type="email" placeholder="email" required>
+                            <input v-model="formData.email" type="email" placeholder="Email" required>
                           </div>
                         </div>
-                        <!-- <div class="col-lg-12">
-                          <div class="input-check payment-save">
-                            <input type="checkbox" class="form-check-input" name="save-for-next" id="saveForNext111">
-                            <label for="saveForNext111">Save for my next payment</label>
-                          </div>
-                          <div class="input-check payment-save style-2">
-                            <input type="checkbox" class="form-check-input" name="save-for-next"
-                              id="saveForNext2">
-                            <label for="saveForNext2">Ship to a different address?</label>
-                          </div>
-                        </div> -->
+                        
                         <div class="col-lg-12">
                           <div class="input-single">
-                            <span>order notes (optional)</span>
-                            <textarea name="notes" id="notes"
+                            <span>Order Notes (optional)</span>
+                            <textarea v-model="formData.notes" name="notes" id="notes"
                               placeholder="Notes about your order, e.g special notes for delivery."></textarea>
                           </div>
                         </div>
@@ -107,14 +110,16 @@
                   </div>
                 </div>
               </div>
+              
               <div class="col-lg-4">
                 <div class="checkout-order-area">
-                  <h3>Our Order</h3>
+                  <h3>Your Order</h3>
                   <div class="product-checout-area">
                     <div class="checkout-item d-flex align-items-center justify-content-between">
                       <p>Product</p>
                       <p>Subtotal</p>
                     </div>
+                    
                     <div v-for="item in cartStore.cartItems" :key="item.id" class="checkout-item d-flex align-items-center justify-content-between">
                       <div class="d-flex align-items-center">
                         <img :src="getImageUrl(item.image)" :alt="item.name" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px; border-radius: 4px;">
@@ -125,17 +130,24 @@
                       </div>
                       <p>${{ (Number(item.price) * item.quantity).toFixed(2) }}</p>
                     </div>
+                    
+                    <div class="checkout-item d-flex justify-content-between">
+                      <p>Subtotal</p>
+                      <p>${{ totalPrice.toFixed(2) }}</p>
+                    </div>
+                    
                     <div class="checkout-item d-flex justify-content-between">
                       <p>Shipping</p>
                       <div class="shopping-items">
-                        <div v-if="formData.state" class="shipping-display">
-                          <p class="mb-0">{{ selectedStateName }}: ${{ shippingFee.toFixed(2) }} AUD</p>
+                        <div v-if="formData.deliveryMethod" class="shipping-display">
+                          <p class="mb-0">{{ deliveryMethodLabel }}: ${{ shippingFee.toFixed(2) }}</p>
                         </div>
                         <div v-else class="text-muted">
-                          <p class="mb-0">Select a state to calculate shipping</p>
+                          <p class="mb-0">Select delivery method</p>
                         </div>
                       </div>
                     </div>
+                    
                     <div class="checkout-item d-flex align-items-center justify-content-between">
                       <p><strong>Total</strong></p>
                       <p><strong>${{ totalWithShipping.toFixed(2) }}</strong></p>
@@ -180,26 +192,30 @@ export default {
     const totalItems = computed(() => cartStore.getTotalItems())
     const totalPrice = computed(() => cartStore.getTotalPrice())
     
-    // Extract shipping fee from selected state (format: "STATE:FEE")
+    // Delivery pricing
+    const DELIVERY_PRICES = {
+      regular: 12.00,
+      express: 15.00
+    }
+    
+    const DELIVERY_TIMES = {
+      regular: '5-7 days',
+      express: '3-5 days'
+    }
+    
+    // Calculate shipping fee based on delivery method
     const shippingFee = computed(() => {
-      if (!formData.value.state) return 0
-      const parts = formData.value.state.split(':')
-      return parts.length > 1 ? parseFloat(parts[1]) || 0 : 0
+      if (!formData.value.deliveryMethod) return 0
+      return DELIVERY_PRICES[formData.value.deliveryMethod] || 0
     })
     
-    
-
-    const shipping_location = computed(() => {
-    if (!formData.value.state) return ''
-    return formData.value.state.split(':')[0]
-  })
-
-
-    // Get selected state name for display
-    const selectedStateName = computed(() => {
-      if (!formData.value.state) return ''
-      const parts = formData.value.state.split(':')
-      return parts[0] || ''
+    // Get delivery method label for display
+    const deliveryMethodLabel = computed(() => {
+      if (!formData.value.deliveryMethod) return ''
+      const method = formData.value.deliveryMethod
+      const time = DELIVERY_TIMES[method]
+      const price = DELIVERY_PRICES[method]
+      return `${method.charAt(0).toUpperCase() + method.slice(1)} (${time}) - $${price.toFixed(2)}`
     })
     
     // Calculate total with shipping
@@ -215,7 +231,9 @@ export default {
       phone: '',
       address: '',
       city: '',
-      state: ''
+      state: '',
+      deliveryMethod: '',
+      notes: ''
     })
 
     const isSubmitting = ref(false)
@@ -233,7 +251,12 @@ export default {
       }
 
       if (!formData.value.state) {
-        submitError.value = 'Please select your state for shipping'
+        submitError.value = 'Please select your state'
+        return
+      }
+
+      if (!formData.value.deliveryMethod) {
+        submitError.value = 'Please select a delivery method'
         return
       }
 
@@ -246,9 +269,13 @@ export default {
           customer_name: `${formData.value.firstName} ${formData.value.lastName}`.trim(),
           customer_email: formData.value.email,
           customer_phone: formData.value.phone,
-          shipping_address: `${formData.value.address}, ${formData.value.city}, ${selectedStateName.value}`.trim(),
-          shipping_location: shipping_location.value,
+          shipping_address: `${formData.value.address}, ${formData.value.city}, ${formData.value.state}`.trim(),
+          shipping_location: formData.value.state,
+          delivery_method: formData.value.deliveryMethod,
+          delivery_time: DELIVERY_TIMES[formData.value.deliveryMethod],
+          shipping_fee: shippingFee.value,
           total_amount: totalWithShipping.value,
+          order_notes: formData.value.notes || '',
           // Send cart items directly in request
           items: cartStore.cartItems.map(item => ({
             product_id: item.id,
@@ -287,9 +314,12 @@ export default {
       const baseUrl = 'https://api.bloomandluxe.store/api'
       return baseUrl + imagePath.replace(/^\//, '')
     }
+    
     onMounted(() => {
       // Initialize jQuery plugins and custom JS
       if (window.$) {
+        const $ = window.$;
+        
         // Sidebar Toggle
         $(".offcanvas__close,.offcanvas__overlay").on("click", function() {
           $(".offcanvas__info").removeClass("info-open");
@@ -328,14 +358,18 @@ export default {
         // Wow Animation
         new WOW().init();
 
-        // Nice Select - Initialize state select with custom styling
+        // Nice Select - Initialize selects with custom styling
         $('.state-select').niceSelect();
+        $('.delivery-select').niceSelect();
+        
         // Listen for nice-select changes and update Vue model
         $('.state-select').on('change', function() {
           formData.value.state = $(this).val();
         });
-        // Also initialize other selects
-        $('select.country-select').niceSelect();
+        
+        $('.delivery-select').on('change', function() {
+          formData.value.deliveryMethod = $(this).val();
+        });
 
         // Sticky Header
         $(window).on("scroll", function() {
@@ -379,29 +413,42 @@ export default {
       }
     });
 
-    // Handle state dropdown change
-    const onStateChange = (event) => {
-      formData.value.state = event.target.value
-    }
-
     return {
       cartStore,
       totalItems,
       totalPrice,
       shippingFee,
-      selectedStateName,
+      deliveryMethodLabel,
       totalWithShipping,
       getImageUrl,
       formData,
       isSubmitting,
       submitError,
-      submitOrder,
-      onStateChange
+      submitOrder
     };
   }
 }
 </script>
 
 <style scoped>
+.checkout-item {
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
 
+.checkout-item:last-child {
+  border-bottom: none;
+}
+
+.alert {
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
 </style>
