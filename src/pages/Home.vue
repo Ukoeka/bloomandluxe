@@ -1,13 +1,6 @@
 <template>
     <SharedLayout>
             <!-- Preloader Start -->
-        
-
-            <!--<< Mouse Cursor Start >>-->
-
-        
-
-            <!-- Modal Version 2 -->
           
 
             <!-- Hero Section Start -->
@@ -24,7 +17,7 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <div class="hero-3">
-                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/bg1.png);">
+                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/hero.jpeg);">
                                     </div>
                                         <div class="container">
                                             <div class="row g-4">
@@ -45,7 +38,7 @@
                             </div>
                             <div class="swiper-slide">
                                 <div class="hero-3">
-                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/bg-11.png);">
+                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/hero2.jpeg);">
                                     </div>
                                         <div class="container">
                                             <div class="row g-4">
@@ -66,7 +59,7 @@
                             </div>
                             <div class="swiper-slide">
                                 <div class="hero-3">
-                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/bg-5.png);">
+                                    <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/hero3.jpeg);">
                                     </div>
                                         <div class="container">
                                             <div class="row g-4">
