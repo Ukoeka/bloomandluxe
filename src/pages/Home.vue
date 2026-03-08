@@ -2227,20 +2227,69 @@ export default {
 <style scoped>
 /* component styles */
 .hero-content p, .hero-content h1 {
-  color: #333;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+  color: #fff;
+  /* text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8); */
 }
 
 /* Make text visible on background images in shop sections */
 .bg-image .content h3,
 .bg-image .content p {
   color: white;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  /* text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); */
 }
 
 /* Make product images have similar height */
 .product-store-item .product-image img {
   height: 370px;
   object-fit: cover;
+}
+.hero-section-3 {
+  min-height: unset !important;
+  overflow: hidden;
+}
+
+.hero-section-3 .swiper,
+.hero-section-3 .swiper-wrapper,
+.hero-section-3 .swiper-slide {
+  height: 100vh !important;
+}
+
+.hero-3 {
+  height: 100vh;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+}
+/* In your <style scoped> section */
+
+/* Fix hero background images on all screens */
+.hero-3 .hero-bg {
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+/* On mobile, position toward the top so subjects aren't cut */
+@media (max-width: 767px) {
+  .hero-3 .hero-bg {
+    background-position: top center !important;
+  }
+
+  .hero-3 {
+    padding: 120px 0 !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .hero-3 {
+    padding: 100px 0 !important;
+  }
+  
+  .hero-3 .hero-content h1 {
+    font-size: 28px !important;
+  }
+
+  .hero-3 .hero-content p {
+    font-size: 14px !important;
+  }
 }
 </style>
