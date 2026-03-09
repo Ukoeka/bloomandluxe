@@ -37,6 +37,11 @@
               </div>
               <ul class="list-items">
                 <li>
+                  <a href="/shop">
+                    Shop
+                  </a>
+                </li>
+                <li>
                   <a href="/my-orders">
                     Track Orders
                   </a>
@@ -47,21 +52,13 @@
                     cart
                   </a>
                 </li>
-                <!-- <li>
-                  <a href="/login">
-                    My Account
-                  </a>
-                </li> -->
+                
                 <!-- <li>
                   <router-link to="/my-orders">
                     Order History
                   </router-link>
                 </li> -->
-                <li>
-                  <router-link to="/contact">
-                    Contact Us
-                  </router-link>
-                </li>
+                
               </ul>
             </div>
           </div>
@@ -81,42 +78,18 @@
                     Contact US
                   </router-link>
                 </li>
-                <li>
-                  <router-link to="/contact">
-                    Privacy Policy
-                  </router-link>
-                </li>
-                <li>
-                  <router-link to="/contact">
-                    Terms & Conditions
-                  </router-link>
-                </li>
-                <li>
-                  <a href="/news">
-                    Latest News
-                  </a>
-                </li>
-                <li>
-                  <router-link to="/contact">
-                    Contact Us
-                  </router-link>
-                </li>
+               
+                
               </ul>
             </div>
           </div>
           <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
             <div class="single-footer-widget">
               <div class="widget-head">
-                <h3>Subcribe.</h3>
+                <h3></h3>
               </div>
               <div class="footer-content">
-                <p class="f-text">Our conversation is just getting started</p>
-                <div class="footer-input">
-                  <input type="email" id="email2" placeholder="Enter Your Email">
-                  <button class="newsletter-btn" type="submit">
-                    <span>Subscribe</span>
-                  </button>
-                </div>
+              
                 <div class="social-item">
                   <h6>Follow Us On</h6>
                   <div class="social-icon d-flex align-items-center">
