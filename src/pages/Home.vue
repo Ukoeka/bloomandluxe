@@ -252,18 +252,16 @@
                       <ul class="social-icon">
                         <li>
                           <router-link :to="`/product-details/${product.id}`">
-                            <i class="fa-regular fa-cart-shopping"></i>
+                            <i class="fa-regular fa-eye"></i>
                           </router-link>
                         </li>
                         <li>
-                          <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                            <i class="fa-regular fa-eye"></i>
+                          <button @click="addToCart(product)">
+                            <i class="fa-regular fa-cart-shopping"></i>
                           </button>
                         </li>
                         <li>
-                          <router-link :to="`/product-details/${product.id}`">
-                            <i class="fa-regular fa-heart"></i>
-                          </router-link>
+                          
                         </li>
                       </ul>
                     </div>
@@ -951,15 +949,15 @@ export default {
 }
 
 .category-card--tall {
-  height: 620px;
+  height: 650px;
 }
 
 .category-card--short {
-  height: 270px;
+  height: 300px;
 }
 
 .category-card--wide {
-  height: 270px;
+  height: 300px;
 }
 
 .category-card__overlay {
