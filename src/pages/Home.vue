@@ -19,9 +19,9 @@
                 <div class="row g-4">
                   <div class="col-lg-10">
                     <div class="hero-content">
-                      <p data-animation="fadeInUp" data-delay="1.3s">Winter Special Collection</p>
+                      <p data-animation="fadeInUp" data-delay="1.3s">Top Collections</p>
                       <h1 data-animation="fadeInUp" data-delay="1.5s">
-                        New Collection With <br> Modern Style
+                        Embrace the luxury feel of<br>African fabrics in trendy fashion
                       </h1>
                       <div class="hero-button" data-animation="fadeInUp" data-delay="1.7s">
                         <a href="/shop" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
@@ -39,9 +39,9 @@
                 <div class="row g-4">
                   <div class="col-lg-10">
                     <div class="hero-content">
-                      <p data-animation="fadeInUp" data-delay="1.3s">Winter Special Collection</p>
+                      <p data-animation="fadeInUp" data-delay="1.3s">Butters and Creams</p>
                       <h1 data-animation="fadeInUp" data-delay="1.5s">
-                        New Collection With <br> Modern Style
+                        Restore Moisture to <br> your skin and hair
                       </h1>
                       <div class="hero-button" data-animation="fadeInUp" data-delay="1.7s">
                         <a href="/shop" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
@@ -59,9 +59,9 @@
                 <div class="row g-4">
                   <div class="col-lg-10">
                     <div class="hero-content">
-                      <p data-animation="fadeInUp" data-delay="1.3s">Winter Special Collection</p>
+                      <p data-animation="fadeInUp" data-delay="1.3s">High class Accessories</p>
                       <h1 data-animation="fadeInUp" data-delay="1.5s">
-                        New Collection With <br> Modern Style
+                        Shop the latest trends in <br> fashion accessories
                       </h1>
                       <div class="hero-button" data-animation="fadeInUp" data-delay="1.7s">
                         <a href="/shop" class="theme-btn">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
@@ -121,32 +121,82 @@
     </section>
 
     <!-- Shop-bg-section Start -->
-    <section class="shop-bg-section fix">
-      <div class="row g-4">
-        <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
-          <div class="bg-image bg-cover" style="background-image: url(assets/img/shop/kid.jpeg);">
-            <div class="content bg-white badge">
-              <h3><a href="/shop">Kids</a></h3>
-              <p>2025 Collection</p>
-            </div>
+    <section class="shop-bg-section fix section-padding">
+  <div class="container">
+    <div class="section-title text-center mb-2">
+      <h6 class="sub-title wow fadeInUp">Shop by Category</h6>
+      <h2 class="wow fadeInUp" data-wow-delay=".3s">Browse Our Collections</h2>
+    </div>
+
+    <div class="row g-4">
+      <!-- Large left card -->
+      <div class="col-lg-6 wow fadeInUp" data-wow-delay=".2s">
+        <div class="category-card category-card--tall bg-cover"
+          style="background-image: url(assets/img/shop/female-3.jpeg);">
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">
+              <a href="/shop?category=female">Female</a>
+            </h3>
+            <a href="/shop?category=female" class="category-card__btn">
+              Shop Now <i class="fa-regular fa-arrow-right"></i>
+            </a>
           </div>
         </div>
-        <div class="col-lg-6">
-          <div class="bg-image style-2 bg-cover" style="background-image: url(assets/img/shop/man-1.png);">
-            <div class="content">
-              <h3><a href="/shop">Men</a></h3>
-              <p>2025 Collection</p>
+      </div>
+
+      <!-- Right column: 3 stacked cards -->
+      <div class="col-lg-6">
+        <div class="row g-4">
+          <div class="col-6 wow fadeInUp" data-wow-delay=".3s">
+            <div class="category-card category-card--short bg-cover"
+              style="background-image: url(assets/img/shop/male2.jpeg);">
+              <div class="category-card__overlay"></div>
+              <div class="category-card__content">
+                <h3 class="category-card__title">
+                  <a href="/shop?category=male">Male</a>
+                </h3>
+                <a href="/shop?category=male" class="category-card__btn">
+                  Shop Now <i class="fa-regular fa-arrow-right"></i>
+                </a>
+              </div>
             </div>
           </div>
-          <div class="bg-image mt-20 style-2 bg-cover" style="background-image: url(assets/img/shop/woman-1.png);">
-            <div class="content">
-              <h3><a href="/shop">Women</a></h3>
-              <p>2025 Collection</p>
+
+          <div class="col-6 wow fadeInUp" data-wow-delay=".4s">
+            <div class="category-card category-card--short bg-cover"
+              style="background-image: url(assets/img/shop/kiddies.jpeg);">
+              <div class="category-card__overlay"></div>
+              <div class="category-card__content">
+                <h3 class="category-card__title">
+                  <a href="/shop?category=kiddies">Kiddies</a>
+                </h3>
+                <a href="/shop?category=kiddies" class="category-card__btn">
+                  Shop Now <i class="fa-regular fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 wow fadeInUp" data-wow-delay=".5s">
+            <div class="category-card category-card--wide bg-cover"
+              style="background-image: url(assets/img/shop/ear-2.jpeg);">
+              <div class="category-card__overlay"></div>
+              <div class="category-card__content">
+                <h3 class="category-card__title">
+                  <a href="/shop?category=accessories">Accessories</a>
+                </h3>
+                <a href="/shop?category=accessories" class="category-card__btn">
+                  Shop Now <i class="fa-regular fa-arrow-right"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
     <!-- Product Store Section Start -->
     <section class="product-store-section section-padding fix">
@@ -881,6 +931,115 @@ export default {
 
   .hero-3 .hero-content p {
     font-size: 14px !important;
+  }
+}
+
+/* Category Cards */
+.category-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+}
+
+.category-card--tall {
+  height: 620px;
+}
+
+.category-card--short {
+  height: 270px;
+}
+
+.category-card--wide {
+  height: 270px;
+}
+
+.category-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.05) 60%);
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
+
+.category-card:hover .category-card__overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 60%);
+}
+
+.category-card__content {
+  position: relative;
+  z-index: 2;
+  padding: 28px;
+  width: 100%;
+}
+
+.category-card__tag {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 8px;
+}
+
+.category-card__title {
+  margin-bottom: 14px;
+}
+
+.category-card__title a {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.category-card--short .category-card__title a {
+  font-size: 20px;
+}
+
+.category-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease, gap 0.2s ease;
+}
+
+.category-card__btn:hover {
+  border-color: #fff;
+  gap: 12px;
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .category-card--tall {
+    height: 380px;
+  }
+
+  .category-card--short {
+    height: 200px;
+  }
+
+  .category-card--wide {
+    height: 200px;
+  }
+
+  .category-card__title a {
+    font-size: 20px;
   }
 }
 </style>
