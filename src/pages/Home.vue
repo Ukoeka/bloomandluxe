@@ -304,7 +304,7 @@
     <div class="section-title-area">
       <div class="section-title">
         <h6 class="sub-title wow fadeInUp">More to Discover</h6>
-        <h2 class="wow fadeInUp" data-wow-delay=".3s">Check out our Butter Creams</h2>
+        <h2 class="wow fadeInUp" data-wow-delay=".3s">Check out our Butters</h2>
       </div>
       <a href="/category/34" class="theme-btn theme-btn-2 wow fadeInUp" data-wow-delay=".5s">View More Items</a>
     </div>
