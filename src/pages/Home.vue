@@ -306,7 +306,7 @@
         <h6 class="sub-title wow fadeInUp">More to Discover</h6>
         <h2 class="wow fadeInUp" data-wow-delay=".3s">Check out our Butter Creams</h2>
       </div>
-      <a href="/shop" class="theme-btn theme-btn-2 wow fadeInUp" data-wow-delay=".5s">View More Items</a>
+      <a href="/category/34" class="theme-btn theme-btn-2 wow fadeInUp" data-wow-delay=".5s">View More Items</a>
     </div>
     <div class="shop-discover-wrapper">
       <div class="row g-5">
@@ -355,9 +355,9 @@
           <div class="bg-image-2 bg-cover" style="background-image: url(assets/img/shop/sheabutter.jpeg);">
             <div class="content">
               <h3>
-                <a href="/shop">Quality hair butter <br> for different hair types</a>
+                <a href="/category/34">Quality hair butter <br> for different hair types</a>
               </h3>
-              <a href="/shop" class="theme-btn">Explore More <i class="fa-regular fa-arrow-right"></i></a>
+              <a href="/category/34" class="theme-btn">Explore More <i class="fa-regular fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -399,7 +399,7 @@
                       <!-- <img src="assets/img/testimonial/client-3.png" alt="img"> -->
                     </div>
                     <div class="text">
-                      <h6>Theodore Handle</h6>
+                      <h6>Emma Clarke – Adelaide</h6>
                       <!-- <span>CO Founder</span> -->
                     </div>
                   </div>
@@ -423,7 +423,7 @@
                       <!-- <img src="assets/img/testimonial/client-3.png" alt="img"> -->
                     </div>
                     <div class="text">
-                      <h6>Theodore Handle</h6>
+                      <h6>Jack Mitchell – Melbourne</h6>
                       <!-- <span>CO Founder</span> -->
                     </div>
                   </div>
@@ -447,8 +447,30 @@
                       <!-- <img src="assets/img/testimonial/client-3.png" alt="img"> -->
                     </div>
                     <div class="text">
-                      <h6>Theodore Handle</h6>
-                      <span>CO Founder</span>
+                      <h6>Sophie Taylor – Perth</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="testimonial-card-item">
+                <div class="testimonial-content">
+                  <h4>The Review Are In</h4>
+                  <div class="star">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                  <p>"I wore one of the dresses to a birthday party in Brisbane <br> and everyone kept asking where I got it from."</p>
+                  <div class="info-item">
+                    <div class="client-image">
+                      <!-- <img src="assets/img/testimonial/client-3.png" alt="img"> -->
+                    </div>
+                    <div class="text">
+                      <h6>Olivia Martin – Brisbane</h6>
                     </div>
                   </div>
                 </div>

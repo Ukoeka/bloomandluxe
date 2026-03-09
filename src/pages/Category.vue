@@ -13,10 +13,9 @@
             </h2>
           </div>
 
-          <ul class="nav">
-            <!-- SUBCATEGORY LOOP -->
+          <ul class="nav" v-if="subcategories.length > 0">
             <li
-              v-for="subcategory in (subcategories || [])"
+              v-for="subcategory in subcategories"
               :key="subcategory?.id"
               class="nav-item"
             >
@@ -99,20 +98,23 @@ export default {
     const loading = ref(false)
 
     const fetchSubcategories = async () => {
-      try {
-        const res = await apiStore.get(`/categories/${route.params.id}/subcategories`);
-        subcategories.value = Array.isArray(res?.data) ? res.data : [];
-        
-        console.log('Subcategories fetched:', subcategories.value);
-        
-        if (subcategories.value.length > 0) {
-          activeSubcategory.value = subcategories.value[0];
-          console.log('Active subcategory set to:', activeSubcategory.value);
-        }
-      } catch (error) {
-        console.error('Error fetching subcategories:', error);
-      }
-    };
+  try {
+    const res = await apiStore.get(`/categories/${route.params.id}/subcategories`);
+    subcategories.value = Array.isArray(res?.data) ? res.data : [];
+
+    if (subcategories.value.length > 0) {
+      // Has subcategories — use first subcategory as active
+      activeSubcategory.value = subcategories.value[0];
+    } else {
+      // No subcategories — fetch products directly with parent category ID
+      await fetchProductsBySubcategory(route.params.id);
+    }
+  } catch (error) {
+    console.error('Error fetching subcategories:', error);
+    // On error, still try fetching products with parent ID
+    await fetchProductsBySubcategory(route.params.id);
+  }
+};
 
     const fetchProductsBySubcategory = async (subcategoryId) => {
       if (!subcategoryId) return;
