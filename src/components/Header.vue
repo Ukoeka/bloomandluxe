@@ -47,8 +47,7 @@
             <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
               <div class="offcanvas__logo">
                 <a href="/">
-                  <img src="/assets/img/logo/main-logo.png
-                  " alt="logo-img">
+                  <img src="/assets/img/logo/main-logo.png" alt="logo-img">
                 </a>
               </div>
               <div class="offcanvas__close">
@@ -62,20 +61,12 @@
             <div class="offcanvas__contact">
               <h4>Contact Info</h4>
               <ul>
-                <!-- <li class="d-flex align-items-center">
-                  <div class="offcanvas__contact-icon">
-                    <i class="fal fa-map-marker-alt"></i>
-                  </div>
-                  <div class="offcanvas__contact-text">
-                    <a target="_blank" href="#">Main Street, Melbourne, Australia</a>
-                  </div>
-                </li> -->
                 <li class="d-flex align-items-center">
                   <div class="offcanvas__contact-icon mr-15">
                     <i class="fal fa-envelope"></i>
                   </div>
                   <div class="offcanvas__contact-text">
-                    <a href="mailto:contact@bloom&luxe.com"><span class="mailto:info@example.com">contact@bloom&luxe.com</span></a>
+                    <a href="mailto:contact@bloom&luxe.com"><span>contact@bloom&luxe.com</span></a>
                   </div>
                 </li>
                 <li class="d-flex align-items-center">
@@ -97,12 +88,11 @@
               </ul>
               <div class="header-button mt-4">
               </div>
-              <a href="/contact" class="theme-btn"><span>Let’s Talk <i class="fa-solid fa-arrow-right"></i></span></a>
+              <a href="/contact" class="theme-btn"><span>Let's Talk <i class="fa-solid fa-arrow-right"></i></span></a>
               <div class="social-icon d-flex align-items-center">
                 <a href="https://www.facebook.com/share/17ZJGw6Lnc/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.tiktok.com/@bloomlux.store?"><i class="fab fa-tiktok"></i></a>
                 <a href="https://www.instagram.com/bloomandluxestore?"><i class="fab fa-instagram"></i></a>
-                <!-- <a href="#"><i class="fab fa-linkedin-in"></i></a> -->
               </div>
             </div>
           </div>
@@ -115,10 +105,6 @@
     <div class="container-fluid">
       <div class="header-top-wrapper header-3">
         <ul class="contact-list">
-          <!-- <li>
-            <i class="fa-brands fa-facebook-f"></i>
-            7500k Followers
-          </li> -->
           <li>
             <i class="fa-solid fa-phone"></i>
             <a href="tel:+40276328246">+402 763 282 46</a>
@@ -134,7 +120,7 @@
                 Log in
               </router-link>
             </button>
-            <button v-else @click.prevent="logout" class="account-text text-decoration-none text-dark">
+            <button v-else @click.prevent="handleLogout" class="account-text text-decoration-none text-dark">
               <i class="fas fa-sign-out-alt"></i>
               Logout
             </button>
@@ -165,20 +151,16 @@
                     <router-link to="/">
                       Home
                     </router-link>
-                    
                   </li>
-                 
                   <li class="has-dropdown">
                     <a href="/about">
                       About Us
                     </a>
-                    
                   </li>
                   <li>
                     <router-link to="/shop">
                       Shop
                     </router-link>
-                    
                   </li>
                   <li v-if="isLoggedIn">
                     <router-link to="/my-orders">Orders</router-link>
@@ -192,10 +174,6 @@
           </div>
           <div class="header-right d-flex justify-content-end align-items-center">
             <div class="search-widget">
-              <!-- <form action="#">
-                <input type="text" placeholder="Search for Products...">
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-              </form> -->
             </div>
             <a href="#0" class="search-trigger search-icon style-2"><i class="fa-regular fa-magnifying-glass"></i></a>
             <div class="menu-cart">
@@ -238,51 +216,48 @@
     </div>
   </header>
 
-
-
-
-   <div id="targetElement" class="side_bar slideInRight side_bar_hidden">
-       <div class="side_bar_overlay"></div>
-       <div class="cart-title mb-50">
-         <h4 v-if="!isLoggedIn">Log in</h4>
-         <h4 v-else>Account</h4>
-       </div>
-       <div v-if="!isLoggedIn" class="login-sidebar">
-         <div class="user-icon-box">
-           <img src="/assets/img/user.png" alt="img">
-           <p>No account yet?</p>
-           <router-link to="/login">Login to Your Account</router-link>
-         </div>
-       </div>
-      <div v-else class="account-sidebar">
-        <div class="user-info-section">
-          <div class="user-avatar">
-            <img src="/assets/img/user.png" alt="user">
-          </div>
-          <h5>{{ authStore.user?.name || 'User' }}</h5>
-          <p>{{ authStore.user?.email || '' }}</p>
-        </div>
-        <div class="account-links">
-          <a href="#" class="account-link">
-            <i class="fas fa-user"></i>
-            My Profile
-          </a>
-          <router-link to="/my-orders" class="account-link">
-            <i class="fas fa-shopping-bag"></i>
-            My Orders
-          </router-link>
-          <a href="#" class="account-link">
-            <i class="fas fa-heart"></i>
-            Wishlist
-          </a>
-          <a href="#" @click.prevent="logout" class="account-link">
-            <i class="fas fa-sign-out-alt"></i>
-            Logout
-          </a>
-        </div>
-      </div>
-      <button id="closeButton" class="x-mark-icon"><i class="fas fa-times"></i></button>
+  <div id="targetElement" class="side_bar slideInRight side_bar_hidden">
+    <div class="side_bar_overlay"></div>
+    <div class="cart-title mb-50">
+      <h4 v-if="!isLoggedIn">Log in</h4>
+      <h4 v-else>Account</h4>
     </div>
+    <div v-if="!isLoggedIn" class="login-sidebar">
+      <div class="user-icon-box">
+        <img src="/assets/img/user.png" alt="img">
+        <p>No account yet?</p>
+        <router-link to="/login">Login to Your Account</router-link>
+      </div>
+    </div>
+    <div v-else class="account-sidebar">
+      <div class="user-info-section">
+        <div class="user-avatar">
+          <img src="/assets/img/user.png" alt="user">
+        </div>
+        <h5>{{ authStore.user?.name || 'User' }}</h5>
+        <p>{{ authStore.user?.email || '' }}</p>
+      </div>
+      <div class="account-links">
+        <a href="#" class="account-link">
+          <i class="fas fa-user"></i>
+          My Profile
+        </a>
+        <router-link to="/my-orders" class="account-link">
+          <i class="fas fa-shopping-bag"></i>
+          My Orders
+        </router-link>
+        <a href="#" class="account-link">
+          <i class="fas fa-heart"></i>
+          Wishlist
+        </a>
+        <a href="#" @click.prevent="handleLogout" class="account-link">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout
+        </a>
+      </div>
+    </div>
+    <button id="closeButton" class="x-mark-icon"><i class="fas fa-times"></i></button>
+  </div>
 
   <!-- search-wrap Start -->
   <div class="search-wrap">
@@ -312,30 +287,57 @@ export default {
     const cartStore = useCartStore()
     const authStore = useAuthStore()
 
-  const totalItems = computed(() => {
-  // Only calculate after cart is initialized
-  if (!cartStore.initialized) return 0
-  return cartStore.getTotalItems()
-})
-    const totalPrice = computed(() => cartStore.getTotalPrice())
+    const totalItems = computed(() => {
+      // Only calculate after cart is initialized
+      if (!cartStore.initialized) return 0
+      return cartStore.getTotalItems()
+    })
+    
+    const totalPrice = computed(() => {
+      const price = cartStore.getTotalPrice()
+      return typeof price === 'number' ? price : 0
+    })
+    
     const isLoggedIn = computed(() => !!authStore.user)
 
     const getImageUrl = (imagePath) => {
-      if (!imagePath) return '/assets/img/cart/01.jpg' // Use a default cart image
+      if (!imagePath) return '/assets/img/cart/01.jpg'
 
-      // If it's already an absolute URL, return as is
       if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
         return imagePath
       }
 
-      // If it's a relative path, prefix with API base URL
       const baseUrl = 'https://api.bloomandluxe.store/api'
-      return baseUrl + imagePath.replace(/^\//, '') // Remove leading slash if present
+      return baseUrl + imagePath.replace(/^\//, '')
     }
 
-    const logout = () => {
-      authStore.logout()
-      router.push('/')
+    const handleLogout = async () => {
+      try {
+        // Close sidebar if open
+        const targetElement = document.getElementById('targetElement')
+        if (targetElement) {
+          targetElement.classList.add('side_bar_hidden')
+        }
+
+        // Call logout from auth store
+        await authStore.logout()
+
+        // Clear all localStorage items related to auth
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+        localStorage.removeItem('refresh_token')
+        
+        // Optional: Clear cart if you want to reset cart on logout
+        // cartStore.clearCart()
+
+        // Force reload to clear all component state
+        window.location.href = '/'
+      } catch (error) {
+        console.error('Logout error:', error)
+        // Force clear even if API call fails
+        localStorage.clear()
+        window.location.href = '/'
+      }
     }
 
     return {
@@ -345,7 +347,7 @@ export default {
       totalPrice,
       isLoggedIn,
       getImageUrl,
-      logout
+      handleLogout
     }
   },
   data() {
@@ -358,35 +360,59 @@ export default {
       this.showPreloader = false;
     }, 1000);
 
-    // Mobile Menu
-    if (window.$ && $('#mobile-menu').length > 0) {
-      $('#mobile-menu').meanmenu({
-        meanMenuContainer: '.mobile-menu',
-        meanScreenWidth: "1199",
-        meanExpand: ['<i class="far fa-plus"></i>'],
+    if (window.$) {
+      const $ = window.$;
+
+      // Mobile Menu
+      if ($('#mobile-menu').length > 0) {
+        $('#mobile-menu').meanmenu({
+          meanMenuContainer: '.mobile-menu',
+          meanScreenWidth: "1199",
+          meanExpand: ['<i class="far fa-plus"></i>'],
+        });
+      }
+
+      // Sticky Header
+      $(window).on("scroll", function() {
+        if ($(this).scrollTop() > 250) {
+          $("#header-sticky").addClass("sticky");
+        } else {
+          $("#header-sticky").removeClass("sticky");
+        }
+      });
+
+      // Search Popup
+      $(".search-trigger").on("click", function (e) {
+        e.preventDefault();
+        $(".search-wrap").animate({ opacity: "toggle" }, 500);
+        $(".nav-search, #search-close").addClass("open");
+      });
+      
+      $(".search-close").on("click", function (e) {
+        e.preventDefault();
+        $(".search-wrap").animate({ opacity: "toggle" }, 500);
+        $(".nav-search, #search-close").removeClass("open");
+      });
+
+      // Back to Top
+      $(window).on('scroll', function() {
+        if ($(this).scrollTop() > 20) {
+          $("#back-top").addClass("show");
+        } else {
+          $("#back-top").removeClass("show");
+        }
+      });
+      
+      $(document).on('click', '#back-top', function() {
+        $('html, body').animate({ scrollTop: 0 }, 800);
+        return false;
       });
     }
 
-    // Sticky Header
-    $(window).on("scroll", function() {
-      if ($(this).scrollTop() > 250) {
-        $("#header-sticky").addClass("sticky");
-      } else {
-        $("#header-sticky").removeClass("sticky");
-      }
-    });
-
     // Sidebar functionality
-    const openButton = document.getElementById('openButton');
     const closeButton = document.getElementById('closeButton');
     const targetElement = document.getElementById('targetElement');
     const overlay = document.querySelector('.side_bar_overlay');
-
-    if (openButton && targetElement) {
-      openButton.addEventListener('click', () => {
-        targetElement.classList.remove('side_bar_hidden');
-      });
-    }
 
     if (closeButton && targetElement) {
       closeButton.addEventListener('click', () => {
@@ -426,31 +452,6 @@ export default {
         offcanvasOverlay.classList.remove('overlay-open');
       });
     }
-
-    // Search Popup
-    $(".search-trigger").on("click", function (e) {
-      e.preventDefault();
-      $(".search-wrap").animate({ opacity: "toggle" }, 500);
-      $(".nav-search, #search-close").addClass("open");
-    });
-    $(".search-close").on("click", function (e) {
-      e.preventDefault();
-      $(".search-wrap").animate({ opacity: "toggle" }, 500);
-      $(".nav-search, #search-close").removeClass("open");
-    });
-
-    // Back to Top
-    $(window).on('scroll', function() {
-      if ($(this).scrollTop() > 20) {
-        $("#back-top").addClass("show");
-      } else {
-        $("#back-top").removeClass("show");
-      }
-    });
-    $(document).on('click', '#back-top', function() {
-      $('html, body').animate({ scrollTop: 0 }, 800);
-      return false;
-    });
   }
 }
 </script>

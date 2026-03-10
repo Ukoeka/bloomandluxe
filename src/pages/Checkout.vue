@@ -61,13 +61,13 @@
                             <span>State*</span>
                             <select v-model="formData.state" name="state" id="state" class="state-select" required>
                               <option value="" disabled>Select your state</option>
-                              <option value="New South Wales">New South Wales</option>
-                              <option value="South Australia">South Australia</option>
-                              <option value="Tasmania">Tasmania</option>
-                              <option value="Western Australia">Western Australia</option>
-                              <option value="Victoria">Victoria</option>
-                              <option value="Queensland">Queensland</option>
-                              <option value="Northern Territory">Northern Territory</option>
+                              <option value="NSW">New South Wales</option>
+                              <option value="SA">South Australia</option>
+                              <option value="TAS">Tasmania</option>
+                              <option value="WA">Western Australia</option>
+                              <option value="VIC">Victoria</option>
+                              <option value="QLD">Queensland</option>
+                              <option value="NT">Northern Territory</option>
                               <option value="ACT">ACT</option>
                             </select>
                           </div>
@@ -76,9 +76,9 @@
                         <div class="col-lg-12">
                           <div class="input-single">
                             <span>Delivery Method*</span>
-                            <select v-model="formData.deliveryMethod" name="deliveryMethod" id="deliveryMethod" class="state-select" required >
+                            <select v-model="formData.deliveryMethod" name="deliveryMethod" id="deliveryMethod" class="state-select" required>
                               <option value="" disabled>Select Preferred Method</option>
-                              <option value="regular">Regular (5-7 days) - $12.00</option>
+                              <option value="standard">Standard (5-7 days) - $12.00</option>
                               <option value="express">Express (3-5 days) - $15.00</option>
                             </select>
                           </div>
@@ -94,7 +94,7 @@
                         <div class="col-lg-12">
                           <div class="input-single">
                             <span>Email Address*</span>
-                            <input v-model="formData.email" type="email" placeholder="Email" required>
+                            <input v-model="formData.email" type="email" placeholder="Email" :readonly="isLoggedIn" :disabled="isLoggedIn" required>
                           </div>
                         </div>
                         
@@ -173,11 +173,12 @@
 </template>
 
 <script>
-import { onMounted, computed, ref } from 'vue'
+import { onMounted, computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import SharedLayout from '../components/SharedLayout.vue'
 import { useCartStore } from '../stores/cart'
 import { useApiStore } from '../stores/api'
+import { useAuthStore } from '../stores/auth'
 
 export default {
   name: 'CheckoutPage',
@@ -188,20 +189,49 @@ export default {
     const cartStore = useCartStore()
     const router = useRouter()
     const apiStore = useApiStore()
+    const authStore = useAuthStore()
+
+    // Check if user is logged in
+    const isLoggedIn = computed(() => !!authStore.user)
+
+    // Ensure cart is loaded from localStorage
+    if (!cartStore.initialized) {
+      cartStore.loadCart()
+    }
 
     const totalItems = computed(() => cartStore.getTotalItems())
-    const totalPrice = computed(() => cartStore.getTotalPrice())
+    const totalPrice = computed(() => {
+      const price = cartStore.getTotalPrice()
+      return typeof price === 'number' ? price : 0
+    })
     
     // Delivery pricing
     const DELIVERY_PRICES = {
-      regular: 12.00,
+      standard: 12.00,
       express: 15.00
     }
     
     const DELIVERY_TIMES = {
-      regular: '5-7 days',
+      standard: '5-7 days',
       express: '3-5 days'
     }
+    
+    // State code to full name mapping
+    const STATE_NAMES = {
+      'NSW': 'New South Wales',
+      'SA': 'South Australia',
+      'TAS': 'Tasmania',
+      'WA': 'Western Australia',
+      'VIC': 'Victoria',
+      'QLD': 'Queensland',
+      'NT': 'Northern Territory',
+      'ACT': 'ACT'
+    }
+    
+    // Get full state name for display
+    const getStateName = computed(() => {
+      return STATE_NAMES[formData.value.state] || formData.value.state
+    })
     
     // Calculate shipping fee based on delivery method
     const shippingFee = computed(() => {
@@ -215,20 +245,22 @@ export default {
       const method = formData.value.deliveryMethod
       const time = DELIVERY_TIMES[method]
       const price = DELIVERY_PRICES[method]
-      return `${method.charAt(0).toUpperCase() + method.slice(1)} (${time}) - $${price.toFixed(2)}`
+      return `${method.charAt(0).toUpperCase() + method.slice(1)} (${time}) - ${price.toFixed(2)}`
     })
     
     // Calculate total with shipping
     const totalWithShipping = computed(() => {
-      return totalPrice.value + shippingFee.value
+      const base = totalPrice.value || 0
+      const shipping = shippingFee.value || 0
+      return base + shipping
     })
 
     // Form data
     const formData = ref({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
+      firstName: authStore.user?.name?.split(' ')[0] || '',
+      lastName: authStore.user?.name?.split(' ').slice(1).join(' ') || '',
+      email: authStore.user?.email || '',
+      phone: authStore.user?.phone || '',
       address: '',
       city: '',
       state: '',
@@ -238,11 +270,6 @@ export default {
 
     const isSubmitting = ref(false)
     const submitError = ref('')
-
-    // Redirect to cart if empty
-    if (cartStore.cartItems.length === 0) {
-      router.push('/shop-cart')
-    }
 
     const submitOrder = async () => {
       if (cartStore.cartItems.length === 0) {
@@ -269,8 +296,8 @@ export default {
           customer_name: `${formData.value.firstName} ${formData.value.lastName}`.trim(),
           customer_email: formData.value.email,
           customer_phone: formData.value.phone,
-          shipping_address: `${formData.value.address}, ${formData.value.city}, ${formData.value.state}`.trim(),
-          shipping_location: formData.value.state,
+          shipping_address: `${formData.value.address}, ${formData.value.city}, ${getStateName.value}`.trim(),
+          shipping_location: formData.value.state, // Send state code (NSW, VIC, etc)
           delivery_method: formData.value.deliveryMethod,
           delivery_time: DELIVERY_TIMES[formData.value.deliveryMethod],
           shipping_fee: shippingFee.value,
@@ -316,6 +343,12 @@ export default {
     }
     
     onMounted(() => {
+      // Redirect to cart if empty after cart is initialized
+      if (cartStore.cartItems.length === 0) {
+        router.push('/shop-cart')
+        return
+      }
+      
       // Initialize jQuery plugins and custom JS
       if (window.$) {
         const $ = window.$;
@@ -359,15 +392,15 @@ export default {
         new WOW().init();
 
         // Nice Select - Initialize selects with custom styling
-        $('.state-select').niceSelect();
-        $('.delivery-select').niceSelect();
+        $('#state').niceSelect();
+        $('#deliveryMethod').niceSelect();
         
         // Listen for nice-select changes and update Vue model
-        $('.state-select').on('change', function() {
+        $('#state').on('change', function() {
           formData.value.state = $(this).val();
         });
         
-        $('.delivery-select').on('change', function() {
+        $('#deliveryMethod').on('change', function() {
           formData.value.deliveryMethod = $(this).val();
         });
 
@@ -424,7 +457,10 @@ export default {
       formData,
       isSubmitting,
       submitError,
-      submitOrder
+      submitOrder,
+      getStateName,
+      isLoggedIn,
+      authStore
     };
   }
 }

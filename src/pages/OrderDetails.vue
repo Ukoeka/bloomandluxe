@@ -24,6 +24,11 @@
           <p class="mt-2">Fetching order details...</p>
         </div>
 
+        <div v-else-if="accessDenied" class="alert alert-danger" role="alert">
+          <i class="fas fa-exclamation-triangle me-2"></i>
+          Access Denied: You do not have permission to view this order.
+        </div>
+
         <div v-else-if="error" class="alert alert-danger" role="alert">
           <i class="fas fa-exclamation-triangle me-2"></i>
           {{ error }}
@@ -31,6 +36,22 @@
 
         <div v-else-if="order" class="row">
           <div class="col-lg-8">
+            <!-- Payment Failed Alert -->
+            <div v-if="showPaymentFailedAlert" class="alert alert-warning mb-4" role="alert">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-exclamation-circle me-3" style="font-size: 1.5rem;"></i>
+                <div class="flex-grow-1">
+                  <h6 class="alert-heading mb-1">Payment {{ order.payment_status === 'failed' ? 'Failed' : 'Pending' }}</h6>
+                  <p class="mb-0">
+                    {{ order.payment_status === 'failed' 
+                      ? 'Your payment could not be processed. Please try again to complete your order.' 
+                      : 'Your payment is still pending. You can retry to complete the payment.' 
+                    }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <div class="card mb-4 shadow-sm border-0">
               <div class="card-header bg-white py-3">
                 <h5 class="mb-0">Order Items</h5>
@@ -112,14 +133,35 @@
                 </div>
               </div>
             </div>
-            <div class="text-center">
-                <router-link to="/my-orders" class="theme-btn w-100">Back to My Orders</router-link>
+
+            <!-- Retry Payment Button -->
+            <div v-if="showPaymentFailedAlert" class="mb-3">
+              <button 
+                @click="retryPayment" 
+                class="theme-btn w-100" 
+                :disabled="retrying"
+              >
+                <span v-if="retrying">
+                  <i class="fas fa-spinner fa-spin me-2"></i>Processing...
+                </span>
+                <span v-else>
+                  <i class="fas fa-redo me-2"></i>Retry Payment
+                </span>
+              </button>
+              <div v-if="retryError" class="alert alert-danger mt-3 mb-0">
+                {{ retryError }}
+              </div>
             </div>
-            <div class="text-center mt-3">
-                <router-link :to="`/create-dispute/${order.id}`" class="theme-btn theme-btn-secondary w-100">
-                    <i class="fas fa-ticket-alt me-2"></i>
-                    Create Dispute Ticket
-                </router-link>
+
+            <div class="text-center">
+              <router-link to="/my-orders" class="theme-btn w-100">Back to My Orders</router-link>
+            </div>
+            
+            <div v-if="order.payment_status === 'succeeded'" class="text-center mt-3">
+              <router-link :to="`/create-dispute/${order.id}`" class="theme-btn theme-btn-secondary w-100">
+                <i class="fas fa-ticket-alt me-2"></i>
+                Create Dispute Ticket
+              </router-link>
             </div>
           </div>
         </div>
@@ -129,10 +171,11 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import SharedLayout from '../components/SharedLayout.vue'
 import { useAuthStore } from '../stores/auth'
+import { useApiStore } from '../stores/api'
 
 export default {
   name: 'OrderDetailsPage',
@@ -142,20 +185,66 @@ export default {
   setup() {
     const route = useRoute()
     const authStore = useAuthStore()
+    const apiStore = useApiStore()
     const order = ref(null)
     const loading = ref(false)
     const error = ref(null)
+    const accessDenied = ref(false)
+    const retrying = ref(false)
+    const retryError = ref(null)
+
+    // Show payment failed alert if payment is not succeeded
+    const showPaymentFailedAlert = computed(() => {
+      if (!order.value) return false
+      const failedStatuses = ['failed', 'pending', 'expired']
+      return failedStatuses.includes(order.value.payment_status)
+    })
 
     const fetchOrderDetails = async () => {
       loading.value = true
       error.value = null
+      accessDenied.value = false
       try {
         order.value = await authStore.fetchOrderDetails(route.params.id)
+        
+        // Security: Verify ownership before showing order details
+        const currentUserId = authStore.user?.id
+        if (currentUserId) {
+          const orderUserId = order.value.user_id || order.value.customer_id
+          if (orderUserId && orderUserId !== currentUserId) {
+            // Order doesn't belong to current user - deny access
+            order.value = null
+            accessDenied.value = true
+            error.value = null
+            return
+          }
+        }
       } catch (err) {
         error.value = 'Failed to fetch order details. Please try again later.'
         console.error('Error fetching order details:', err)
       } finally {
         loading.value = false
+      }
+    }
+
+    const retryPayment = async () => {
+      retrying.value = true
+      retryError.value = null
+
+      try {
+        // Call API to retry payment for this order
+        const response = await apiStore.post(`/orders/${order.value.id}/retry-payment`)
+
+        if (response.checkout_url) {
+          // Redirect to Stripe checkout
+          window.location.href = response.checkout_url
+        } else {
+          throw new Error('No checkout URL received')
+        }
+      } catch (err) {
+        retryError.value = err.response?.data?.message || err.message || 'Failed to retry payment. Please try again.'
+        console.error('Retry payment error:', err)
+        retrying.value = false
       }
     }
 
@@ -191,14 +280,16 @@ export default {
       if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
         return imagePath
       }
-      const baseUrl = 'https://api.digi-essentials.com/'
+      const baseUrl = 'https://api.bloomandluxe.store/'
       return baseUrl + imagePath.replace(/^\//, '')
     }
 
     onMounted(() => {
       fetchOrderDetails()
       
-       if (window.$) {
+      if (window.$) {
+        const $ = window.$;
+        
         // Sticky Header
         $(window).on("scroll", function() {
           if ($(this).scrollTop() > 250) {
@@ -224,10 +315,15 @@ export default {
       order,
       loading,
       error,
+      accessDenied,
+      retrying,
+      retryError,
+      showPaymentFailedAlert,
       formatDate,
       getStatusBadgeClass,
       getPaymentStatusBadgeClass,
-      getImageUrl
+      getImageUrl,
+      retryPayment
     }
   }
 }
@@ -239,23 +335,36 @@ export default {
   font-weight: 500;
   text-transform: capitalize;
 }
+
 .card {
-    border-radius: 10px;
-    overflow: hidden;
+  border-radius: 10px;
+  overflow: hidden;
 }
+
 .card-header {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .theme-btn-secondary {
-    background-color: #6c757d;
-    border: 2px solid #6c757d;
-    color: white;
+  background-color: #6c757d;
+  border: 2px solid #6c757d;
+  color: white;
 }
 
 .theme-btn-secondary:hover {
-    background-color: #5a6268;
-    border-color: #5a6268;
-    color: white;
+  background-color: #5a6268;
+  border-color: #5a6268;
+  color: white;
+}
+
+.alert-warning {
+  background-color: #fff3cd;
+  border-color: #ffc107;
+  color: #856404;
+}
+
+.alert-warning .alert-heading {
+  color: #856404;
+  font-weight: 600;
 }
 </style>

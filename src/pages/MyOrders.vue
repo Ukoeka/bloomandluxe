@@ -14,7 +14,13 @@
           </ul>
         </div>
 
-        <div v-if="loading" class="text-center py-5">
+        <!-- Not Logged In Message -->
+        <div v-if="!authStore.isAuthenticated" class="alert alert-warning text-center" role="alert">
+          <i class="fas fa-lock me-2"></i>
+          Please <router-link to="/login" class="alert-link">login</router-link> to view your orders.
+        </div>
+
+        <div v-else-if="loading" class="text-center py-5">
           <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
@@ -33,7 +39,8 @@
                 <th class="text-center">Order #</th>
                 <th class="text-center">Date</th>
                 <th class="text-center">Total</th>
-                <th class="text-center">Status</th>
+                <th class="text-center">Payment Status</th>
+                <th class="text-center">Order Status</th>
                 <th class="text-center">Action</th>
               </tr>
             </thead>
@@ -42,6 +49,11 @@
                 <td class="text-center">{{ order.order_number }}</td>
                 <td class="text-center">{{ formatDate(order.created_at) }}</td>
                 <td class="text-center">${{ Number(order.total_amount).toFixed(2) }}</td>
+                <td class="text-center">
+                  <span :class="getPaymentStatusBadgeClass(order.payment_status)">
+                    {{ order.payment_status }}
+                  </span>
+                </td>
                 <td class="text-center">
                   <span :class="getStatusBadgeClass(order.status)">
                     {{ order.status }}
@@ -56,12 +68,12 @@
             </tbody>
             <tbody v-else>
               <tr>
-                <td colspan="5" class="text-center py-5">
+                <td colspan="6" class="text-center py-5">
                   <div class="empty-orders">
                     <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
                     <h4>No orders found</h4>
                     <p>It seems you haven't placed any orders yet.</p>
-                    <router-link to="/categories" class="theme-btn alt-color radius-xs">Start Shopping</router-link>
+                    <router-link to="/shop-grid" class="theme-btn alt-color radius-xs">Start Shopping</router-link>
                   </div>
                 </td>
               </tr>
@@ -75,6 +87,7 @@
 
 <script>
 import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import SharedLayout from '../components/SharedLayout.vue'
 import { useAuthStore } from '../stores/auth'
 
@@ -85,17 +98,32 @@ export default {
   },
   setup() {
     const authStore = useAuthStore()
+    const router = useRouter()
     const orders = ref([])
     const loading = ref(false)
     const error = ref(null)
 
     const fetchOrders = async () => {
+      // Only fetch if user is authenticated
+      if (!authStore.isAuthenticated) {
+        router.push('/login')
+        return
+      }
+
       loading.value = true
       error.value = null
       try {
         orders.value = await authStore.fetchOrders()
       } catch (err) {
-        error.value = 'Failed to fetch orders. Please try again later.'
+        // Handle unauthorized error
+        if (err.response?.status === 401 || err.response?.status === 403) {
+          error.value = 'Please login to view your orders.'
+          setTimeout(() => {
+            router.push('/login')
+          }, 2000)
+        } else {
+          error.value = 'Failed to fetch orders. Please try again later.'
+        }
         console.error('Error fetching orders:', err)
       } finally {
         loading.value = false
@@ -118,10 +146,23 @@ export default {
       }
     }
 
+    const getPaymentStatusBadgeClass = (status) => {
+      switch (status) {
+        case 'succeeded': return 'badge bg-success'
+        case 'pending': return 'badge bg-warning text-dark'
+        case 'failed': return 'badge bg-danger'
+        case 'expired': return 'badge bg-secondary'
+        case 'flagged': return 'badge bg-dark'
+        default: return 'badge bg-secondary'
+      }
+    }
+
     onMounted(() => {
       fetchOrders()
       
       if (window.$) {
+        const $ = window.$;
+        
         // Sticky Header
         $(window).on("scroll", function() {
           if ($(this).scrollTop() > 250) {
@@ -144,11 +185,13 @@ export default {
     })
 
     return {
+      authStore,
       orders,
       loading,
       error,
       formatDate,
-      getStatusBadgeClass
+      getStatusBadgeClass,
+      getPaymentStatusBadgeClass
     }
   }
 }
@@ -160,11 +203,27 @@ export default {
   font-weight: 500;
   text-transform: capitalize;
 }
+
 .common-table th {
-    background-color: #f8f9fa;
-    border-bottom: 2px solid #dee2e6;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
 }
+
 .common-table td {
-    vertical-align: middle;
+  vertical-align: middle;
+}
+
+.empty-orders {
+  padding: 2rem;
+}
+
+.empty-orders i {
+  display: block;
+  margin: 0 auto;
+}
+
+.alert-link {
+  font-weight: 600;
+  text-decoration: underline;
 }
 </style>
