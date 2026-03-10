@@ -96,7 +96,7 @@
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="bg-2"><i class="fab fa-tiktok"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-vimeo-v"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
                   </div>
                 </div>
               </div>
