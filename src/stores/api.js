@@ -29,18 +29,41 @@ apiClient.interceptors.request.use(
     // Select the correct token based on the request URL
     const isAdminRoute = config.url.startsWith('/admin')
 
+    let token = null
     if (isAdminRoute && adminAuthStore.token) {
-      config.headers.Authorization = `Bearer ${adminAuthStore.token}`
+      token = adminAuthStore.token
     } else if (authStore.token) {
-      config.headers.Authorization = `Bearer ${authStore.token}`
+      token = authStore.token
     } else if (adminAuthStore.token) {
       // Fallback for cases where an admin might be accessing non-admin routes
-      config.headers.Authorization = `Bearer ${adminAuthStore.token}`
+      token = adminAuthStore.token
+    }
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+      console.log(`[API] Adding token to request: ${config.url}`)
+    } else {
+      console.log(`[API] No token available for request: ${config.url}`)
     }
     return config
 
   },
   (error) => {
+    return Promise.reject(error)
+  }
+)
+
+// Add response interceptor to log errors
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response) {
+      console.error('[API Error]', error.config?.url, error.response.status, error.response.data)
+    } else if (error.request) {
+      console.error('[API Error] No response received', error.config?.url, error.message)
+    } else {
+      console.error('[API Error]', error.message)
+    }
     return Promise.reject(error)
   }
 )

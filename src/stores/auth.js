@@ -14,7 +14,11 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   getters: {
-    isAuthenticated: (state) => !!state.token || !!state.user
+    isAuthenticated: (state) => {
+      const auth = !!state.token || !!state.user
+      console.log('[Auth Store] isAuthenticated:', auth, 'token:', !!state.token, 'user:', !!state.user)
+      return auth
+    }
   },
 
   actions: {
@@ -56,11 +60,18 @@ export const useAuthStore = defineStore('auth', {
       const api = useApiStore()
 
       try {
+        console.log('[Auth Store] Attempting login with:', payload.email)
         // Adjust the URL to match your backend login endpoint
         const response = await api.post('/login', payload)
+        console.log('[Auth Store] Login response:', response)
+        
         // Backend returns { success, message, data: { user, token } }
         this.user = response.data?.user || null
         this.token = response.data?.token || null
+        
+        console.log('[Auth Store] Setting user:', this.user)
+        console.log('[Auth Store] Setting token:', this.token ? 'present' : 'missing')
+        
         if (this.user) {
           localStorage.setItem('user', JSON.stringify(this.user))
         }
@@ -70,6 +81,7 @@ export const useAuthStore = defineStore('auth', {
 
         return response
       } catch (err) {
+        console.error('[Auth Store] Login failed:', err)
         this.loginError =
           err.response?.data?.message ||
           err.message ||
@@ -81,6 +93,7 @@ export const useAuthStore = defineStore('auth', {
     },
 
     logout() {
+      console.log('[Auth Store] Logging out, clearing user and token')
       this.user = null
       this.token = null
       localStorage.removeItem('user')

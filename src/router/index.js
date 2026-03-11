@@ -204,13 +204,13 @@ const routes = [
     path: '/order-details/:id',
     name: 'OrderDetails',
     component: OrderDetails,
-    meta: { requiresAuth: true }
+    meta: { requiresUserAuth: true }
   },
   {
     path: '/leave-review/:productId',
     name: 'LeaveReview',
     component: LeaveReview,
-    meta: { requiresAuth: true }
+    meta: { requiresUserAuth: true }
   },
   {
     path: '/create-dispute/:orderId?',
@@ -233,14 +233,21 @@ router.beforeEach((to, from, next) => {
   const requiresAdmin = to.meta.requiresAuth
   const requiresUser = to.meta.requiresUserAuth
 
+  console.log('[Router] Navigation to:', to.path)
+  console.log('[Router] requiresAdmin:', requiresAdmin, 'adminToken:', !!adminAuthStore.token)
+  console.log('[Router] requiresUser:', requiresUser, 'userToken:', !!authStore.token)
+
   if (requiresAdmin && !adminAuthStore.token) {
     // If route requires admin but no admin token exists, redirect to admin login
+    console.log('[Router] Redirecting to admin login - no admin token')
     next('/admin/login')
   } else if (requiresUser && !authStore.token) {
     // If route requires user but no user token exists, redirect to login
+    console.log('[Router] Redirecting to login - no user token')
     next({ path: '/login', query: { redirect: to.fullPath } })
   } else {
     // Proceed to the route
+    console.log('[Router] Allowing navigation')
     next()
   }
 })

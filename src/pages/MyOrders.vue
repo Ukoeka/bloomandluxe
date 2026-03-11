@@ -106,25 +106,35 @@ export default {
     const fetchOrders = async () => {
       // Only fetch if user is authenticated
       if (!authStore.isAuthenticated) {
+        console.log('User not authenticated, showing message instead of redirect')
         // Don't redirect immediately, let the user see the message and choose to login
         return
       }
 
+      console.log('Fetching orders with token:', authStore.token ? 'Token present' : 'NO TOKEN')
+      
       loading.value = true
       error.value = null
       try {
-        orders.value = await authStore.fetchOrders()
+        const result = await authStore.fetchOrders()
+        console.log('Orders fetched successfully:', result)
+        orders.value = result
       } catch (err) {
         // Handle unauthorized error
+        console.error('Error fetching orders:', err)
+        console.error('Response status:', err.response?.status)
+        console.error('Response data:', err.response?.data)
+        
         if (err.response?.status === 401 || err.response?.status === 403) {
-          error.value = 'Please login to view your orders.'
+          error.value = 'Your session has expired. Please login again.'
+          // Logout the user and redirect to login
+          authStore.logout()
           setTimeout(() => {
             router.push('/login')
           }, 2000)
         } else {
           error.value = 'Failed to fetch orders. Please try again later.'
         }
-        console.error('Error fetching orders:', err)
       } finally {
         loading.value = false
       }

@@ -35,7 +35,8 @@
                     <tr v-for="item in order.items" :key="item.id">
                       <td>
                         <div class="d-flex align-items-center gap-3">
-                          <img :src="getImageUrl(item.product?.image)" :alt="item.name" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                          <img :src="getImageUrl(item.product?.image)" :alt="item.name" class="img-fluid rounded"
+                            style="width: 50px; height: 50px; object-fit: cover;">
                           <span>{{ item.name || 'Unknown Product' }}</span>
                         </div>
                       </td>
@@ -47,7 +48,7 @@
                   <tfoot>
                     <tr>
                       <td colspan="3" class="text-end fw-bold">Subtotal:</td>
-                      <td class="text-center">${{ Number(order.total).toFixed(2) }}</td>
+                      <td class="text-center">${{ Number(order.total_amount).toFixed(2) }}</td>
                     </tr>
                   </tfoot>
                 </table>
@@ -56,27 +57,34 @@
           </div>
 
           <div class="row">
-             <div class="col-md-6 mb-4">
-                <div class="card shadow-sm border-0 h-100">
-                  <div class="card-header bg-white py-3">
-                    <h5 class="mb-0">Customer Information</h5>
-                  </div>
-                  <div class="card-body">
-                    <p><strong>Name:</strong> {{ order.customer || 'N/A' }}</p>
-                    <p><strong>Email:</strong> <a :href="'mailto:' + order.email">{{ order.email || 'N/A' }}</a></p>
-                    <p><strong>Phone:</strong> {{ order.phone || 'N/A' }}</p>
-                  </div>
+            <div class="col-md-6 mb-4">
+              <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white py-3">
+                  <h5 class="mb-0">Customer Information</h5>
                 </div>
+                <div class="card-body">
+                  <p><strong>Name:</strong> {{ order.customer_name || 'N/A' }}</p>
+                  <p><strong>Email:</strong> <a :href="'mailto:' + order.email">{{ order.customer_email || 'N/A' }}</a>
+                  </p>
+                  <p><strong>Phone:</strong> {{ order.customer_phone || 'N/A' }}</p>
+                </div>
+              </div>
             </div>
             <div class="col-md-6 mb-4">
-               <div class="card shadow-sm border-0 h-100">
-                  <div class="card-header bg-white py-3">
-                    <h5 class="mb-0">Shipping Information</h5>
-                  </div>
-                  <div class="card-body">
-                    <p><strong>Address:</strong> {{ order.address || 'N/A' }}</p>
-                  </div>
+              <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white py-3">
+                  <h5 class="mb-0">Shipping Information</h5>
                 </div>
+                <div class="card-body">
+                  <p><strong>Address:</strong> {{ order.shipping_address || 'N/A' }}</p>
+                </div>
+                <div class="card-body">
+                <strong>Shipping Method:</strong>
+                <span class="fs-6">
+                  &nbsp;{{ order.shipping_method}}
+                </span>
+              </div>
+              </div>
             </div>
           </div>
         </div>
@@ -87,21 +95,18 @@
               <h5 class="mb-0">Order Summary</h5>
             </div>
             <div class="card-body">
-               <div class="d-flex justify-content-between mb-3 align-items-center">
+              <div class="d-flex justify-content-between mb-3 align-items-center">
                 <span>Payment Status:</span>
                 <span :class="['badge fs-6', getPaymentStatusClass(order.payment_status)]">
                   {{ order.payment_status || 'pending' }}
                 </span>
               </div>
+              
               <hr>
               <div class="mb-3">
                 <label class="form-label d-block fw-bold">Order Status:</label>
-                <select
-                  v-model="order.status"
-                  @change="updateOrderStatus($event.target.value)"
-                  class="form-select"
-                  :disabled="updatingStatus"
-                >
+                <select v-model="order.status" @change="updateOrderStatus($event.target.value)" class="form-select"
+                  :disabled="updatingStatus">
                   <option value="pending">Pending</option>
                   <option value="processing">Processing</option>
                   <option value="shipped">Shipped</option>
@@ -109,13 +114,13 @@
                   <option value="cancelled">Cancelled</option>
                 </select>
                 <div v-if="updatingStatus" class="form-text text-primary">
-                    <i class="fas fa-spinner fa-spin me-1"></i> Updating...
+                  <i class="fas fa-spinner fa-spin me-1"></i> Updating...
                 </div>
               </div>
               <hr>
               <div class="d-flex justify-content-between mt-3">
                 <span class="h5 mb-0">Total:</span>
-                <span class="h5 mb-0 text-primary fw-bold">${{ Number(order.total).toFixed(2) }}</span>
+                <span class="h5 mb-0 text-primary fw-bold">${{ Number(order.total_amount).toFixed(2) }}</span>
               </div>
             </div>
           </div>
@@ -142,7 +147,7 @@ export default {
     const route = useRoute()
     const router = useRouter()
     const apiStore = useApiStore()
-    
+
     const order = ref(null)
     const loading = ref(true)
     const error = ref(null)
@@ -171,7 +176,7 @@ export default {
         console.error('Failed to update order status:', err)
         error.value = 'Failed to update order status.'
         // Revert status on failure
-        fetchOrderDetails() 
+        fetchOrderDetails()
       } finally {
         updatingStatus.value = false
       }
@@ -231,12 +236,15 @@ export default {
 .admin-order-details {
   padding: 20px 0;
 }
+
 .card {
-    border-radius: 10px;
+  border-radius: 10px;
 }
+
 .card-header {
-    font-weight: 600;
+  font-weight: 600;
 }
+
 .badge {
   text-transform: capitalize;
   padding: 0.5em 0.8em;
