@@ -13,6 +13,10 @@ export const useAuthStore = defineStore('auth', {
     loginLoading: false,
   }),
 
+  getters: {
+    isAuthenticated: (state) => !!state.token || !!state.user
+  },
+
   actions: {
     async register(payload) {
       this.registerLoading = true

@@ -106,7 +106,7 @@ export default {
     const fetchOrders = async () => {
       // Only fetch if user is authenticated
       if (!authStore.isAuthenticated) {
-        router.push('/login')
+        // Don't redirect immediately, let the user see the message and choose to login
         return
       }
 
