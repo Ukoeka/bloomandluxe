@@ -53,11 +53,6 @@ const routes = [
     name: 'Contact',
     component: Contact
   },
-  // {
-  //   path: '/shop',
-  //   name: 'Shop',
-  //   component: ShopGrid
-  // },
   {
     path: '/product-details/:id',
     name: 'ProductDetails',
@@ -138,61 +133,61 @@ const routes = [
     path: '/admin/dashboard',
     name: 'AdminDashboard',
     component: AdminDashboard,
-    meta: { requiresAuth: true }
+    meta: { requiresAdminAuth: true }
   },
   {
     path: '/admin/products',
     name: 'AdminProducts',
     component: AdminProducts,
-    meta: { requiresAuth: true }
+    meta: { requiresAdminAuth: true }
   },
   {
     path: '/admin/orders',
     name: 'AdminOrders',
     component: AdminOrders,
-    meta: { requiresAuth: true }
+    meta: { requiresAdminAuth: true }
   },
   {
     path: '/admin/orders/:id',
     name: 'AdminOrderDetails',
     component: AdminOrderDetails,
-    meta: { requiresAuth: true }
+    meta: { requiresAdminAuth: true }
   },
   {
     path: '/admin/products/add/:id?',
     name: 'AdminAddProduct',
     component: AdminAddProduct,
-    meta: { requiresAuth: true }
+    meta: { requiresAdminAuth: true }
   },
   {
     path: '/admin/categories',
     name: 'AdminCategories',
     component: AdminCategories,
-    meta: { requiresAuth: true }
+    meta: { requiresAdminAuth: true }
   },
   {
     path: '/admin/categories/:id/subcategories',
     name: 'AdminSubCategories',
     component: AdminSubCategories,
-    meta: { requiresAuth: true }
+    meta: { requiresAdminAuth: true }
   },
   {
     path: '/admin/users',
     name: 'AdminUsers',
     component: AdminUsers,
-    meta: { requiresAuth: true }
+    meta: { requiresAdminAuth: true }
   },
   {
     path: '/admin/reports',
     name: 'AdminReports',
     component: AdminReports,
-    meta: { requiresAuth: true }
+    meta: { requiresAdminAuth: true }
   },
   {
     path: '/admin/disputes',
     name: 'AdminDisputes',
     component: AdminDisputes,
-    meta: { requiresAuth: true }
+    meta: { requiresAdminAuth: true }
   },
   {
     path: '/my-orders',
@@ -230,27 +225,37 @@ router.beforeEach((to, from, next) => {
   const adminAuthStore = useAdminAuthStore()
   const authStore = useAuthStore()
 
-  const requiresAdmin = to.meta.requiresAuth
-  const requiresUser = to.meta.requiresUserAuth
+  // Separate admin and user auth checks
+  const requiresAdminAuth = to.meta.requiresAdminAuth === true
+  const requiresUserAuth = to.meta.requiresUserAuth === true
 
   console.log('[Router] Navigation to:', to.path)
-  console.log('[Router] requiresAdmin:', requiresAdmin, 'adminToken:', !!adminAuthStore.token)
-  console.log('[Router] requiresUser:', requiresUser, 'userToken:', !!authStore.token)
+  console.log('[Router] requiresAdminAuth:', requiresAdminAuth, 'adminToken:', !!adminAuthStore.token)
+  console.log('[Router] requiresUserAuth:', requiresUserAuth, 'userToken:', !!authStore.token)
 
-  if (requiresAdmin && !adminAuthStore.token) {
-    // If route requires admin but no admin token exists, redirect to admin login
-    console.log('[Router] Redirecting to admin login - no admin token')
-    next('/admin/login')
-  } else if (requiresUser && !authStore.token) {
-    // If route requires user but no user token exists, redirect to login
-    console.log('[Router] Redirecting to login - no user token')
-    next({ path: '/login', query: { redirect: to.fullPath } })
-  } else {
-    // Proceed to the route
-    console.log('[Router] Allowing navigation')
-    next()
+  // Handle admin routes
+  if (requiresAdminAuth) {
+    if (!adminAuthStore.token) {
+      console.log('[Router] Redirecting to admin login - no admin token')
+      return next('/admin/login')
+    }
+    console.log('[Router] Admin authenticated, allowing navigation')
+    return next()
   }
-})
 
+  // Handle user routes
+  if (requiresUserAuth) {
+    if (!authStore.token) {
+      console.log('[Router] Redirecting to user login - no user token')
+      return next({ path: '/login', query: { redirect: to.fullPath } })
+    }
+    console.log('[Router] User authenticated, allowing navigation')
+    return next()
+  }
+
+  // Public routes - no authentication required
+  console.log('[Router] Public route, allowing navigation')
+  next()
+})
 
 export default router
