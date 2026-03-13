@@ -103,9 +103,9 @@
                     </div>
                   </div>
                   <div class="social-icon d-flex align-items-center">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="bg-2"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                    <a href="" class="bg-2"><i class="fab fa-twitter"></i></a>
+                    <a href=""><i class="fab fa-linkedin-in"></i></a>
                   </div>
                 </div>
               </div>
