@@ -127,6 +127,19 @@
                   <span>{{ formatDate(order.created_at) }}</span>
                 </div>
                 <hr>
+                <div class="d-flex justify-content-between mb-2">
+                  <span>Subtotal:</span>
+                  <span>${{ (Number(order.total_amount) - Number(order.shipping_cost || 0) - Number(order.tax_amount || 0)).toFixed(2) }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2" v-if="order.shipping_cost > 0">
+                  <span>Shipping:</span>
+                  <span>${{ Number(order.shipping_cost).toFixed(2) }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2" v-if="order.tax_amount > 0">
+                  <span>Tax (10%):</span>
+                  <span>${{ Number(order.tax_amount).toFixed(2) }}</span>
+                </div>
+                <hr>
                 <div class="d-flex justify-content-between">
                   <span class="h6">Shipping Cost:</span>
                   <span class="h6 text-primary">${{ Number(order.shipping_cost).toFixed(2) }}</span>
