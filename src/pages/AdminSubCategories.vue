@@ -159,7 +159,8 @@ export default {
         }
 
         if (editingCategory.value) {
-          await apiStore.put(`/admin/categories/${editingCategory.value.id}`, formData)
+          formData.append('_method', 'PUT')
+          await apiStore.post(`/admin/categories/${editingCategory.value.id}`, formData)
         } else {
           await apiStore.post('/admin/categories', formData)
         }

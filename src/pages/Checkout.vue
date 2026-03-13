@@ -147,10 +147,15 @@
                         </div>
                       </div>
                     </div>
+
+                    <div class="checkout-item d-flex justify-content-between">
+                      <p>Tax (10%)</p>
+                      <p>${{ taxAmount.toFixed(2) }}</p>
+                    </div>
                     
                     <div class="checkout-item d-flex align-items-center justify-content-between">
                       <p><strong>Total</strong></p>
-                      <p><strong>${{ totalWithShipping.toFixed(2) }}</strong></p>
+                      <p><strong>${{ totalWithShippingAndTax.toFixed(2) }}</strong></p>
                     </div>
                    
                     <button type="submit" form="checkout-form" class="theme-btn mt-4" :disabled="isSubmitting || cartStore.cartItems.length === 0">
@@ -248,11 +253,18 @@ export default {
       return `${method.charAt(0).toUpperCase() + method.slice(1)} (${time}) - ${price.toFixed(2)}`
     })
     
-    // Calculate total with shipping
-    const totalWithShipping = computed(() => {
+    // Calculate tax (10% of subtotal)
+    const taxAmount = computed(() => {
+      const base = totalPrice.value || 0
+      return base * 0.10
+    })
+
+    // Calculate total with shipping and tax
+    const totalWithShippingAndTax = computed(() => {
       const base = totalPrice.value || 0
       const shipping = shippingFee.value || 0
-      return base + shipping
+      const tax = taxAmount.value || 0
+      return base + shipping + tax
     })
 
     // Form data
@@ -301,7 +313,8 @@ export default {
           delivery_method: formData.value.deliveryMethod,
           delivery_time: DELIVERY_TIMES[formData.value.deliveryMethod],
           shipping_fee: shippingFee.value,
-          total_amount: totalWithShipping.value,
+          tax_amount: taxAmount.value,
+          total_amount: totalWithShippingAndTax.value,
           order_notes: formData.value.notes || '',
           // Send cart items directly in request
           items: cartStore.cartItems.map(item => ({
@@ -452,7 +465,8 @@ export default {
       totalPrice,
       shippingFee,
       deliveryMethodLabel,
-      totalWithShipping,
+      taxAmount,
+      totalWithShippingAndTax,
       getImageUrl,
       formData,
       isSubmitting,

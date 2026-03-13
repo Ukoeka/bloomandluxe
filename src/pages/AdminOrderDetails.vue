@@ -48,6 +48,18 @@
                   <tfoot>
                     <tr>
                       <td colspan="3" class="text-end fw-bold">Subtotal:</td>
+                      <td class="text-center">${{ (Number(order.total_amount) - Number(order.shipping_cost || 0) - Number(order.tax_amount || 0)).toFixed(2) }}</td>
+                    </tr>
+                    <tr v-if="order.shipping_cost > 0">
+                      <td colspan="3" class="text-end fw-bold">Shipping:</td>
+                      <td class="text-center">${{ Number(order.shipping_cost).toFixed(2) }}</td>
+                    </tr>
+                    <tr v-if="order.tax_amount > 0">
+                      <td colspan="3" class="text-end fw-bold">Tax (10%):</td>
+                      <td class="text-center">${{ Number(order.tax_amount).toFixed(2) }}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" class="text-end fw-bold">Total:</td>
                       <td class="text-center">${{ Number(order.total_amount).toFixed(2) }}</td>
                     </tr>
                   </tfoot>
