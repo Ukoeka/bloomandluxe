@@ -22,9 +22,11 @@
             <div v-for="rating in [5,4,3,2,1]" :key="rating" class="rating-bar">
               <span class="rating-label">{{ rating }} star</span>
               <div class="progress">
-                <div class="progress-bar" :style="{ width: stats.rating_distribution[rating].percentage + '%' }"></div>
+                <div class="progress-bar" 
+                     :style="{ width: (stats.rating_distribution[rating]?.percentage || 0) + '%' }">
+                </div>
               </div>
-              <span class="rating-count">{{ stats.rating_distribution[rating].count }}</span>
+              <span class="rating-count">{{ stats.rating_distribution[rating]?.count || 0 }}</span>
             </div>
           </div>
         </div>
@@ -81,11 +83,21 @@
       </div>
     </div>
 
+    <!-- Debug Info (remove in production) -->
+    <div v-if="debugMode" class="alert alert-info">
+      <strong>Debug Info:</strong>
+      <pre>{{ debugInfo }}</pre>
+    </div>
+
     <!-- Reviews List -->
     <div class="reviews-list">
-      <div v-if="loading" class="text-center py-4">
+      <div v-if="loading && currentPage === 1" class="text-center py-4">
         <div class="spinner-border text-primary"></div>
         <p class="mt-2">Loading reviews...</p>
+      </div>
+
+      <div v-else-if="error" class="alert alert-danger">
+        {{ error }}
       </div>
 
       <div v-else-if="reviews.length === 0" class="text-center py-4">
@@ -97,7 +109,7 @@
           <div class="card-body">
             <div class="review-header d-flex justify-content-between align-items-start">
               <div>
-                <h6 class="review-author">{{ review.user.name }}</h6>
+                <h6 class="review-author">{{ review.user?.name || 'Anonymous' }}</h6>
                 <div class="review-rating">
                   <span v-for="star in 5" :key="star" class="star"
                         :class="{ 'filled': star <= review.rating }">
@@ -121,6 +133,7 @@
         <!-- Load More Button -->
         <div v-if="hasMorePages" class="text-center mt-4">
           <button @click="loadMoreReviews" class="theme-btn alt-color" :disabled="loading">
+            <span v-if="loading" class="spinner-border spinner-border-sm me-2"></span>
             Load More Reviews
           </button>
         </div>
@@ -133,6 +146,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { useApiStore } from '../stores/api'
 import { useAuthStore } from '../stores/auth'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'ProductReviews',
@@ -150,9 +164,16 @@ export default {
     const stats = ref({
       total_reviews: 0,
       average_rating: 0,
-      rating_distribution: {}
+      rating_distribution: {
+        5: { count: 0, percentage: 0 },
+        4: { count: 0, percentage: 0 },
+        3: { count: 0, percentage: 0 },
+        2: { count: 0, percentage: 0 },
+        1: { count: 0, percentage: 0 }
+      }
     })
     const loading = ref(false)
+    const error = ref(null)
     const showReviewForm = ref(false)
     const selectedRating = ref(5)
     const reviewComment = ref('')
@@ -161,6 +182,8 @@ export default {
     const reviewableProducts = ref([])
     const currentPage = ref(1)
     const hasMorePages = ref(false)
+    const debugMode = ref(false) // Set to true to see debug info
+    const debugInfo = ref({})
 
     const canReview = computed(() => {
       return auth.isAuthenticated && reviewableProducts.value.length > 0
@@ -168,18 +191,48 @@ export default {
 
     const loadReviews = async (page = 1) => {
       loading.value = true
+      error.value = null
       try {
         const response = await api.get(`/products/${props.productId}/reviews?page=${page}`)
-        if (page === 1) {
-          reviews.value = response.data.reviews
-          stats.value = response.data.stats
+        
+        // Debug: Log the response
+        console.log('Reviews API Response:', response)
+        debugInfo.value = { response, page }
+
+        // Handle paginated response structure
+        const reviewsData = response.reviews?.data || response.data?.reviews?.data || []
+        const statsData = response.stats || response.data?.stats || stats.value
+        const pagination = response.reviews || response.data?.reviews || {}
+
+        // Ensure reviewsData is an array
+        if (!Array.isArray(reviewsData)) {
+          console.warn('Reviews data is not an array:', reviewsData)
+          reviews.value = []
         } else {
-          reviews.value.push(...response.data.reviews)
+          if (page === 1) {
+            reviews.value = reviewsData
+          } else {
+            reviews.value.push(...reviewsData)
+          }
         }
-        hasMorePages.value = response.data.reviews.length === 10 // Assuming 10 per page
+
+        // Update stats
+        if (statsData) {
+          stats.value = {
+            total_reviews: statsData.total_reviews || 0,
+            average_rating: statsData.average_rating || 0,
+            rating_distribution: statsData.rating_distribution || stats.value.rating_distribution
+          }
+        }
+
+        // Check if there are more pages
+        hasMorePages.value = !!pagination.next_page_url
         currentPage.value = page
-      } catch (error) {
-        console.error('Error loading reviews:', error)
+
+      } catch (err) {
+        console.error('Error loading reviews:', err)
+        error.value = 'Failed to load reviews. Please try again.'
+        debugInfo.value = { error: err.message, response: err.response }
       } finally {
         loading.value = false
       }
@@ -190,14 +243,34 @@ export default {
 
       try {
         const response = await api.get('/reviews/reviewable-products')
-        reviewableProducts.value = response.data.products.filter(p => p.product.id == props.productId)
-      } catch (error) {
-        console.error('Error loading reviewable products:', error)
+        
+        // Handle different response structures
+        let productsData = []
+        if (response.data?.products) {
+          productsData = response.data.products
+        } else if (response.products) {
+          productsData = response.products
+        } else if (Array.isArray(response.data)) {
+          productsData = response.data
+        } else if (Array.isArray(response)) {
+          productsData = response
+        }
+
+        reviewableProducts.value = productsData.filter(p => p.product?.id == props.productId)
+      } catch (err) {
+        console.error('Error loading reviewable products:', err)
       }
     }
 
     const submitReview = async () => {
-      if (!selectedOrderId.value || !selectedRating.value) return
+      if (!selectedOrderId.value || !selectedRating.value) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Missing Information',
+          text: 'Please select an order and rating'
+        })
+        return
+      }
 
       submitting.value = true
       try {
@@ -217,12 +290,19 @@ export default {
         await loadReviews(1)
         await loadReviewableProducts()
 
-        // Show success message (you might want to use a toast notification)
-        alert('Review submitted successfully!')
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Review submitted successfully!'
+        })
 
-      } catch (error) {
-        console.error('Error submitting review:', error)
-        alert('Error submitting review. Please try again.')
+      } catch (err) {
+        console.error('Error submitting review:', err)
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: err.response?.data?.message || 'Error submitting review. Please try again.'
+        })
       } finally {
         submitting.value = false
       }
@@ -233,7 +313,12 @@ export default {
     }
 
     const formatDate = (dateString) => {
-      return new Date(dateString).toLocaleDateString()
+      if (!dateString) return 'Unknown date'
+      try {
+        return new Date(dateString).toLocaleDateString()
+      } catch {
+        return 'Invalid date'
+      }
     }
 
     onMounted(() => {
@@ -245,6 +330,7 @@ export default {
       reviews,
       stats,
       loading,
+      error,
       showReviewForm,
       selectedRating,
       reviewComment,
@@ -252,6 +338,10 @@ export default {
       submitting,
       reviewableProducts,
       canReview,
+      hasMorePages,
+      currentPage,
+      debugMode,
+      debugInfo,
       submitReview,
       loadMoreReviews,
       formatDate
@@ -331,6 +421,7 @@ export default {
 .progress-bar {
   background-color: #f39c12;
   border-radius: 4px;
+  height: 100%;
 }
 
 .rating-count {
@@ -366,6 +457,11 @@ export default {
   margin-top: 0.75rem;
 }
 
+.review-content p {
+  margin: 0;
+  line-height: 1.6;
+}
+
 .review-form .card-body {
   padding: 1.5rem;
 }
@@ -395,5 +491,13 @@ export default {
 
 .theme-btn.alt-color:hover {
   background-color: #2980b9;
+}
+
+pre {
+  background: #f5f5f5;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  overflow-x: auto;
 }
 </style>

@@ -85,9 +85,9 @@
                             </div>
                           </div>
                         </td>
-                        <td class="text-center">${{ Number(item.price).toFixed(2) }}</td>
+                        <td class="text-center">${{ Number(item.product.price).toFixed(2) }}</td>
                         <td class="text-center">{{ item.quantity }}</td>
-                        <td class="text-center">${{ (Number(item.price) * item.quantity).toFixed(2) }}</td>
+                        <td class="text-center">${{ (Number(item.product.price) * item.quantity).toFixed(2) }}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -127,6 +127,10 @@
                   <span>{{ formatDate(order.created_at) }}</span>
                 </div>
                 <hr>
+                <div class="d-flex justify-content-between">
+                  <span class="h6">Shipping Cost:</span>
+                  <span class="h6 text-primary">${{ Number(order.shipping_cost).toFixed(2) }}</span>
+                </div>
                 <div class="d-flex justify-content-between">
                   <span class="h5">Total Amount:</span>
                   <span class="h5 text-primary">${{ Number(order.total_amount).toFixed(2) }}</span>

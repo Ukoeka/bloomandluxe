@@ -60,18 +60,8 @@
                         <input type='button' value='+' class='qtyplus plus' @click="incrementQty">
                       </div>
                     </div>
-                    <a href="javascript:void(0)" class="icon">
-                      <i class="far fa-heart"></i>
-                    </a>
-                    <div class="social-profile">
-                      <span class="plus-btn"><i class="far fa-share"></i></span>
-                      <ul>
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                      </ul>
-                    </div>
+                    
+                    
                   </div>
                   <div class="shop-btn">
                     <button @click="addToCart" class="theme-btn">

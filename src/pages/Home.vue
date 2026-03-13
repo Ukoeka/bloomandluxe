@@ -54,7 +54,7 @@
           </div>
           <div class="swiper-slide">
             <div class="hero-3">
-              <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/hero3.jpeg);"></div>
+              <div class="hero-bg bg-cover" style="background-image: url(assets/img/hero/kiddies-hero.png); background-size: auto;"></div>
               <div class="container">
                 <div class="row g-4">
                   <div class="col-lg-10">

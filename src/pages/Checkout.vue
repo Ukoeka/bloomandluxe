@@ -143,7 +143,7 @@
                           <p class="mb-0">{{ deliveryMethodLabel }}: ${{ shippingFee.toFixed(2) }}</p>
                         </div>
                         <div v-else class="text-muted">
-                          <p class="mb-0">Select delivery method</p>
+                          <p class="mb-0">Select deliver method</p>
                         </div>
                       </div>
                     </div>
