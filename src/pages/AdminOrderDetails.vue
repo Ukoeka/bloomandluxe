@@ -18,7 +18,7 @@
           <div class="card shadow-sm border-0 mb-4">
             <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
               <h5 class="mb-0">Order Items</h5>
-              <span class="text-muted">Order Date: {{ formatDateTime(order.date) }}</span>
+              <span class="text-muted">Order Date: {{ formatDateTime(order.created_at) }}</span>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -37,7 +37,7 @@
                         <div class="d-flex align-items-center gap-3">
                           <img :src="getImageUrl(item.product?.image)" :alt="item.name" class="img-fluid rounded"
                             style="width: 50px; height: 50px; object-fit: cover;">
-                          <span>{{ item.name || 'Unknown Product' }}</span>
+                          <span>{{ item.product.name || 'Unknown product' }}</span>
                         </div>
                       </td>
                       <td class="text-center">${{ Number(item.price).toFixed(2) }}</td>
@@ -51,9 +51,10 @@
                       <td class="text-center">${{ (Number(order.total_amount) - Number(order.shipping_cost || 0) - Number(order.tax_amount || 0)).toFixed(2) }}</td>
                     </tr>
                     <tr v-if="order.shipping_cost > 0">
-                      <td colspan="3" class="text-end fw-bold">Shipping:</td>
+                      <td colspan="3" class="text-end fw-bold">Shipping Fee:</td>
                       <td class="text-center">${{ Number(order.shipping_cost).toFixed(2) }}</td>
                     </tr>
+                    
                     <tr v-if="order.tax_amount > 0">
                       <td colspan="3" class="text-end fw-bold">Tax (10%):</td>
                       <td class="text-center">${{ Number(order.tax_amount).toFixed(2) }}</td>

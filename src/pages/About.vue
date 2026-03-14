@@ -44,7 +44,7 @@ We strive to make quality fashion accessible to everyone — blending elegance, 
             </div>
             <div class="col-xl-4 col-lg-6 col-md-6">
               <div class="about-image">
-                <img src="/assets/img/about/03.jpg" alt="img">
+                <img src="/assets/img/shop/about.png" alt="img">
               </div>
             </div>
             <div class="col-xl-4 col-lg-6 col-md-6">
@@ -70,15 +70,7 @@ Each piece we curate blends modern design with everyday practicality, helping yo
     </section>
 
     <!-- video-bg-Section Start -->
-    <div class="video-bg-section fix">
-      <div class="container-fluid">
-        <div class="video-wrapper bg-cover" style="background-image: url(/assets/img/cta/video-bg.jpg);">
-          <a href="https://www.youtube.com/watch?v=Cn4G2lZ_g2I" class="video-btn video-popup">
-            <i class="fa-duotone fa-play"></i>
-          </a>
-        </div>
-      </div>
-    </div>
+    
 
     <!-- About-Section Start -->
     <section class="about-section section-padding fix">
@@ -87,9 +79,9 @@ Each piece we curate blends modern design with everyday practicality, helping yo
           <div class="row g-4">
             <div class="col-xl-6">
               <div class="about-image">
-                <img src="/assets/img/instagram/09.jpg" alt="img" class="wow fadeInUp" data-wow-delay=".3s">
+                <img src="/assets/img/shop/ear-1.jpeg" alt="img" class="wow fadeInUp" data-wow-delay=".3s">
                 <div class="about-image-2">
-                  <img src="/assets/img/instagram/11.jpg" alt="img" class="wow fadeInUp" data-wow-delay=".5s">
+                  <img src="/assets/img/product/bag4.jpg" alt="img" class="wow fadeInUp" data-wow-delay=".5s">
                 </div>
               </div>
             </div>
@@ -108,7 +100,7 @@ Each piece we curate blends modern design with everyday practicality, helping yo
                   <p class="wow fadeInUp" data-wow-delay=".5s">
                     Our Limited Edition Collaborations bring you one-of-a-kind pieces created with top designers and fashion creatives. Each collection is crafted in small batches — once they’re gone, they’re gone for good. Shop now and own a look that’s uniquely yours.
                   </p>
-                  <a href="/about" class="theme-btn wow fadeInUp" data-wow-delay=".7s">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
+                  <a href="/shop" class="theme-btn wow fadeInUp" data-wow-delay=".7s">Shop Now <i class="fa-regular fa-arrow-right"></i></a>
                 </div>
               </div>
             </div>
@@ -123,7 +115,7 @@ Each piece we curate blends modern design with everyday practicality, helping yo
         <div class="row g-0">
           <div class="col-xl-6">
             <div class="testimonial-image">
-              <img src="/assets/img/testimonial/01.jpg" alt="img">
+              <img src="/assets/img/shop/sheabutter.jpeg" alt="img">
             </div>
           </div>
           <div class="col-xl-6">
@@ -132,7 +124,6 @@ Each piece we curate blends modern design with everyday practicality, helping yo
                 <img src="/assets/img/icon/quate.svg" alt="img">
               </div>
               <h3>What Customers Say</h3>
-              <p>Showing our latest arrival on this summer</p>
               <div class="swiper testimonial-slider-2">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
@@ -144,24 +135,7 @@ Each piece we curate blends modern design with everyday practicality, helping yo
                         alteration in some form, by injected humour, or randomised words which don't look
                         even slightly believable. If you are going to use a passage of Lorem Ipsum
                       </p>
-                      <div class="star">
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star color"></i>
-                      </div>
-                      <div class="client-image">
-                        <div class="image">
-                          <img src="/assets/img/testimonial/client-4.png" alt="img">
-                        </div>
-                        <div class="image">
-                          <img src="/assets/img/testimonial/client-5.png" alt="img">
-                        </div>
-                        <div class="image">
-                          <img src="/assets/img/testimonial/client-6.png" alt="img">
-                        </div>
-                      </div>
+                      
                     </div>
                   </div>
                   <div class="swiper-slide">
@@ -173,24 +147,6 @@ Each piece we curate blends modern design with everyday practicality, helping yo
                         alteration in some form, by injected humour, or randomised words which don't look
                         even slightly believable. If you are going to use a passage of Lorem Ipsum
                       </p>
-                      <div class="star">
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star color"></i>
-                      </div>
-                      <div class="client-image">
-                        <div class="image">
-                          <img src="/assets/img/testimonial/client-4.png" alt="img">
-                        </div>
-                        <div class="image">
-                          <img src="/assets/img/testimonial/client-5.png" alt="img">
-                        </div>
-                        <div class="image">
-                          <img src="/assets/img/testimonial/client-6.png" alt="img">
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
