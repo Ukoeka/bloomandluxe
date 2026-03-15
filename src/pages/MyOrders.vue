@@ -1,6 +1,6 @@
 <template>
   <SharedLayout>
-    <section class="my-orders-section section-padding fix">
+    <section class="my-orders-section section-padding">
       <div class="container">
         <div class="top-content mb-5">
           <h2>My Orders</h2>
@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import SharedLayout from '../components/SharedLayout.vue'
 import { useAuthStore } from '../stores/auth'
@@ -104,37 +104,25 @@ export default {
     const error = ref(null)
 
     const fetchOrders = async () => {
-      // Only fetch if user is authenticated
       if (!authStore.isAuthenticated) {
-        console.log('User not authenticated, showing message instead of redirect')
-        // Don't redirect immediately, let the user see the message and choose to login
+        router.push('/login')
         return
       }
 
-      console.log('Fetching orders with token:', authStore.token ? 'Token present' : 'NO TOKEN')
-      
       loading.value = true
       error.value = null
       try {
-        const result = await authStore.fetchOrders()
-        console.log('Orders fetched successfully:', result)
-        orders.value = result
+        orders.value = await authStore.fetchOrders()
       } catch (err) {
-        // Handle unauthorized error
-        console.error('Error fetching orders:', err)
-        console.error('Response status:', err.response?.status)
-        console.error('Response data:', err.response?.data)
-        
         if (err.response?.status === 401 || err.response?.status === 403) {
-          error.value = 'Your session has expired. Please login again.'
-          // Logout the user and redirect to login
-          authStore.logout()
+          error.value = 'Please login to view your orders.'
           setTimeout(() => {
             router.push('/login')
           }, 2000)
         } else {
           error.value = 'Failed to fetch orders. Please try again later.'
         }
+        console.error('Error fetching orders:', err)
       } finally {
         loading.value = false
       }
@@ -167,30 +155,56 @@ export default {
       }
     }
 
+    // Sidebar handlers stored so they can be cleaned up on unmount
+    let $sidebarClose = null
+    let $sidebarToggle = null
+
     onMounted(() => {
       fetchOrders()
-      
-      if (window.$) {
-        const $ = window.$;
-        
-        // Sticky Header
-        $(window).on("scroll", function() {
-          if ($(this).scrollTop() > 250) {
-            $("#header-sticky").addClass("sticky");
-          } else {
-            $("#header-sticky").removeClass("sticky");
-          }
-        });
 
-        // Sidebar Toggle
-        $(".offcanvas__close,.offcanvas__overlay").on("click", function() {
-          $(".offcanvas__info").removeClass("info-open");
-          $(".offcanvas__overlay").removeClass("overlay-open");
-        });
-        $(".sidebar__toggle").on("click", function() {
-          $(".offcanvas__info").addClass("info-open");
-          $(".offcanvas__overlay").addClass("overlay-open");
-        });
+      if (window.$) {
+        const $ = window.$
+
+        // The sticky header normally activates when scrollTop > 250.
+        // On this page the content is short so the user never scrolls
+        // that far — the header never sticks and overlaps the content.
+        // Force it sticky immediately on mount and release on unmount.
+        $('#header-sticky').addClass('sticky')
+
+        $sidebarClose = $('.offcanvas__close,.offcanvas__overlay')
+        $sidebarToggle = $('.sidebar__toggle')
+
+        $sidebarClose.on('click', function () {
+          $('.offcanvas__info').removeClass('info-open')
+          $('.offcanvas__overlay').removeClass('overlay-open')
+        })
+
+        $sidebarToggle.on('click', function () {
+          $('.offcanvas__info').addClass('info-open')
+          $('.offcanvas__overlay').addClass('overlay-open')
+        })
+      }
+    })
+
+    // Remove sidebar listeners when leaving this page
+    onUnmounted(() => {
+      if (window.$) {
+        const $ = window.$
+
+        // Let the global scroll handler in main.js re-evaluate
+        // sticky state naturally on the next page
+        if ($(window).scrollTop() <= 250) {
+          $('#header-sticky').removeClass('sticky')
+        }
+
+        if ($sidebarClose) {
+          $sidebarClose.off('click')
+          $sidebarClose = null
+        }
+        if ($sidebarToggle) {
+          $sidebarToggle.off('click')
+          $sidebarToggle = null
+        }
       }
     })
 
@@ -208,6 +222,11 @@ export default {
 </script>
 
 <style scoped>
+.my-orders-section {
+  min-height: 60vh;
+  isolation: isolate;
+}
+
 .badge {
   padding: 0.5em 0.75em;
   font-weight: 500;

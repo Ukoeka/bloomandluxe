@@ -32,13 +32,7 @@
 
         //>> Sticky Header Js Start <<//
 
-        $windowOn.on("scroll", function() {
-            if ($(this).scrollTop() > 250) {
-                $("#header-sticky").addClass("sticky");
-            } else {
-                $("#header-sticky").removeClass("sticky");
-            }
-        });
+  
 
         // Sidebar Area Start <<//
         $(".share-btn").on("click", function() {

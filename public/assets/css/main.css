@@ -3221,11 +3221,6 @@ span {
   font-size: 20px;
 }
 
-.header-1 {
-  position: static;
-  background: transparent;
-  z-index: 9999;
-}
 .header-1 .container-fluid {
   padding: 0 90px;
 }
@@ -4013,7 +4008,7 @@ span {
 }
 
 .fix {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .ralt {
@@ -4585,6 +4580,8 @@ span {
 .bg-light-orange {
   background-color: #0FE2D1 !important;
 }
+/* Prevents sticky header scroll repaints from flickering into page sections */
+
 
 .bg-light-grey {
   background-color: #EB1313 !important;

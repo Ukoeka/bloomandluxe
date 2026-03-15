@@ -288,7 +288,6 @@ export default {
     const authStore = useAuthStore()
 
     const totalItems = computed(() => {
-      // Only calculate after cart is initialized
       if (!cartStore.initialized) return 0
       return cartStore.getTotalItems()
     })
@@ -302,39 +301,26 @@ export default {
 
     const getImageUrl = (imagePath) => {
       if (!imagePath) return '/assets/img/cart/01.jpg'
-
       if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
         return imagePath
       }
-
       const baseUrl = 'https://api.bloomandluxe.store/api'
       return baseUrl + imagePath.replace(/^\//, '')
     }
 
     const handleLogout = async () => {
       try {
-        // Close sidebar if open
         const targetElement = document.getElementById('targetElement')
         if (targetElement) {
           targetElement.classList.add('side_bar_hidden')
         }
-
-        // Call logout from auth store
         await authStore.logout()
-
-        // Clear all localStorage items related to auth
         localStorage.removeItem('token')
         localStorage.removeItem('user')
         localStorage.removeItem('refresh_token')
-        
-        // Optional: Clear cart if you want to reset cart on logout
-        // cartStore.clearCart()
-
-        // Force reload to clear all component state
         window.location.href = '/'
       } catch (error) {
         console.error('Logout error:', error)
-        // Force clear even if API call fails
         localStorage.clear()
         window.location.href = '/'
       }
@@ -373,13 +359,22 @@ export default {
       }
 
       // Sticky Header
-      $(window).on("scroll", function() {
-        if ($(this).scrollTop() > 250) {
-          $("#header-sticky").addClass("sticky");
+      // Checks on scroll AND immediately on mount.
+      // On short pages (like My Orders) the user can never scroll 250px,
+      // so we also check if the page itself is too short to ever reach the
+      // threshold — if so, sticky is applied straight away.
+      const updateSticky = () => {
+        const scrolled = $(window).scrollTop() > 250;
+        const pageToShortToScroll = $(document).height() - $(window).height() < 250;
+        if (scrolled || pageToShortToScroll) {
+          $('#header-sticky').addClass('sticky');
         } else {
-          $("#header-sticky").removeClass("sticky");
+          $('#header-sticky').removeClass('sticky');
         }
-      });
+      };
+
+      $(window).on('scroll', updateSticky);
+      updateSticky(); // run once immediately on every page load
 
       // Search Popup
       $(".search-trigger").on("click", function (e) {
