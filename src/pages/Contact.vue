@@ -36,26 +36,61 @@
               <div class="col-lg-8">
                 <div class="comment-form-wrap">
                   <h3>Sent A Message</h3>
-                  <form action="https://demo.labibly.xyz/karto/contact.php" id="contact-form2" method="POST">
+                  <!-- Success Message -->
+                  <div v-if="successMessage" class="alert alert-success mb-4">
+                    {{ successMessage }}
+                  </div>
+                  <!-- Error Message -->
+                  <div v-if="errorMessage" class="alert alert-danger mb-4">
+                    {{ errorMessage }}
+                  </div>
+                  <form @submit.prevent="submitForm" id="contact-form2">
                     <div class="row g-4">
                       <div class="col-lg-12">
                         <div class="form-clt">
-                          <input type="text" name="name" id="name" placeholder="Your Name">
+                          <input 
+                            type="text" 
+                            name="name" 
+                            id="name" 
+                            v-model="formData.name"
+                            placeholder="Your Name"
+                            required
+                          >
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-clt">
-                          <input type="text" name="email" id="email20" placeholder="Email address">
+                          <input 
+                            type="email" 
+                            name="email" 
+                            id="email20" 
+                            v-model="formData.email"
+                            placeholder="Email address"
+                            required
+                          >
                         </div>
                       </div>
                        <div class="col-lg-12">
                         <div class="form-clt">
-                          <input type="text" name="subject" id="name" placeholder="Subject">
+                          <input 
+                            type="text" 
+                            name="subject" 
+                            id="subject" 
+                            v-model="formData.subject"
+                            placeholder="Subject"
+                            required
+                          >
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-clt">
-                          <textarea name="message" id="message" placeholder="Type your message"></textarea>
+                          <textarea 
+                            name="message" 
+                            id="message" 
+                            v-model="formData.message"
+                            placeholder="Type your message"
+                            required
+                          ></textarea>
                         </div>
                       </div>
                       <div class="col-lg-12">
@@ -69,8 +104,9 @@
                         </div> -->
                       </div>
                       <div class="col-lg-12">
-                        <button type="submit" class="theme-btn">
-                          Send Message
+                        <button type="submit" class="theme-btn" :disabled="loading">
+                          <span v-if="loading">Sending...</span>
+                          <span v-else>Send Message</span>
                         </button>
                       </div>
                     </div>
@@ -121,8 +157,9 @@
 </template>
 
 <script>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import SharedLayout from '../components/SharedLayout.vue'
+import { useApiStore } from '../stores/api'
 
 export default {
   name: 'ContactPage',
@@ -130,6 +167,71 @@ export default {
     SharedLayout
   },
   setup() {
+    const api = useApiStore()
+    
+    // Form data
+    const formData = ref({
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    })
+    
+    // Loading state
+    const loading = ref(false)
+    
+    // Message states
+    const successMessage = ref('')
+    const errorMessage = ref('')
+    
+    // Submit form handler
+    const submitForm = async () => {
+      // Clear previous messages
+      successMessage.value = ''
+      errorMessage.value = ''
+      
+      // Basic validation
+      if (!formData.value.name || !formData.value.email || !formData.value.subject || !formData.value.message) {
+        errorMessage.value = 'Please fill in all fields'
+        return
+      }
+      
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(formData.value.email)) {
+        errorMessage.value = 'Please enter a valid email address'
+        return
+      }
+      
+      loading.value = true
+      
+      try {
+        const response = await api.post('/contact', {
+          name: formData.value.name,
+          email: formData.value.email,
+          subject: formData.value.subject,
+          message: formData.value.message
+        })
+        
+        // Show success message
+        successMessage.value = response.message || 'Your message has been sent successfully! We will get back to you soon.'
+        
+        // Reset form
+        formData.value = {
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        }
+        
+      } catch (error) {
+        console.error('Contact form error:', error)
+        errorMessage.value = error.response?.data?.message || error.message || 'Failed to send message. Please try again.'
+      } finally {
+        loading.value = false
+      }
+    }
+    
     onMounted(() => {
       // Preloader
       setTimeout(() => {
@@ -216,12 +318,41 @@ export default {
       }
     });
 
-    return {};
+    return {
+      formData,
+      loading,
+      successMessage,
+      errorMessage,
+      submitForm
+    };
   }
 }
 </script>
 <style scoped>
 .contact-right{
   text-transform:none;
+}
+
+.alert {
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.theme-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 </style>

@@ -23,7 +23,7 @@
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
                 <td>${{ product.price }}</td>
-                <td>{{ product.category?.name || 'N/A' }}</td>
+                <td class="stock">{{ product.category?.name || 'N/A' }}</td>
                 <td>{{ product.stock }}</td>
                 <td>
                   <AdminTableActions
@@ -122,5 +122,8 @@ export default {
 .admin-products .btn-outline-danger:hover {
   background-color: var(--theme-2, #EF6CC2);
   border-color: var(--theme-2, #EF6CC2);
+}
+.stock{
+  color: white;
 }
 </style>
