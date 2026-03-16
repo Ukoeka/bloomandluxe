@@ -47,7 +47,7 @@
             <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
               <div class="offcanvas__logo">
                 <a href="/">
-                  <img src="/assets/img/logo/main-logo.png" alt="logo-img">
+                  <img src="/assets/img/logo/main-logo1.png" alt="logo-img">
                 </a>
               </div>
               <div class="offcanvas__close">
@@ -107,7 +107,7 @@
         <ul class="contact-list">
           <li>
             <i class="fa-solid fa-phone"></i>
-            <a href="tel:+40276328246">+402 763 282 46</a>
+            <a href="tel:+61401596099">+61 401 596 099</a>
           </li>
         </ul>
         <div class="flag-wrapper">

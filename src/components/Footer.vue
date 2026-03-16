@@ -14,7 +14,7 @@
               <div class="footer-content">
                 <div class="text">
                   <p>Got Questions? Call us</p>
-                  <a href="tel:+67041390762">+670 413 90 762</a>
+                  <a href="tel:+61401596099">+61 401 596 099</a>
                 </div>
                 <ul class="contact-list">
                   <li>

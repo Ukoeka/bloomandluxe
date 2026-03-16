@@ -128,24 +128,21 @@ Each piece we curate blends modern design with everyday practicality, helping yo
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
                     <div class="info-content">
-                      <h4>nelson richard</h4>
-                      <span>fashion designer</span>
+                      <h4>Emma Clarke</h4>
+                      <span>Adelaide</span>
                       <p>
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                        alteration in some form, by injected humour, or randomised words which don't look
-                        even slightly believable. If you are going to use a passage of Lorem Ipsum
+                      Such a unique store! The outfit I bought is fashionable, <br> comfortable, and really stands out. I get compliments every time I wear it. Highly recommend!  
                       </p>
                       
                     </div>
                   </div>
                   <div class="swiper-slide">
                     <div class="info-content">
-                      <h4>nelson richard</h4>
-                      <span>fashion designer</span>
+                      <h4>Jack Mitchell</h4>
+                      <span>Melbourne</span>
                       <p>
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                        alteration in some form, by injected humour, or randomised words which don't look
-                        even slightly believable. If you are going to use a passage of Lorem Ipsum
+                        
+                        Great quality clothing and beautiful designs.  <br>Shipping was quick and the packaging was lovely.
                       </p>
                     </div>
                   </div>
