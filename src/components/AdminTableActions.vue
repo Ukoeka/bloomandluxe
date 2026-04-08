@@ -40,7 +40,7 @@ export default {
     },
     showView: {
       type: Boolean,
-      default: true
+      default: false
     },
     showEdit: {
       type: Boolean,
