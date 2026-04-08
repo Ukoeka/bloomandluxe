@@ -28,6 +28,7 @@
                 <td>
                   <AdminTableActions
                     :item="product"
+                    @view="viewProduct"
                     @edit="editProduct"
                     @delete="deleteProduct($event.id)"
                   />
@@ -77,6 +78,10 @@ export default {
       router.push(`/admin/products/add/${product.id}`)
     }
 
+    const viewProduct = (product) => {
+      router.push(`/admin/products/view/${product.id}`)
+    }
+
     const deleteProduct = async (id) => {
       if (confirm('Are you sure you want to delete this product?')) {
         try {
@@ -96,6 +101,7 @@ export default {
     return {
       loading,
       products,
+      viewProduct,
       editProduct,
       deleteProduct
     }

@@ -22,6 +22,7 @@ import Category from '../pages/Category.vue'
 import AdminLogin from '../pages/AdminLogin.vue'
 import AdminDashboard from '../pages/AdminDashboard.vue'
 import AdminProducts from '../pages/AdminProducts.vue'
+import AdminProductView from '../pages/AdminProductView.vue'
 import AdminOrders from '../pages/AdminOrders.vue'
 import AdminAddProduct from '../pages/AdminAddProduct.vue'
 import AdminUsers from '../pages/AdminUsers.vue'
@@ -139,6 +140,12 @@ const routes = [
     path: '/admin/products',
     name: 'AdminProducts',
     component: AdminProducts,
+    meta: { requiresAdminAuth: true }
+  },
+  {
+    path: '/admin/products/view/:id',
+    name: 'AdminProductView',
+    component: AdminProductView,
     meta: { requiresAdminAuth: true }
   },
   {

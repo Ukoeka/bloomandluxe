@@ -1,6 +1,15 @@
 <template>
   <div class="admin-table-actions">
     <button
+      v-if="showView"
+      class="btn btn-sm btn-outline-info me-2"
+      @click="$emit('view', item)"
+      :title="viewTitle"
+    >
+      <i class="fas fa-eye" v-if="showIcons"></i>
+      {{ viewText }}
+    </button>
+    <button
       v-if="showEdit"
       class="btn btn-sm btn-outline-primary me-2"
       @click="$emit('edit', item)"
@@ -29,6 +38,10 @@ export default {
       type: Object,
       required: true
     },
+    showView: {
+      type: Boolean,
+      default: true
+    },
     showEdit: {
       type: Boolean,
       default: true
@@ -40,6 +53,14 @@ export default {
     showIcons: {
       type: Boolean,
       default: false
+    },
+    viewText: {
+      type: String,
+      default: 'View'
+    },
+    viewTitle: {
+      type: String,
+      default: 'View item'
     },
     editText: {
       type: String,
@@ -58,7 +79,7 @@ export default {
       default: 'Delete item'
     }
   },
-  emits: ['edit', 'delete']
+  emits: ['view', 'edit', 'delete']
 }
 </script>
 <style scoped>
