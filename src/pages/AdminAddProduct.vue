@@ -48,8 +48,20 @@
                   <textarea v-model="productForm.description" class="form-control" id="productDescription" rows="4"></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="productImage" class="form-label">Product Image</label>
-                  <input type="file" class="form-control" id="productImage" accept="image/*" @change="handleImageUpload">
+                  <label for="productImages" class="form-label">Product Images</label>
+                  <input type="file" class="form-control" id="productImages" accept="image/*" multiple @change="handleImageUpload">
+                  <small class="text-muted">You can select multiple images</small>
+                </div>
+                <div class="mb-3" v-if="imagePreviews.length > 0">
+                  <label class="form-label">Image Previews</label>
+                  <div class="image-preview-grid">
+                    <div v-for="(preview, index) in imagePreviews" :key="index" class="image-preview-item">
+                      <img :src="preview" alt="Preview">
+                      <button type="button" class="btn btn-sm btn-danger remove-image" @click="removeImage(index)">
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <button type="submit" class="btn btn-primary" :disabled="loading || !isCategorySelected">
                   {{ loading ? 'Saving...' : (isEditing ? 'Update Product' : 'Save Product') }}
@@ -63,10 +75,21 @@
             <div class="card-body">
               <h5 class="card-title">Product Preview</h5>
               <div class="text-center mb-3">
-                <img v-if="imagePreview" :src="imagePreview" alt="Product preview" class="img-fluid" style="max-height: 200px;">
+                <div v-if="imagePreviews.length > 0" class="preview-carousel">
+                  <img :src="currentPreview" alt="Product preview" class="img-fluid" style="max-height: 200px;">
+                  <div class="preview-nav mt-2" v-if="imagePreviews.length > 1">
+                    <button type="button" class="btn btn-sm btn-secondary me-1" @click="prevPreview" :disabled="currentPreviewIndex === 0">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="preview-counter">{{ currentPreviewIndex + 1 }} / {{ imagePreviews.length }}</span>
+                    <button type="button" class="btn btn-sm btn-secondary ms-1" @click="nextPreview" :disabled="currentPreviewIndex === imagePreviews.length - 1">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
                 <div v-else class="text-muted">
                   <i class="fas fa-image fa-3x mb-2"></i>
-                  <p>No image selected</p>
+                  <p>No images selected</p>
                 </div>
               </div>
               <h6>{{ productForm.name || 'Product Name' }}</h6>
@@ -104,9 +127,10 @@ export default {
       category_id: '',
       stock: 0,
       description: '',
-      image: null
+      images: []
     })
-    const imagePreview = ref('')
+    const imagePreviews = ref([])
+    const currentPreviewIndex = ref(0)
     const categories = ref([])
     const loadingCategories = ref(false)
     const isEditing = ref(false)
@@ -185,7 +209,7 @@ export default {
           category_id: product.category_id || '',
           stock: product.stock || 0,
           description: product.description || '',
-          image: null // Don't pre-fill image file
+          images: []
         }
         
         // Find the category and set the parent category
@@ -200,8 +224,11 @@ export default {
           }
         }
         
-        if (product.image) {
-          imagePreview.value = product.image // Assuming the API returns the image URL
+        // Handle multiple images from API (could be an array or single string)
+        if (product.images && Array.isArray(product.images)) {
+          imagePreviews.value = product.images
+        } else if (product.image) {
+          imagePreviews.value = [product.image]
         }
       } catch (error) {
         console.error('Failed to fetch product:', error)
@@ -213,18 +240,43 @@ export default {
     }
 
     const handleImageUpload = (event) => {
-      const file = event.target.files[0]
-      if (file) {
-        productForm.value.image = file
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          imagePreview.value = e.target.result
+      const files = event.target.files
+      if (files && files.length > 0) {
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i]
+          if (file) {
+            productForm.value.images.push(file)
+            const reader = new FileReader()
+            reader.onload = (e) => {
+              imagePreviews.value.push(e.target.result)
+            }
+            reader.readAsDataURL(file)
+          }
         }
-        reader.readAsDataURL(file)
-      } else {
-        // Clear preview if no file selected
-        imagePreview.value = ''
-        productForm.value.image = null
+      }
+      // Reset the input value so user can select same files again if needed
+      event.target.value = ''
+    }
+
+    const removeImage = (index) => {
+      imagePreviews.value.splice(index, 1)
+      productForm.value.images.splice(index, 1)
+    }
+
+    const currentPreview = computed(() => {
+      if (imagePreviews.value.length === 0) return ''
+      return imagePreviews.value[currentPreviewIndex.value] || ''
+    })
+
+    const prevPreview = () => {
+      if (currentPreviewIndex.value > 0) {
+        currentPreviewIndex.value--
+      }
+    }
+
+    const nextPreview = () => {
+      if (currentPreviewIndex.value < imagePreviews.value.length - 1) {
+        currentPreviewIndex.value++
       }
     }
 
@@ -245,8 +297,11 @@ export default {
         formData.append('description', productForm.value.description)
         formData.append('is_active', '1')
 
-        if (productForm.value.image) {
-          formData.append('image', productForm.value.image)
+        // Append multiple images
+        if (productForm.value.images && productForm.value.images.length > 0) {
+          productForm.value.images.forEach((image, index) => {
+            formData.append(`images[${index}]`, image)
+          })
         }
 
         if (isEditing.value) {
@@ -279,7 +334,9 @@ export default {
 
     return {
       productForm,
-      imagePreview,
+      imagePreviews,
+      currentPreview,
+      currentPreviewIndex,
       categories,
       selectedCategory,
       mainCategories,
@@ -289,6 +346,9 @@ export default {
       isEditing,
       isCategorySelected,
       handleImageUpload,
+      removeImage,
+      prevPreview,
+      nextPreview,
       saveProduct
     }
   }
@@ -323,5 +383,53 @@ export default {
 .add-product-page .btn-primary:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.image-preview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-preview-item {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.image-preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-preview-item .remove-image {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  padding: 2px 5px;
+  font-size: 10px;
+  line-height: 1;
+  border-radius: 50%;
+}
+
+.preview-carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preview-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.preview-counter {
+  font-size: 12px;
+  color: #666;
 }
 </style>
