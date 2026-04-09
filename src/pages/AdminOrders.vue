@@ -200,13 +200,13 @@ export default {
 }
 
 .admin-orders .btn-primary {
-  background-color: var(--theme, #6B8F71);
-  border-color: var(--theme, #6B8F71);
+  background-color: #6B8F71;
+  border-color: #6B8F71;
 }
 
 .admin-orders .btn-primary:hover {
-  background-color: var(--header, #010F1C);
-  border-color: var(--header, #010F1C);
+  background-color: #010F1C;
+  border-color: #010F1C;
 }
 
 /* Pagination Styles */
@@ -245,15 +245,15 @@ export default {
 }
 
 .pagination-btn:hover:not(:disabled) {
-  background: var(--theme, #6B8F71);
+  background: #6B8F71;
   color: white;
-  border-color: var(--theme, #6B8F71);
+  border-color: #6B8F71;
 }
 
 .pagination-btn.active {
-  background: var(--theme, #6B8F71);
+  background: #6B8F71;
   color: white;
-  border-color: var(--theme, #6B8F71);
+  border-color: #6B8F71;
 }
 
 .pagination-btn:disabled {
