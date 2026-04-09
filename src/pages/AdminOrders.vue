@@ -2,9 +2,12 @@
   <AdminLayout>
     <AdminPreloader :loading="loadingOrders" message="Loading orders..." />
     <div class="admin-orders">
-      <h2 class="mb-4">Manage Orders</h2>
-      <div class="table-responsive">
-        <table class="table table-striped">
+      <div class="section-header mb-4">
+        <h2>Manage Orders</h2>
+      </div>
+      
+      <div class="table-container">
+        <table class="modern-table">
           <thead>
             <tr>
               <th>ID</th>
@@ -19,13 +22,13 @@
           </thead>
           <tbody>
             <tr v-for="order in paginatedOrders" :key="order.id">
-              <td>{{ order.id }}</td>
-              <td>{{ order.order_number || `#${order.id}` }}</td>
-              <td>{{ order.customer || 'N/A' }}</td>
-              <td>{{ new Date(order.date).toLocaleDateString() }}</td>
-              <td>${{ order.total }}</td>
+              <td class="order-id">#{{ order.id }}</td>
+              <td class="order-number">{{ order.order_number || `#${order.id}` }}</td>
+              <td class="customer-name">{{ order.customer || 'N/A' }}</td>
+              <td class="order-date">{{ new Date(order.date).toLocaleDateString() }}</td>
+              <td class="order-total">${{ order.total }}</td>
               <td>
-                <span :class="['badge', getPaymentStatusClass(order.payment_status)]">
+                <span class="payment-badge" :class="getPaymentStatusClass(order.payment_status)">
                   {{ order.payment_status || 'pending' }}
                 </span>
               </td>
@@ -33,8 +36,7 @@
                 <select
                   :value="order.status"
                   @change="updateStatus(order.id, $event.target.value)"
-                  class="form-select form-select-sm"
-                  style="width: auto;"
+                  class="status-select"
                 >
                   <option value="pending">Pending</option>
                   <option value="processing">Processing</option>
@@ -44,8 +46,8 @@
                 </select>
               </td>
               <td>
-                <router-link :to="'/admin/orders/' + order.id" class="btn btn-sm btn-primary">
-                  View Details
+                <router-link :to="'/admin/orders/' + order.id" class="action-btn">
+                  <i class="fas fa-eye me-1"></i>View Details
                 </router-link>
               </td>
             </tr>
@@ -53,7 +55,6 @@
         </table>
       </div>
 
-      <!-- Pagination -->
       <div class="pagination-container" v-if="totalPages > 1">
         <div class="pagination-info">
           Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ Math.min(currentPage * itemsPerPage, totalOrders) }} of {{ totalOrders }} entries
@@ -84,7 +85,6 @@
           </button>
         </div>
       </div>
-
     </div>
   </AdminLayout>
 </template>
@@ -106,7 +106,6 @@ export default {
     const loadingOrders = ref(false)
     const apiStore = useApiStore()
 
-    // Pagination state
     const currentPage = ref(1)
     const itemsPerPage = ref(10)
     const totalOrders = ref(0)
@@ -160,17 +159,17 @@ export default {
     const getPaymentStatusClass = (status) => {
       switch (status) {
         case 'succeeded':
-          return 'bg-success'
+          return 'succeeded'
         case 'pending':
         case 'processing':
-          return 'bg-warning text-dark'
+          return 'pending'
         case 'failed':
         case 'canceled':
-          return 'bg-danger'
+          return 'failed'
         case 'refunded':
-          return 'bg-info text-dark'
+          return 'refunded'
         default:
-          return 'bg-secondary'
+          return 'pending'
       }
     }
 
@@ -196,27 +195,148 @@ export default {
 
 <style scoped>
 .admin-orders {
-  padding: 20px 0;
+  padding: 0;
 }
 
-.admin-orders .btn-primary {
-  background-color: #6B8F71;
+.section-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.table-container {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modern-table thead th {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  color: #495057;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 20px 30px;
+  text-align: left;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.modern-table tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.modern-table tbody tr:hover {
+  background: linear-gradient(135deg, #f8f9fa, #f1f3f4);
+}
+
+.modern-table tbody td {
+  padding: 20px 30px;
+  vertical-align: middle;
+}
+
+.order-id {
+  font-weight: 600;
+  color: #6B8F71;
+}
+
+.order-number {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.customer-name {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.order-date {
+  color: #6c757d;
+}
+
+.order-total {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.payment-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.payment-badge.succeeded {
+  background: linear-gradient(135deg, #27ae60, #229954);
+  color: white;
+}
+
+.payment-badge.pending {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: white;
+}
+
+.payment-badge.failed {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+}
+
+.payment-badge.refunded {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+}
+
+.status-select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  background: white;
+  color: #495057;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.status-select:focus {
   border-color: #6B8F71;
+  outline: none;
 }
 
-.admin-orders .btn-primary:hover {
-  background-color: #010F1C;
-  border-color: #010F1C;
+.action-btn {
+  background: rgba(107, 143, 113, 0.1);
+  color: #6B8F71;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease;
 }
 
-/* Pagination Styles */
+.action-btn:hover {
+  background: #6B8F71;
+  color: white;
+  transform: translateY(-1px);
+}
+
 .pagination-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 20px 30px;
   margin-top: 20px;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #f1f3f4;
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+  border-radius: 12px;
 }
 
 .pagination-info {
@@ -265,6 +385,15 @@ export default {
   .pagination-container {
     flex-direction: column;
     gap: 15px;
+  }
+  
+  .modern-table {
+    font-size: 14px;
+  }
+  
+  .modern-table thead th,
+  .modern-table tbody td {
+    padding: 12px 15px;
   }
 }
 </style>
