@@ -25,8 +25,21 @@
                   <div class="tab-content">
                     <div id="thumb1" class="tab-pane fade show active">
                       <div class="shop-thumb text-center">
-                        <img :src="product.image || '/assets/img/product/bag1.jpg'" :alt="product.name" class="img-fluid" style="max-height: 500px; object-fit: contain;">
+                        <img :src="currentImage" :alt="product.name" class="img-fluid" style="max-height: 500px; object-fit: contain;">
                       </div>
+                    </div>
+                  </div>
+                  <div class="thumbnail-images d-flex gap-2 mt-3" v-if="productImages.length > 1">
+                    <div 
+                      v-for="(img, index) in productImages" 
+                      :key="index"
+                      class="thumbnail-item"
+                      :class="{ active: currentImageIndex === index }"
+                      @click="currentImageIndex = index"
+                      style="cursor: pointer; width: 80px; height: 80px; border: 2px solid #ddd; padding: 2px;"
+                      :style="currentImageIndex === index ? 'border-color: #f39c12;' : ''"
+                    >
+                      <img :src="img" :alt="`${product.name} ${index + 1}`" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                   </div>
                 </div>
@@ -116,7 +129,7 @@
                     </div>
                     <div class="col-xl-6 col-lg-6 mt-5 mt-lg-0">
                       <div class="description-image">
-                        <img :src="product.image" alt="img">
+                        <img :src="currentImage" alt="img">
                       </div>
                     </div>
                   </div>
@@ -275,6 +288,23 @@ export default {
     const loading = ref(true)
     const error = ref(null)
     const quantity = ref(1)
+    const currentImageIndex = ref(0)
+
+    const productImages = computed(() => {
+      if (!product.value) return []
+      const images = []
+      if (product.value.image) images.push(product.value.image)
+      if (product.value.images && Array.isArray(product.value.images)) {
+        product.value.images.forEach(img => {
+          if (img && !images.includes(img)) images.push(img)
+        })
+      }
+      return images.length > 0 ? images : ['/assets/img/product/bag1.jpg']
+    })
+
+    const currentImage = computed(() => {
+      return productImages.value[currentImageIndex.value] || '/assets/img/product/bag1.jpg'
+    })
 
     // Calculate total price based on quantity
     const totalPrice = computed(() => {
@@ -285,6 +315,7 @@ export default {
     const fetchProduct = async (id) => {
       loading.value = true
       error.value = null
+      currentImageIndex.value = 0
       try {
         const response = await apiStore.get(`products/${id}`)
         product.value = response.data || response
@@ -377,7 +408,10 @@ export default {
       totalPrice,
       addToCart,
       incrementQty,
-      decrementQty
+      decrementQty,
+      productImages,
+      currentImage,
+      currentImageIndex
     }
   }
 }
