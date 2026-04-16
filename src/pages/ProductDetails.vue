@@ -25,21 +25,18 @@
                   <div class="tab-content">
                     <div id="thumb1" class="tab-pane fade show active">
                       <div class="shop-thumb text-center">
-                        <img :src="currentImage" :alt="product.name" class="img-fluid" style="max-height: 500px; object-fit: contain;">
+                        <img :src="currentImage" :alt="product.name" class="img-fluid"
+                          style="max-height: 500px; object-fit: contain;">
                       </div>
                     </div>
                   </div>
                   <div class="thumbnail-images d-flex gap-2 mt-3" v-if="productImages.length > 1">
-                    <div 
-                      v-for="(img, index) in productImages" 
-                      :key="index"
-                      class="thumbnail-item"
-                      :class="{ active: currentImageIndex === index }"
-                      @click="currentImageIndex = index"
+                    <div v-for="(img, index) in productImages" :key="index" class="thumbnail-item"
+                      :class="{ active: currentImageIndex === index }" @click="currentImageIndex = index"
                       style="cursor: pointer; width: 80px; height: 80px; border: 2px solid #ddd; padding: 2px;"
-                      :style="currentImageIndex === index ? 'border-color: #f39c12;' : ''"
-                    >
-                      <img :src="img" :alt="`${product.name} ${index + 1}`" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                      :style="currentImageIndex === index ? 'border-color: #f39c12;' : ''">
+                      <img :src="img" :alt="`${product.name} ${index + 1}`" class="img-fluid"
+                        style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                   </div>
                 </div>
@@ -48,7 +45,8 @@
                 <div class="product-details-content">
                   <h3 class="pb-3">{{ product.name }}</h3>
                   <div class="star pb-3">
-                    <i class="fas fa-star" v-for="i in 5" :key="i" :style="{ color: i <= Math.round(product.average_rating) ? '#f39c12' : '#ddd' }"></i>
+                    <i class="fas fa-star" v-for="i in 5" :key="i"
+                      :style="{ color: i <= Math.round(product.average_rating) ? '#f39c12' : '#ddd' }"></i>
                     <span class="ms-2">({{ product.total_reviews }} Customer Review)</span>
                   </div>
                   <p class="mb-3">
@@ -69,12 +67,13 @@
                     <div class="cart-quantity">
                       <div class='quantity d-flex align-items-center justify-content-center'>
                         <input type='button' value='-' class='qtyminus minus' @click="decrementQty">
-                        <input type='text' name='quantity' v-model='quantity' class='qty text-center' style="width: 50px;">
+                        <input type='text' name='quantity' v-model='quantity' class='qty text-center'
+                          style="width: 50px;">
                         <input type='button' value='+' class='qtyplus plus' @click="incrementQty">
                       </div>
                     </div>
-                    
-                    
+
+
                   </div>
                   <div class="shop-btn">
                     <button @click="addToCart" class="theme-btn">
@@ -85,8 +84,10 @@
                     </button> -->
                   </div>
                   <!-- <h6 class="details-info"><span>SKU:</span> <a href="javascript:void(0)">{{ product.sku || 'N/A' }}</a></h6> -->
-                  <h6 class="details-info"><span>Categories:</span> <a href="javascript:void(0)">{{ product.category?.name || 'Uncategorized' }}</a></h6>
-                  <h6 class="details-info style-2"><span>Tags:</span> <a href="javascript:void(0)"> <b>{{ product.tags || 'fashion' }}</b></a></h6>
+                  <h6 class="details-info"><span>Categories:</span> <a href="javascript:void(0)">{{
+                    product.category?.name || 'Uncategorized' }}</a></h6>
+                  <h6 class="details-info style-2"><span>Tags:</span> <a href="javascript:void(0)"> <b>{{ product.tags
+                        || 'fashion' }}</b></a></h6>
                 </div>
               </div>
             </div>
@@ -106,7 +107,7 @@
               </li>
               <li class="nav-item">
                 <a href="#additional" data-bs-toggle="tab" class="nav-link">
-                  <h6>Additional Information  </h6>
+                  <h6>Additional Information </h6>
                 </a>
               </li>
               <li class="nav-item">
@@ -282,7 +283,7 @@ export default {
     const route = useRoute()
     const apiStore = useApiStore()
     const cartStore = useCartStore()
-    
+
     const productId = ref(route.params.id)
     const product = ref(null)
     const loading = ref(true)
@@ -296,11 +297,13 @@ export default {
       if (product.value.image) images.push(product.value.image)
       if (product.value.images && Array.isArray(product.value.images)) {
         product.value.images.forEach(img => {
-          if (img && !images.includes(img)) images.push(img)
+          const url = typeof img === 'object' ? img.url : img
+          if (url && !images.includes(url)) images.push(url)
         })
       }
       return images.length > 0 ? images : ['/assets/img/product/bag1.jpg']
     })
+
 
     const currentImage = computed(() => {
       return productImages.value[currentImageIndex.value] || '/assets/img/product/bag1.jpg'
@@ -334,12 +337,12 @@ export default {
         const existingItem = cartStore.cartItems.find(item => item.id === product.value.id)
         const currentQty = existingItem ? existingItem.quantity : 0
         const requestedQty = quantity.value
-        
+
         if (currentQty + requestedQty > availableStock) {
           Swal.fire(`Only ${availableStock - currentQty} more items available in stock!`)
           return
         }
-        
+
         cartStore.addToCart({
           ...product.value,
           price: product.value.price,
@@ -349,9 +352,9 @@ export default {
       }
     }
 
-    const incrementQty = () => { 
+    const incrementQty = () => {
       const maxStock = product.value?.stock || 999
-      if (quantity.value < maxStock) quantity.value++ 
+      if (quantity.value < maxStock) quantity.value++
     }
     const decrementQty = () => { if (quantity.value > 1) quantity.value-- }
 
@@ -415,6 +418,6 @@ export default {
     }
   }
 }
-  
+
 
 </script>

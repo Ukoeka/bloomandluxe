@@ -19,17 +19,14 @@
             <div class="card-body">
               <div class="product-images">
                 <div class="main-image text-center mb-4">
-                  <img v-if="currentImage" :src="getImageUrl(currentImage)" :alt="product.name" class="img-fluid" style="max-height: 400px; object-fit: contain; border-radius: 8px;" @error="handleImageError">
-                  <img v-else src="/assets/img/product/bag1.jpg" :alt="product.name" class="img-fluid" style="max-height: 400px; object-fit: contain; border-radius: 8px;">
+                  <img v-if="currentImage" :src="getImageUrl(currentImage)" :alt="product.name" class="img-fluid"
+                    style="max-height: 400px; object-fit: contain; border-radius: 8px;" @error="handleImageError">
+                  <img v-else src="/assets/img/product/bag1.jpg" :alt="product.name" class="img-fluid"
+                    style="max-height: 400px; object-fit: contain; border-radius: 8px;">
                 </div>
                 <div class="thumbnail-grid" v-if="allImages.length > 1">
-                  <div 
-                    v-for="(img, index) in allImages" 
-                    :key="index" 
-                    class="thumbnail-item"
-                    :class="{ active: currentImageIndex === index }"
-                    @click="currentImageIndex = index"
-                  >
+                  <div v-for="(img, index) in allImages" :key="index" class="thumbnail-item"
+                    :class="{ active: currentImageIndex === index }" @click="currentImageIndex = index">
                     <img :src="getImageUrl(img)" :alt="`Thumbnail ${index + 1}`" @error="handleImageError">
                   </div>
                 </div>
@@ -77,7 +74,8 @@
               <div class="mb-3" v-if="product.average_rating">
                 <strong>Rating:</strong>
                 <p class="mb-0 mt-1">
-                  <i class="fas fa-star" v-for="i in 5" :key="i" :style="{ color: i <= Math.round(product.average_rating) ? '#f39c12' : '#ddd' }"></i>
+                  <i class="fas fa-star" v-for="i in 5" :key="i"
+                    :style="{ color: i <= Math.round(product.average_rating) ? '#f39c12' : '#ddd' }"></i>
                   <span class="ms-2 text-muted">({{ product.total_reviews || 0 }} reviews)</span>
                 </p>
               </div>
@@ -155,10 +153,14 @@ export default {
       const images = []
       if (product.value.image) images.push(product.value.image)
       if (product.value.images && Array.isArray(product.value.images)) {
-        images.push(...product.value.images)
+        product.value.images.forEach(img => {
+          const url = typeof img === 'object' ? img.url : img
+          if (url && !images.includes(url)) images.push(url)
+        })
       }
       return images.length > 0 ? images : ['/assets/img/product/bag1.jpg']
     })
+
 
     const currentImage = computed(() => {
       return allImages.value[currentImageIndex.value] || ''

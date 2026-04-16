@@ -59,7 +59,25 @@ apiClient.interceptors.response.use(
   (error) => {
     if (error.response) {
       console.error('[API Error]', error.config?.url, error.response.status, error.response.data)
+
+      // Handle 401 Unauthorized
+      if (error.response.status === 401) {
+        const adminAuthStore = useAdminAuthStore()
+        const authStore = useAuthStore()
+        const isAdminRoute = error.config?.url?.includes('/admin')
+
+        if (isAdminRoute) {
+          console.log('[API] 401 detected on admin route, redirecting to admin login')
+          adminAuthStore.logout()
+          window.location.href = '/admin/login'
+        } else {
+          console.log('[API] 401 detected on user route, redirecting to login')
+          authStore.logout()
+          window.location.href = '/login'
+        }
+      }
     } else if (error.request) {
+
       console.error('[API Error] No response received', error.config?.url, error.message)
     } else {
       console.error('[API Error]', error.message)

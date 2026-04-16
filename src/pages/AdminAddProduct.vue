@@ -17,11 +17,13 @@
                 </div>
                 <div class="mb-3">
                   <label for="productPrice" class="form-label">Price</label>
-                  <input v-model="productForm.price" type="number" step="0.01" class="form-control" id="productPrice" required>
+                  <input v-model="productForm.price" type="number" step="0.01" class="form-control" id="productPrice"
+                    required>
                 </div>
                 <div class="mb-3">
                   <label for="productCategory" class="form-label">Category</label>
-                  <select v-model="selectedCategory" class="form-select" id="productCategory" required :disabled="loadingCategories">
+                  <select v-model="selectedCategory" class="form-select" id="productCategory" required
+                    :disabled="loadingCategories">
                     <option value="">
                       {{ loadingCategories ? 'Loading categories...' : 'Select Category' }}
                     </option>
@@ -45,11 +47,13 @@
                 </div>
                 <div class="mb-3">
                   <label for="productDescription" class="form-label">Description</label>
-                  <textarea v-model="productForm.description" class="form-control" id="productDescription" rows="4"></textarea>
+                  <textarea v-model="productForm.description" class="form-control" id="productDescription"
+                    rows="4"></textarea>
                 </div>
                 <div class="mb-3">
                   <label for="productImages" class="form-label">Product Images</label>
-                  <input type="file" class="form-control" id="productImages" accept="image/*" multiple @change="handleImageUpload">
+                  <input type="file" class="form-control" id="productImages" accept="image/*" multiple
+                    @change="handleImageUpload">
                   <small class="text-muted">You can select multiple images</small>
                 </div>
                 <div class="mb-3" v-if="imagePreviews.length > 0">
@@ -78,11 +82,13 @@
                 <div v-if="imagePreviews.length > 0" class="preview-carousel">
                   <img :src="currentPreview" alt="Product preview" class="img-fluid" style="max-height: 200px;">
                   <div class="preview-nav mt-2" v-if="imagePreviews.length > 1">
-                    <button type="button" class="btn btn-sm btn-secondary me-1" @click="prevPreview" :disabled="currentPreviewIndex === 0">
+                    <button type="button" class="btn btn-sm btn-secondary me-1" @click="prevPreview"
+                      :disabled="currentPreviewIndex === 0">
                       <i class="fas fa-chevron-left"></i>
                     </button>
                     <span class="preview-counter">{{ currentPreviewIndex + 1 }} / {{ imagePreviews.length }}</span>
-                    <button type="button" class="btn btn-sm btn-secondary ms-1" @click="nextPreview" :disabled="currentPreviewIndex === imagePreviews.length - 1">
+                    <button type="button" class="btn btn-sm btn-secondary ms-1" @click="nextPreview"
+                      :disabled="currentPreviewIndex === imagePreviews.length - 1">
                       <i class="fas fa-chevron-right"></i>
                     </button>
                   </div>
@@ -156,12 +162,12 @@ export default {
     // Check if a valid category is selected (either subcategory or main category without children)
     const isCategorySelected = computed(() => {
       if (!selectedCategory.value) return false
-      
+
       // If there are subcategories available, one must be selected
       if (availableSubcategories.value.length > 0) {
         return !!productForm.value.category_id
       }
-      
+
       // If no subcategories, the main category itself is valid
       return true
     })
@@ -211,7 +217,7 @@ export default {
           description: product.description || '',
           images: []
         }
-        
+
         // Find the category and set the parent category
         const category = categories.value.find(c => c.id == product.category_id)
         if (category) {
@@ -223,13 +229,14 @@ export default {
             selectedCategory.value = category.id
           }
         }
-        
-        // Handle multiple images from API (could be an array or single string)
+
+        // Handle multiple images from API (could be an array of objects or single string)
         if (product.images && Array.isArray(product.images)) {
-          imagePreviews.value = product.images
+          imagePreviews.value = product.images.map(img => typeof img === 'object' ? img.url : img)
         } else if (product.image) {
           imagePreviews.value = [product.image]
         }
+
       } catch (error) {
         console.error('Failed to fetch product:', error)
         alert('Failed to load product data.')
