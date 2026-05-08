@@ -334,9 +334,7 @@ export default {
 
         // Append deleted images
         if (deletedImages.value.length > 0) {
-          deletedImages.value.forEach((id, index) => {
-            formData.append(`deleted_images[${index}]`, id)
-          })
+          formData.append('deleted_images', JSON.stringify(deletedImages.value))
         }
 
         if (isEditing.value) {
