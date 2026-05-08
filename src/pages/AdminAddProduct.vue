@@ -60,7 +60,7 @@
                   <label class="form-label">Image Previews</label>
                   <div class="image-preview-grid">
                     <div v-for="(preview, index) in imagePreviews" :key="index" class="image-preview-item">
-                      <img :src="preview" alt="Preview">
+                      <img :src="preview.url" alt="Preview">
                       <button type="button" class="btn btn-sm btn-danger remove-image" @click="removeImage(index)">
                         <i class="fas fa-times"></i>
                       </button>
@@ -136,6 +136,7 @@ export default {
       images: []
     })
     const imagePreviews = ref([])
+    const deletedImages = ref([])
     const currentPreviewIndex = ref(0)
     const categories = ref([])
     const loadingCategories = ref(false)
@@ -232,9 +233,17 @@ export default {
 
         // Handle multiple images from API (could be an array of objects or single string)
         if (product.images && Array.isArray(product.images)) {
-          imagePreviews.value = product.images.map(img => typeof img === 'object' ? img.url : img)
+          imagePreviews.value = product.images.map(img => ({
+            type: 'existing',
+            id: typeof img === 'object' ? img.id : null,
+            url: typeof img === 'object' ? img.url : img
+          }))
         } else if (product.image) {
-          imagePreviews.value = [product.image]
+          imagePreviews.value = [{
+            type: 'existing',
+            id: null,
+            url: product.image
+          }]
         }
 
       } catch (error) {
@@ -252,10 +261,13 @@ export default {
         for (let i = 0; i < files.length; i++) {
           const file = files[i]
           if (file) {
-            productForm.value.images.push(file)
             const reader = new FileReader()
             reader.onload = (e) => {
-              imagePreviews.value.push(e.target.result)
+              imagePreviews.value.push({
+                type: 'new',
+                file: file,
+                url: e.target.result
+              })
             }
             reader.readAsDataURL(file)
           }
@@ -266,13 +278,21 @@ export default {
     }
 
     const removeImage = (index) => {
+      const item = imagePreviews.value[index]
+      if (item.type === 'existing' && item.id) {
+        deletedImages.value.push(item.id)
+      }
       imagePreviews.value.splice(index, 1)
-      productForm.value.images.splice(index, 1)
+      
+      // Adjust currentPreviewIndex if necessary
+      if (currentPreviewIndex.value >= imagePreviews.value.length) {
+        currentPreviewIndex.value = Math.max(0, imagePreviews.value.length - 1)
+      }
     }
 
     const currentPreview = computed(() => {
       if (imagePreviews.value.length === 0) return ''
-      return imagePreviews.value[currentPreviewIndex.value] || ''
+      return imagePreviews.value[currentPreviewIndex.value]?.url || ''
     })
 
     const prevPreview = () => {
@@ -305,9 +325,17 @@ export default {
         formData.append('is_active', '1')
 
         // Append multiple images
-        if (productForm.value.images && productForm.value.images.length > 0) {
-          productForm.value.images.forEach((image, index) => {
+        const newImages = imagePreviews.value.filter(p => p.type === 'new').map(p => p.file)
+        if (newImages.length > 0) {
+          newImages.forEach((image, index) => {
             formData.append(`images[${index}]`, image)
+          })
+        }
+
+        // Append deleted images
+        if (deletedImages.value.length > 0) {
+          deletedImages.value.forEach((id, index) => {
+            formData.append(`deleted_images[${index}]`, id)
           })
         }
 
