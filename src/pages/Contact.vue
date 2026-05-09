@@ -11,10 +11,10 @@
     <div class="mouse-cursor cursor-inner"></div>
 
     <!-- fix-area Start -->
-    
+
 
     <!-- Sidebar Area Here -->
-    
+
 
     <!-- contact-us-Section Start -->
     <section class="contact-us-section section-padding fix">
@@ -48,49 +48,26 @@
                     <div class="row g-4">
                       <div class="col-lg-12">
                         <div class="form-clt">
-                          <input 
-                            type="text" 
-                            name="name" 
-                            id="name" 
-                            v-model="formData.name"
-                            placeholder="Your Name"
-                            required
-                          >
+                          <input type="text" name="name" id="name" v-model="formData.name" placeholder="Your Name"
+                            required>
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-clt">
-                          <input 
-                            type="email" 
-                            name="email" 
-                            id="email20" 
-                            v-model="formData.email"
-                            placeholder="Email address"
-                            required
-                          >
-                        </div>
-                      </div>
-                       <div class="col-lg-12">
-                        <div class="form-clt">
-                          <input 
-                            type="text" 
-                            name="subject" 
-                            id="subject" 
-                            v-model="formData.subject"
-                            placeholder="Subject"
-                            required
-                          >
+                          <input type="email" name="email" id="email20" v-model="formData.email"
+                            placeholder="Email address" required>
                         </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-clt">
-                          <textarea 
-                            name="message" 
-                            id="message" 
-                            v-model="formData.message"
-                            placeholder="Type your message"
-                            required
-                          ></textarea>
+                          <input type="text" name="subject" id="subject" v-model="formData.subject"
+                            placeholder="Subject" required>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-clt">
+                          <textarea name="message" id="message" v-model="formData.message"
+                            placeholder="Type your message" required></textarea>
                         </div>
                       </div>
                       <div class="col-lg-12">
@@ -127,7 +104,7 @@
                       </h6>
                     </div>
                   </div>
-                 
+
                   <div class="contact-item mb-0">
                     <div class="icon">
                       <i class="fa-thin fa-share-nodes"></i>
@@ -139,9 +116,12 @@
                     </div>
                   </div>
                   <div class="social-icon d-flex align-items-center">
-                    <a href="https://www.facebook.com/share/17ZJGw6Lnc/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.tiktok.com/@bloomlux.store" target="_blank" class="bg-2"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://www.instagram.com/bloomlux.store" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/share/17ZJGw6Lnc/?mibextid=wwXIfr" target="_blank"><i
+                        class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.tiktok.com/@bloomlux.store" target="_blank" class="bg-2"><i
+                        class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/bloomandluxestore" target=" _blank"><i
+                        class="fab fa-instagram"></i></a>
                   </div>
                 </div>
               </div>
@@ -152,7 +132,7 @@
     </section>
 
     <!-- map-Section Start -->
-    
+
   </SharedLayout>
 </template>
 
@@ -168,7 +148,7 @@ export default {
   },
   setup() {
     const api = useApiStore()
-    
+
     // Form data
     const formData = ref({
       name: '',
@@ -176,35 +156,35 @@ export default {
       subject: '',
       message: ''
     })
-    
+
     // Loading state
     const loading = ref(false)
-    
+
     // Message states
     const successMessage = ref('')
     const errorMessage = ref('')
-    
+
     // Submit form handler
     const submitForm = async () => {
       // Clear previous messages
       successMessage.value = ''
       errorMessage.value = ''
-      
+
       // Basic validation
       if (!formData.value.name || !formData.value.email || !formData.value.subject || !formData.value.message) {
         errorMessage.value = 'Please fill in all fields'
         return
       }
-      
+
       // Email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
       if (!emailRegex.test(formData.value.email)) {
         errorMessage.value = 'Please enter a valid email address'
         return
       }
-      
+
       loading.value = true
-      
+
       try {
         const response = await api.post('/contact', {
           name: formData.value.name,
@@ -212,10 +192,10 @@ export default {
           subject: formData.value.subject,
           message: formData.value.message
         })
-        
+
         // Show success message
         successMessage.value = response.message || 'Your message has been sent successfully! We will get back to you soon.'
-        
+
         // Reset form
         formData.value = {
           name: '',
@@ -223,7 +203,7 @@ export default {
           subject: '',
           message: ''
         }
-        
+
       } catch (error) {
         console.error('Contact form error:', error)
         errorMessage.value = error.response?.data?.message || error.message || 'Failed to send message. Please try again.'
@@ -231,7 +211,7 @@ export default {
         loading.value = false
       }
     }
-    
+
     onMounted(() => {
       // Preloader
       setTimeout(() => {
@@ -242,17 +222,17 @@ export default {
       // Initialize jQuery plugins and custom JS
       if (window.$) {
         // Sidebar Toggle
-        $(".offcanvas__close,.offcanvas__overlay").on("click", function() {
+        $(".offcanvas__close,.offcanvas__overlay").on("click", function () {
           $(".offcanvas__info").removeClass("info-open");
           $(".offcanvas__overlay").removeClass("overlay-open");
         });
-        $(".sidebar__toggle").on("click", function() {
+        $(".sidebar__toggle").on("click", function () {
           $(".offcanvas__info").addClass("info-open");
           $(".offcanvas__overlay").addClass("overlay-open");
         });
 
         // Sticky Header
-        $(window).on("scroll", function() {
+        $(window).on("scroll", function () {
           if ($(this).scrollTop() > 250) {
             $("#header-sticky").addClass("sticky");
           } else {
@@ -261,11 +241,11 @@ export default {
         });
 
         // Sidebar Area
-        $("#openButton").on("click", function(e) {
+        $("#openButton").on("click", function (e) {
           e.preventDefault();
           $("#targetElement").removeClass("side_bar_hidden");
         });
-        $("#closeButton").on("click", function(e) {
+        $("#closeButton").on("click", function (e) {
           e.preventDefault();
           $("#targetElement").addClass("side_bar_hidden");
         });
@@ -304,14 +284,14 @@ export default {
         });
 
         // Back to Top
-        $(window).on('scroll', function() {
+        $(window).on('scroll', function () {
           if ($(this).scrollTop() > 20) {
             $("#back-top").addClass("show");
           } else {
             $("#back-top").removeClass("show");
           }
         });
-        $(document).on('click', '#back-top', function() {
+        $(document).on('click', '#back-top', function () {
           $('html, body').animate({ scrollTop: 0 }, 800);
           return false;
         });
@@ -329,8 +309,8 @@ export default {
 }
 </script>
 <style scoped>
-.contact-right{
-  text-transform:none;
+.contact-right {
+  text-transform: none;
 }
 
 .alert {

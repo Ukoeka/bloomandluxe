@@ -46,19 +46,19 @@
                     Track Orders
                   </a>
                 </li>
-                
+
                 <li>
                   <a href="/shop-cart">
                     cart
                   </a>
                 </li>
-                
+
                 <!-- <li>
                   <router-link to="/my-orders">
                     Order History
                   </router-link>
                 </li> -->
-                
+
               </ul>
             </div>
           </div>
@@ -78,8 +78,8 @@
                     Contact US
                   </router-link>
                 </li>
-               
-                
+
+
               </ul>
             </div>
           </div>
@@ -89,13 +89,16 @@
                 <h3></h3>
               </div>
               <div class="footer-content">
-              
+
                 <div class="social-item">
                   <h6>Follow Us On</h6>
                   <div class="social-icon d-flex align-items-center">
-                    <a href="https://www.facebook.com/share/17ZJGw6Lnc/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.tiktok.com/@bloomlux.store" target="_blank" class="bg-2"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://www.instagram.com/bloomlux.store" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/share/17ZJGw6Lnc/?mibextid=wwXIfr" target="_blank"><i
+                        class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.tiktok.com/@bloomlux.store" target="_blank" class="bg-2"><i
+                        class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/bloomandluxestore" target=" _blank"><i
+                        class="fab fa-instagram"></i></a>
                   </div>
                 </div>
               </div>
@@ -108,7 +111,7 @@
           <p class="wow fadeInUp" data-wow-delay=".3s">
             ©All Rights reserved | by <span>bloomandluxe</span>
           </p>
-          
+
         </div>
       </div>
     </div>

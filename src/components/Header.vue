@@ -1,105 +1,105 @@
 <template>
   <div id="preloader" class="preloader" v-if="showPreloader">
-      <div class="animation-preloader">
-        <div class="spinner"></div>
-        <div class="txt-loading">
-          <span data-text-preloader="B" class="letters-loading">B</span>
-          <span data-text-preloader="L" class="letters-loading">L</span>
-          <span data-text-preloader="O" class="letters-loading">O</span>
-          <span data-text-preloader="O" class="letters-loading">O</span>
-          <span data-text-preloader="M" class="letters-loading">M</span>
-          <span data-text-preloader="" class="letters-loading">&</span>
-          <span data-text-preloader="L" class="letters-loading">L</span>
-          <span data-text-preloader="U" class="letters-loading">U</span>
-          <span data-text-preloader="X" class="letters-loading">X</span>
-          <span data-text-preloader="E" class="letters-loading">E</span>
-        </div>
-        <p class="text-center">Loading</p>
+    <div class="animation-preloader">
+      <div class="spinner"></div>
+      <div class="txt-loading">
+        <span data-text-preloader="B" class="letters-loading">B</span>
+        <span data-text-preloader="L" class="letters-loading">L</span>
+        <span data-text-preloader="O" class="letters-loading">O</span>
+        <span data-text-preloader="O" class="letters-loading">O</span>
+        <span data-text-preloader="M" class="letters-loading">M</span>
+        <span data-text-preloader="" class="letters-loading">&</span>
+        <span data-text-preloader="L" class="letters-loading">L</span>
+        <span data-text-preloader="U" class="letters-loading">U</span>
+        <span data-text-preloader="X" class="letters-loading">X</span>
+        <span data-text-preloader="E" class="letters-loading">E</span>
       </div>
-      <div class="loader">
-        <div class="row">
-          <div class="col-3 loader-section section-left">
-            <div class="bg"></div>
-          </div>
-          <div class="col-3 loader-section section-left">
-            <div class="bg"></div>
-          </div>
-          <div class="col-3 loader-section section-right">
-            <div class="bg"></div>
-          </div>
-          <div class="col-3 loader-section section-right">
-            <div class="bg"></div>
-          </div>
+      <p class="text-center">Loading</p>
+    </div>
+    <div class="loader">
+      <div class="row">
+        <div class="col-3 loader-section section-left">
+          <div class="bg"></div>
+        </div>
+        <div class="col-3 loader-section section-left">
+          <div class="bg"></div>
+        </div>
+        <div class="col-3 loader-section section-right">
+          <div class="bg"></div>
+        </div>
+        <div class="col-3 loader-section section-right">
+          <div class="bg"></div>
         </div>
       </div>
+    </div>
   </div>
   <button id="back-top" class="back-to-top">
-      <i class="fa-regular fa-arrow-up"></i>
-    </button>
+    <i class="fa-regular fa-arrow-up"></i>
+  </button>
 
-    <!-- Mouse Cursor Start -->
-    <div class="mouse-cursor cursor-outer"></div>
-    <div class="mouse-cursor cursor-inner"></div>
-     <div class="fix-area">
-      <div class="offcanvas__info">
-        <div class="offcanvas__wrapper">
-          <div class="offcanvas__content">
-            <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
-              <div class="offcanvas__logo">
-                <a href="/">
-                  <img src="/assets/img/logo/main-logo1.png" alt="logo-img">
-                </a>
-              </div>
-              <div class="offcanvas__close">
-                <button>
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
+  <!-- Mouse Cursor Start -->
+  <div class="mouse-cursor cursor-outer"></div>
+  <div class="mouse-cursor cursor-inner"></div>
+  <div class="fix-area">
+    <div class="offcanvas__info">
+      <div class="offcanvas__wrapper">
+        <div class="offcanvas__content">
+          <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
+            <div class="offcanvas__logo">
+              <a href="/">
+                <img src="/assets/img/logo/main-logo1.png" alt="logo-img">
+              </a>
             </div>
-           
-            <div class="mobile-menu fix mb-3"></div>
-            <div class="offcanvas__contact">
-              <h4>Contact Info</h4>
-              <ul>
-                <li class="d-flex align-items-center">
-                  <div class="offcanvas__contact-icon mr-15">
-                    <i class="fal fa-envelope"></i>
-                  </div>
-                  <div class="offcanvas__contact-text">
-                    <a href="mailto:contact@bloom&luxe.com"><span>contact@bloom&luxe.com</span></a>
-                  </div>
-                </li>
-                <li class="d-flex align-items-center">
-                  <div class="offcanvas__contact-icon mr-15">
-                    <i class="fal fa-clock"></i>
-                  </div>
-                  <div class="offcanvas__contact-text">
-                    <a target="_blank" href="#">Sun-Sat 24/7</a>
-                  </div>
-                </li>
-                <li class="d-flex align-items-center">
-                  <div class="offcanvas__contact-icon mr-15">
-                    <i class="far fa-phone"></i>
-                  </div>
-                  <div class="offcanvas__contact-text">
-                    <a href="tel:+61401596099"> +61401596099</a>
-                  </div>
-                </li>
-              </ul>
-              <div class="header-button mt-4">
-              </div>
-              <a href="/contact" class="theme-btn"><span>Let's Talk <i class="fa-solid fa-arrow-right"></i></span></a>
-              <div class="social-icon d-flex align-items-center">
-                <a href="https://www.facebook.com/share/17ZJGw6Lnc/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.tiktok.com/@bloomlux.store?"><i class="fab fa-tiktok"></i></a>
-                <a href="https://www.instagram.com/bloomandluxestore?"><i class="fab fa-instagram"></i></a>
-              </div>
+            <div class="offcanvas__close">
+              <button>
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="mobile-menu fix mb-3"></div>
+          <div class="offcanvas__contact">
+            <h4>Contact Info</h4>
+            <ul>
+              <li class="d-flex align-items-center">
+                <div class="offcanvas__contact-icon mr-15">
+                  <i class="fal fa-envelope"></i>
+                </div>
+                <div class="offcanvas__contact-text">
+                  <a href="mailto:contact@bloom&luxe.com"><span>contact@bloom&luxe.com</span></a>
+                </div>
+              </li>
+              <li class="d-flex align-items-center">
+                <div class="offcanvas__contact-icon mr-15">
+                  <i class="fal fa-clock"></i>
+                </div>
+                <div class="offcanvas__contact-text">
+                  <a target="_blank" href="#">Sun-Sat 24/7</a>
+                </div>
+              </li>
+              <li class="d-flex align-items-center">
+                <div class="offcanvas__contact-icon mr-15">
+                  <i class="far fa-phone"></i>
+                </div>
+                <div class="offcanvas__contact-text">
+                  <a href="tel:+61401596099"> +61401596099</a>
+                </div>
+              </li>
+            </ul>
+            <div class="header-button mt-4">
+            </div>
+            <a href="/contact" class="theme-btn"><span>Let's Talk <i class="fa-solid fa-arrow-right"></i></span></a>
+            <div class="social-icon d-flex align-items-center">
+              <a href="https://www.facebook.com/share/17ZJGw6Lnc/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.tiktok.com/@bloomlux.store?"><i class="fab fa-tiktok"></i></a>
+              <a href="https://www.instagram.com/bloomandluxestore"><i class="fab fa-instagram"></i></a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="offcanvas__overlay"></div>
+  </div>
+  <div class="offcanvas__overlay"></div>
   <!-- Header top Section Start -->
   <div class="header-top-section">
     <div class="container-fluid">
@@ -291,12 +291,12 @@ export default {
       if (!cartStore.initialized) return 0
       return cartStore.getTotalItems()
     })
-    
+
     const totalPrice = computed(() => {
       const price = cartStore.getTotalPrice()
       return typeof price === 'number' ? price : 0
     })
-    
+
     const isLoggedIn = computed(() => !!authStore.user)
 
     const getImageUrl = (imagePath) => {
@@ -382,7 +382,7 @@ export default {
         $(".search-wrap").animate({ opacity: "toggle" }, 500);
         $(".nav-search, #search-close").addClass("open");
       });
-      
+
       $(".search-close").on("click", function (e) {
         e.preventDefault();
         $(".search-wrap").animate({ opacity: "toggle" }, 500);
@@ -390,15 +390,15 @@ export default {
       });
 
       // Back to Top
-      $(window).on('scroll', function() {
+      $(window).on('scroll', function () {
         if ($(this).scrollTop() > 20) {
           $("#back-top").addClass("show");
         } else {
           $("#back-top").removeClass("show");
         }
       });
-      
-      $(document).on('click', '#back-top', function() {
+
+      $(document).on('click', '#back-top', function () {
         $('html, body').animate({ scrollTop: 0 }, 800);
         return false;
       });
