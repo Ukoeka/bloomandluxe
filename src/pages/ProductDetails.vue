@@ -53,9 +53,9 @@
                     {{ product.description }}
                   </p>
                   <div class="price-list">
-                    <h3>${{ product.price }}</h3>
+                    <h3>AUD {{ product.price }}</h3>
                     <span v-if="quantity > 1" class="total-price ms-2">
-                      Total: ${{ totalPrice.toFixed(2) }}
+                      Total: AUD {{ totalPrice.toFixed(2) }}
                     </span>
                   </div>
                   <div class="stock-info mb-3" v-if="product.stock !== undefined">
@@ -193,7 +193,7 @@
                   </h4>
                   <ul class="doller">
                     <li>
-                      $102.00 <del>$226.00</del>
+                      AUD 102.00 <del>AUD 226.00</del>
                     </li>
                   </ul>
                 </div>
@@ -213,7 +213,7 @@
                   <h4>
                     <router-link :to="`/product-details/${2}`">Mineral Matte Finishing</router-link>
                   </h4>
-                  <span>$16.00</span>
+                  <span>AUD 16.00</span>
                 </div>
               </div>
             </div>
@@ -232,7 +232,7 @@
                   </h4>
                   <ul class="doller">
                     <li>
-                      $76.00 <del>$106.00</del>
+                      AUD 76.00 <del>AUD 106.00</del>
                     </li>
                   </ul>
                 </div>
@@ -252,7 +252,7 @@
                   <h4>
                     <router-link :to="`/product-details/${4}`">Correction Tinted Cream</router-link>
                   </h4>
-                  <span>$44.00</span>
+                  <span>AUD 44.00</span>
                 </div>
               </div>
             </div>

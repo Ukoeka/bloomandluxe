@@ -57,7 +57,7 @@
                 <h4>
                   <router-link :to="`/product-details/${product?.id}`">{{ product?.name }} <i class="fa-regular fa-eye"></i></router-link>
                 </h4>
-                <span>${{ product?.price }}</span>
+                <span>AUD {{ product?.price }}</span>
               </div>
             </div>
           </div>

@@ -406,7 +406,7 @@
                   </ul>
                   <div class="shopping-items">
                     <span>Total :</span>
-                    <span>$386.00</span>
+                    <span>AUD 386.00</span>
                   </div>
                   <div class="cart-button mb-4">
                     <router-link to="/shop-cart" class="theme-btn">

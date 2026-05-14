@@ -78,8 +78,8 @@
                             <span>Delivery Method*</span>
                             <select v-model="formData.deliveryMethod" name="deliveryMethod" id="deliveryMethod" class="state-select" required>
                               <option value="" disabled>Select Preferred Method</option>
-                              <option value="standard">Standard (5-7 days) - $12.00</option>
-                              <option value="express">Express (3-5 days) - $15.00</option>
+                              <option value="standard">Standard (5-7 days) - AUD 12.00</option>
+                              <option value="express">Express (3-5 days) - AUD 15.00</option>
                             </select>
                           </div>
                         </div>
@@ -128,19 +128,19 @@
                           <small class="text-muted">Qty: {{ item.quantity }}</small>
                         </div>
                       </div>
-                      <p>${{ (Number(item.price) * item.quantity).toFixed(2) }}</p>
+                      <p>AUD {{ (Number(item.price) * item.quantity).toFixed(2) }}</p>
                     </div>
                     
                     <div class="checkout-item d-flex justify-content-between">
                       <p>Subtotal</p>
-                      <p>${{ totalPrice.toFixed(2) }}</p>
+                      <p>AUD {{ totalPrice.toFixed(2) }}</p>
                     </div>
                     
                     <div class="checkout-item d-flex justify-content-between">
                       <p>Shipping</p>
                       <div class="shopping-items">
                         <div v-if="formData.deliveryMethod" class="shipping-display">
-                          <p class="mb-0">{{ deliveryMethodLabel }}: ${{ shippingFee.toFixed(2) }}</p>
+                          <p class="mb-0">{{ deliveryMethodLabel }}: AUD {{ shippingFee.toFixed(2) }}</p>
                         </div>
                         <div v-else class="text-muted">
                           <p class="mb-0">Select delivery method</p>
@@ -150,12 +150,12 @@
 
                     <div class="checkout-item d-flex justify-content-between">
                       <p>Tax (10%)</p>
-                      <p>${{ taxAmount.toFixed(2) }}</p>
+                      <p>AUD {{ taxAmount.toFixed(2) }}</p>
                     </div>
                     
                     <div class="checkout-item d-flex align-items-center justify-content-between">
                       <p><strong>Total</strong></p>
-                      <p><strong>${{ totalWithShippingAndTax.toFixed(2) }}</strong></p>
+                      <p><strong>AUD {{ totalWithShippingAndTax.toFixed(2) }}</strong></p>
                     </div>
                    
                     <button type="submit" form="checkout-form" class="theme-btn mt-4" :disabled="isSubmitting || cartStore.cartItems.length === 0">

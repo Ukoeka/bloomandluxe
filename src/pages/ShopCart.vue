@@ -51,7 +51,7 @@
                   </td>
                   <td class="text-center">
                     <span class="price-usd">
-                      ${{ Number(item.price).toFixed(2) }} USD
+                      AUD {{ Number(item.price).toFixed(2) }}
                     </span>
                   </td>
                   <td class="price-quantity text-center">
@@ -68,7 +68,7 @@
                   </td>
                   <td class="text-center">
                     <span class="price-usd">
-                      ${{ (Number(item.price) * item.quantity).toFixed(2) }} USD
+                      AUD {{ (Number(item.price) * item.quantity).toFixed(2) }}
                     </span>
                   </td>
                 </tr>
@@ -99,7 +99,7 @@
                 </div>
                 <div class="summary-item d-flex justify-content-between">
                   <span>Total Price:</span>
-                  <span class="fw-bold">${{ totalPrice.toFixed(2) }} USD</span>
+                  <span class="fw-bold">AUD {{ totalPrice.toFixed(2) }}</span>
                 </div>
               </div>
             </div>

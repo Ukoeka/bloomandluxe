@@ -271,7 +271,7 @@
                       <h5>
                         <router-link :to="`/product-details/${product.id}`">{{ product.name }}</router-link>
                       </h5>
-                      <h6>${{ product.price }}</h6>
+                      <h6>AUD {{ product.price }}</h6>
                     </div>
                   </div>
                 </div>
@@ -326,7 +326,7 @@
                         <h4>
                           <router-link :to="`/product-details/${product.id}`">{{ product.name }}</router-link>
                         </h4>
-                        <h6>${{ product.price }}</h6>
+                        <h6>AUD {{ product.price }}</h6>
                       </div>
                     </div>
                   </div>

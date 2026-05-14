@@ -124,7 +124,7 @@
                                         </h4>
                                         <ul class="doller">
                                             <li>
-                                                $102.00 <del>$226.00</del>
+                                                AUD 102.00 <del>AUD 226.00</del>
                                             </li>
                                          </ul>
                                     </div>
@@ -144,7 +144,7 @@
                                         <h4>
                                             <a href="/product-details/1">Mineral Matte Finishing</a>
                                         </h4>
-                                        <span>$16.00</span>
+                                        <span>AUD 16.00</span>
                                     </div>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                                         </h4>
                                         <ul class="doller">
                                             <li>
-                                                $76.00 <del>$106.00</del>
+                                                AUD 76.00 <del>AUD 106.00</del>
                                             </li>
                                          </ul>
                                     </div>
@@ -183,7 +183,7 @@
                                         <h4>
                                             <a href="/product-details/1">Correction Tinted Cream</a>
                                         </h4>
-                                        <span>$44.00</span>
+                                        <span>AUD 44.00</span>
                                     </div>
                                 </div>
                             </div>
@@ -206,7 +206,7 @@
                                         </h4>
                                         <ul class="doller">
                                             <li>
-                                                $102.00 <del>$226.00</del>
+                                                AUD 102.00 <del>AUD 226.00</del>
                                             </li>
                                          </ul>
                                     </div>
@@ -226,7 +226,7 @@
                                         <h4>
                                             <a href="/product-details/1">Mineral Matte Finishing</a>
                                         </h4>
-                                        <span>$16.00</span>
+                                        <span>AUD 16.00</span>
                                     </div>
                                 </div>
                             </div>
@@ -245,7 +245,7 @@
                                         </h4>
                                         <ul class="doller">
                                             <li>
-                                                $76.00 <del>$106.00</del>
+                                                AUD 76.00 <del>AUD 106.00</del>
                                             </li>
                                          </ul>
                                     </div>
@@ -265,7 +265,7 @@
                                         <h4>
                                             <a href="/product-details/1">Correction Tinted Cream</a>
                                         </h4>
-                                        <span>$44.00</span>
+                                        <span>AUD 44.00</span>
                                     </div>
                                 </div>
                             </div>
@@ -288,7 +288,7 @@
                                         </h4>
                                         <ul class="doller">
                                             <li>
-                                                $102.00 <del>$226.00</del>
+                                                AUD 102.00 <del>AUD 226.00</del>
                                             </li>
                                          </ul>
                                     </div>
@@ -308,7 +308,7 @@
                                         <h4>
                                             <a href="/product-details/1">Mineral Matte Finishing</a>
                                         </h4>
-                                        <span>$16.00</span>
+                                        <span>AUD 16.00</span>
                                     </div>
                                 </div>
                             </div>
@@ -327,7 +327,7 @@
                                         </h4>
                                         <ul class="doller">
                                             <li>
-                                                $76.00 <del>$106.00</del>
+                                                AUD 76.00 <del>AUD 106.00</del>
                                             </li>
                                          </ul>
                                     </div>
@@ -347,7 +347,7 @@
                                         <h4>
                                             <a href="/product-details/1">Correction Tinted Cream</a>
                                         </h4>
-                                        <span>$44.00</span>
+                                        <span>AUD 44.00</span>
                                     </div>
                                 </div>
                             </div>
@@ -370,7 +370,7 @@
                                         </h4>
                                         <ul class="doller">
                                             <li>
-                                                $102.00 <del>$226.00</del>
+                                                AUD 102.00 <del>AUD 226.00</del>
                                             </li>
                                          </ul>
                                     </div>
@@ -390,7 +390,7 @@
                                         <h4>
                                             <a href="/product-details/1">Mineral Matte Finishing</a>
                                         </h4>
-                                        <span>$16.00</span>
+                                        <span>AUD 16.00</span>
                                     </div>
                                 </div>
                             </div>
@@ -409,7 +409,7 @@
                                         </h4>
                                         <ul class="doller">
                                             <li>
-                                                $76.00 <del>$106.00</del>
+                                                AUD 76.00 <del>AUD 106.00</del>
                                             </li>
                                          </ul>
                                     </div>
@@ -429,7 +429,7 @@
                                         <h4>
                                             <a href="/product-details/1">Correction Tinted Cream</a>
                                         </h4>
-                                        <span>$44.00</span>
+                                        <span>AUD 44.00</span>
                                     </div>
                                 </div>
                             </div>

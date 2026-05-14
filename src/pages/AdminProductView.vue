@@ -59,7 +59,7 @@
               </div>
               <div class="mb-3">
                 <strong>Price:</strong>
-                <p class="mb-0 mt-1">${{ product.price }}</p>
+                <p class="mb-0 mt-1">AUD {{ product.price }}</p>
               </div>
               <div class="mb-3">
                 <strong>Category:</strong>
@@ -195,7 +195,7 @@ export default {
 
     const formatDate = (dateString) => {
       if (!dateString) return 'N/A'
-      return new Date(dateString).toLocaleDateString('en-US', {
+      return new Date(dateString).toLocaleDateString('en-AU', {
         year: 'numeric',
         month: 'long',
         day: 'numeric'

@@ -26,7 +26,7 @@
               <td class="order-number">{{ order.order_number || `#${order.id}` }}</td>
               <td class="customer-name">{{ order.customer || 'N/A' }}</td>
               <td class="order-date">{{ new Date(order.date).toLocaleDateString() }}</td>
-              <td class="order-total">${{ order.total }}</td>
+              <td class="order-total">AUD {{ order.total }}</td>
               <td>
                 <span class="payment-badge" :class="getPaymentStatusClass(order.payment_status)">
                   {{ order.payment_status || 'pending' }}

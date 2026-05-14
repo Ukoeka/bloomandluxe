@@ -50,7 +50,7 @@ We strive to make quality fashion accessible to everyone — blending elegance, 
             <div class="col-xl-4 col-lg-6 col-md-6">
               <div class="about-right">
                 <h3>
-                  About Company
+                  About Brand
                 </h3>
                 <p>
                   

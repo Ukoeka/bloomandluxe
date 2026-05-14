@@ -294,7 +294,7 @@
                 <p>
                   Molestias internos et commodi tempora <br> dolores sapiente sed iste.
                 </p>
-                <span>Save $72</span>
+                <span>Save AUD 72</span>
               </div>
             </div>
           </div>
@@ -311,7 +311,7 @@
                 <p>
                   Molestias internos et commodi tempora <br> dolores sapiente sed iste.
                 </p>
-                <span>Save $72</span>
+                <span>Save AUD 72</span>
               </div>
             </div>
           </div>
@@ -329,7 +329,7 @@
                 <p>
                   Molestias internos et commodi tempora <br> dolores sapiente sed iste.
                 </p>
-                <span>Save $72</span>
+                <span>Save AUD 72</span>
               </div>
             </div>
           </div>
@@ -366,7 +366,7 @@
                   <h4>
                     <a href="/product-details/1">Face Wash by Olay Regenerist</a>
                   </h4>
-                  <span>$19.00</span>
+                  <span>AUD 19.00</span>
                 </div>
               </div>
             </div>
@@ -386,7 +386,7 @@
                   </h4>
                   <ul class="doller">
                     <li>
-                      $19.00 <del>$27.00</del>
+                      AUD 19.00 <del>AUD 27.00</del>
                     </li>
                   </ul>
                 </div>
@@ -405,7 +405,7 @@
                   <h4>
                     <a href="/product-details/1">Organic Face Sunscreen</a>
                   </h4>
-                  <span>$44.00</span>
+                  <span>AUD 44.00</span>
                 </div>
               </div>
             </div>
@@ -425,7 +425,7 @@
                   </h4>
                   <ul class="doller">
                     <li>
-                      $23.00 <del>$25.00</del>
+                      AUD 23.00 <del>AUD 25.00</del>
                     </li>
                   </ul>
                 </div>
@@ -447,7 +447,7 @@
                   </h4>
                   <ul class="doller">
                     <li>
-                      $16.00 <del>$22.00</del>
+                      AUD 16.00 <del>AUD 22.00</del>
                     </li>
                   </ul>
                 </div>
@@ -467,7 +467,7 @@
                     <a href="/product-details/1">Retinol Value Set Duo</a>
                   </h4>
                   <span>
-                    $76.00
+                    AUD 76.00
                   </span>
                 </div>
               </div>
@@ -488,7 +488,7 @@
                   </h4>
                   <ul class="doller">
                     <li>
-                      $124.00 <del>$126.00</del>
+                      AUD 124.00 <del>AUD 126.00</del>
                     </li>
                   </ul>
                 </div>
@@ -508,7 +508,7 @@
                     <a href="/product-details/1">Grande Cosmetics Grande</a>
                   </h4>
                   <span>
-                    $102.00
+                    AUD 102.00
                   </span>
                 </div>
               </div>
@@ -632,7 +632,7 @@
                     </h4>
                     <ul class="doller">
                       <li>
-                        $102.00 <del>$226.00</del>
+                        AUD 102.00 <del>AUD 226.00</del>
                       </li>
                     </ul>
                   </div>
@@ -652,7 +652,7 @@
                     <h4>
                       <a href="/product-details/1">Mineral Matte Finishing</a>
                     </h4>
-                    <span>$16.00</span>
+                    <span>AUD 16.00</span>
                   </div>
                 </div>
               </div>
@@ -671,7 +671,7 @@
                     </h4>
                     <ul class="doller">
                       <li>
-                        $76.00 <del>$106.00</del>
+                        AUD 76.00 <del>AUD 106.00</del>
                       </li>
                     </ul>
                   </div>
@@ -691,7 +691,7 @@
                     <h4>
                       <a href="/product-details/1">Correction Tinted Cream</a>
                     </h4>
-                    <span>$44.00</span>
+                    <span>AUD 44.00</span>
                   </div>
                 </div>
               </div>
@@ -714,7 +714,7 @@
                     </h4>
                     <ul class="doller">
                       <li>
-                        $102.00 <del>$226.00</del>
+                        AUD 102.00 <del>AUD 226.00</del>
                       </li>
                     </ul>
                   </div>
@@ -737,7 +737,7 @@
               <div class="banner-product">
                 <div class="product-details">
                   <h4 class="title"><a href="/product-details/1">Night Face</a></h4>
-                  <div class="price">$15.22 - $15.22</div>
+                  <div class="price">AUD 15.22 - AUD 15.22</div>
                   <div class="rating-image">
                     <img src="/assets/img/cart/cream.jpg" alt="img">
                   </div>
@@ -749,7 +749,7 @@
               <div class="banner-product style-2">
                 <div class="product-details">
                   <h4 class="title"><a href="/product-details/1">Night Face</a></h4>
-                  <div class="price">$15.22 - $15.22</div>
+                  <div class="price">AUD 15.22 - AUD 15.22</div>
                   <div class="rating-image">
                     <img src="/assets/img/cart/cream.jpg" alt="img">
                   </div>
@@ -780,7 +780,7 @@
                     <h4 class="wow fadeInUp" data-wow-delay=".5s">Retinol Value Set Duo</h4>
                     <ul class="doller wow fadeInUp" data-wow-delay=".7s">
                       <li>
-                        $124.00 <del>$126.00</del>
+                        AUD 124.00 <del>AUD 126.00</del>
                       </li>
                     </ul>
                   </div>
@@ -792,7 +792,7 @@
                     <h4 class="wow fadeInUp" data-wow-delay=".5s">Retinol Value Set Duo</h4>
                     <ul class="doller wow fadeInUp" data-wow-delay=".7s">
                       <li>
-                        $124.00 <del>$126.00</del>
+                        AUD 124.00 <del>AUD 126.00</del>
                       </li>
                     </ul>
                   </div>
@@ -952,7 +952,7 @@
             <h6>
               Member Discount
             </h6>
-            <p>Onevery order over $140.00</p>
+            <p>Onevery order over AUD 140.00</p>
           </div>
         </div>
         <div class="feature-item wow fadeInUp" data-wow-delay=".8s">

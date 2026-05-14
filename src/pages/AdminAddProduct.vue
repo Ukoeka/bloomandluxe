@@ -99,7 +99,7 @@
                 </div>
               </div>
               <h6>{{ productForm.name || 'Product Name' }}</h6>
-              <p class="text-muted">${{ productForm.price || '0.00' }}</p>
+              <p class="text-muted">AUD {{ productForm.price || '0.00' }}</p>
               <p>{{ productForm.description || 'Product description will appear here.' }}</p>
             </div>
           </div>

@@ -693,7 +693,7 @@
                   </ul>
                   <div class="shopping-items">
                     <span>Total :</span>
-                    <span>$386.00</span>
+                    <span>AUD 386.00</span>
                   </div>
                   <div class="cart-button mb-4">
                     <a href="/shop-cart" class="theme-btn">
@@ -766,7 +766,7 @@
                       customers in–and keep them coming back
                     </p>
                     <div class="price-list">
-                      <h3>$1,260.00</h3>
+                      <h3>AUD 1,260.00</h3>
                     </div>
                     <div class="cart-wrp">
                       <div class="cart-quantity">
@@ -900,7 +900,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-regular fa-star"></i>
                       </div>
-                      <h6>$76.00 <del>$76.00</del></h6>
+                      <h6>AUD 76.00 <del>AUD 76.00</del></h6>
                     </div>
                   </div>
                 </div>
@@ -934,7 +934,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-regular fa-star"></i>
                       </div>
-                      <h6>$102.00 <del>$226.00</del></h6>
+                      <h6>AUD 102.00 <del>AUD 226.00</del></h6>
                     </div>
                   </div>
                 </div>
@@ -968,7 +968,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-regular fa-star"></i>
                       </div>
-                      <h6>$126.00 <del>$216.00</del></h6>
+                      <h6>AUD 126.00 <del>AUD 216.00</del></h6>
                     </div>
                   </div>
                 </div>
@@ -1002,7 +1002,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-regular fa-star"></i>
                       </div>
-                      <h6>$93.00 <del>$76.00</del></h6>
+                      <h6>AUD 93.00 <del>AUD 76.00</del></h6>
                     </div>
                   </div>
                 </div>
@@ -1036,7 +1036,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-regular fa-star"></i>
                       </div>
-                      <h6>$120.00 <del>$76.00</del></h6>
+                      <h6>AUD 120.00 <del>AUD 76.00</del></h6>
                     </div>
                   </div>
                 </div>
@@ -1070,7 +1070,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-regular fa-star"></i>
                       </div>
-                      <h6>$44.00 <del>$66.00</del></h6>
+                      <h6>AUD 44.00 <del>AUD 66.00</del></h6>
                     </div>
                   </div>
                 </div>
@@ -1104,7 +1104,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-regular fa-star"></i>
                       </div>
-                      <h6>$44.00 <del>$66.00</del></h6>
+                      <h6>AUD 44.00 <del>AUD 66.00</del></h6>
                     </div>
                   </div>
                 </div>

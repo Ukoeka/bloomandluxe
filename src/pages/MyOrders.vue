@@ -48,7 +48,7 @@
               <tr v-for="order in orders" :key="order.id">
                 <td class="text-center">{{ order.order_number }}</td>
                 <td class="text-center">{{ formatDate(order.created_at) }}</td>
-                <td class="text-center">${{ Number(order.total_amount).toFixed(2) }}</td>
+                <td class="text-center">AUD {{ Number(order.total_amount).toFixed(2) }}</td>
                 <td class="text-center">
                   <span :class="getPaymentStatusBadgeClass(order.payment_status)">
                     {{ order.payment_status }}

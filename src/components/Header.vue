@@ -183,7 +183,7 @@
                     <img :src="getImageUrl(item.image)" :alt="item.name">
                     <div class="cart-product">
                       <a href="#">{{ item.name || 'Product' }}</a>
-                      <span>${{ Number(item.price).toFixed(2) }}</span>
+                      <span>AUD {{ Number(item.price).toFixed(2) }}</span>
                     </div>
                   </li>
                 </ul>
@@ -192,7 +192,7 @@
                 </div>
                 <div v-if="cartStore.cartItems.length > 0" class="shopping-items">
                   <span>Total :</span>
-                  <span>${{ totalPrice.toFixed(2) }}</span>
+                  <span>AUD {{ totalPrice.toFixed(2) }}</span>
                 </div>
                 <div class="cart-button mb-4">
                   <router-link to="/shop-cart" class="theme-btn">

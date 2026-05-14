@@ -40,28 +40,28 @@
                           <span>{{ item.product.name || 'Unknown product' }}</span>
                         </div>
                       </td>
-                      <td class="text-center">${{ Number(item.price).toFixed(2) }}</td>
+                      <td class="text-center">AUD {{ Number(item.price).toFixed(2) }}</td>
                       <td class="text-center">{{ item.quantity }}</td>
-                      <td class="text-center">${{ (Number(item.price) * item.quantity).toFixed(2) }}</td>
+                      <td class="text-center">AUD {{ (Number(item.price) * item.quantity).toFixed(2) }}</td>
                     </tr>
                   </tbody>
                   <tfoot>
                     <tr>
                       <td colspan="3" class="text-end fw-bold">Subtotal:</td>
-                      <td class="text-center">${{ (Number(order.total_amount) - Number(order.shipping_cost || 0) - Number(order.tax_amount || 0)).toFixed(2) }}</td>
+                      <td class="text-center">AUD {{ (Number(order.total_amount) - Number(order.shipping_cost || 0) - Number(order.tax_amount || 0)).toFixed(2) }}</td>
                     </tr>
                     <tr v-if="order.shipping_cost > 0">
                       <td colspan="3" class="text-end fw-bold">Shipping Fee:</td>
-                      <td class="text-center">${{ Number(order.shipping_cost).toFixed(2) }}</td>
+                      <td class="text-center">AUD {{ Number(order.shipping_cost).toFixed(2) }}</td>
                     </tr>
                     
                     <tr v-if="order.tax_amount > 0">
                       <td colspan="3" class="text-end fw-bold">Tax (10%):</td>
-                      <td class="text-center">${{ Number(order.tax_amount).toFixed(2) }}</td>
+                      <td class="text-center">AUD {{ Number(order.tax_amount).toFixed(2) }}</td>
                     </tr>
                     <tr>
                       <td colspan="3" class="text-end fw-bold">Total:</td>
-                      <td class="text-center">${{ Number(order.total_amount).toFixed(2) }}</td>
+                      <td class="text-center">AUD {{ Number(order.total_amount).toFixed(2) }}</td>
                     </tr>
                   </tfoot>
                 </table>
@@ -133,7 +133,7 @@
               <hr>
               <div class="d-flex justify-content-between mt-3">
                 <span class="h5 mb-0">Total:</span>
-                <span class="h5 mb-0 text-primary fw-bold">${{ Number(order.total_amount).toFixed(2) }}</span>
+                <span class="h5 mb-0 text-primary fw-bold">AUD {{ Number(order.total_amount).toFixed(2) }}</span>
               </div>
             </div>
           </div>

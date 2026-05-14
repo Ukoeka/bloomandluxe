@@ -25,7 +25,7 @@
             <tr v-for="product in products" :key="product.id">
               <td class="product-id">#{{ product.id }}</td>
               <td class="product-name">{{ product.name }}</td>
-              <td class="product-price">${{ product.price }}</td>
+              <td class="product-price">AUD {{ product.price }}</td>
               <td class="product-category">{{ product.category?.name || 'N/A' }}</td>
               <td class="product-stock">
                 <span class="stock-badge" :class="product.stock > 0 ? 'in-stock' : 'out-of-stock'">

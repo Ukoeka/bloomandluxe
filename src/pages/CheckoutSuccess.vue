@@ -14,7 +14,7 @@
               <div v-if="orderInfo" class="order-details mb-4 p-4" style="background: #f8f9fa; border-radius: 8px;">
                 <h4 class="mb-3">Order Details</h4>
                 <p><strong>Order Number:</strong> {{ orderInfo.order_number }}</p>
-                <p><strong>Total Amount:</strong> ${{ orderInfo.total_amount }}</p>
+                <p><strong>Total Amount:</strong> AUD {{ orderInfo.total_amount }}</p>
                 <p><strong>Status:</strong> <span class="badge bg-success">{{ orderInfo.status }}</span></p>
               </div>
 

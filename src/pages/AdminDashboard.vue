@@ -76,7 +76,7 @@
             <i class="fas fa-dollar-sign"></i>
           </div>
           <div class="card-content">
-            <h3 class="card-value">${{ revenue }}</h3>
+            <h3 class="card-value">AUD {{ revenue }}</h3>
             <p class="card-label">Total Revenue</p>
             <div class="card-trend">
               <i class="fas fa-chart-line"></i>
@@ -129,7 +129,7 @@
                     {{ order.status }}
                   </span>
                 </td>
-                <td class="order-total">${{ order.total }}</td>
+                <td class="order-total">AUD {{ order.total }}</td>
                 <td>
                   <router-link :to="`/admin/orders/${order.id}`" class="action-btn">
                     <i class="fas fa-eye"></i>

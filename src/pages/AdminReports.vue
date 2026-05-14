@@ -267,7 +267,7 @@ export default {
         return [
           { label: 'Total Sales',      value: formatCurrency(total) },
           { label: 'Total Orders',     value: data.length },
-          { label: 'Avg. Order Value', value: data.length ? formatCurrency(total / data.length) : '$0.00' },
+          { label: 'Avg. Order Value', value: data.length ? formatCurrency(total / data.length) : 'AUD 0.00' },
         ]
       }
       if (activeReport.value === 'users') {
@@ -365,7 +365,7 @@ export default {
 
     // ── Helpers ───────────────────────────────────────────────────────────────
     const formatCurrency = (value) =>
-      new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(parseFloat(value) || 0)
+      new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD' }).format(parseFloat(value) || 0)
 
     const formatDate = (dateStr) => {
       if (!dateStr) return 'N/A'

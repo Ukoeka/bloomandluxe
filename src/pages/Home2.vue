@@ -406,7 +406,7 @@
                   </ul>
                   <div class="shopping-items">
                     <span>Total :</span>
-                    <span>$386.00</span>
+                    <span>AUD 386.00</span>
                   </div>
                   <div class="cart-button mb-4">
                     <router-link to="/shop-cart" class="theme-btn">
@@ -479,7 +479,7 @@
                       customers in–and keep them coming back
                     </p>
                     <div class="price-list">
-                      <h3>$1,260.00</h3>
+                      <h3>AUD 1,260.00</h3>
                     </div>
                     <div class="cart-wrp">
                       <div class="cart-quantity">
@@ -615,7 +615,7 @@
               <h6>
                 Member Discount
               </h6>
-              <p>Onevery order over $140.00</p>
+              <p>Onevery order over AUD 140.00</p>
             </div>
           </div>
           <div class="feature-item wow fadeInUp" data-wow-delay=".8s">
@@ -756,7 +756,7 @@
                   <h4>
                     <router-link to="/shop-grid">Chair</router-link>
                   </h4>
-                  <p>starting @ $48.00</p>
+                  <p>starting @ AUD 48.00</p>
                 </div>
               </div>
             </div>
@@ -769,7 +769,7 @@
                   <h4>
                     <router-link to="/shop-grid">Bed</router-link>
                   </h4>
-                  <p>starting @ $48.00</p>
+                  <p>starting @ AUD 48.00</p>
                 </div>
               </div>
             </div>
@@ -782,7 +782,7 @@
                   <h4>
                     <router-link to="/shop-grid">Sofa</router-link>
                   </h4>
-                  <p>starting @ $48.00</p>
+                  <p>starting @ AUD 48.00</p>
                 </div>
               </div>
             </div>
@@ -795,7 +795,7 @@
                   <h4>
                     <router-link to="/shop-grid">Table</router-link>
                   </h4>
-                  <p>starting @ $48.00</p>
+                  <p>starting @ AUD 48.00</p>
                 </div>
               </div>
             </div>
@@ -808,7 +808,7 @@
                   <h4>
                     <router-link to="/shop-grid">Side Drawer</router-link>
                   </h4>
-                  <p>starting @ $48.00</p>
+                  <p>starting @ AUD 48.00</p>
                 </div>
               </div>
             </div>
@@ -884,7 +884,7 @@
                       <router-link to="/product-details">Marmont gold-tone ring</router-link>
                     </h4>
                     <p>Sterling silver erring</p>
-                    <span>$76.00</span>
+                    <span>AUD 76.00</span>
                   </div>
                 </div>
               </div>
@@ -912,7 +912,7 @@
                       <router-link to="/product-details">Pop gold baselight</router-link>
                     </h4>
                     <p>Gold vermeil, pearl</p>
-                    <span>$19.00</span>
+                    <span>AUD 19.00</span>
                   </div>
                 </div>
               </div>
@@ -940,7 +940,7 @@
                       <router-link to="/product-details">Diamond vintage ring</router-link>
                     </h4>
                     <p>14k yellow gold</p>
-                    <span>$19.00</span>
+                    <span>AUD 19.00</span>
                   </div>
                 </div>
               </div>
@@ -968,7 +968,7 @@
                       <router-link to="/product-details">Amber earrings close-up</router-link>
                     </h4>
                     <p>Gold vermeil, white topaz</p>
-                    <span>$23.00</span>
+                    <span>AUD 23.00</span>
                   </div>
                 </div>
               </div>
@@ -998,7 +998,7 @@
                     <p>Sterling silver erring</p>
                     <ul class="doller">
                       <li>
-                        $19.00 <del>$27.00</del>
+                        AUD 19.00 <del>AUD 27.00</del>
                       </li>
                     </ul>
                   </div>
@@ -1028,7 +1028,7 @@
                       <router-link to="/product-details">Gold jewellery baselight</router-link>
                     </h4>
                     <p>14k yellow gold</p>
-                    <span>$16.00</span>
+                    <span>AUD 16.00</span>
                   </div>
                 </div>
               </div>
@@ -1056,7 +1056,7 @@
                       <router-link to="/product-details">Prong diamond ring</router-link>
                     </h4>
                     <p>Gold vermeil, pearl</p>
-                    <span>$102.00</span>
+                    <span>AUD 102.00</span>
                   </div>
                 </div>
               </div>
@@ -1086,7 +1086,7 @@
                     <p>14k yellow gold</p>
                     <ul class="doller">
                       <li>
-                        $123.00 <del>$126.00</del>
+                        AUD 123.00 <del>AUD 126.00</del>
                       </li>
                     </ul>
                   </div>
@@ -1120,7 +1120,7 @@
                       <router-link to="/product-details">Marmont gold-tone ring</router-link>
                     </h4>
                     <p>Sterling silver erring</p>
-                    <span>$76.00</span>
+                    <span>AUD 76.00</span>
                   </div>
                 </div>
               </div>
@@ -1148,7 +1148,7 @@
                       <router-link to="/product-details">Pop gold baselight</router-link>
                     </h4>
                     <p>Gold vermeil, pearl</p>
-                    <span>$19.00</span>
+                    <span>AUD 19.00</span>
                   </div>
                 </div>
               </div>
@@ -1180,7 +1180,7 @@
                       <router-link to="/product-details">Diamond vintage ring</router-link>
                     </h4>
                     <p>14k yellow gold</p>
-                    <span>$19.00</span>
+                    <span>AUD 19.00</span>
                   </div>
                 </div>
               </div>
@@ -1212,7 +1212,7 @@
                       <router-link to="/product-details">Amber earrings close-up</router-link>
                     </h4>
                     <p>Gold vermeil, white topaz</p>
-                    <span>$23.00</span>
+                    <span>AUD 23.00</span>
                   </div>
                 </div>
               </div>
