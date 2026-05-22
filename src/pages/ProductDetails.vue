@@ -79,9 +79,9 @@
                     <button @click="addToCart" class="theme-btn">
                       <span> Add to cart</span>
                     </button>
-                    <!-- <button class="theme-btn">
+                    <button @click="buyNow" class="theme-btn alt-color">
                       <span> Buy now</span>
-                    </button> -->
+                    </button>
                   </div>
                   <!-- <h6 class="details-info"><span>SKU:</span> <a href="javascript:void(0)">{{ product.sku || 'N/A' }}</a></h6> -->
                   <h6 class="details-info"><span>Categories:</span> <a href="javascript:void(0)">{{
@@ -266,7 +266,7 @@
 
 <script>
 import { onMounted, ref, computed, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import SharedLayout from '../components/SharedLayout.vue'
 import ProductReviews from '../components/ProductReviews.vue'
 import { useApiStore } from '../stores/api'
@@ -281,6 +281,7 @@ export default {
   },
   setup() {
     const route = useRoute()
+    const router = useRouter()
     const apiStore = useApiStore()
     const cartStore = useCartStore()
 
@@ -352,6 +353,40 @@ export default {
       }
     }
 
+    const buyNow = async () => {
+      if (!product.value) return
+
+      const availableStock = product.value.stock || 999
+      if (quantity.value > availableStock) {
+        Swal.fire(`Only ${availableStock} items available in stock!`)
+        return
+      }
+
+      const hasOtherProducts = cartStore.cartItems.some(
+        item => item.id !== product.value.id
+      )
+
+      if (hasOtherProducts) {
+        const result = await Swal.fire({
+          title: 'Replace cart?',
+          text: 'Buy now will replace the items in your cart with this product.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Continue',
+          cancelButtonText: 'Cancel'
+        })
+        if (!result.isConfirmed) return
+      }
+
+      cartStore.buyNow({
+        ...product.value,
+        price: product.value.price,
+        quantity: quantity.value
+      })
+
+      router.push('/checkout')
+    }
+
     const incrementQty = () => {
       const maxStock = product.value?.stock || 999
       if (quantity.value < maxStock) quantity.value++
@@ -410,6 +445,7 @@ export default {
       quantity,
       totalPrice,
       addToCart,
+      buyNow,
       incrementQty,
       decrementQty,
       productImages,

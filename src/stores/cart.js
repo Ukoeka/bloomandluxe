@@ -53,6 +53,12 @@ export const useCartStore = defineStore('cart', () => {
     saveCartToLocalStorage()
   }
 
+  const buyNow = (product) => {
+    const quantity = product.quantity || 1
+    cartItems.value = [{ ...product, quantity }]
+    saveCartToLocalStorage()
+  }
+
   // ---------------- GETTERS ----------------
 
   const getTotalItems = () => {
@@ -111,6 +117,7 @@ export const useCartStore = defineStore('cart', () => {
     initialized,
 
     addToCart,
+    buyNow,
     removeFromCart,
     updateQuantity,
     clearCart,

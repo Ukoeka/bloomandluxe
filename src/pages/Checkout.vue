@@ -355,12 +355,18 @@ export default {
       return baseUrl + imagePath.replace(/^\//, '')
     }
     
-    onMounted(() => {
-      // Redirect to cart if empty after cart is initialized
+    const redirectIfCartEmpty = () => {
+      if (!cartStore.initialized) return
       if (cartStore.cartItems.length === 0) {
         router.push('/shop-cart')
-        return
       }
+    }
+
+    watch(() => cartStore.initialized, redirectIfCartEmpty, { immediate: true })
+
+    onMounted(() => {
+      redirectIfCartEmpty()
+      if (cartStore.cartItems.length === 0) return
       
       // Initialize jQuery plugins and custom JS
       if (window.$) {
