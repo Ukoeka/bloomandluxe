@@ -46,7 +46,9 @@
           >
             <div class="product-collection-item">
               <div class="product-image">
-                <img :src="product?.image" alt="img" style="width: 100%; height: 350px; object-fit: cover;" />
+                <router-link :to="`/product-details/${product?.id}`" class="product-image-link">
+                  <img :src="product?.image" :alt="product?.name || 'Product'" style="width: 100%; height: 350px; object-fit: cover;" />
+                </router-link>
                 <div class="product-btn">
                   <button @click="addToCart(product)" class="theme-btn theme-btn-2">Add To Cart</button>
                 </div>
@@ -181,3 +183,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.product-image-link {
+  display: block;
+  cursor: pointer;
+}
+</style>

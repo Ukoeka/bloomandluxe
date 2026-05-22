@@ -12,6 +12,8 @@ import CheckoutCancel from '../pages/CheckoutCancel.vue'
 import NotFound from '../pages/NotFound.vue'
 import SignUp from '../pages/SignUp.vue'
 import Login from '../pages/Login.vue'
+import ForgotPassword from '../pages/ForgotPassword.vue'
+import ResetPassword from '../pages/ResetPassword.vue'
 import Home2 from '../pages/Home2.vue'
 import Home4 from '../pages/Home5.vue'
 import Order from '../pages/Order.vue'
@@ -93,6 +95,16 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/forgot-password',
+    name: 'ForgotPassword',
+    component: ForgotPassword
+  },
+  {
+    path: '/reset-password',
+    name: 'ResetPassword',
+    component: ResetPassword
   },
   {
     path: '/home2',

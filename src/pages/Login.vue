@@ -70,7 +70,7 @@
                               Remember Me
                             </label>
                           </div>
-                          <span>Forgot Password?</span>
+                          <router-link to="/forgot-password">Forgot Password?</router-link>
                         </div>
                       </div>
                       <h6>Don’t have an account? <router-link :to="{ path: '/sign-up', query: $route.query }">

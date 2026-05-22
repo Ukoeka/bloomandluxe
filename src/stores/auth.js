@@ -11,6 +11,10 @@ export const useAuthStore = defineStore('auth', {
     registerLoading: false,
     loginError: null,
     loginLoading: false,
+    forgotPasswordLoading: false,
+    forgotPasswordError: null,
+    resetPasswordLoading: false,
+    resetPasswordError: null,
   }),
 
   getters: {
@@ -89,6 +93,46 @@ export const useAuthStore = defineStore('auth', {
         throw err
       } finally {
         this.loginLoading = false
+      }
+    },
+
+    async forgotPassword(payload) {
+      this.forgotPasswordLoading = true
+      this.forgotPasswordError = null
+
+      const api = useApiStore()
+
+      try {
+        const response = await api.post('/forgot-password', payload)
+        return response
+      } catch (err) {
+        this.forgotPasswordError =
+          err.response?.data?.message ||
+          err.message ||
+          'Failed to send reset link. Please try again.'
+        throw err
+      } finally {
+        this.forgotPasswordLoading = false
+      }
+    },
+
+    async resetPassword(payload) {
+      this.resetPasswordLoading = true
+      this.resetPasswordError = null
+
+      const api = useApiStore()
+
+      try {
+        const response = await api.post('/reset-password', payload)
+        return response
+      } catch (err) {
+        this.resetPasswordError =
+          err.response?.data?.message ||
+          err.message ||
+          'Failed to reset password. Please try again.'
+        throw err
+      } finally {
+        this.resetPasswordLoading = false
       }
     },
 

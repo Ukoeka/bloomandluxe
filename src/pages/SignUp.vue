@@ -66,7 +66,7 @@
                               Remember Me
                             </label>
                           </div>
-                          <span>Forgot Password?</span>
+                          <router-link to="/forgot-password">Forgot Password?</router-link>
                         </div>
                       </div>
                       <h6>Already have an account? <router-link :to="{ path: '/login', query: $route.query }">Login</router-link></h6>

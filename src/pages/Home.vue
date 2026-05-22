@@ -132,66 +132,78 @@
         <div class="row g-4">
           <!-- Large left card -->
           <div class="col-lg-6 wow fadeInUp" data-wow-delay=".2s">
-            <div class="category-card category-card--tall bg-cover"
-              style="background-image: url(assets/img/shop/female-3.jpeg);">
+            <router-link
+              to="/shop?category=female"
+              class="category-card category-card--tall bg-cover text-decoration-none"
+              style="background-image: url(assets/img/shop/female-3.jpeg);"
+            >
               <div class="category-card__overlay"></div>
               <div class="category-card__content">
                 <h3 class="category-card__title">
-                  <a href="/shop?category=female">Female</a>
+                  <span class="category-card__title-text">Female</span>
                 </h3>
-                <a href="/shop?category=female" class="category-card__btn">
+                <span class="category-card__btn">
                   Shop Now <i class="fa-regular fa-arrow-right"></i>
-                </a>
+                </span>
               </div>
-            </div>
+            </router-link>
           </div>
 
           <!-- Right column: 3 stacked cards -->
           <div class="col-lg-6">
             <div class="row g-4">
               <div class="col-6 wow fadeInUp" data-wow-delay=".3s">
-                <div class="category-card category-card--short bg-cover"
-                  style="background-image: url(assets/img/shop/male2.jpeg);">
+                <router-link
+                  to="/shop?category=male"
+                  class="category-card category-card--short bg-cover text-decoration-none"
+                  style="background-image: url(assets/img/shop/male2.jpeg);"
+                >
                   <div class="category-card__overlay"></div>
                   <div class="category-card__content">
                     <h3 class="category-card__title">
-                      <a href="/shop?category=male">Male</a>
+                      <span class="category-card__title-text">Male</span>
                     </h3>
-                    <a href="/shop?category=male" class="category-card__btn">
+                    <span class="category-card__btn">
                       Shop Now <i class="fa-regular fa-arrow-right"></i>
-                    </a>
+                    </span>
                   </div>
-                </div>
+                </router-link>
               </div>
 
               <div class="col-6 wow fadeInUp" data-wow-delay=".4s">
-                <div class="category-card category-card--short bg-cover"
-                  style="background-image: url(assets/img/shop/kiddies.jpeg);">
+                <router-link
+                  to="/shop?category=kiddies"
+                  class="category-card category-card--short bg-cover text-decoration-none"
+                  style="background-image: url(assets/img/shop/kiddies.jpeg);"
+                >
                   <div class="category-card__overlay"></div>
                   <div class="category-card__content">
                     <h3 class="category-card__title">
-                      <a href="/shop?category=kiddies">Kiddies</a>
+                      <span class="category-card__title-text">Kiddies</span>
                     </h3>
-                    <a href="/shop?category=kiddies" class="category-card__btn">
+                    <span class="category-card__btn">
                       Shop Now <i class="fa-regular fa-arrow-right"></i>
-                    </a>
+                    </span>
                   </div>
-                </div>
+                </router-link>
               </div>
 
               <div class="col-12 wow fadeInUp" data-wow-delay=".5s">
-                <div class="category-card category-card--wide bg-cover"
-                  style="background-image: url(assets/img/shop/ear-2.jpeg);">
+                <router-link
+                  to="/shop?category=accessories"
+                  class="category-card category-card--wide bg-cover text-decoration-none"
+                  style="background-image: url(assets/img/shop/ear-2.jpeg);"
+                >
                   <div class="category-card__overlay"></div>
                   <div class="category-card__content">
                     <h3 class="category-card__title">
-                      <a href="/shop?category=accessories">Accessories</a>
+                      <span class="category-card__title-text">Accessories</span>
                     </h3>
-                    <a href="/shop?category=accessories" class="category-card__btn">
+                    <span class="category-card__btn">
                       Shop Now <i class="fa-regular fa-arrow-right"></i>
-                    </a>
+                    </span>
                   </div>
-                </div>
+                </router-link>
               </div>
             </div>
           </div>
@@ -233,7 +245,9 @@
                 <div v-for="product in storeProducts" :key="product.id" class="col-xl-3 col-lg-4 col-md-6">
                   <div class="product-store-item">
                     <div class="product-image">
-                      <img :src="product.image" alt="img">
+                      <router-link :to="`/product-details/${product.id}`" class="product-image-link">
+                        <img :src="product.image" :alt="product.name">
+                      </router-link>
                       <ul class="product-size">
                         <li>s</li>
                         <li>m</li>
@@ -312,7 +326,9 @@
                   <div v-for="product in buttersProducts" :key="product.id" class="swiper-slide">
                     <div class="shop-discover-item">
                       <div class="shop-image">
-                        <img :src="product.image" alt="img">
+                        <router-link :to="`/product-details/${product.id}`" class="product-image-link">
+                          <img :src="product.image" :alt="product.name">
+                        </router-link>
                       </div>
                       <div class="content">
                         <div class="star">
@@ -338,14 +354,18 @@
             </div>
 
             <div class="col-lg-6">
-              <div class="bg-image-2 bg-cover" style="background-image: url(assets/img/shop/sheabutter.jpeg);">
+              <router-link
+                to="/category/34"
+                class="bg-image-2 bg-cover text-decoration-none d-block"
+                style="background-image: url(assets/img/shop/sheabutter.jpeg);"
+              >
                 <div class="content">
                   <h3>
-                    <a href="/category/34">Quality hair butter <br> for different hair types</a>
+                    <span>Quality hair butter <br> for different hair types</span>
                   </h3>
-                  <a href="/category/34" class="theme-btn">Explore More <i class="fa-regular fa-arrow-right"></i></a>
+                  <span class="theme-btn">Explore More <i class="fa-regular fa-arrow-right"></i></span>
                 </div>
-              </div>
+              </router-link>
             </div>
           </div>
         </div>
@@ -1049,16 +1069,20 @@ export default {
   margin-bottom: 14px;
 }
 
-.category-card__title a {
+.category-card__title-text {
   font-size: 26px;
   font-weight: 700;
   color: #fff;
-  text-decoration: none;
   line-height: 1.2;
 }
 
-.category-card--short .category-card__title a {
+.category-card--short .category-card__title-text {
   font-size: 20px;
+}
+
+.product-image-link {
+  display: block;
+  cursor: pointer;
 }
 
 .category-card__btn {

@@ -37,7 +37,9 @@
           <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s" v-for="category in categories" :key="category.id">
             <div class="shop-product-item">
               <div class="product-image">
-                <img :src="getImageUrl(category.image)" alt="img">
+                <router-link :to="`/category/${category.id}`" class="product-image-link">
+                  <img :src="getImageUrl(category.image)" :alt="category.name">
+                </router-link>
                 <!-- <ul class="shop-icon d-flex justify-content-center align-items-center">
                   <li>
                     <router-link to="/product-details"><i class="far fa-heart"></i></router-link>
@@ -162,3 +164,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.product-image-link {
+  display: block;
+  cursor: pointer;
+}
+</style>
