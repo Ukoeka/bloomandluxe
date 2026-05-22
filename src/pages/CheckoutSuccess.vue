@@ -18,12 +18,34 @@
                 <p><strong>Status:</strong> <span class="badge bg-success">{{ orderInfo.status }}</span></p>
               </div>
 
+              <p v-if="orderInfo && !isLoggedIn" class="text-muted mb-4">
+                Save your order number for your records.
+                <template v-if="orderEmail">
+                  Log in or sign up with <strong>{{ orderEmail }}</strong> to view this order in My Orders.
+                </template>
+                <template v-else>
+                  <router-link :to="{ path: '/login', query: { redirect: '/my-orders' } }">Log in</router-link>
+                  to track your orders.
+                </template>
+              </p>
+
               <div class="action-buttons">
                 <router-link to="/" class="theme-btn me-3">
                   Continue Shopping
                 </router-link>
-                <router-link :to="`/order-details/${orderInfo?.id}`" class="theme-btn" v-if="orderInfo">
+                <router-link
+                  v-if="orderInfo && isLoggedIn"
+                  :to="`/order-details/${orderInfo.id}`"
+                  class="theme-btn"
+                >
                   View Order
+                </router-link>
+                <router-link
+                  v-else-if="!isLoggedIn"
+                  :to="{ path: '/login', query: { redirect: '/my-orders' } }"
+                  class="theme-btn"
+                >
+                  Log in to track orders
                 </router-link>
               </div>
             </div>
@@ -35,10 +57,11 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import SharedLayout from '../components/SharedLayout.vue'
 import { useApiStore } from '../stores/api'
+import { useAuthStore } from '../stores/auth'
 
 export default {
   name: 'CheckoutSuccess',
@@ -48,7 +71,10 @@ export default {
   setup() {
     const route = useRoute()
     const apiStore = useApiStore()
+    const authStore = useAuthStore()
     const orderInfo = ref(null)
+    const isLoggedIn = computed(() => !!authStore.token)
+    const orderEmail = ref('')
     const loading = ref(true)
     const error = ref(null)
 
@@ -61,6 +87,7 @@ export default {
           const response = await apiStore.post('/cart/verify-order', { session_id: sessionId })
           if (response.order) {
             orderInfo.value = response.order
+            orderEmail.value = response.order.customer_email || ''
           }
           loading.value = false
         } catch (err) {
@@ -75,6 +102,8 @@ export default {
 
     return {
       orderInfo,
+      orderEmail,
+      isLoggedIn,
       loading,
       error
     }

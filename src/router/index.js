@@ -67,8 +67,7 @@ const routes = [
   {
     path: '/checkout',
     name: 'Checkout',
-    component: Checkout,
-    meta: { requiresUserAuth: true }
+    component: Checkout
   },
   {
     path: '/checkout/success',

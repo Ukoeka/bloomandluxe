@@ -15,6 +15,11 @@
               </li>
             </ul>
           </div>
+          <div v-if="!isLoggedIn" class="alert alert-info mb-4">
+            Checking out as a guest. Already have an account?
+            <router-link :to="{ path: '/login', query: { redirect: '/checkout' } }">Log in</router-link>
+            to prefill your details and track orders.
+          </div>
           <form id="checkout-form" @submit.prevent="submitOrder">
             <div class="row g-4">
               <div class="col-lg-8">
